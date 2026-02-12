@@ -1,5 +1,6 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
+import Link from 'next/link'
 
 export default function Architecture() {
   return (
@@ -10,28 +11,33 @@ export default function Architecture() {
           <h1>Architecture</h1>
           <h2 className="tagline">Sew Protocol</h2>
           <p className="intro">
-            Sew Protocol introduces a structured pattern for protected transfers on Ethereum.
-            At its core, it defines how a payment can be held, released, and resolved without custody, while preserving composability and forward evolution.
+            Sew Protocol introduces a structured pattern for protected transfers
+            on Ethereum. At its core, it defines how a payment can be held,
+            released, and resolved without custody, while preserving
+            composability and forward evolution.
           </p>
         </section>
 
         <section className="content-block">
           <h3>System model</h3>
           <p>
-            A protected transfer in Sew is an escrow-backed payment with predefined release and resolution paths.
-            Instead of sending tokens directly to a recipient:
+            A protected transfer in Sew is an escrow-backed payment with
+            predefined release and resolution paths. Instead of sending tokens
+            directly to a recipient:
           </p>
           <ul>
             <li>Funds are routed into an escrow contract</li>
             <li>Release conditions are defined at creation</li>
             <li>Funds are released when conditions are satisfied</li>
           </ul>
-          <p>Each escrow represents an isolated agreement between participants.</p>
+          <p>
+            Each escrow represents an isolated agreement between participants.
+          </p>
         </section>
 
         <section className="content-block">
           <h3>Core components</h3>
-          
+
           <div className="component">
             <h4>Escrow layer</h4>
             <p>The escrow layer holds funds under rule-bound conditions.</p>
@@ -42,7 +48,10 @@ export default function Architecture() {
               <li>Enforce release and cancellation paths</li>
               <li>Interface with resolution modules when disputes occur</li>
             </ul>
-            <p>Each escrow is self-contained. State transitions are deterministic and governed by protocol rules.</p>
+            <p>
+              Each escrow is self-contained. State transitions are deterministic
+              and governed by protocol rules.
+            </p>
           </div>
 
           <div className="component">
@@ -54,7 +63,10 @@ export default function Architecture() {
               <li>Timed auto-release</li>
               <li>Conditional release paths</li>
             </ul>
-            <p>Release logic is separated from escrow storage to allow evolution without rewriting core contracts.</p>
+            <p>
+              Release logic is separated from escrow storage to allow evolution
+              without rewriting core contracts.
+            </p>
           </div>
 
           <div className="component">
@@ -82,22 +94,48 @@ export default function Architecture() {
 
         <section className="content-block">
           <h3>Isolation as a first principle</h3>
-          <p>Sew is designed to minimize blast radius. Isolation happens at multiple levels:</p>
+          <p>
+            Sew is designed to minimize blast radius. Isolation happens at
+            multiple levels:
+          </p>
           <ul>
-            <li><strong>Per-escrow isolation:</strong> Each agreement is independent. Failures do not propagate.</li>
-            <li><strong>Module boundaries:</strong> Release logic, resolution logic, and extensions are separated.</li>
-            <li><strong>Forward-only upgrades:</strong> Changes affect new escrows only.</li>
+            <li>
+              <strong>Per-escrow isolation:</strong> Each agreement is
+              independent. Failures do not propagate.
+            </li>
+            <li>
+              <strong>Module boundaries:</strong> Release logic, resolution
+              logic, and extensions are separated.
+            </li>
+            <li>
+              <strong>Forward-only upgrades:</strong> Changes affect new escrows
+              only.
+            </li>
           </ul>
         </section>
 
         <section className="content-block">
           <h3>Governance surface</h3>
-          <p>Protocol evolution is coordinated through defined roles. At a high level:</p>
+          <p>
+            Protocol evolution is coordinated through defined roles. At a high
+            level:
+          </p>
           <ul>
             <li>Governance can approve new modules</li>
             <li>Safety roles can pause components during incidents</li>
             <li>Emergency actions are constrained and scope-limited</li>
           </ul>
+          <p>
+            See{' '}
+            <Link href="/governance">
+              <a>Governance</a>
+            </Link>{' '}
+            and{' '}
+            <Link href="/protocol-limits">
+              <a>Protocol Limits</a>
+            </Link>{' '}
+            for detailed constraints.
+          </p>
         </section>
       </div>
 

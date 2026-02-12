@@ -1,5 +1,6 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
+import Link from 'next/link'
 
 export default function ProtocolLimits() {
   return (
@@ -135,6 +136,36 @@ export default function ProtocolLimits() {
             <li>Timeout settings</li>
           </ul>
           <p>Governance changes only affect future escrows.</p>
+        </section>
+
+        <section className="content-block">
+          <h3>Related Pages</h3>
+          <ul>
+            <li>
+              <Link href="/fees">
+                <a>Fees</a>
+              </Link>
+              : Complete breakdown of all protocol fees
+            </li>
+            <li>
+              <Link href="/governance">
+                <a>Governance</a>
+              </Link>
+              : How protocol constraints are enforced
+            </li>
+            <li>
+              <Link href="/how-it-works">
+                <a>How It Works</a>
+              </Link>
+              : Understand the escrow lifecycle
+            </li>
+            <li>
+              <Link href="/technical">
+                <a>Technical Resources</a>
+              </Link>
+              : Smart contracts and documentation
+            </li>
+          </ul>
         </section>
       </div>
 

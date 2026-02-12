@@ -11,6 +11,7 @@ const protocolNavItems: { label: string; page?: string; link?: string }[] = [
   { label: 'Protocol Limits', page: '/protocol-limits' },
   { label: 'Architecture', page: '/architecture' },
   { label: 'Security', page: '/security' },
+  { label: 'Emergency', page: '/emergency' },
   { label: 'Research', page: '/researcher' },
   { label: 'Build on Sew', page: '/developer' },
   { label: 'Investors', page: '/investor' },

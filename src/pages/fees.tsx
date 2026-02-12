@@ -1,5 +1,6 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
+import Link from 'next/link'
 
 export default function Fees() {
   return (
@@ -100,6 +101,30 @@ export default function Fees() {
             This address funds protocol development, security audits, and
             ecosystem growth.
           </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Related Pages</h3>
+          <ul>
+            <li>
+              <Link href="/protocol-limits">
+                <a>Protocol Limits</a>
+              </Link>
+              : Detailed bounds on all protocol parameters
+            </li>
+            <li>
+              <Link href="/governance">
+                <a>Governance</a>
+              </Link>
+              : How protocol parameters are set and updated
+            </li>
+            <li>
+              <Link href="/how-it-works">
+                <a>How It Works</a>
+              </Link>
+              : Understand escrow lifecycle and fees in context
+            </li>
+          </ul>
         </section>
       </div>
 

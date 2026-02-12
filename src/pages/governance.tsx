@@ -68,6 +68,8 @@ export default function Governance() {
               <li>Updating system configuration</li>
               <li>Setting exposure caps</li>
               <li>Managing supported integrations</li>
+              <li>Appointing or removing guardian roles</li>
+              <li>Adjusting protocol parameters</li>
             </ul>
             <p>
               Changes are delayed through a timelock mechanism to allow
@@ -93,7 +95,7 @@ export default function Governance() {
             </p>
             <ul>
               <li>Pause maximum duration: 7 days</li>
-              <li>Limited pauses per time window</li>
+              <li>Maximum 3 pauses per 90-day rolling window</li>
               <li>Cannot re-pause while already paused</li>
               <li>Unpause requires governance, not guardian</li>
             </ul>
@@ -122,23 +124,55 @@ export default function Governance() {
 
         <section className="content-block">
           <h3>Governance lanes</h3>
-          <p>Different types of changes use different timelines:</p>
-          <ul>
-            <li>
-              <strong>Fast lane</strong>: Small, safe parameter changes with
-              minimal delay.
-            </li>
-            <li>
-              <strong>Slow lane</strong>: Major changes like module upgrades
-              require extended review periods.
-            </li>
-            <li>
-              <strong>Emergency lane</strong>: Risk reduction only. Guardian can
-              act immediately to reduce exposure, but cannot increase risk or
-              reverse the pause.
-            </li>
-          </ul>
-          <p>This layered approach balances agility with safety.</p>
+          <p>
+            Different types of changes use different timelines and approval
+            requirements:
+          </p>
+
+          <table className="lanes-table">
+            <thead>
+              <tr>
+                <th>Lane</th>
+                <th>Typical Use Cases</th>
+                <th>Delay</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Fast lane</strong>
+                </td>
+                <td>
+                  Small parameter adjustments, token registration, minor
+                  configuration changes
+                </td>
+                <td>48 hours</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Slow lane</strong>
+                </td>
+                <td>
+                  Module upgrades, high-risk parameter changes, new integrations
+                </td>
+                <td>~9 days</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Emergency lane</strong>
+                </td>
+                <td>
+                  Risk reduction only—pauses, caps, disabling integrations
+                </td>
+                <td>0 hours (immediate)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            This layered approach balances agility with safety. Critical changes
+            require more review time.
+          </p>
         </section>
 
         <section className="content-block">
@@ -152,68 +186,79 @@ export default function Governance() {
             <li>Set exposure limits</li>
             <li>Enable or disable integrations</li>
             <li>Adjust system parameters for future activity</li>
+            <li>Register new tokens</li>
+            <li>Appoint or remove guardian roles</li>
           </ul>
           <p>
             <strong>Governance cannot:</strong>
           </p>
           <ul>
-            <li>Seize funds</li>
+            <li>Seize funds from escrows</li>
             <li>Redirect assets</li>
             <li>Force settlement outcomes</li>
             <li>Change the rules of an active escrow</li>
+            <li>Modify past decisions</li>
           </ul>
           <p>These constraints are enforced by contract design, not policy.</p>
         </section>
 
         <section className="content-block">
-          <h3>Change boundaries</h3>
-          <p>There are clear limits on what governance can and cannot do.</p>
+          <h3>Module governance</h3>
           <p>
-            <strong>Governance can:</strong>
+            Modules are the primary mechanism for protocol evolution. Each
+            module type has specific governance considerations:
           </p>
-          <ul>
-            <li>Approve new modules</li>
-            <li>Set exposure limits</li>
-            <li>Enable or disable integrations</li>
-            <li>Adjust system parameters for future activity</li>
-          </ul>
-          <p>
-            <strong>Governance cannot:</strong>
-          </p>
-          <ul>
-            <li>Seize funds</li>
-            <li>Redirect assets</li>
-            <li>Force settlement outcomes</li>
-            <li>Change the rules of an active escrow</li>
-          </ul>
-          <p>These constraints are enforced by contract design, not policy.</p>
+
+          <div className="module-governance">
+            <h4>Resolution modules</h4>
+            <p>
+              Govern how disputes are handled. Changes to resolution logic only
+              affect new escrows. Existing disputes continue under the
+              resolution module selected at escrow creation.
+            </p>
+          </div>
+
+          <div className="module-governance">
+            <h4>Release strategies</h4>
+            <p>
+              Define who can release funds and under what conditions. New
+              release strategies can be introduced for future escrows without
+              affecting existing agreements.
+            </p>
+          </div>
+
+          <div className="module-governance">
+            <h4>Yield generation modules</h4>
+            <p>
+              Manage how escrowed funds generate yield. Governance can add new
+              yield integrations or disable existing ones. Module changes only
+              affect new escrows.
+            </p>
+          </div>
         </section>
 
         <section className="content-block">
           <h3>Exposure management</h3>
-          <p>
-            Governance manages system-level risk through exposure controls,
-            including setting caps per token, setting caps per escrow contract,
-            and reducing exposure during incidents.
-          </p>
+          <p>Governance manages system-level risk through exposure controls:</p>
+          <ul>
+            <li>
+              <strong>Per-token caps</strong>: Maximum exposure for each
+              supported token
+            </li>
+            <li>
+              <strong>Per-contract caps</strong>: Maximum deposits into specific
+              escrow contracts
+            </li>
+            <li>
+              <strong>Module-level limits</strong>: Exposure limits for each
+              integration
+            </li>
+          </ul>
           <p>
             These controls are applied at deposit time and designed to limit
             systemic risk, prevent over-concentration, and maintain stability
             across integrations. They do not affect the ability to withdraw or
             unwind existing positions.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Emergency response</h3>
-          <p>
-            In the event of an integration failure or security concern, the
-            guardian can disable the affected module, deposits can be halted,
-            and existing positions can be unwound back to escrow custody.
-          </p>
-          <p>
-            Emergency actions are designed to restore safe conditions, not to
-            introduce new control paths.
           </p>
         </section>
 
@@ -227,6 +272,7 @@ export default function Governance() {
             <li>Timelock delays provide transparency into upcoming changes</li>
             <li>Guardians act to reduce risk, not increase it</li>
             <li>Governance powers remain narrowly scoped</li>
+            <li>Role appointments follow proper procedures</li>
           </ul>
           <p>
             The protocol is designed so that even in worst-case governance
@@ -255,6 +301,13 @@ export default function Governance() {
             </Link>{' '}
             for detailed constraints on governance and guardian powers.
           </p>
+          <p>
+            See{' '}
+            <Link href="/emergency">
+              <a>Emergency Recovery</a>
+            </Link>{' '}
+            for emergency response procedures.
+          </p>
         </section>
       </div>
 
@@ -282,19 +335,43 @@ export default function Governance() {
           max-width: 800px;
           padding: 0 2rem;
         }
-        .role {
+        .role,
+        .module-governance {
           margin-top: 2rem;
           padding: 1.5rem;
           background: #fafafa;
           border-radius: var(--radius);
           border: 1px solid #eaeaea;
         }
-        .role h4 {
+        .role h4,
+        .module-governance h4 {
           margin-top: 0;
+        }
+        .lanes-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 1.5rem;
+        }
+        .lanes-table th,
+        .lanes-table td {
+          text-align: left;
+          padding: 1rem;
+          border-bottom: 1px solid #eaeaea;
+        }
+        .lanes-table th {
+          font-weight: 600;
+          background: #fafafa;
         }
         @media (max-width: 600px) {
           .content-block {
             padding: 0 1rem;
+          }
+          .lanes-table {
+            font-size: 0.9rem;
+          }
+          .lanes-table th,
+          .lanes-table td {
+            padding: 0.75rem 0.5rem;
           }
         }
       `}</style>
