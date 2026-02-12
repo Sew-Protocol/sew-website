@@ -7,14 +7,20 @@ import styles from '../styles/header.module.css'
 const protocolNavItems: { label: string; page?: string; link?: string }[] = [
   { label: 'Home', page: '/' },
   { label: 'How It Works', page: '/how-it-works' },
+  { label: 'Fees', page: '/fees' },
+  { label: 'Protocol Limits', page: '/protocol-limits' },
   { label: 'Architecture', page: '/architecture' },
   { label: 'Security', page: '/security' },
   { label: 'Research', page: '/researcher' },
   { label: 'Build on Sew', page: '/developer' },
   { label: 'Investors', page: '/investor' },
+  { label: 'Technical', page: '/technical' },
   // { label: 'Blog', page: '/blog' },
   // { label: 'Contact', page: '/contact' },
-  { label: 'Source Code', link: 'https://github.com/Sew-Protocol/sew-protocol' },
+  {
+    label: 'Source Code',
+    link: 'https://github.com/Sew-Protocol/sew-protocol',
+  },
 ]
 
 const ogImageUrl = 'https://notion-blog.now.sh/og-image.png'
@@ -54,7 +60,9 @@ const Header = ({ titlePre = '' }) => {
       <ul className={styles.secondaryNav}>
         <li>
           <Link href="/everyday-wallet">
-            <a className={pathname === '/everyday-wallet' ? 'active' : undefined}>
+            <a
+              className={pathname === '/everyday-wallet' ? 'active' : undefined}
+            >
               Everyday Wallet
             </a>
           </Link>

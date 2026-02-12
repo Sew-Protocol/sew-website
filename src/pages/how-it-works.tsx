@@ -1,5 +1,6 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
+import Link from 'next/link'
 
 export default function HowItWorks() {
   return (
@@ -10,10 +11,20 @@ export default function HowItWorks() {
           <h1>How It Works</h1>
           <h2 className="tagline">Sew Protocol</h2>
           <p className="intro">
-            Sew Protocol introduces a structured way to send protected payments
-            on Ethereum. Instead of transferring funds directly to another
-            address, a payment can be held in escrow until it is released,
-            cancelled, or resolved.
+            Sew Protocol is a security layer for payments on Base (Ethereum L2).
+            Instead of transferring funds directly, payments can be held in
+            escrow until conditions are met.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>What Sew Is Not</h3>
+          <p>Sew is not a marketplace, a wallet, or a court.</p>
+          <p>
+            Sew is a <strong>security layer for transfers</strong>. It provides
+            the infrastructure for protected payments while leaving user
+            experience, dispute evaluation, and interface design to the
+            applications built on top.
           </p>
         </section>
 
@@ -29,6 +40,11 @@ export default function HowItWorks() {
           <p>
             The protocol does not decide outcomes. It enforces the rules defined
             at creation.
+          </p>
+          <p className="key-concept">
+            Each escrow captures its configuration at creation and cannot be
+            changed. Governance changes only affect future escrows, never
+            existing ones.
           </p>
         </section>
 
@@ -60,7 +76,7 @@ export default function HowItWorks() {
             <p>While active, the funds remain locked in escrow.</p>
             <p>During this period:</p>
             <ul>
-              <li>The recipient cannot withdraw funds</li>
+              <li>The recipient cannot withdraw funds unilaterally</li>
               <li>The sender cannot reclaim funds unilaterally</li>
               <li>Settlement depends on the selected release path</li>
             </ul>
@@ -75,16 +91,14 @@ export default function HowItWorks() {
             <p>If enabled at creation:</p>
             <ul>
               <li>
-                Funds may be deployed into an external protocol (such as Aave)
-                to generate yield
+                Funds may generate yield through integrations (e.g., Aave V3)
               </li>
-              <li>The escrow remains the owner of the position</li>
-              <li>Yield accrues during the escrow period</li>
+              <li>Yield can go to sender, recipient, or be split</li>
+              <li>Yield settings are fixed at escrow creation</li>
             </ul>
             <p>
-              This feature is optional and currently scoped to Aave integration.
-              Yield handling requires active unwinding at settlement. If unwound
-              early, funds return to escrow custody.
+              This feature is optional. Yield settings are locked at escrow
+              creation and cannot be changed.
             </p>
           </div>
 
@@ -93,34 +107,36 @@ export default function HowItWorks() {
             <p>Settlement typically occurs through a release action.</p>
             <p>Examples include:</p>
             <ul>
-              <li>Sender releases funds after receiving goods</li>
-              <li>A timed release triggers automatically</li>
+              <li>Sender releases at any time after creating the escrow</li>
+              <li>
+                Time-based release triggers automatically after a set period
+              </li>
               <li>A predefined condition is met</li>
             </ul>
             <p>
               When released: funds leave escrow, the recipient receives the
               payment, and any generated yield is included in settlement.
             </p>
+            <p>If a dispute is opened, release is paused until resolution.</p>
           </div>
 
           <div className="lifecycle-step">
             <h4>5) Dispute (if needed)</h4>
-            <p>If parties disagree:</p>
+            <p>If parties disagree, a dispute can be opened.</p>
+            <p>Two resolution modes exist:</p>
             <ul>
               <li>
-                A dispute can be opened according to the selected resolution
-                module
+                <strong>Single trusted resolver:</strong> A designated resolver
+                makes the final decision.
               </li>
-              <li>The designated resolver evaluates the situation</li>
               <li>
-                If the outcome is contested, the resolver's decision can be
-                appealed
+                <strong>Escalating resolution:</strong> Multi-level process with
+                final arbitration possible.
               </li>
-              <li>A final outcome is enforced by the protocol</li>
             </ul>
             <p>
-              The protocol enforces the result deterministically. It does not
-              judge disputes—the resolution module defines the process.
+              Both modes use bonds and incentives to secure behavior. The
+              protocol enforces the resolution deterministically.
             </p>
           </div>
 
@@ -134,129 +150,6 @@ export default function HowItWorks() {
             </ul>
             <p>The agreement is complete.</p>
           </div>
-        </section>
-
-        <section className="content-block">
-          <h3>What makes this different from a normal transfer</h3>
-          <p>
-            <strong>Standard transfer:</strong>
-          </p>
-          <ul>
-            <li>Immediate</li>
-            <li>Irreversible</li>
-            <li>No coordination phase</li>
-          </ul>
-          <p>
-            <strong>Protected transfer:</strong>
-          </p>
-          <ul>
-            <li>Held under defined rules</li>
-            <li>Released intentionally</li>
-            <li>Supports structured settlement paths</li>
-          </ul>
-          <p>
-            This creates space for coordination without introducing custody.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Optional modules</h3>
-          <p>Sew is modular by design.</p>
-          <p>At creation time, an escrow may opt into:</p>
-          <ul>
-            <li>A release strategy</li>
-            <li>A resolution mechanism</li>
-            <li>A yield generation module</li>
-          </ul>
-          <p>
-            Each module defines behavior for that escrow only. Modules can
-            evolve over time, but existing escrows remain bound to the modules
-            they selected.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Isolation of agreements</h3>
-          <p>Each escrow is an independent agreement.</p>
-          <p>This means:</p>
-          <ul>
-            <li>State transitions are specific to that escrow</li>
-            <li>Settlement paths are defined up front</li>
-            <li>Changes to the protocol affect only new escrows</li>
-          </ul>
-          <p>
-            Optional integrations may pool activity for efficiency, but the
-            agreement itself remains self-contained.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Safety mechanisms</h3>
-          <p>To support system stability:</p>
-          <ul>
-            <li>Governance can limit exposure to external integrations</li>
-            <li>Guardians can disable risky integrations</li>
-            <li>
-              Positions can be unwound back to escrow custody in emergencies
-            </li>
-          </ul>
-          <p>
-            These mechanisms are designed to contain risk, not to control funds.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Interface-agnostic design</h3>
-          <p>Sew does not depend on a single frontend.</p>
-          <p>Protected transfers can be initiated through:</p>
-          <ul>
-            <li>Wallets</li>
-            <li>Marketplaces</li>
-            <li>Custom applications</li>
-            <li>Automated workflows</li>
-          </ul>
-          <p>
-            Everyday Wallet is one reference interface designed to make
-            protected payments simple to use.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>A simple mental model</h3>
-          <p>
-            You can think of Sew as adding a coordination phase to a payment:
-          </p>
-          <ul>
-            <li>Lock funds under agreed rules</li>
-            <li>Coordinate outcome</li>
-            <li>Settle deterministically</li>
-          </ul>
-          <p>
-            The protocol enforces the rules. Participants control the decisions.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Where this fits</h3>
-          <p>Protected transfers are useful when:</p>
-          <ul>
-            <li>Parties do not already trust each other</li>
-            <li>Delivery happens after payment</li>
-            <li>Outcomes depend on real-world coordination</li>
-          </ul>
-          <p>
-            <strong>Examples include:</strong>
-          </p>
-          <ul>
-            <li>Peer-to-peer purchases</li>
-            <li>Services and freelance work</li>
-            <li>Event tickets</li>
-            <li>Marketplace transactions</li>
-          </ul>
-          <p>
-            The protocol provides the settlement layer beneath these
-            interactions.
-          </p>
         </section>
 
         <section className="content-block">
@@ -312,6 +205,74 @@ export default function HowItWorks() {
             afterward. This ensures existing agreements remain predictable
             regardless of future protocol upgrades.
           </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Safety mechanisms</h3>
+          <p>To support system stability:</p>
+          <ul>
+            <li>Governance can limit exposure to external integrations</li>
+            <li>Guardians can disable risky integrations</li>
+            <li>
+              Positions can be unwound back to escrow custody in emergencies
+            </li>
+          </ul>
+          <p>
+            These mechanisms are designed to contain risk, not to control funds.
+          </p>
+          <p>
+            See{' '}
+            <Link href="/protocol-limits">
+              <a>Protocol Limits</a>
+            </Link>{' '}
+            for detailed bounds on all protocol parameters.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Fees</h3>
+          <p>
+            Escrow creation fees are capped at 2%. The protocol may take a share
+            of generated yield and appeal bonds. All fees are bounded and
+            disclosed upfront.
+          </p>
+          <p>
+            See{' '}
+            <Link href="/fees">
+              <a>Fees</a>
+            </Link>{' '}
+            for the complete breakdown.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>What Makes Sew Different</h3>
+          <p>Sew introduces several original design concepts:</p>
+          <ul>
+            <li>
+              <strong>Per-escrow configuration snapshot</strong>: Every escrow
+              captures its complete configuration at creation. This includes
+              release strategy, resolution module, yield settings, and timeout
+              parameters. Once created, these settings cannot be changed by
+              anyone—including governance.
+            </li>
+            <li>
+              <strong>Forward-only evolution</strong>: Protocol upgrades and
+              module changes only affect new escrows. Existing agreements remain
+              governed by the rules that existed when they were created.
+            </li>
+            <li>
+              <strong>Yield on escrowed payments</strong>: Funds held in escrow
+              can generate yield through integrations like Aave V3. This yield
+              accrues to the escrow and is included in final settlement.
+            </li>
+            <li>
+              <strong>Resolver incentives</strong>: Dispute resolvers are
+              incentivized through bonds and fees to act honestly. Escalation
+              paths with final arbitration (e.g., Kleros) provide recourse for
+              disputed outcomes.
+            </li>
+          </ul>
         </section>
 
         <section className="content-block">

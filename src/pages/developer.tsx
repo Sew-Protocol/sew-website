@@ -1,5 +1,6 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
+import Link from 'next/link'
 
 export default function Developer() {
   return (
@@ -10,15 +11,24 @@ export default function Developer() {
           <h1>Build on Sew Protocol</h1>
           <h2 className="tagline">Developer Guide</h2>
           <p className="intro">
-            Sew Protocol introduces protected transfers as a composable primitive for Ethereum applications.
-            Developers can integrate escrow-backed payments directly into wallets, marketplaces, and coordination tools without introducing custody.
+            Sew Protocol introduces protected transfers as a composable
+            primitive for Ethereum applications. Developers can integrate
+            escrow-backed payments directly into wallets, marketplaces, and
+            coordination tools without introducing custody.
           </p>
         </section>
 
         <section className="content-block">
           <h3>What Sew gives you</h3>
-          <p>At its core, Sew provides a new settlement pattern: a token transfer that is held under rules until it is released, cancelled, or resolved.</p>
-          <p>Instead of building escrow logic from scratch, you can rely on a shared protocol layer that handles:</p>
+          <p>
+            At its core, Sew provides a new settlement pattern: a token transfer
+            that is held under rules until it is released, cancelled, or
+            resolved.
+          </p>
+          <p>
+            Instead of building escrow logic from scratch, you can rely on a
+            shared protocol layer that handles:
+          </p>
           <ul>
             <li>Escrow custody under defined conditions</li>
             <li>Deterministic release flows</li>
@@ -26,17 +36,30 @@ export default function Developer() {
             <li>Optional yield generation</li>
             <li>Forward-compatible module evolution</li>
           </ul>
-          <p>This allows applications to focus on UX and coordination while Sew handles settlement enforcement.</p>
+          <p>
+            This allows applications to focus on UX and coordination while Sew
+            handles settlement enforcement.
+          </p>
+          <p className="key-concept">
+            Each escrow captures its configuration at creation and cannot be
+            changed. Governance changes only affect future escrows, never
+            existing ones.
+          </p>
         </section>
 
         <section className="content-block">
           <h3>Mental model for integration</h3>
-          <p>Think of Sew as a coordination layer between sender and recipient.</p>
+          <p>
+            Think of Sew as a coordination layer between sender and recipient.
+          </p>
           <p>A typical flow:</p>
           <ul>
             <li>Your app initiates a protected transfer</li>
             <li>Funds move into an escrow contract</li>
-            <li>Your interface guides participants through the release or dispute process</li>
+            <li>
+              Your interface guides participants through the release or dispute
+              process
+            </li>
             <li>The protocol enforces the final outcome</li>
           </ul>
           <p>Your application never holds custody.</p>
@@ -44,9 +67,17 @@ export default function Developer() {
 
         <section className="content-block">
           <h3>Where Sew fits in your stack</h3>
-          <p>Sew sits between your frontend/application logic and token transfers on Ethereum.</p>
-          <p>It becomes the settlement layer for any situation where payment and delivery are separated.</p>
-          <p><strong>Typical integration points:</strong></p>
+          <p>
+            Sew sits between your frontend/application logic and token transfers
+            on Ethereum.
+          </p>
+          <p>
+            It becomes the settlement layer for any situation where payment and
+            delivery are separated.
+          </p>
+          <p>
+            <strong>Typical integration points:</strong>
+          </p>
           <ul>
             <li>Wallet send flows</li>
             <li>Marketplace checkout flows</li>
@@ -57,19 +88,28 @@ export default function Developer() {
 
         <section className="content-block">
           <h3>Core integration surfaces</h3>
-          <p>From a contract perspective, Sew exposes a small number of core concepts:</p>
-          
+          <p>
+            From a contract perspective, Sew exposes a small number of core
+            concepts:
+          </p>
+
           <div className="integration-surface">
             <h4>Escrow creation</h4>
             <p>Your application triggers escrow creation by defining:</p>
             <ul>
               <li>Token and amount</li>
               <li>Sender and recipient</li>
-              <li>Release authorization (who can release: sender only, designated address, or timed auto-release)</li>
+              <li>
+                Release authorization (who can release: sender only, designated
+                address, or timed auto-release)
+              </li>
               <li>Resolution module (optional)</li>
               <li>Yield module (optional)</li>
             </ul>
-            <p>This creates a protected transfer with fixed rules locked to this escrow.</p>
+            <p>
+              This creates a protected transfer with fixed rules locked to this
+              escrow.
+            </p>
           </div>
 
           <div className="integration-surface">
@@ -97,7 +137,9 @@ export default function Developer() {
             <h4>Yield integration (optional)</h4>
             <p>If enabled:</p>
             <ul>
-              <li>Escrowed funds can generate yield through external integrations</li>
+              <li>
+                Escrowed funds can generate yield through external integrations
+              </li>
               <li>Ownership remains with the escrow</li>
               <li>Positions can be unwound if needed</li>
             </ul>
@@ -119,14 +161,20 @@ export default function Developer() {
 
         <section className="content-block">
           <h3>Module architecture</h3>
-          <p>Sew is designed to evolve through modules rather than core contract rewrites.</p>
+          <p>
+            Sew is designed to evolve through modules rather than core contract
+            rewrites.
+          </p>
           <p>Modules define behavior for:</p>
           <ul>
             <li>Release semantics</li>
             <li>Dispute resolution</li>
             <li>Optional integrations (such as yield)</li>
           </ul>
-          <p>When an escrow is created, it selects its modules. Those choices remain fixed for the life of that escrow.</p>
+          <p>
+            When an escrow is created, it selects its modules. Those choices
+            remain fixed for the life of that escrow.
+          </p>
           <p>New modules affect only future escrows.</p>
         </section>
 
@@ -139,7 +187,9 @@ export default function Developer() {
             <li>Governance cannot rewrite active agreements</li>
             <li>Privileged roles cannot redirect user funds</li>
           </ul>
-          <p>Your integration should preserve these guarantees at the UX level.</p>
+          <p>
+            Your integration should preserve these guarantees at the UX level.
+          </p>
         </section>
 
         <section className="content-block">
@@ -150,7 +200,9 @@ export default function Developer() {
             <li>Coordination is needed before settlement</li>
             <li>Users want structured release paths</li>
           </ul>
-          <p><strong>Good fits include:</strong></p>
+          <p>
+            <strong>Good fits include:</strong>
+          </p>
           <ul>
             <li>P2P marketplaces</li>
             <li>Services and freelance payments</li>
@@ -162,11 +214,16 @@ export default function Developer() {
 
         <section className="content-block">
           <h3>Versioning and forward compatibility</h3>
-          <p>The protocol is designed to evolve without breaking existing integrations.</p>
+          <p>
+            The protocol is designed to evolve without breaking existing
+            integrations.
+          </p>
           <p>Key properties:</p>
           <ul>
             <li>New modules can be introduced over time</li>
-            <li>Existing escrows continue using their original configuration</li>
+            <li>
+              Existing escrows continue using their original configuration
+            </li>
             <li>Interface-level upgrades can be rolled out independently</li>
           </ul>
           <p>This supports long-lived integrations.</p>
@@ -204,25 +261,54 @@ export default function Developer() {
             <li>Choose default modules for your use case</li>
             <li>Build release and dispute flows into your UI</li>
           </ul>
-          <p>Detailed technical documentation is available in the protocol docs.</p>
+          <p>
+            Detailed technical documentation is available in the protocol docs.
+          </p>
         </section>
 
         <section className="content-block">
           <h3>Integration philosophy</h3>
           <p>Sew is designed to be:</p>
           <ul>
-            <li><strong>Minimal at the core</strong> — only essential settlement logic</li>
-            <li><strong>Flexible at the edges</strong> — extensible through modules</li>
-            <li><strong>Safe by default</strong> — invariants enforced by contract</li>
+            <li>
+              <strong>Minimal at the core</strong> — only essential settlement
+              logic
+            </li>
+            <li>
+              <strong>Flexible at the edges</strong> — extensible through
+              modules
+            </li>
+            <li>
+              <strong>Safe by default</strong> — invariants enforced by contract
+            </li>
           </ul>
           <p>You can adopt only the parts you need.</p>
         </section>
 
         <section className="content-block">
           <h3>Summary</h3>
-          <p>For developers, Sew provides a reusable primitive: a payment that can be held, coordinated, and settled under rules.</p>
-          <p>It removes the need to build escrow logic, custody systems, and settlement enforcement from scratch.</p>
-          <p>This allows applications to focus on coordination, not enforcement.</p>
+          <p>
+            For developers, Sew provides a reusable primitive: a payment that
+            can be held, coordinated, and settled under rules.
+          </p>
+          <p>
+            It removes the need to build escrow logic, custody systems, and
+            settlement enforcement from scratch.
+          </p>
+          <p>
+            This allows applications to focus on coordination, not enforcement.
+          </p>
+          <p>
+            See{' '}
+            <Link href="/fees">
+              <a>Fees</a>
+            </Link>{' '}
+            and{' '}
+            <Link href="/protocol-limits">
+              <a>Protocol Limits</a>
+            </Link>{' '}
+            for complete parameter details.
+          </p>
         </section>
       </div>
 

@@ -17,85 +17,52 @@ This document compares the static website content (in `/docs/input-*.md`) with t
 
 ## A) Misleading or Inaccurate Information on Static Website
 
-### 1. Escrow Fee - No Specific Percentage Defined
+### 1. Escrow Fee - No Specific Percentage Defined ✅ ADDRESSED
 
-**Website (input-developer.md):**
+Added fees page with:
 
-> "Escrow creation fee" listed as a parameter but no specific percentage mentioned.
-
-**Contracts (BaseEscrow.sol:127):**
-
-```solidity
-uint256 public constant MAX_ESCROW_FEE_BPS = 200; // 2% maximum escrow fee
-```
-
-**Issue:** The website implies an escrow fee exists but doesn't specify it cannot exceed 2%. Users may incorrectly assume a higher fee is possible.
+- Escrow creation fee capped at 2%
+- Yield protocol fee up to 30%
+- Appeal bond fee up to 30%
 
 ---
 
-### 2. Protocol Fees - Not Disclosed
+### 2. Protocol Fees - Not Disclosed ✅ ADDRESSED
 
-**Website:** No mention of protocol fees on yield or appeal bonds.
-
-**Contracts (BaseEscrow.sol:135-136):**
-
-```solidity
-uint256 public yieldProtocolFeeBps; // Protocol fee on yield (0-3000 bps = 0-30%)
-uint256 public appealBondProtocolFeeBps; // Protocol fee on appeal bonds (0-3000 bps = 0-30%)
-```
-
-**Issue:** Users have no visibility that up to 30% of yield and appeal bonds can be taken as protocol fees.
+Added fees page with full breakdown and links from main pages.
 
 ---
 
-### 3. Yield Generation - Aave Mentioned Without Detail
+### 3. Yield Generation - Aave Mentioned Without Detail ✅ ADDRESSED
 
-**Website (input-how-it-works.md):**
+Updated how-it-works.tsx:
 
-> "Funds may be deployed into an external protocol (such as Aave) to generate yield"
-
-**Contracts:**
-
-- `AaveYieldGenerationModule.sol` - Full Aave V3 integration
-- `DefaultYieldGenerationModule.sol` - Non-Aave option
-- `YieldPresets.sol` - Multiple yield distribution options (TO_SENDER, TO_RECIPIENT, SPLIT)
-
-**Issue:** Website oversimplifies yield generation. Missing:
-
-- Specific integration is Aave V3
-- Multiple yield presets exist
-- Yield distribution can be split between sender/recipient
+- "Funds may generate yield through integrations (e.g., Aave V3)"
+- "Yield can go to sender, recipient, or be split"
+- "Yield settings are fixed at escrow creation"
 
 ---
 
-### 4. Dispute Resolution - Incomplete Description
+### 4. Dispute Resolution - Incomplete Description ✅ ADDRESSED
 
-**Website (input-governance.md, input-how-it-works.md):**
+Updated how-it-works.tsx dispute section:
 
-> Mentions "resolution module" and "resolver" without specifics.
-
-**Contracts:**
-
-- `DefaultResolutionModule.sol` - Single trusted resolver per escrow
-- `DecentralizedResolutionModule.sol` - Multi-level escalation (Standard → Senior → External/Kleros)
-- Resolver staking and incentive systems
-
-**Issue:** Missing critical details:
-
-- Two distinct resolution module implementations
-- Three-level escalation path
-- Kleros integration for external resolution
-- Resolver staking requirements
+- Two resolution modes: Single trusted resolver, Escalating resolution
+- Final arbitration possible
+- Bonds and incentives mentioned
 
 ---
 
-### 5. Guardian Role Scope - Missing Constraints
+### 5. Guardian Role Scope - Missing Constraints ✅ ADDRESSED
 
-**Website (input-governance.md):**
+Updated governance.tsx with guardian constraints:
 
-> "Guardian can disable integrations, lower risk parameters, pause certain system components"
+- Pause max duration: 7 days
+- Limited pauses per time window
+- Cannot re-pause while paused
+- Unpause requires governance
 
-**Contracts (BaseEscrow.sol:115-122):**
+---
 
 ```solidity
 bool private _paused;
@@ -113,34 +80,44 @@ uint256 public constant PAUSE_WINDOW = 90 days;    // Rolling 90-day window
 
 ---
 
-### 6. Governance Process - Missing Lane System
+### 6. Governance Process - Missing Lane System ✅ ADDRESSED
 
-**Website (input-governance.md):**
+Updated governance.tsx with governance lanes section:
 
-> "Timelock is responsible for protocol evolution" with unspecified delays.
-
-**Contracts:**
-
-- `SlowLaneQueueActivate.sol` - ~9 day process (48h queue + 7 days + 48h activate)
-- Standard Lane: 48 hours for bounded parameter updates
-- Emergency Lane: 0 hours, down-only (guardian controlled)
-
-**Issue:** Missing specific governance lane system and timing requirements.
+- Fast lane: small, safe parameter changes
+- Slow lane: major changes with extended review
+- Emergency lane: risk reduction only
 
 ---
 
-### 7. Chain Deployment - Not Disclosed
+### 7. Chain Deployment - Not Disclosed ✅ ADDRESSED
 
-**Website:** No mention of which chain the protocol is deployed on.
+Updated how-it-works.tsx intro:
 
-**Contracts:**
+- "Sew Protocol is a security layer for payments on Base (Ethereum L2)"
 
-- `RPCEndpointManager.sol` - Multi-chain RPC management
-- `MultiL2EscrowAggregator.sol` - L2 support
-- `L2AddressRegistry.sol` - L2 address tracking
-- `BaseEscrow.sol:56-57` - Default timeouts reference Base L2 context
+---
 
-**Issue:** Protocol is built for Base (Ethereum L2) with multi-L2 support. Website doesn't clarify deployment target.
+## New Pages Added
+
+### Fees Page (`/fees`)
+
+Created a dedicated fees page with:
+
+- Escrow creation fee: max 2%
+- Yield protocol fee: 0-30%
+- Appeal bond fee: 0-30%
+- Fee principles and summary table
+
+### Protocol Limits Page (`/protocol-limits`)
+
+Created a dedicated limits page with:
+
+- Fee limits table
+- Time limits table
+- Guardian constraints table
+- Governance constraints
+- Per-escrow immutability summary
 
 ---
 
@@ -180,30 +157,13 @@ Added to input-how-it-works.md:
 
 ---
 
-### 4. Per-Escrow Configuration Snapshot
+### 4. Per-Escrow Configuration Snapshot ✅ ADDRESSED
 
-**Contracts (BaseEscrow.sol:157-171):**
-Every escrow captures a frozen snapshot at creation:
+Added snapshot concept to:
 
-```solidity
-struct ModuleSnapshot {
-    address resolutionModule;
-    address releaseStrategy;
-    address yieldGenerationModule;
-    address yieldDistributionModule;
-    address incentiveModule;
-    address cancellationStrategy;
-    uint256 yieldProtocolFeeBps;
-    uint256 appealBondProtocolFeeBps;
-    uint256 escrowFeeBps;
-    uint256 defaultAutoReleaseDelay;
-    uint256 defaultAutoCancelDelay;
-    uint256 maxDisputeDuration;
-    uint256 appealWindowDuration;
-}
-```
-
-**Missing from website:** Explicit statement that all settings are snapshotted and immutable per-escrow.
+- how-it-works.tsx: "Each escrow captures its configuration at creation and cannot be changed"
+- developer.tsx: "Each escrow captures its configuration at creation and cannot be changed"
+- governance.tsx: Already had "Once an escrow is created, its rules are fixed"
 
 ---
 
@@ -340,30 +300,116 @@ Link to:
 
 ### Medium Priority
 
-1. Add escrow state machine diagram
-2. Document DecentralizedResolutionModule escalation
-3. Add protocol limits table
-4. Clarify release strategies
-5. Document SEW token existence
+1. Add escrow state machine diagram ✅ ADDRESSED
+2. Document DecentralizedResolutionModule escalation ✅ ADDRESSED
+3. Add protocol limits table ✅ ADDRESSED
+4. Clarify release strategies ✅ ADDRESSED
+5. Document SEW token existence PENDING
 
 ### Low Priority
 
-1. Add ERC-2771/meta-transaction support
-2. Document emergency recovery procedures
-3. Add resolver staking details
-4. Include Aave risk considerations
-5. Document multi-L2 architecture
+1. Add ERC-2771/meta-transaction support PENDING
+2. Document emergency recovery procedures PENDING
+3. Add resolver staking details PENDING
+4. Include Aave risk considerations PENDING
+5. Document multi-L2 architecture PENDING
+
+---
+
+## Summary of Changes Made
+
+### Updated Pages
+
+1. **how-it-works.tsx**
+
+   - Added Base L2 deployment context
+   - Added "What Sew Is Not" section (Safety layer)
+   - Added snapshot concept (key primitive)
+   - Fixed yield section (Aave V3, split options)
+   - Fixed dispute section (two modes, escalation)
+   - Fixed release section (sender can release anytime, disputes pause release)
+   - Added Escrow states section
+   - Added Module architecture section
+
+2. **governance.tsx**
+
+   - Added Guardian constraints (7-day max, limited cycles)
+   - Added Governance lanes section
+
+3. **developer.tsx**
+   - Added snapshot concept
+
+### New Pages Created
+
+1. **fees.tsx** - Dedicated fees page with:
+
+   - Escrow creation fee (max 2%)
+   - Yield protocol fee (0-30%)
+   - Appeal bond fee (0-30%)
+   - Summary table
+
+2. **protocol-limits.tsx** - Dedicated limits page with:
+   - Fee limits table
+   - Time limits table
+   - Guardian constraints table
+   - Governance constraints
+   - Per-escrow immutability summary
+
+---
+
+## Next Steps
+
+### Completed
+
+1. ✅ Link new pages in navigation (updated header.tsx)
+2. ✅ Add links to fees/protocol-limits from relevant pages (how-it-works, developer, governance)
+3. ✅ Add Originality section ("What Makes Sew Different") to how-it-works.tsx
+4. ✅ Add technical reference page (/technical)
+
+### Originality Section Added
+
+Added to how-it-works.tsx after Fees section:
+
+- Per-escrow configuration snapshot
+- Forward-only evolution
+- Yield on escrowed payments
+- Resolver incentives
+
+### Technical Reference Page Created
+
+Created `/technical.tsx` with sections for:
+
+- Smart Contracts (core, modules, governance)
+- Documentation (architecture, security, guides, whitepaper)
+- External Resources (GitHub, explorer, audits)
+- Integration Resources (addresses, ABI, SDK)
+- Community (Discord, Twitter, Forum)
+
+### Remaining Work
+
+- Populate GitHub URL, block explorer, and audit report links when available
+- Add Discord/forum links when established
+- Add SDK references when published
 
 ---
 
 ## Conclusion
 
-The static website provides a good high-level overview but lacks critical technical details that developers and users need to make informed decisions. The contracts implement a sophisticated system with:
+High-priority items from the review have been addressed:
 
-- Clear fee structures
-- Constrained governance powers
-- Per-escrow immutability guarantees
-- Multi-level dispute resolution
-- Yield generation with Aave
+- ✅ Fee transparency with dedicated fees page
+- ✅ Snapshot concept added to key pages
+- ✅ Guardian constraints documented
+- ✅ Governance lanes explained
+- ✅ Base L2 deployment context added
+- ✅ Escrow states documented
+- ✅ Module architecture explained
+- ✅ Release and dispute mechanics clarified
+- ✅ Safety layer concept added
 
-These details should be surfaced on the website to ensure transparency and trust.
+Remaining work includes:
+
+- Linking new pages in navigation
+- Adding cross-references between pages
+- Documenting governance token (when finalized)
+- Adding emergency recovery details
