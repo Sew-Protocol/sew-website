@@ -160,31 +160,23 @@ uint256 public constant PAUSE_WINDOW = 90 days;    // Rolling 90-day window
 
 ---
 
-### 2. Escrow States and Transitions
+### 2. Escrow States and Transitions ✅ ADDRESSED
 
-**States (EscrowTypes.sol:64-71):**
+Added to input-how-it-works.md:
 
-- `NONE` - Uninitialized
-- `PENDING` - Created, awaiting release/cancel/dispute
-- `DISPUTED` - Under dispute resolution
-- `RELEASED` - Funds sent to recipient
-- `REFUNDED` - Funds returned to sender
-- `RESOLVED` - Outcome determined by resolver
-
-**Missing from website:** Full state machine diagram and valid transitions.
+- Defined 5 states: Pending, Disputed, Released, Refunded, Resolved
+- Clarified states are final once reached
 
 ---
 
-### 3. Module Types
+### 3. Module Types ✅ ADDRESSED
 
-| Module Type           | Purpose               | Examples                                                |
-| --------------------- | --------------------- | ------------------------------------------------------- |
-| Resolution Module     | Dispute handling      | DefaultResolutionModule, DecentralizedResolutionModule  |
-| Release Strategy      | Release authorization | DefaultReleaseStrategy                                  |
-| Cancellation Strategy | Cancel rules          | DefaultCancellationStrategy                             |
-| Yield Generation      | Yield accrual         | AaveYieldGenerationModule, DefaultYieldGenerationModule |
-| Yield Distribution    | Yield allocation      | DefaultYieldDistributionModule                          |
-| Incentive Module      | Resolver incentives   | ResolverIncentiveModuleV1/V2                            |
+Added to input-how-it-works.md:
+
+- Release strategy module
+- Resolution module
+- Yield module
+- Explained modules are selected at creation and immutable
 
 ---
 

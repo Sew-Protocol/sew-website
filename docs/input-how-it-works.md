@@ -23,7 +23,8 @@ The protocol does not decide outcomes.
 It enforces the rules defined at creation.
 
 Lifecycle of a protected transfer
-1) Creation
+
+1. Creation
 
 A user initiates a payment through an interface (such as a wallet or marketplace).
 
@@ -43,7 +44,7 @@ Funds are transferred into an escrow contract and held under these rules.
 
 Once created, these rules do not change.
 
-2) Active escrow state
+2. Active escrow state
 
 While active, the funds remain locked in escrow.
 
@@ -57,7 +58,7 @@ Settlement depends on the selected release path
 
 This creates a neutral holding phase where both parties can coordinate.
 
-3) Optional yield generation
+3. Optional yield generation
 
 If enabled at creation:
 
@@ -71,7 +72,7 @@ This feature is optional and scoped to specific integrations.
 
 If disabled or unwound, funds return to escrow custody.
 
-4) Release
+4. Release
 
 Settlement typically occurs through a release action.
 
@@ -91,7 +92,7 @@ The recipient receives the payment
 
 Any generated yield is included in settlement
 
-5) Dispute (if needed)
+5. Dispute (if needed)
 
 If parties disagree:
 
@@ -104,7 +105,7 @@ A final outcome is enforced by the protocol
 The protocol enforces the result.
 It does not judge the dispute itself.
 
-6) Final settlement
+6. Final settlement
 
 Once released, cancelled, or resolved:
 
@@ -244,3 +245,27 @@ Settled
 Under predefined, enforceable rules.
 
 This makes it possible to support safer exchanges between parties who do not already trust each other.
+
+Escrow states
+
+An escrow moves through defined states during its lifecycle:
+
+- **Pending**: Created and funded. Funds are locked until conditions are met.
+- **Disputed**: A participant opened a dispute. Resolution is in progress.
+- **Released**: Conditions were met. Recipient received the funds.
+- **Refunded**: The escrow was cancelled. Funds returned to sender.
+- **Resolved**: A resolver determined the outcome. Funds distributed accordingly.
+
+Once an escrow reaches Released, Refunded, or Resolved, it is complete. These states are final.
+
+Module architecture
+
+Sew uses pluggable modules to define escrow behavior:
+
+- **Release strategy**: Controls who can release funds and under what conditions.
+- **Resolution module**: Handles disputes and determines outcomes.
+- **Yield module**: Manages optional yield generation on escrowed funds.
+
+Modules are selected when an escrow is created and cannot be changed afterward. This ensures existing agreements remain predictable regardless of future protocol upgrades.
+
+See the technical documentation for complete module specifications.
