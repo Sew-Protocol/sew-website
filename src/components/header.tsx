@@ -4,18 +4,32 @@ import ExtLink from './ext-link'
 import { useRouter } from 'next/router'
 import styles from '../styles/header.module.css'
 
-const protocolNavItems: { label: string; page?: string; link?: string }[] = [
+const protocolNavItems: {
+  label: string
+  page?: string
+  link?: string
+  submenu?: { label: string; page: string }[]
+}[] = [
   { label: 'Home', page: '/' },
+  { label: 'Start Here', page: '/start-here' },
   { label: 'How It Works', page: '/how-it-works' },
-  { label: 'Fees', page: '/fees' },
-  { label: 'Protocol Limits', page: '/protocol-limits' },
+  { label: 'Build on Sew', page: '/developer' },
   { label: 'Architecture', page: '/architecture' },
   { label: 'Security', page: '/security' },
-  { label: 'Emergency', page: '/emergency' },
-  { label: 'Research', page: '/researcher' },
-  { label: 'Build on Sew', page: '/developer' },
-  { label: 'Investors', page: '/investor' },
-  { label: 'Technical', page: '/technical' },
+  {
+    label: 'Resources',
+    page: '/resources',
+    submenu: [
+      { label: 'Fees', page: '/fees' },
+      { label: 'SEW Token', page: '/token' },
+      { label: 'Protocol Limits', page: '/protocol-limits' },
+      { label: 'Emergency Recovery', page: '/emergency' },
+      { label: 'Contracts', page: '/contracts' },
+      { label: 'Technical Resources', page: '/technical' },
+      { label: 'For Researchers', page: '/researcher' },
+      { label: 'Investors', page: '/investor' },
+    ],
+  },
   // { label: 'Blog', page: '/blog' },
   // { label: 'Contact', page: '/contact' },
   {
@@ -44,8 +58,8 @@ const Header = ({ titlePre = '' }) => {
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
       <ul>
-        {protocolNavItems.map(({ label, page, link }) => (
-          <li key={label}>
+        {protocolNavItems.map(({ label, page, link, submenu }) => (
+          <li key={label} className={submenu ? 'has-submenu' : ''}>
             {page ? (
               <Link href={page}>
                 <a className={pathname === page ? 'active' : undefined}>
@@ -54,6 +68,21 @@ const Header = ({ titlePre = '' }) => {
               </Link>
             ) : (
               <ExtLink href={link}>{label}</ExtLink>
+            )}
+            {submenu && (
+              <ul className="submenu">
+                {submenu.map(({ label: subLabel, page: subPage }) => (
+                  <li key={subLabel}>
+                    <Link href={subPage}>
+                      <a
+                        className={pathname === subPage ? 'active' : undefined}
+                      >
+                        {subLabel}
+                      </a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             )}
           </li>
         ))}

@@ -7,27 +7,40 @@ export default function Index() {
   return (
     <>
       <Header titlePre="Home" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="hero">
           <h1>Sew Protocol</h1>
-          <h2 className="tagline">Payment protection at the transaction layer</h2>
+          <h2 className="tagline">
+            Payment protection at the transaction layer
+          </h2>
           <p className="description">
-            A non-custodial escrow architecture for ERC20 transfers on Ethereum.
-            Designed to reduce fraud, contain irreversible user error, and limit systemic smart contract risk.
+            By "transaction layer" we mean the moment of transfer and settlement
+            logic—the default pattern used when value moves—not L1 consensus or
+            sequencer infrastructure.
           </p>
           <div className="btns">
-            <ExtLink href="/architecture" className="button primary">Read the architecture</ExtLink>
-            <ExtLink href="#how-it-works" className="button">How it works</ExtLink>
+            <ExtLink href="/architecture" className="button primary">
+              Read the architecture
+            </ExtLink>
+            <ExtLink href="#how-it-works" className="button">
+              How it works
+            </ExtLink>
           </div>
         </section>
 
-        <section id="what-is-it" className="content-section">
+        <section
+          id="what-is-it"
+          className="content-section fabric-texture fabric-texture-light"
+        >
           <h3>What it is</h3>
           <p>
-            Sew Protocol introduces protected transfers as a native pattern on Ethereum.
+            Sew Protocol introduces protected transfers as a native pattern on
+            Ethereum.
           </p>
           <p>
-            Instead of sending tokens directly from one address to another, a transfer can be routed through a deterministic escrow that holds funds until release conditions are met.
+            Instead of sending tokens directly from one address to another, a
+            transfer can be routed through a deterministic escrow that holds
+            funds until release conditions are met.
           </p>
           <div className="pill-grid">
             <span className="pill">Non-custodial</span>
@@ -38,10 +51,15 @@ export default function Index() {
           <p>Any wallet, marketplace, or application can build on it.</p>
         </section>
 
-        <section id="why-it-exists" className="content-section">
+        <section
+          id="why-it-exists"
+          className="content-section fabric-texture fabric-texture-warm"
+        >
+          <div className="thread-divider" />
           <h3>Why it exists</h3>
           <p>
-            Ethereum transactions are irreversible by design. This property enables trustless settlement, but it also creates persistent risks:
+            Ethereum transactions are irreversible by design. This property
+            enables trustless settlement, but it also creates persistent risks:
           </p>
           <ul>
             <li>Funds sent to the wrong address cannot be recovered</li>
@@ -50,15 +68,17 @@ export default function Index() {
             <li>Smart contract risk can propagate across shared systems</li>
           </ul>
           <p>
-            Protection today is usually added off-chain, through custodians, or as application-specific logic.
-            Sew moves protection to the transaction layer itself.
+            Protection today is usually added off-chain, through custodians, or
+            as application-specific logic. Sew moves protection to the
+            transaction layer itself—the default pattern used when value moves.
           </p>
         </section>
 
         <section id="how-it-helps" className="content-section">
           <h3>How it helps</h3>
           <p>
-            Sew allows a transfer to be structured as an escrowed payment with clear release paths. This enables:
+            Sew allows a transfer to be structured as an escrowed payment with
+            clear release paths. This enables:
           </p>
           <ul>
             <li>Funds held until conditions are met</li>
@@ -68,44 +88,67 @@ export default function Index() {
             <li>Isolation of risk to individual transactions</li>
           </ul>
           <p>
-            The goal is not to replace direct transfers, but to establish a safer default pattern where protection is needed.
+            The goal is not to replace direct transfers, but to establish a
+            safer default pattern where protection is needed.
           </p>
         </section>
 
-        <section id="design-principles" className="content-section">
+        <section
+          id="design-principles"
+          className="content-section fabric-texture fabric-texture-light"
+        >
+          <div className="thread-divider" />
           <h3>Design principles</h3>
           <div className="principles-grid">
             <div className="principle">
               <h4>Non-custodial by construction</h4>
-              <p>Funds remain under smart contract control. No party can arbitrarily redirect assets.</p>
+              <p>
+                Funds remain under smart contract control. No party can
+                arbitrarily redirect assets.
+              </p>
             </div>
             <div className="principle">
               <h4>Deterministic execution</h4>
-              <p>Release and resolution follow predefined rules encoded at escrow creation.</p>
+              <p>
+                Release and resolution follow predefined rules encoded at escrow
+                creation.
+              </p>
             </div>
             <div className="principle">
               <h4>Isolation of risk</h4>
-              <p>Each escrow is self-contained. Failures do not propagate across the system.</p>
+              <p>
+                Each escrow is self-contained. Failures do not propagate across
+                the system.
+              </p>
             </div>
             <div className="principle">
               <h4>Changes affect only new escrows</h4>
-              <p>Upgrades and module swaps apply forward, preserving the integrity of existing agreements.</p>
+              <p>
+                Upgrades and module swaps apply forward, preserving the
+                integrity of existing agreements.
+              </p>
             </div>
             <div className="principle">
               <h4>Composable infrastructure</h4>
-              <p>The protocol exposes a base primitive that other systems can extend.</p>
+              <p>
+                The protocol exposes a base primitive that other systems can
+                extend.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="content-section">
+        <section className="content-section fabric-texture fabric-texture-warm">
+          <div className="thread-divider" />
           <h3>A primitive for protected transfers</h3>
           <p>
-            Sew defines a simple idea: A payment can be protected before it is finalized.
+            Sew defines a simple idea: A payment can be protected before it is
+            finalized.
           </p>
           <p>
-            This makes it possible to coordinate exchanges, deliveries, and agreements without introducing custody.
-            The same primitive can support:
+            This makes it possible to coordinate exchanges, deliveries, and
+            agreements without introducing custody. The same primitive can
+            support:
           </p>
           <ul>
             <li>Peer-to-peer commerce</li>
@@ -116,23 +159,29 @@ export default function Index() {
           </ul>
         </section>
 
-        <section className="content-section">
+        <section className="content-section fabric-texture fabric-texture-light">
+          <div className="thread-divider" />
           <h3>Vision</h3>
           <p>
-            Ethereum made programmable money possible. Sew explores what happens when payments themselves become programmable agreements.
+            Ethereum made programmable money possible. Sew explores what happens
+            when payments themselves become programmable agreements.
           </p>
           <p>
-            By introducing protection at the moment of transfer, the protocol aims to support safer coordination between parties who do not already trust each other.
+            By introducing protection at the moment of transfer, the protocol
+            aims to support safer coordination between parties who do not
+            already trust each other.
           </p>
-          <p>
-            This is a long-term infrastructure effort focused on:
-          </p>
+          <p>This is a long-term infrastructure effort focused on:</p>
           <ul>
             <li>Safer everyday transactions</li>
             <li>Clearer settlement patterns</li>
             <li>Reduced reliance on custodial intermediaries</li>
           </ul>
-          <p><strong>Protection is not an add-on. It becomes a default option.</strong></p>
+          <p>
+            <strong>
+              Protection is not an add-on. It becomes a default option.
+            </strong>
+          </p>
         </section>
 
         <footer className="page-footer">
@@ -146,7 +195,8 @@ export default function Index() {
             <ExtLink href="https://everyday.wallet">Everyday Wallet</ExtLink>
           </div>
           <p className="disclaimer">
-            Non-custodial protocol software. Interfaces may vary. Users remain responsible for their own keys and transactions.
+            Non-custodial protocol software. Interfaces may vary. Users remain
+            responsible for their own keys and transactions.
           </p>
         </footer>
       </div>

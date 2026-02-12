@@ -29,38 +29,45 @@ export default function Fees() {
         <section className="content-block">
           <h3>Escrow creation fee</h3>
           <p>
-            <strong>Maximum: 2%</strong>
+            <strong>Default at launch: 1% | Maximum: 2%</strong>
           </p>
           <p>
             A small fee is charged when creating an escrow. This fee is deducted
-            from the transaction amount at creation time. The exact fee
-            percentage is set at protocol deployment and applies to all escrows.
+            from the transaction amount at creation time. The fee percentage is
+            set by governance but cannot exceed 2%.
           </p>
         </section>
 
         <section className="content-block">
           <h3>Yield protocol fee</h3>
           <p>
-            <strong>Range: 0% - 30%</strong>
+            <strong>Default at launch: 30% | Maximum: 30%</strong>
           </p>
           <p>
             When escrowed funds generate yield through integrations (e.g., Aave
-            V3), the protocol may take a share of the generated yield. This fee
-            is set by governance and applies to all future escrows. Existing
-            escrows retain the fee percentage at the time of their creation.
+            V3), the protocol takes a share of the generated yield. This fee is
+            set by governance but is capped at 30%.
           </p>
           <p>The yield protocol fee does not affect the principal amount.</p>
+          <p>
+            Fee is snapshotted at escrow creation and cannot change during the
+            escrow's lifetime.
+          </p>
         </section>
 
         <section className="content-block">
           <h3>Appeal bond fee</h3>
           <p>
-            <strong>Range: 0% - 30%</strong>
+            <strong>Default at launch: 0% | Maximum: 30%</strong>
           </p>
           <p>
             When a dispute resolution is appealed, the appellant posts a bond. A
             portion of this bond may be taken as a protocol fee. This
             discourages frivolous appeals while funding protocol development.
+          </p>
+          <p>
+            Currently inactive at launch. Can be enabled by governance in the
+            future.
           </p>
         </section>
 
@@ -70,23 +77,27 @@ export default function Fees() {
             <thead>
               <tr>
                 <th>Fee Type</th>
-                <th>Max Rate</th>
+                <th>Default at Launch</th>
+                <th>Max</th>
                 <th>Applied When</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Escrow creation</td>
+                <td>1%</td>
                 <td>2%</td>
                 <td>At escrow creation</td>
               </tr>
               <tr>
                 <td>Yield protocol share</td>
                 <td>30%</td>
+                <td>30%</td>
                 <td>On generated yield</td>
               </tr>
               <tr>
                 <td>Appeal bond</td>
+                <td>0% (inactive)</td>
                 <td>30%</td>
                 <td>On appeal bonds</td>
               </tr>

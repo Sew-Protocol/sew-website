@@ -6,7 +6,7 @@ export default function Researcher() {
   return (
     <>
       <Header titlePre="For Researchers" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>For Researchers</h1>
           <h2 className="tagline">Sew Protocol</h2>
@@ -19,7 +19,7 @@ export default function Researcher() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>Framing</h3>
           <p>
             Sew can be understood as an attempt to formalize protected transfers

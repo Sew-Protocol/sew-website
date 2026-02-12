@@ -6,7 +6,7 @@ export default function HowItWorks() {
   return (
     <>
       <Header titlePre="How It Works" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>How It Works</h1>
           <h2 className="tagline">Sew Protocol</h2>
@@ -17,7 +17,7 @@ export default function HowItWorks() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>What Sew Is Not</h3>
           <p>Sew is not a marketplace, a wallet, or a court.</p>
           <p>
@@ -28,7 +28,7 @@ export default function HowItWorks() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>The core idea</h3>
           <p>A standard token transfer is immediate and final.</p>
           <p>A protected transfer is different:</p>
@@ -48,7 +48,7 @@ export default function HowItWorks() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>Lifecycle of a protected transfer</h3>
 
           <div className="lifecycle-step">
@@ -123,20 +123,23 @@ export default function HowItWorks() {
           <div className="lifecycle-step">
             <h4>5) Dispute (if needed)</h4>
             <p>If parties disagree, a dispute can be opened.</p>
-            <p>Two resolution modes exist:</p>
+            <p>Resolution modes:</p>
             <ul>
               <li>
-                <strong>Single trusted resolver:</strong> A designated resolver
-                makes the final decision.
+                <strong>Single trusted resolver (available at launch):</strong>{' '}
+                A designated resolver makes the final decision. Suitable for
+                straightforward disputes.
               </li>
               <li>
-                <strong>Escalating resolution:</strong> Multi-level process with
-                final arbitration possible.
+                <strong>Escalating resolution (staged rollout):</strong>{' '}
+                Multi-level process with Standard → Senior → External resolver
+                tiers. Coming in future phases.
               </li>
             </ul>
             <p>
-              Both modes use bonds and incentives to secure behavior. The
-              protocol enforces the resolution deterministically.
+              At launch, the protocol uses single trusted resolver mode.
+              Escalating resolution will be activated through governance after
+              testing and validation.
             </p>
           </div>
 
@@ -152,7 +155,7 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>Escrow states</h3>
           <p>An escrow moves through defined states during its lifecycle:</p>
           <ul>
@@ -183,7 +186,7 @@ export default function HowItWorks() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>Module architecture</h3>
           <p>Sew uses pluggable modules to define escrow behavior:</p>
           <ul>
@@ -207,7 +210,7 @@ export default function HowItWorks() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>Safety mechanisms</h3>
           <p>To support system stability:</p>
           <ul>
@@ -229,7 +232,7 @@ export default function HowItWorks() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>Fees</h3>
           <p>
             Escrow creation fees are capped at 2%. The protocol may take a share
@@ -245,7 +248,7 @@ export default function HowItWorks() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>What Makes Sew Different</h3>
           <p>Sew introduces several original design concepts:</p>
           <ul>
@@ -275,7 +278,7 @@ export default function HowItWorks() {
           </ul>
         </section>
 
-        <section className="content-block">
+        <section className="content-block fabric-texture fabric-texture-light">
           <h3>Summary</h3>
           <p>
             Sew Protocol adds structure to token transfers without introducing

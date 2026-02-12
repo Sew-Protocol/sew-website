@@ -14,21 +14,17 @@ export default function Developer() {
             Sew Protocol introduces protected transfers as a composable
             primitive for Ethereum applications. Developers can integrate
             escrow-backed payments directly into wallets, marketplaces, and
-            coordination tools without introducing custody.
+            coordination tools.
           </p>
         </section>
 
         <section className="content-block">
-          <h3>What Sew gives you</h3>
+          <h3>Core concepts</h3>
           <p>
-            At its core, Sew provides a new settlement pattern: a token transfer
-            that is held under rules until it is released, cancelled, or
-            resolved.
+            At its core, Sew provides a settlement pattern where tokens are held
+            until conditions are met.
           </p>
-          <p>
-            Instead of building escrow logic from scratch, you can rely on a
-            shared protocol layer that handles:
-          </p>
+          <p>The protocol handles:</p>
           <ul>
             <li>Escrow custody under defined conditions</li>
             <li>Deterministic release flows</li>
@@ -36,10 +32,6 @@ export default function Developer() {
             <li>Optional yield generation</li>
             <li>Forward-compatible module evolution</li>
           </ul>
-          <p>
-            This allows applications to focus on UX and coordination while Sew
-            handles settlement enforcement.
-          </p>
           <p className="key-concept">
             Each escrow captures its configuration at creation and cannot be
             changed. Governance changes only affect future escrows, never
@@ -48,255 +40,392 @@ export default function Developer() {
         </section>
 
         <section className="content-block">
-          <h3>Mental model for integration</h3>
-          <p>
-            Think of Sew as a coordination layer between sender and recipient.
-          </p>
-          <p>A typical flow:</p>
-          <ul>
-            <li>Your app initiates a protected transfer</li>
-            <li>Funds move into an escrow contract</li>
-            <li>
-              Your interface guides participants through the release or dispute
-              process
-            </li>
-            <li>The protocol enforces the final outcome</li>
-          </ul>
-          <p>Your application never holds custody.</p>
-        </section>
+          <h3>Escrow creation</h3>
+          <p>Creating an escrow requires defining the terms upfront:</p>
 
-        <section className="content-block">
-          <h3>Where Sew fits in your stack</h3>
-          <p>
-            Sew sits between your frontend/application logic and token transfers
-            on Ethereum.
-          </p>
-          <p>
-            It becomes the settlement layer for any situation where payment and
-            delivery are separated.
-          </p>
-          <p>
-            <strong>Typical integration points:</strong>
-          </p>
-          <ul>
-            <li>Wallet send flows</li>
-            <li>Marketplace checkout flows</li>
-            <li>Service payment agreements</li>
-            <li>Automated coordination systems</li>
-          </ul>
-        </section>
+          <div className="code-block">
+            <pre>{`interface EscrowSettings {
+  // Custom resolver override (address(0) = use default)
+  customResolver: address
+  // Address authorized to release (address(0) = sender only)
+  releaseAddress: address
+  // Yield configuration preset
+  yieldPreset: YieldPreset
+  // Unix timestamp for auto-release (0 = disabled)
+  autoReleaseTime: uint256
+  // Unix timestamp for auto-cancel (0 = disabled)
+  autoCancelTime: uint256
+}
 
-        <section className="content-block">
-          <h3>Core integration surfaces</h3>
-          <p>
-            From a contract perspective, Sew exposes a small number of core
-            concepts:
-          </p>
+enum YieldPreset {
+  OFF,        // No yield generation
+  TO_SENDER,  // Yield goes to sender
+  TO_RECIPIENT, // Yield goes to recipient
+  SPLIT       // Split between parties
+}
 
-          <div className="integration-surface">
-            <h4>Escrow creation</h4>
-            <p>Your application triggers escrow creation by defining:</p>
-            <ul>
-              <li>Token and amount</li>
-              <li>Sender and recipient</li>
-              <li>
-                Release authorization (who can release: sender only, designated
-                address, or timed auto-release)
-              </li>
-              <li>Resolution module (optional)</li>
-              <li>Yield module (optional)</li>
-            </ul>
-            <p>
-              This creates a protected transfer with fixed rules locked to this
-              escrow.
-            </p>
+// Create an escrow
+function createEscrow(
+  address token,
+  address to,
+  uint256 amount,
+  EscrowSettings memory settings
+) external returns (uint256 workflowId)`}</pre>
           </div>
 
-          <div className="integration-surface">
-            <h4>Release interactions</h4>
-            <p>Your interface can allow participants to:</p>
-            <ul>
-              <li>Release funds</li>
-              <li>Request cancellation</li>
-              <li>Escalate disputes</li>
-            </ul>
-            <p>The protocol enforces the state transitions.</p>
+          <p>
+            The function returns a workflowId that identifies this escrow
+            uniquely.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Escrow states</h3>
+          <p>Every escrow moves through defined states:</p>
+
+          <div className="code-block">
+            <pre>{`enum EscrowState {
+  NONE,       // Uninitialized
+  PENDING,    // Created, awaiting action
+  DISPUTED,   // Under dispute resolution
+  RELEASED,   // Funds sent to recipient
+  REFUNDED,   // Funds returned to sender
+  RESOLVED    // Resolver determined outcome
+}
+
+// Check escrow state
+function getEscrowState(uint256 workflowId) external view returns (EscrowState)`}</pre>
           </div>
 
-          <div className="integration-surface">
-            <h4>Resolution integration</h4>
-            <p>If your use case involves disputes:</p>
-            <ul>
-              <li>You can integrate with existing resolution modules</li>
-              <li>Or introduce new resolution models as extensions</li>
-            </ul>
-            <p>The protocol ensures outcomes are enforced deterministically.</p>
+          <p>
+            Once an escrow reaches RELEASED, REFUNDED, or RESOLVED, it is
+            complete and irreversible.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Release interactions</h3>
+          <p>Funds can be released in several ways:</p>
+
+          <div className="code-block">
+            <pre>{`// Sender releases at any time
+function releaseEscrow(uint256 workflowId) external
+
+// Release after conditions are met (automatic or triggered)
+function automateTimedActions(uint256 workflowId) external returns (bool)
+
+// Query if release is currently allowed
+function canRelease(
+  uint256 workflowId,
+  address caller,
+  bytes calldata escrowData
+) external view returns (bool allowed, uint8 reasonCode)`}</pre>
           </div>
 
-          <div className="integration-surface">
-            <h4>Yield integration (optional)</h4>
-            <p>If enabled:</p>
-            <ul>
-              <li>
-                Escrowed funds can generate yield through external integrations
-              </li>
-              <li>Ownership remains with the escrow</li>
-              <li>Positions can be unwound if needed</li>
-            </ul>
-            <p>Yield is a feature layer, not a requirement.</p>
+          <p>
+            The release strategy determines authorization. Default strategy
+            allows sender to release anytime.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Dispute handling</h3>
+          <p>Disputes pause normal release and invoke resolution:</p>
+
+          <div className="code-block">
+            <pre>{`// Open a dispute
+function raiseDispute(uint256 workflowId) external
+
+// Escalate to next resolution level
+function escalateDispute(uint256 workflowId) external
+
+// Execute a pending resolution
+function executePending(uint256 workflowId) external
+
+// Query resolution status
+function getResolutionStatus(uint256 workflowId) external view returns (
+  address resolver,
+  uint8 level,
+  bool hasResolution,
+  uint256 appealDeadline
+)`}</pre>
+          </div>
+
+          <p>
+            Two resolution modes are available: single trusted resolver and
+            escalating decentralized resolution.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Querying escrow details</h3>
+          <p>Read interface for integration:</p>
+
+          <div className="code-block">
+            <pre>{`struct EscrowTransfer {
+  address token;           // ERC20 token address
+  address to;            // Recipient
+  address from;          // Sender
+  address disputeResolver;// Assigned resolver
+  uint256 amountAfterFee; // Amount held in escrow
+  uint64 autoReleaseTime; // Auto-release timestamp
+  uint64 autoCancelTime; // Auto-cancel timestamp
+  EscrowState escrowState;
+  SenderStatus senderStatus;
+  RecipientStatus recipientStatus;
+}
+
+// Get full escrow details
+function getEscrowDetails(uint256 workflowId) external view returns (EscrowTransfer memory)
+
+// Get module snapshot for this escrow
+function getModuleSnapshot(uint256 workflowId) external view returns (
+  address resolutionModule,
+  address releaseStrategy,
+  address yieldGenerationModule,
+  address yieldDistributionModule,
+  uint256[4] memory fees // [yieldProtocol, appealBond, escrow, unused]
+)`}</pre>
           </div>
         </section>
 
         <section className="content-block">
-          <h3>Interface-agnostic design</h3>
-          <p>Sew does not prescribe UX. You can build:</p>
-          <ul>
-            <li>Wallet-native protected send flows</li>
-            <li>Marketplace settlement systems</li>
-            <li>Specialized coordination tools</li>
-            <li>Vertical-specific payment experiences</li>
-          </ul>
-          <p>Multiple interfaces can coexist over the same protocol.</p>
+          <h3>Module types</h3>
+          <p>Sew uses pluggable modules for extensibility:</p>
+
+          <table className="module-table">
+            <thead>
+              <tr>
+                <th>Module Type</th>
+                <th>Purpose</th>
+                <th>Interface</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Resolution Module</strong>
+                </td>
+                <td>Handle disputes, determine outcomes</td>
+                <td>IResolutionModule</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Release Strategy</strong>
+                </td>
+                <td>Control release authorization</td>
+                <td>IReleaseStrategy</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Cancellation Strategy</strong>
+                </td>
+                <td>Define cancel rules</td>
+                <td>ICancellationStrategy</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Yield Generation</strong>
+                </td>
+                <td>Generate yield on escrowed funds</td>
+                <td>IYieldGenerationModule</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Yield Distribution</strong>
+                </td>
+                <td>Allocate generated yield</td>
+                <td>IYieldDistributionModule</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            Modules are selected at escrow creation and remain fixed for that
+            escrow's lifetime.
+          </p>
         </section>
 
         <section className="content-block">
-          <h3>Module architecture</h3>
-          <p>
-            Sew is designed to evolve through modules rather than core contract
-            rewrites.
-          </p>
-          <p>Modules define behavior for:</p>
-          <ul>
-            <li>Release semantics</li>
-            <li>Dispute resolution</li>
-            <li>Optional integrations (such as yield)</li>
-          </ul>
-          <p>
-            When an escrow is created, it selects its modules. Those choices
-            remain fixed for the life of that escrow.
-          </p>
-          <p>New modules affect only future escrows.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Safety and invariants</h3>
-          <p>When building on Sew, you can rely on a few key properties:</p>
-          <ul>
-            <li>Funds are never held by your application</li>
-            <li>Settlement follows predefined rules</li>
-            <li>Governance cannot rewrite active agreements</li>
-            <li>Privileged roles cannot redirect user funds</li>
-          </ul>
-          <p>
-            Your integration should preserve these guarantees at the UX level.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>What to design for</h3>
-          <p>Sew works best when:</p>
-          <ul>
-            <li>Payment and delivery are separated in time</li>
-            <li>Coordination is needed before settlement</li>
-            <li>Users want structured release paths</li>
-          </ul>
-          <p>
-            <strong>Good fits include:</strong>
-          </p>
-          <ul>
-            <li>P2P marketplaces</li>
-            <li>Services and freelance payments</li>
-            <li>Ticketing systems</li>
-            <li>Event coordination</li>
-            <li>Local commerce platforms</li>
-          </ul>
-        </section>
-
-        <section className="content-block">
-          <h3>Versioning and forward compatibility</h3>
-          <p>
-            The protocol is designed to evolve without breaking existing
-            integrations.
-          </p>
-          <p>Key properties:</p>
-          <ul>
-            <li>New modules can be introduced over time</li>
+          <h3>Integration checklist</h3>
+          <ol>
             <li>
-              Existing escrows continue using their original configuration
-            </li>
-            <li>Interface-level upgrades can be rolled out independently</li>
-          </ul>
-          <p>This supports long-lived integrations.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Governance awareness</h3>
-          <p>As a builder, you should understand:</p>
-          <ul>
-            <li>Exposure caps may affect new deposits into optional modules</li>
-            <li>Integrations can be disabled for safety reasons</li>
-            <li>Existing escrows remain valid under their original rules</li>
-          </ul>
-          <p>This helps you design resilient flows.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Reference implementation</h3>
-          <p>Everyday Wallet is one example of an interface built on Sew.</p>
-          <p>It demonstrates:</p>
-          <ul>
-            <li>Protected send flows</li>
-            <li>Release UX patterns</li>
-            <li>Real-world usage scenarios</li>
-          </ul>
-          <p>It is not required for integration.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Getting started</h3>
-          <p>To begin integrating:</p>
-          <ul>
-            <li>Review the core contracts and interfaces</li>
-            <li>Understand the escrow lifecycle</li>
-            <li>Choose default modules for your use case</li>
-            <li>Build release and dispute flows into your UI</li>
-          </ul>
-          <p>
-            Detailed technical documentation is available in the protocol docs.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Integration philosophy</h3>
-          <p>Sew is designed to be:</p>
-          <ul>
-            <li>
-              <strong>Minimal at the core</strong> — only essential settlement
-              logic
+              <strong>Import interfaces</strong> — Include Sew interface
+              contracts for type safety
             </li>
             <li>
-              <strong>Flexible at the edges</strong> — extensible through
-              modules
+              <strong>Handle approvals</strong> — Users must approve token
+              spending for escrow creation
             </li>
             <li>
-              <strong>Safe by default</strong> — invariants enforced by contract
+              <strong>Monitor states</strong> — Listen for escrow state change
+              events
+            </li>
+            <li>
+              <strong>Guide users</strong> — Show pending escrows and available
+              actions
+            </li>
+            <li>
+              <strong>Handle disputes</strong> — Provide UI for dispute
+              initiation and resolution
+            </li>
+            <li>
+              <strong>Support yield</strong> — Display yield accrued if enabled
+            </li>
+          </ol>
+        </section>
+
+        <section className="content-block">
+          <h3>Event references</h3>
+          <p>Key events to watch:</p>
+
+          <div className="code-block">
+            <pre>{`// Escrow lifecycle events
+event EscrowCreated(
+  uint256 indexed workflowId,
+  address indexed token,
+  address indexed from,
+  address to,
+  uint256 amount,
+  uint256 amountAfterFee,
+  uint256 fee
+);
+
+event EscrowStateChanged(
+  uint256 indexed workflowId,
+  EscrowState fromState,
+  EscrowState toState
+);
+
+event EscrowResolved(
+  uint256 indexed workflowId,
+  address indexed disputeResolver,
+  bytes32 resolutionHash
+);
+
+// Fee events
+event ProtocolFeeCollected(
+  uint8 indexed kind,      // 0 = yield, 1 = appeal bond
+  uint256 indexed workflowId,
+  address indexed token,
+  uint256 grossAmount,
+  uint256 feeBps,
+  uint256 feeAmount
+);`}</pre>
+          </div>
+        </section>
+
+        <section className="content-block">
+          <h3>Safety guarantees</h3>
+          <p>When building on Sew, these invariants hold:</p>
+          <ul>
+            <li>Your application never holds custody of funds</li>
+            <li>Settlement follows predefined rules only</li>
+            <li>Governance cannot modify active escrows</li>
+            <li>No role can arbitrarily redirect funds</li>
+            <li>Module changes only affect future escrows</li>
+          </ul>
+        </section>
+
+        <section className="content-block">
+          <h3>Contract addresses</h3>
+          <p>Mainnet addresses (Base):</p>
+          <table className="address-table">
+            <thead>
+              <tr>
+                <th>Contract</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>EscrowVault (default)</td>
+                <td>
+                  <Link href="/contracts">
+                    <a>See contract addresses</a>
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td>DefaultResolutionModule</td>
+                <td>
+                  <Link href="/contracts">
+                    <a>See contract addresses</a>
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td>DefaultReleaseStrategy</td>
+                <td>
+                  <Link href="/contracts">
+                    <a>See contract addresses</a>
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td>AaveYieldModule</td>
+                <td>
+                  <Link href="/contracts">
+                    <a>See contract addresses</a>
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td>ModuleRegistry</td>
+                <td>
+                  <Link href="/contracts">
+                    <a>See contract addresses</a>
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            See{' '}
+            <Link href="/contracts">
+              <a>Contract Addresses</a>
+            </Link>{' '}
+            for deployed testnet contracts.
+          </p>
+        </section>
+
+        <section className="content-block">
+          <h3>Resources</h3>
+          <ul>
+            <li>
+              <strong>GitHub</strong>: Full source code, tests, and deployment
+              scripts
+            </li>
+            <li>
+              <strong>ABIs</strong>: Contract interfaces for integration
+            </li>
+            <li>
+              <strong>SDK</strong>: TypeScript/JavaScript utilities (coming
+              soon)
+            </li>
+            <li>
+              <strong>Examples</strong>: Reference implementations in the
+              repository
             </li>
           </ul>
-          <p>You can adopt only the parts you need.</p>
+          <p>
+            See{' '}
+            <Link href="/technical">
+              <a>Technical Resources</a>
+            </Link>{' '}
+            for documentation links.
+          </p>
         </section>
 
         <section className="content-block">
           <h3>Summary</h3>
           <p>
-            For developers, Sew provides a reusable primitive: a payment that
-            can be held, coordinated, and settled under rules.
+            Sew provides a reusable primitive: payments that can be held,
+            coordinated, and settled under rules.
           </p>
           <p>
             It removes the need to build escrow logic, custody systems, and
             settlement enforcement from scratch.
-          </p>
-          <p>
-            This allows applications to focus on coordination, not enforcement.
           </p>
           <p>
             See{' '}
@@ -336,19 +465,52 @@ export default function Developer() {
           max-width: 800px;
           padding: 0 2rem;
         }
-        .integration-surface {
-          margin-top: 2rem;
+        .code-block {
+          background: #1a1a1a;
+          color: #e0e0e0;
           padding: 1.5rem;
-          background: #fafafa;
-          border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border-radius: 8px;
+          overflow-x: auto;
+          margin: 1.5rem 0;
         }
-        .integration-surface h4 {
-          margin-top: 0;
+        .code-block pre {
+          margin: 0;
+          font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+          font-size: 0.9rem;
+          line-height: 1.5;
+        }
+        .module-table,
+        .address-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1.5rem 0;
+        }
+        .module-table th,
+        .module-table td,
+        .address-table th,
+        .address-table td {
+          text-align: left;
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #eaeaea;
+        }
+        .module-table th,
+        .address-table th {
+          font-weight: 600;
+          background: #fafafa;
         }
         @media (max-width: 600px) {
           .content-block {
             padding: 0 1rem;
+          }
+          .code-block {
+            padding: 1rem;
+          }
+          .code-block pre {
+            font-size: 0.8rem;
+          }
+          .module-table,
+          .address-table {
+            font-size: 0.85rem;
           }
         }
       `}</style>
