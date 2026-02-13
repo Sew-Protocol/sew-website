@@ -37,13 +37,15 @@ export default function StartHere() {
               </svg>
             </div>
             <h2>I&apos;m a User</h2>
-            <p>I want to make protected payments on Ethereum</p>
-            <div className="pathway-action">
+            <p className="pathway-desc">
+              I want to make protected payments on Ethereum
+            </p>
+            <div className="pathway-actions">
               <Link href="/everyday-wallet">
                 <a className="pathway-link">Use Everyday Wallet</a>
               </Link>
             </div>
-            <div className="pathway-features">
+            <div className="pathway-tags">
               <span>Simple checkout</span>
               <span>Buyer protection</span>
               <span>Works with any wallet</span>
@@ -83,13 +85,15 @@ export default function StartHere() {
               </svg>
             </div>
             <h2>I&apos;m a Builder</h2>
-            <p>I want to integrate protected transfers into my app</p>
-            <div className="pathway-action">
+            <p className="pathway-desc">
+              I want to integrate protected transfers into my app
+            </p>
+            <div className="pathway-actions">
               <Link href="/developer">
-                <a className="pathway-link">Developer Quickstart</a>
+                <a className="pathway-link">Developer Guide</a>
               </Link>
             </div>
-            <div className="pathway-features">
+            <div className="pathway-tags">
               <span>API reference</span>
               <span>Integration guides</span>
               <span>Code examples</span>
@@ -126,8 +130,10 @@ export default function StartHere() {
               </svg>
             </div>
             <h2>I&apos;m an Investor</h2>
-            <p>I want to understand the protocol&apos;s value and tokenomics</p>
-            <div className="pathway-links">
+            <p className="pathway-desc">
+              I want to understand the protocol&apos;s value and tokenomics
+            </p>
+            <div className="pathway-actions">
               <Link href="/investor">
                 <a className="pathway-link">Investment Thesis</a>
               </Link>
@@ -135,7 +141,7 @@ export default function StartHere() {
                 <a className="pathway-link secondary">SEW Token</a>
               </Link>
             </div>
-            <div className="pathway-features">
+            <div className="pathway-tags">
               <span>Token utility</span>
               <span>Risk factors</span>
               <span>Roadmap</span>
@@ -174,8 +180,10 @@ export default function StartHere() {
               </svg>
             </div>
             <h2>I&apos;m an Auditor / Researcher</h2>
-            <p>I need deep technical and security documentation</p>
-            <div className="pathway-links">
+            <p className="pathway-desc">
+              I need deep technical and security documentation
+            </p>
+            <div className="pathway-actions">
               <Link href="/security">
                 <a className="pathway-link">Security Model</a>
               </Link>
@@ -183,7 +191,7 @@ export default function StartHere() {
                 <a className="pathway-link secondary">Architecture</a>
               </Link>
             </div>
-            <div className="pathway-features">
+            <div className="pathway-tags">
               <span>Trust model</span>
               <span>Invariant guarantees</span>
               <span>Audit reports</span>
@@ -214,6 +222,18 @@ export default function StartHere() {
                 <span className="quick-link-desc">
                   Protocol evolution and roles
                 </span>
+              </a>
+            </Link>
+            <Link href="/dispute-resolution">
+              <a className="quick-link needle-accent">
+                <span className="quick-link-title">Dispute Resolution</span>
+                <span className="quick-link-desc">Escalation modes</span>
+              </a>
+            </Link>
+            <Link href="/release-plan">
+              <a className="quick-link needle-accent">
+                <span className="quick-link-title">Release Plan</span>
+                <span className="quick-link-desc">Phased rollout</span>
               </a>
             </Link>
             <Link href="/emergency">
@@ -248,14 +268,9 @@ export default function StartHere() {
           margin: 0 auto;
         }
         .pathway-card {
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          padding: 2rem;
-          transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .pathway-card:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
         .pathway-icon {
           width: 48px;
@@ -265,15 +280,18 @@ export default function StartHere() {
         }
         .pathway-card h2 {
           font-size: 1.25rem;
-          margin-bottom: 0.5rem;
+          margin: 0 0 0.5rem 0;
         }
-        .pathway-card > p {
+        .pathway-desc {
           color: var(--accents-3);
           font-size: 0.95rem;
-          margin-bottom: 1.5rem;
-          flex-grow: 1;
+          margin: 0 0 1.5rem 0;
+          line-height: 1.5;
         }
-        .pathway-action {
+        .pathway-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
           margin-bottom: 1rem;
         }
         .pathway-link {
@@ -292,24 +310,18 @@ export default function StartHere() {
         .pathway-link:hover {
           opacity: 0.9;
         }
-        .pathway-links {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          margin-bottom: 1rem;
-        }
         .pathway-link.secondary {
           background: transparent;
           color: var(--fg);
           border: 1px solid var(--accents-2);
         }
-        .pathway-features {
+        .pathway-tags {
           display: flex;
           flex-wrap: wrap;
           gap: 0.5rem;
           margin-top: auto;
         }
-        .pathway-features span {
+        .pathway-tags span {
           font-size: 0.8rem;
           padding: 0.25rem 0.5rem;
           background: var(--accents-6);
@@ -320,7 +332,7 @@ export default function StartHere() {
           font-size: 0.75rem;
           color: var(--accents-3);
           font-style: italic;
-          margin: 1rem 0 0;
+          margin: 1rem 0 0 0;
         }
         .quick-links {
           max-width: 800px;
@@ -331,7 +343,6 @@ export default function StartHere() {
         .quick-links h3 {
           text-align: center;
           margin-bottom: 2rem;
-          font-size: 1.25rem;
         }
         .quick-links-grid {
           display: grid;
@@ -345,7 +356,6 @@ export default function StartHere() {
           border-radius: 8px;
           text-decoration: none;
           border: 1px solid var(--accents-2);
-          transition: background 0.2s;
         }
         .quick-link:hover {
           background: var(--accents-6);

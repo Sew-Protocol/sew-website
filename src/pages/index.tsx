@@ -18,6 +18,10 @@ export default function Index() {
             logic—the default pattern used when value moves—not L1 consensus or
             sequencer infrastructure.
           </p>
+          <p className="micro-line">
+            Sew is infrastructure: contracts and modules. Interfaces (wallets,
+            marketplaces) are built on top.
+          </p>
           <div className="btns">
             <ExtLink href="/architecture" className="button primary">
               Read the architecture

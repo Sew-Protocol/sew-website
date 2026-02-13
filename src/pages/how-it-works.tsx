@@ -278,6 +278,34 @@ export default function HowItWorks() {
           </ul>
         </section>
 
+        <section className="content-block fabric-texture fabric-texture-warm">
+          <h3>Who can do what?</h3>
+          <p>Each role in the protocol has specific, bounded powers:</p>
+          <ul>
+            <li>
+              <strong>Sender</strong>: Creates escrow, funds it, can release
+              anytime, can dispute
+            </li>
+            <li>
+              <strong>Recipient</strong>: Can release funds (if allowed), can
+              dispute, cannot cancel
+            </li>
+            <li>
+              <strong>Resolver</strong>: Decides disputes within their module,
+              gets bonded incentives
+            </li>
+            <li>
+              <strong>Guardian</strong>: Can pause (7-day max), disable
+              integrations, lower caps
+            </li>
+            <li>
+              <strong>Governance</strong>: Can upgrade modules, change
+              parameters, appoint guardians
+            </li>
+          </ul>
+          <p>No role can seize funds or modify rules of existing escrows.</p>
+        </section>
+
         <section className="content-block fabric-texture fabric-texture-light">
           <h3>Summary</h3>
           <p>

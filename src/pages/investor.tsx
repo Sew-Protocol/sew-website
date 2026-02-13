@@ -15,6 +15,10 @@ export default function Investor() {
             irreversible user error, and support safer coordination between
             parties who do not already trust each other.
           </p>
+          <p className="micro-line">
+            Sew is infrastructure: contracts and modules. Interfaces (wallets,
+            marketplaces) are built on top.
+          </p>
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">

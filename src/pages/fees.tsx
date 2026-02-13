@@ -105,6 +105,31 @@ export default function Fees() {
           </table>
         </section>
 
+        <section className="content-block fabric-panel">
+          <h3>Example: 100 USDC escrow</h3>
+          <p>With 1% escrow fee and 30% yield protocol fee (active):</p>
+          <ul>
+            <li>
+              <strong>Sender pays:</strong> 100 USDC
+            </li>
+            <li>
+              <strong>Escrow locked:</strong> 99 USDC (1 USDC fee to protocol)
+            </li>
+            <li>
+              <strong>If yield earned:</strong> Protocol takes 30% of yield; 70%
+              to configured recipient
+            </li>
+            <li>
+              <strong>On release:</strong> Recipient receives 99 USDC + their
+              share of yield
+            </li>
+          </ul>
+          <p>
+            Fees are deducted from the amount specified—no surprises at
+            settlement.
+          </p>
+        </section>
+
         <section className="content-block">
           <h3>Fee recipient</h3>
           <p>
