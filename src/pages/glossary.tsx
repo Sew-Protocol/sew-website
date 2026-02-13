@@ -7,82 +7,147 @@ export default function Glossary() {
     {
       term: 'Protected Transfer',
       definition:
-        'A token transfer held in escrow under predefined rules until release conditions are met. The transfer is protected because funds cannot be unilaterally seized or redirected.',
+        'An ERC-20 token transfer routed through escrow with predefined release and resolution rules. Funds are held under deterministic conditions until settlement.',
+    },
+    {
+      term: 'Protected Payment',
+      definition:
+        'A user-friendly term for a protected transfer. Refers to sending value where funds are held in escrow until conditions are met.',
     },
     {
       term: 'Escrow',
       definition:
-        'A smart contract that holds funds until predefined conditions are met. Once created, the escrow rules are fixed and cannot be changed.',
+        'A smart contract that holds tokens under predefined conditions until release, refund, or resolution. Once created, its rules and configuration are fixed.',
     },
     {
       term: 'Escrow State',
       definition:
-        'The current status of an escrow: Pending (active, awaiting action), Disputed (under resolution), Released (funds sent to recipient), Refunded (cancelled, funds returned), or Resolved (resolver determined outcome).',
+        'The current lifecycle stage of an escrow: Pending (active, awaiting action), Disputed (under resolution), Released (funds sent to recipient), Refunded (funds returned to sender), or Resolved (resolver determined outcome).',
     },
     {
-      term: 'Module',
+      term: 'Settlement',
       definition:
-        'A pluggable contract that defines specific behavior for an escrow. Modules are selected at escrow creation and cannot be changed later.',
+        'The final outcome of an escrow where funds are either released to the recipient or returned to the sender.',
     },
     {
-      term: 'Release Strategy',
+      term: 'Deterministic Execution',
       definition:
-        'A module that controls who can release funds and under what conditions. Examples: sender-only release, time-based release, or condition-based release.',
-    },
-    {
-      term: 'Resolution Module',
-      definition:
-        'A module that handles dispute resolution for an escrow. Determines how disputes are opened, escalated, and decided.',
-    },
-    {
-      term: 'Yield Module',
-      definition:
-        'An optional module that generates yield on escrowed funds (e.g., via Aave integration). Can be enabled or disabled per escrow.',
-    },
-    {
-      term: 'Guardian',
-      definition:
-        'An emergency role with limited powers: pause the protocol (max 7 days), disable integrations, or lower exposure caps. Cannot seize funds or modify escrows.',
-    },
-    {
-      term: 'Timelock',
-      definition:
-        'A time-delayed execution mechanism for governance changes. Changes are queued and must wait before executing, allowing community review.',
-    },
-    {
-      term: 'Forward-Only Upgrades',
-      definition:
-        'A design principle where protocol improvements affect only new escrows. Existing escrows continue operating under their original rules.',
+        'Outcomes are determined strictly by predefined rules in smart contracts, not by discretionary decisions.',
     },
     {
       term: 'Per-Escrow Snapshot',
       definition:
-        'The complete configuration of an escrow (modules, fees, timeouts) is recorded at creation and cannot be changed. This is a core security guarantee.',
+        'The full configuration of an escrow recorded at creation (modules, parameters, fees, timeouts). This configuration cannot be changed afterward.',
     },
     {
-      term: 'Exposure Caps',
+      term: 'Forward-Only Upgrades',
       definition:
-        'Limits on how much value can be exposed to external integrations (e.g., Aave). Caps contain failures and reduce systemic risk.',
+        'A design principle where protocol upgrades affect only new escrows. Existing escrows continue operating under their original rules.',
     },
     {
-      term: 'Appeal Bond',
+      term: 'Module',
       definition:
-        'A deposit required to appeal a dispute resolution. If the appeal fails, the bond may be forfeited. Discourages frivolous appeals.',
+        'A pluggable smart contract that defines a specific behavior within an escrow. Modules are selected at creation and remain fixed for that escrow.',
     },
     {
-      term: 'Dispute Resolution',
+      term: 'Release Strategy',
       definition:
-        'The process of handling disagreements between parties. Can be single-resolver (trusted party) or escalating (multi-level with final arbitration).',
+        'A module that defines when and how funds can be released. Examples include sender-initiated release, time-based release, or rule-based conditions.',
     },
     {
-      term: 'Non-Custodial',
+      term: 'Resolution Module',
       definition:
-        'Funds are held by smart contracts, not intermediaries. No party can arbitrarily redirect or seize funds—settlement follows predefined rules only.',
+        'A module that defines how disputes are opened, escalated, and decided.',
+    },
+    {
+      term: 'Yield Module',
+      definition:
+        'An optional module that can deploy escrowed funds into external protocols to generate yield while funds remain locked.',
     },
     {
       term: 'Composable',
       definition:
-        'The protocol can be integrated into other applications (wallets, marketplaces) and extended with custom modules. Protection becomes a standard primitive.',
+        'A system design where applications can integrate the protocol and extend it with new modules without modifying the core escrow logic.',
+    },
+    {
+      term: 'Non-Custodial',
+      definition:
+        'Funds are held by smart contracts and controlled by predefined rules. No intermediary can arbitrarily redirect, seize, or access funds.',
+    },
+    {
+      term: 'Guardian',
+      definition:
+        'A limited emergency role that can pause the protocol temporarily, disable integrations, or reduce exposure caps. Cannot withdraw funds or alter existing escrows.',
+    },
+    {
+      term: 'Timelock',
+      definition:
+        'A delay mechanism for governance changes. Actions are queued and executed only after a defined waiting period, allowing review.',
+    },
+    {
+      term: 'Exposure Caps',
+      definition:
+        'Limits on how much value can be routed into external integrations (such as yield protocols). Designed to contain risk and reduce systemic exposure.',
+    },
+    {
+      term: 'Dispute Resolution',
+      definition:
+        'The process used when parties disagree on whether funds should be released or refunded. Resolution may involve a resolver or multi-level escalation.',
+    },
+    {
+      term: 'Appeal Bond',
+      definition:
+        'A deposit required to escalate or appeal a dispute outcome. The bond may be forfeited if the appeal fails, discouraging low-quality challenges.',
+    },
+    {
+      term: 'ERC-20',
+      definition:
+        'A standard for fungible tokens on Ethereum that enables consistent transfer and integration across applications.',
+    },
+    {
+      term: 'Transfer (ERC-20 Transfer)',
+      definition:
+        'The movement of tokens from one address to another on Ethereum.',
+    },
+    {
+      term: 'Peer-to-Peer Transfer',
+      definition:
+        'A direct transfer of tokens between users without a centralized intermediary.',
+    },
+    {
+      term: 'Yield',
+      definition:
+        'Additional tokens earned by temporarily deploying assets into lending or liquidity protocols.',
+    },
+    {
+      term: 'Liquidity Pool',
+      definition:
+        'A shared pool of assets used by external protocols (e.g., lending systems). Users receive proportional claims on deposited assets.',
+    },
+    {
+      term: 'Smart Contract',
+      definition:
+        'Code deployed on Ethereum that automatically executes predefined logic when triggered by transactions.',
+    },
+    {
+      term: 'Protocol',
+      definition:
+        'A shared on-chain system of smart contracts and rules that anyone can interact with. It is infrastructure, not a service provider.',
+    },
+    {
+      term: 'Smart Contract Architecture',
+      definition:
+        'The structured system formed by multiple interacting contracts that define how escrows are created, executed, and resolved.',
+    },
+    {
+      term: 'Transaction',
+      definition:
+        'A signed instruction submitted to Ethereum that changes blockchain state (e.g., creating an escrow or releasing funds).',
+    },
+    {
+      term: 'Wallet',
+      definition:
+        'Software that allows users to hold keys, sign transactions, and interact with smart contracts.',
     },
   ]
 
