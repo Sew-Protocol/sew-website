@@ -15,6 +15,13 @@ export default function HowItWorks() {
             Instead of transferring funds directly, payments can be held in
             escrow until conditions are met.
           </p>
+          <p className="glossary-note">
+            <small>
+              <strong>Glossary:</strong> A protected payment is an ERC-20
+              transfer routed through escrow. "Transfer" refers to the on-chain
+              token movement; "payment" refers to the user intent.
+            </small>
+          </p>
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">

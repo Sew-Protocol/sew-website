@@ -42,6 +42,11 @@ export default function Index() {
             Ethereum.
           </p>
           <p>
+            A <strong>protected payment</strong> is an ERC-20 transfer routed
+            through escrow, with predefined release and dispute resolution
+            paths.
+          </p>
+          <p>
             Instead of sending tokens directly from one address to another, a
             transfer can be routed through a deterministic escrow that holds
             funds until release conditions are met.
@@ -81,7 +86,7 @@ export default function Index() {
         <section id="how-it-helps" className="content-section">
           <h3>How it helps</h3>
           <p>
-            Sew allows a transfer to be structured as an escrowed payment with
+            Sew allows a payment to be structured as an escrowed transfer with
             clear release paths. This enables:
           </p>
           <ul>
