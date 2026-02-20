@@ -98,14 +98,50 @@ export default function HowItWorks() {
             <p>If enabled at creation:</p>
             <ul>
               <li>
-                Funds may generate yield through integrations (e.g., Aave V3)
+                Funds may generate yield through external protocols (e.g., Aave
+                V3)
               </li>
-              <li>Yield can go to sender, recipient, or be split</li>
-              <li>Yield settings are fixed at escrow creation</li>
+              <li>
+                The <strong>yield module</strong> is selected at creation and
+                locked for the escrow's lifetime
+              </li>
+              <li>
+                Yield can go to sender or be disabled (additional presets coming
+                in future releases)
+              </li>
+              <li>
+                Funds remain under escrow control; the module acts as an
+                integration layer only
+              </li>
+              <li>
+                If the external protocol becomes unavailable, escrow can unwind
+                back to custody
+              </li>
             </ul>
             <p>
-              This feature is optional. Yield settings are locked at escrow
-              creation and cannot be changed.
+              This feature is optional. Yield settings, including the yield
+              module, are locked at escrow creation and cannot be changed.
+            </p>
+          </div>
+
+          <div className="disclaimer-block">
+            <p>
+              <strong>Yield disclaimer:</strong> Yield is optional. If enabled,
+              funds are deployed to an external protocol (e.g., Aave V3).
+              Principal remains under escrow control. External protocol risk
+              exists (smart contract exploits, oracle failures, protocol
+              changes). Governance can set exposure caps, and escrow can unwind
+              positions back to custody in emergencies. See{' '}
+              <Link href="/emergency">Emergency Recovery</Link>
+              for details.
+            </p>
+          </div>
+
+          <div className="disclaimer-block">
+            <p>
+              <strong>Relayer/gas abstraction:</strong> Users authorize actions;
+              relayers may submit transactions. Relayers cannot control funds or
+              override escrow rules.
             </p>
           </div>
 
@@ -125,6 +161,9 @@ export default function HowItWorks() {
               payment, and any generated yield is included in settlement.
             </p>
             <p>If a dispute is opened, release is paused until resolution.</p>
+            <p className="learn-more">
+              <Link href="/docs/lifecycle">See full lifecycle details →</Link>
+            </p>
           </div>
 
           <div className="lifecycle-step">
@@ -191,6 +230,9 @@ export default function HowItWorks() {
             Once an escrow reaches Released, Refunded, or Resolved, it is
             complete. These states are final.
           </p>
+          <p className="learn-more">
+            <Link href="/docs/lifecycle">See escrow lifecycle in docs →</Link>
+          </p>
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
@@ -215,6 +257,46 @@ export default function HowItWorks() {
             afterward. This ensures existing agreements remain predictable
             regardless of future protocol upgrades.
           </p>
+          <p className="learn-more">
+            <Link href="/docs/architecture">Learn more in the docs →</Link>
+          </p>
+        </section>
+
+        <section className="content-block fabric-texture fabric-texture-light">
+          <h3>Module independence</h3>
+          <p>
+            Each escrow uses three independent pluggable modules that work
+            together:
+          </p>
+          <ul>
+            <li>
+              <strong>Release Strategy:</strong> Determines when
+              sender/recipient can release funds (immediate, time-based,
+              conditional)
+            </li>
+            <li>
+              <strong>Resolution Module:</strong> Handles dispute escalation and
+              determines outcomes if parties disagree
+            </li>
+            <li>
+              <strong>Yield Module:</strong> Manages optional yield generation
+              through external protocols (e.g., Aave V3)
+            </li>
+          </ul>
+          <p>
+            These modules are selected at escrow creation and cannot be changed.
+            Each module is immutable for that escrow's lifetime, ensuring
+            agreements remain predictable even as protocol governance evolves.
+          </p>
+          <p>
+            Future governance can add new module implementations (e.g., Morpho
+            for yield generation, or new resolution protocols), but existing
+            escrows continue using the modules selected at creation. This
+            forward-only evolution protects agreement stability.
+          </p>
+          <p className="learn-more">
+            <Link href="/modules">Learn more about modules →</Link>
+          </p>
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
@@ -231,11 +313,8 @@ export default function HowItWorks() {
             These mechanisms are designed to contain risk, not to control funds.
           </p>
           <p>
-            See{' '}
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>{' '}
-            for detailed bounds on all protocol parameters.
+            See <Link href="/protocol-limits">Protocol Limits</Link> for
+            detailed bounds on all protocol parameters.
           </p>
         </section>
 
@@ -247,11 +326,7 @@ export default function HowItWorks() {
             disclosed upfront.
           </p>
           <p>
-            See{' '}
-            <Link href="/fees">
-              <a>Fees</a>
-            </Link>{' '}
-            for the complete breakdown.
+            See <Link href="/fees">Fees</Link> for the complete breakdown.
           </p>
         </section>
 
@@ -366,6 +441,28 @@ export default function HowItWorks() {
         }
         .lifecycle-step h4 {
           margin-top: 0;
+        }
+        .learn-more {
+          margin-top: 1rem;
+        }
+        .learn-more a {
+          color: #0070f3;
+          font-weight: 500;
+        }
+        .learn-more a:hover {
+          text-decoration: underline;
+        }
+        .disclaimer-block {
+          background: #fef3c7;
+          border: 1px solid #f59e0b;
+          border-radius: 8px;
+          padding: 1rem 1.5rem;
+          margin: 1.5rem 0;
+          font-size: 0.9rem;
+        }
+        .disclaimer-block p {
+          margin: 0;
+          color: #92400e;
         }
         @media (max-width: 600px) {
           .content-block {

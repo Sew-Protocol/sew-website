@@ -295,18 +295,19 @@ export default function Governance() {
             must remain predictable and protected.
           </p>
           <p>
-            See{' '}
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>{' '}
-            for detailed constraints on governance and guardian powers.
+            See <Link href="/protocol-limits">Protocol Limits</Link> for
+            detailed constraints on governance and guardian powers.
           </p>
           <p>
-            See{' '}
-            <Link href="/emergency">
-              <a>Emergency Recovery</a>
-            </Link>{' '}
-            for emergency response procedures.
+            See <Link href="/emergency">Emergency Recovery</Link> for emergency
+            response procedures.
+          </p>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs/governance">View full documentation →</Link>
           </p>
         </section>
       </div>
@@ -373,6 +374,18 @@ export default function Governance() {
           .lanes-table td {
             padding: 0.75rem 0.5rem;
           }
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
         }
       `}</style>
     </>

@@ -19,16 +19,12 @@ export default function Resources() {
           <h3>Fees & Economics</h3>
           <ul>
             <li>
-              <Link href="/fees">
-                <a>Fees</a>
-              </Link>{' '}
-              — Escrow creation fees, yield protocol fees, appeal bond fees
+              <Link href="/fees">Fees</Link>— Escrow creation fees, yield
+              protocol fees, appeal bond fees
             </li>
             <li>
-              <Link href="/protocol-limits">
-                <a>Protocol Limits</a>
-              </Link>{' '}
-              — Maximum bounds on fees, timeouts, and guardian powers
+              <Link href="/protocol-limits">Protocol Limits</Link>— Maximum
+              bounds on fees, timeouts, and guardian powers
             </li>
           </ul>
         </section>
@@ -37,16 +33,12 @@ export default function Resources() {
           <h3>Security & Safety</h3>
           <ul>
             <li>
-              <Link href="/security">
-                <a>Security Model</a>
-              </Link>{' '}
-              — Security philosophy, properties, and threat model
+              <Link href="/security">Security Model</Link>— Security philosophy,
+              properties, and threat model
             </li>
             <li>
-              <Link href="/emergency">
-                <a>Emergency Recovery</a>
-              </Link>{' '}
-              — Guardian pause, module disabling, position unwinding
+              <Link href="/emergency">Emergency Recovery</Link>— Guardian pause,
+              module disabling, position unwinding
             </li>
           </ul>
         </section>
@@ -55,16 +47,12 @@ export default function Resources() {
           <h3>Technical</h3>
           <ul>
             <li>
-              <Link href="/developer">
-                <a>Developer Guide</a>
-              </Link>{' '}
-              — Integration guide with code examples
+              <Link href="/developer">Developer Guide</Link>— Integration guide
+              with code examples
             </li>
             <li>
-              <Link href="/technical">
-                <a>Technical Resources</a>
-              </Link>{' '}
-              — Smart contracts, documentation, and external resources
+              <Link href="/technical">Technical Resources</Link>— Smart
+              contracts, documentation, and external resources
             </li>
           </ul>
         </section>
@@ -73,16 +61,12 @@ export default function Resources() {
           <h3>Research & Investment</h3>
           <ul>
             <li>
-              <Link href="/researcher">
-                <a>For Researchers</a>
-              </Link>{' '}
-              — Research domains, system properties, and ongoing inquiries
+              <Link href="/researcher">For Researchers</Link>— Research domains,
+              system properties, and ongoing inquiries
             </li>
             <li>
-              <Link href="/investor">
-                <a>Investors</a>
-              </Link>{' '}
-              — Protocol economics and investment considerations
+              <Link href="/investor">Investors</Link>— Protocol economics and
+              investment considerations
             </li>
           </ul>
         </section>

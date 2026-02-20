@@ -9,6 +9,24 @@ const OUTPUT_FILE = path.join(__dirname, '..', 'website-content.txt')
 const EXCLUDED_FILES = ['_app.tsx', '_document.tsx', 'contact.tsx']
 
 function extractReadableText(content) {
+  // Extract data arrays from full content (before return)
+  let dataContent = ''
+  const arrayRegex = /const\s+\w+\s*=\s*(\[[\s\S]*?\])\s*/g
+  let arrayMatch
+  while ((arrayMatch = arrayRegex.exec(content)) !== null) {
+    const arr = arrayMatch[1]
+    const objRegex = /\{([^}]+)\}/g
+    let objMatch
+    while ((objMatch = objRegex.exec(arr)) !== null) {
+      const obj = objMatch[1]
+      const fieldRegex = /(\w+):\s*['"`]([^'"`]+)['"`]/g
+      let fieldMatch
+      while ((fieldMatch = fieldRegex.exec(obj)) !== null) {
+        dataContent += fieldMatch[2] + ' '
+      }
+    }
+  }
+
   let text = content
 
   // Remove imports
@@ -20,26 +38,15 @@ function extractReadableText(content) {
     ''
   )
 
-  // Get everything inside the return(...) or return {...}
+  // Get everything inside the return(...)
   const returnMatch = text.match(/return\s*\(\s*([\s\S]*)\s*\)\s*;?\s*$/)
   if (returnMatch) {
     text = returnMatch[1]
   }
 
-  // Replace code blocks (backticks) with [CODE]
-  text = text.replace(/`[\s\S]*?`/g, '\n\n[Code example]\n\n')
-
-  // Replace JSX comments
-  text = text.replace(/\{[\s\S]*?\}/g, (match) => {
-    if (match.includes('//')) return ' '
-    if (match.includes('Link') || match.includes('href')) return ' '
-    return ' '
-  })
-
   // Extract text content from JSX
-  // Match text between > and < or between tags
   let extracted = ''
-  const regex = />\s*([A-Za-z0-9\s.,;:!?()'"\-]+)\s*</g
+  const regex = />\s*([\p{L}\p{N}\s.,;:!?()'"\-]+)\s*</gu
   let match
   while ((match = regex.exec(text)) !== null) {
     const line = match[1].trim()
@@ -48,16 +55,22 @@ function extractReadableText(content) {
     }
   }
 
+  // Replace code blocks (backticks) with [CODE]
+  content = content.replace(/`[\s\S]*?`/g, '\n\n[Code example]\n\n')
+
+  // Combine data content and extracted content
+  let finalContent = dataContent + ' ' + extracted
+
   // Clean up
-  extracted = extracted.replace(/\s+/g, ' ')
-  extracted = extracted.replace(/\s+([.,;:!?])/g, '$1')
-  extracted = extracted.replace(
+  finalContent = finalContent.replace(/\s+/g, ' ')
+  finalContent = finalContent.replace(/\s+([.,;:!?])/g, '$1')
+  finalContent = finalContent.replace(
     /\[\s*Code\s*example\s*\]/gi,
     '\n\n[Code example]\n\n'
   )
-  extracted = extracted.trim()
+  finalContent = finalContent.trim()
 
-  return extracted
+  return finalContent
 }
 
 function getPageTitle(filename) {
@@ -109,7 +122,7 @@ function main() {
     }
   }
 
-  fs.writeFileSync(OUTPUT_FILE, output)
+  fs.writeFileSync(OUTPUT_FILE, output, 'utf-8')
   console.log(`Generated ${OUTPUT_FILE}`)
   console.log(`${files.length} pages processed`)
 }

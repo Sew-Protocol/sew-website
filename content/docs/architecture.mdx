@@ -1,0 +1,76 @@
+# Architecture
+
+Sew Protocol introduces a structured pattern for protected transfers on Ethereum. At its core, it defines how a payment can be held, released, and resolved without custody, while preserving composability and forward evolution.
+
+## System Model
+
+A protected transfer in Sew is an escrow-backed payment with predefined release and resolution paths. Instead of sending tokens directly to a recipient:
+
+1. Funds are routed into an escrow contract
+2. Release conditions are defined at creation
+3. Funds are released when conditions are satisfied
+
+Each escrow represents an isolated agreement between participants.
+
+## Core Components
+
+### Escrow Layer
+
+The escrow layer holds funds under rule-bound conditions.
+
+**Responsibilities:**
+
+- Receive tokens into escrow
+- Track escrow state
+- Enforce release and cancellation paths
+- Interface with resolution modules when disputes occur
+
+Each escrow is self-contained. State transitions are deterministic and governed by protocol rules.
+
+### Release Strategies
+
+Release strategies define how and when a payment finalizes.
+
+**Examples of release patterns:**
+
+- Sender-initiated release
+- Timed auto-release
+- Conditional release paths
+
+Release logic is separated from escrow storage to allow evolution without rewriting core contracts.
+
+### Resolution Modules
+
+Resolution modules handle disagreements between parties. They define:
+
+- How disputes are escalated
+- Who can resolve them
+- How final outcomes are enforced
+
+## Asset Custody Model
+
+Funds are always held by smart contracts.
+
+**Key properties:**
+
+- No centralized custody
+- No discretionary redirection of funds
+- Release flows must follow encoded rules
+
+## Isolation as a First Principle
+
+Sew is designed to minimize blast radius. Isolation happens at multiple levels:
+
+- **Per-escrow isolation**: Each agreement is independent. Failures do not propagate.
+- **Module boundaries**: Release logic, resolution logic, and extensions are separated.
+- **Forward-only upgrades**: Changes affect new escrows only.
+
+## Governance Surface
+
+Protocol evolution is coordinated through defined roles:
+
+- Governance can approve new modules
+- Safety roles can pause components during incidents
+- Emergency actions are constrained and scope-limited
+
+See [Governance](/docs/governance) and [Protocol Limits](/docs/protocol-limits) for detailed constraints.

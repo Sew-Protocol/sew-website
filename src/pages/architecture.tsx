@@ -11,10 +11,9 @@ export default function Architecture() {
           <h1>Architecture</h1>
           <h2 className="tagline">Sew Protocol</h2>
           <p className="intro">
-            Sew Protocol introduces a structured pattern for protected transfers
-            on Ethereum. At its core, it defines how a payment can be held,
-            released, and resolved without custody, while preserving
-            composability and forward evolution.
+            <strong>Protected transfer:</strong> An ERC-20 transfer routed
+            through escrow with predefined release and resolution paths. This
+            enables safer peer-to-peer payments.
           </p>
         </section>
 
@@ -126,15 +125,9 @@ export default function Architecture() {
             <li>Emergency actions are constrained and scope-limited</li>
           </ul>
           <p>
-            See{' '}
-            <Link href="/governance">
-              <a>Governance</a>
-            </Link>{' '}
-            and{' '}
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>{' '}
-            for detailed constraints.
+            See <Link href="/governance">Governance</Link> and{' '}
+            <Link href="/protocol-limits">Protocol Limits</Link> for detailed
+            constraints.
           </p>
         </section>
       </div>

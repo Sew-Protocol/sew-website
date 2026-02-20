@@ -115,34 +115,22 @@ export default function Technical() {
           <h3>Related Pages</h3>
           <ul>
             <li>
-              <Link href="/how-it-works">
-                <a>How It Works</a>
-              </Link>
-              : Protocol overview and concepts
+              <Link href="/how-it-works">How It Works</Link>: Protocol overview
+              and concepts
             </li>
             <li>
-              <Link href="/fees">
-                <a>Fees</a>
-              </Link>
-              : Detailed fee breakdown
+              <Link href="/fees">Fees</Link>: Detailed fee breakdown
             </li>
             <li>
-              <Link href="/protocol-limits">
-                <a>Protocol Limits</a>
-              </Link>
-              : Maximum bounds and constraints
+              <Link href="/protocol-limits">Protocol Limits</Link>: Maximum
+              bounds and constraints
             </li>
             <li>
-              <Link href="/developer">
-                <a>Build on Sew</a>
-              </Link>
-              : Developer guide
+              <Link href="/developer">Build on Sew</Link>: Developer guide
             </li>
             <li>
-              <Link href="/governance">
-                <a>Governance</a>
-              </Link>
-              : Protocol governance structure
+              <Link href="/governance">Governance</Link>: Protocol governance
+              structure
             </li>
           </ul>
         </section>

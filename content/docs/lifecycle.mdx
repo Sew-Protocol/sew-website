@@ -1,0 +1,69 @@
+# Escrow Lifecycle
+
+Every protected transfer in Sew Protocol follows a defined lifecycle from creation to completion.
+
+## Lifecycle States
+
+An escrow can be in one of the following states:
+
+| State      | Description                                   |
+| ---------- | --------------------------------------------- |
+| `ACTIVE`   | Funds are locked, awaiting release conditions |
+| `RELEASED` | Funds have been released to recipient         |
+| `REFUNDED` | Funds have been returned to sender            |
+| `RESOLVED` | Funds distributed via dispute resolution      |
+
+Once an escrow reaches `RELEASED`, `REFUNDED`, or `RESOLVED`, it is complete and irreversible.
+
+## Phase 1: Creation
+
+A user initiates a protected payment through an interface (wallet, marketplace, etc.). At creation time:
+
+```solidity
+struct EscrowConfig {
+    address token;           // ERC20 token address
+    uint256 amount;          // Amount to escrow
+    address sender;          // Payer
+    address recipient;       // Payee
+    address releaseStrategy; // Release authorization logic
+    address resolutionModule; // Dispute resolution path
+    uint256 timeout;         // Time until auto-release/refund
+}
+```
+
+The function returns a unique `escrowId` that identifies this escrow.
+
+## Phase 2: Active Escrow
+
+While active, funds remain locked in escrow:
+
+- The recipient cannot withdraw unilaterally
+- The sender cannot reclaim unilaterally
+- Settlement depends on the selected release path
+
+This creates a neutral holding phase where both parties can coordinate.
+
+## Phase 3: Release
+
+Funds can be released in several ways:
+
+- **Sender-initiated**: Sender explicitly releases funds
+- **Timed release**: Automatic release after timeout
+- **Conditional release**: Based on external conditions
+
+The release strategy determines authorization. Default strategy allows sender to release anytime.
+
+## Phase 4: Dispute Handling
+
+If disagreement occurs:
+
+1. Either party can open a dispute
+2. Normal release is paused
+3. Resolution module determines outcome
+
+**Two resolution modes:**
+
+- Single trusted resolver (DRv1)
+- Escalating decentralized resolution (DRv2/DRv3)
+
+See [Dispute Resolution](/docs/dispute-resolution) for details.

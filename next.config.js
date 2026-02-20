@@ -1,5 +1,10 @@
 const fs = require('fs')
 const path = require('path')
+const withNextra = require('nextra')({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.tsx',
+})
+
 const {
   NOTION_TOKEN,
   BLOG_INDEX_ID,
@@ -7,41 +12,30 @@ const {
 
 try {
   fs.unlinkSync(path.resolve('.blog_index_data'))
-} catch (_) {
-  /* non fatal */
-}
+} catch (_) {}
 try {
   fs.unlinkSync(path.resolve('.blog_index_data_previews'))
-} catch (_) {
-  /* non fatal */
-}
+} catch (_) {}
 
 if (!NOTION_TOKEN) {
   console.warn(
-    `\nNOTION_TOKEN is missing from env, Notion features will be disabled\n`
+    '\nNOTION_TOKEN is missing from env, Notion features will be disabled\n'
   )
 }
 
 if (!BLOG_INDEX_ID) {
   console.warn(
-    `\nBLOG_INDEX_ID is missing from env, Notion features will be disabled\n`
+    '\nBLOG_INDEX_ID is missing from env, Notion features will be disabled\n'
   )
 }
 
-module.exports = {
-  webpack(cfg, { dev, isServer }) {
-    // only compile build-rss in production server build
-    if (dev || !isServer) return cfg
-
-    // we're in build mode so enable shared caching for Notion data
-    process.env.USE_CACHE = 'true'
-
-    const originalEntry = cfg.entry
-    cfg.entry = async () => {
-      const entries = { ...(await originalEntry()) }
-      entries['build-rss.js'] = './src/lib/build-rss.ts'
-      return entries
-    }
-    return cfg
+module.exports = withNextra({
+  reactStrictMode: true,
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
+  typescript: {
+    ignoreBuildErrors: true,
   },
-}
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+})

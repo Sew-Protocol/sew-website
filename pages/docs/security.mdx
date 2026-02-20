@@ -1,0 +1,59 @@
+# Security Model
+
+Sew Protocol is designed as a containment layer for protected transfers on Ethereum. Rather than attempting to eliminate all risk, the protocol focuses on narrowing scope, isolating failures, and ensuring that funds always follow deterministic paths.
+
+## Security Philosophy
+
+Ethereum transactions are irreversible. Smart contracts introduce new capabilities, but also new forms of risk. Sew approaches security through three principles:
+
+- **Containment over prevention**: Failures may occur. The protocol is designed to limit their impact.
+- **Determinism over discretion**: Funds move according to predefined rules, not human judgment.
+- **Isolation over shared risk**: Each escrow is treated as an independent agreement.
+
+## Core Security Properties
+
+### Non-Custodial by Design
+
+Funds are held by smart contracts, not by an operator or intermediary.
+
+### Deterministic Release Paths
+
+Every escrow defines its release and resolution rules at creation. Settlement follows predefined state transitions.
+
+### Per-Escrow Isolation
+
+Each protected transfer is independent. If one fails, others are unaffected.
+
+### Forward-Only Evolution
+
+Protocol upgrades do not alter existing agreements. Historical agreements remain stable.
+
+## Threat Model
+
+Sew is designed to operate in an adversarial environment, addressing risks like:
+
+- **User error**: Sending funds to the wrong address or premature release
+- **Counterparty risk**: Fraudulent participants or failure to deliver
+- **Smart contract risk**: Bugs in integrations or extension modules
+- **Governance risk**: Malicious or compromised privileged roles
+
+## Emergency Response Posture
+
+In the event of a vulnerability, the protocol is designed for rapid containment. A guardian role can:
+
+- Pause the system for up to 7 days (maximum 3 cycles total)
+- While paused, dispute initiation and escalation are blocked
+- Normal settlement operations (release, cancellation, new escrow creation) remain available
+
+Pause is an emergency circuit-breaker for high-risk operations.
+
+## Guardian Constraints
+
+The guardian cannot:
+
+- Extract funds from escrows
+- Modify existing escrow rules
+- Override settlement outcomes
+- Unpause the system (requires governance)
+
+See [Emergency](/docs/emergency) for detailed emergency response procedures.

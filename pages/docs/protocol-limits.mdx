@@ -1,0 +1,58 @@
+# Protocol Limits
+
+Maximum bounds enforced by the protocol to limit risk and ensure predictability.
+
+## Fee Limits
+
+| Parameter           | Maximum | Purpose                |
+| ------------------- | ------- | ---------------------- |
+| Escrow creation fee | 2%      | Prevent excessive fees |
+| Yield protocol fee  | 30%     | Limit protocol share   |
+| Appeal bond fee     | 10%     | Limit appeal fees      |
+
+## Time Limits
+
+| Parameter               | Maximum | Purpose                   |
+| ----------------------- | ------- | ------------------------- |
+| Guardian pause duration | 7 days  | Prevent indefinite pauses |
+| Dispute duration        | 90 days | Ensure bounded resolution |
+| Appeal window           | 2 days  | Allow time to appeal      |
+
+## Guardian Constraints
+
+| Constraint                  | Limit                    |
+| --------------------------- | ------------------------ |
+| Max pause duration          | 7 days                   |
+| Pause cycles per 90 days    | 3                        |
+| Can re-pause while paused   | No                       |
+| Can unpause                 | No (requires governance) |
+| Can extract funds           | No                       |
+| Can modify existing escrows | No                       |
+
+## Governance Constraints
+
+Governance cannot:
+
+- Seize funds from escrows
+- Redirect assets
+- Force settlement outcomes
+- Change rules of existing escrows
+
+All changes subject to timelock delays.
+
+## Per-Escrow Immutability
+
+Once an escrow is created, the following are permanently fixed:
+
+- Release strategy
+- Resolution module
+- Yield generation module
+- Fee percentage
+- Timeout settings
+
+Governance changes only affect future escrows.
+
+## Related
+
+- [Fees](/docs/fees) - Complete breakdown of all protocol fees
+- [Governance](/docs/governance) - How protocol constraints are enforced

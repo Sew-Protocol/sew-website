@@ -72,10 +72,11 @@ const Header = ({ titlePre = '' }) => {
         {protocolNavItems.map(({ label, page, link, submenu }) => (
           <li key={label} className={submenu ? 'has-submenu' : ''}>
             {page ? (
-              <Link href={page}>
-                <a className={pathname === page ? 'active' : undefined}>
-                  {label}
-                </a>
+              <Link
+                href={page}
+                className={pathname === page ? 'active' : undefined}
+              >
+                {label}
               </Link>
             ) : (
               <ExtLink href={link}>{label}</ExtLink>
@@ -84,12 +85,11 @@ const Header = ({ titlePre = '' }) => {
               <ul className="submenu">
                 {submenu.map(({ label: subLabel, page: subPage }) => (
                   <li key={subLabel}>
-                    <Link href={subPage}>
-                      <a
-                        className={pathname === subPage ? 'active' : undefined}
-                      >
-                        {subLabel}
-                      </a>
+                    <Link
+                      href={subPage}
+                      className={pathname === subPage ? 'active' : undefined}
+                    >
+                      {subLabel}
                     </Link>
                   </li>
                 ))}
@@ -100,12 +100,11 @@ const Header = ({ titlePre = '' }) => {
       </ul>
       <ul className={styles.secondaryNav}>
         <li>
-          <Link href="/everyday-wallet">
-            <a
-              className={pathname === '/everyday-wallet' ? 'active' : undefined}
-            >
-              Everyday Wallet
-            </a>
+          <Link
+            href="/everyday-wallet"
+            className={pathname === '/everyday-wallet' ? 'active' : undefined}
+          >
+            Everyday Wallet
           </Link>
         </li>
       </ul>

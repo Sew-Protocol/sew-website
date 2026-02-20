@@ -1,0 +1,62 @@
+# Governance
+
+Sew Protocol is designed to evolve over time while preserving the integrity of existing agreements.
+
+## Governance Philosophy
+
+Sew separates two responsibilities:
+
+- Protocol evolution
+- Operational safety
+
+Governance is designed to:
+
+- Allow defensive action when needed
+- Prevent discretionary interference in active escrows
+- Ensure upgrades affect only future agreements
+
+## Core Design Constraint
+
+Once an escrow is created, its rules are fixed:
+
+- Release strategy is locked
+- Resolution path is locked
+- Yield module is locked
+- Settlement logic cannot be rewritten
+
+Governance cannot retroactively alter how an existing escrow resolves.
+
+## Roles
+
+### Timelock Governance
+
+Responsible for protocol evolution:
+
+- Registering new modules
+- Updating system configuration
+- Setting exposure caps
+- Managing supported integrations
+- Appointing/removed guardian roles
+- Adjusting protocol parameters
+
+Changes are delayed through a timelock for transparency and review.
+
+### Guardian Role
+
+Exists for emergency response with intentionally limited scope:
+
+- Disable integrations (e.g., yield module)
+- Lower risk parameters
+- Pause certain system components
+
+**Constraints:**
+
+- Max pause duration: 7 days
+- Max 3 pauses per 90-day window
+- Cannot re-pause while paused
+- Cannot withdraw funds, redirect assets, or modify existing escrows
+
+## Related
+
+- [Protocol Limits](/docs/protocol-limits) - Detailed constraints
+- [Emergency](/docs/emergency) - Emergency response procedures

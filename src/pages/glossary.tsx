@@ -176,19 +176,18 @@ export default function Glossary() {
         <section className="related-section fabric-texture fabric-texture-light">
           <h3>Related pages</h3>
           <div className="related-links">
-            <Link href="/how-it-works">
-              <a>How It Works</a>
-            </Link>
-            <Link href="/architecture">
-              <a>Architecture</a>
-            </Link>
-            <Link href="/security">
-              <a>Security Model</a>
-            </Link>
-            <Link href="/governance">
-              <a>Governance</a>
-            </Link>
+            <Link href="/how-it-works">How It Works</Link>
+            <Link href="/architecture">Architecture</Link>
+            <Link href="/security">Security Model</Link>
+            <Link href="/governance">Governance</Link>
           </div>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs">View full documentation →</Link>
+          </p>
         </section>
       </div>
 
@@ -263,6 +262,18 @@ export default function Glossary() {
         }
         .related-links a:hover {
           background: var(--accents-6);
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
         }
         @media (max-width: 600px) {
           .glossary-grid {

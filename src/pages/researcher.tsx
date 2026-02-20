@@ -248,19 +248,11 @@ export default function Researcher() {
             security, economics, mechanism design, and human coordination.
           </p>
           <p>
-            See{' '}
-            <Link href="/security">
-              <a>Security</a>
-            </Link>{' '}
-            for detailed security model,{' '}
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>{' '}
-            for constraint definitions, and{' '}
-            <Link href="/technical">
-              <a>Technical Resources</a>
-            </Link>{' '}
-            for contract references.
+            See <Link href="/security">Security</Link> for detailed security
+            model, <Link href="/protocol-limits">Protocol Limits</Link> for
+            constraint definitions, and{' '}
+            <Link href="/technical">Technical Resources</Link> for contract
+            references.
           </p>
         </section>
       </div>

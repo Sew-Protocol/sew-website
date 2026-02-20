@@ -1,0 +1,80 @@
+# Quickstart
+
+Get started with Sew Protocol in 5 minutes.
+
+## Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- An Ethereum wallet (MetaMask, etc.)
+
+## Installation
+
+```bash
+# Clone the contracts repository
+git clone https://github.com/sew-protocol/sew-protocol-contracts
+cd sew-protocol-contracts
+
+# Install dependencies
+npm install
+
+# Copy environment variables
+cp .env.example .env
+```
+
+## Running Tests
+
+```bash
+# Run all tests
+npm run test
+
+# Run specific test file
+npm run test -- --match "Escrow"
+```
+
+## Deploying Locally
+
+```bash
+# Start local blockchain (Anvil)
+anvil
+
+# Deploy to local network
+npm run deploy:local
+```
+
+## Basic Usage
+
+### Creating an Escrow
+
+```solidity
+interface IEscrowVault {
+    function createEscrow(
+        address token,
+        uint256 amount,
+        address recipient,
+        address releaseStrategy,
+        address resolutionModule,
+        uint256 timeout
+    ) external returns (bytes32 escrowId);
+}
+```
+
+### Release
+
+```solidity
+// Sender releases funds
+IEscrowVault(vault).release(escrowId);
+```
+
+### Dispute
+
+```solidity
+// Open dispute
+IEscrowVault(vault).initiateDispute(escrowId);
+```
+
+## Next Steps
+
+- [Architecture](/docs/architecture) - Understand the system design
+- [Guides](/docs/guides) - Integration tutorials
+- [Reference](/docs/reference) - Contract APIs

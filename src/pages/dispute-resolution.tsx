@@ -139,18 +139,10 @@ export default function DisputeResolution() {
         <section className="content-block fabric-texture fabric-texture-light">
           <h3>Related pages</h3>
           <div className="related-links">
-            <Link href="/governance">
-              <a>Governance</a>
-            </Link>
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>
-            <Link href="/release-plan">
-              <a>Release Plan</a>
-            </Link>
-            <Link href="/security">
-              <a>Security Model</a>
-            </Link>
+            <Link href="/governance">Governance</Link>
+            <Link href="/protocol-limits">Protocol Limits</Link>
+            <Link href="/release-plan">Release Plan</Link>
+            <Link href="/security">Security Model</Link>
           </div>
         </section>
       </div>

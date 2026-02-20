@@ -1,0 +1,54 @@
+# Fees
+
+Sew Protocol fees are bounded and transparent.
+
+## Fee Principles
+
+- Fees are capped at protocol level
+- Fees are known at escrow creation
+- Escrow fees are deducted upfront
+- Yield and appeal fees are taken from generated amounts
+
+## Fee Types
+
+### Escrow Creation Fee
+
+A small fee is charged when creating an escrow to prevent spam and fund protocol development.
+
+### Yield Protocol Fee
+
+When yield is generated on escrowed funds, a portion goes to the protocol.
+
+- Fee is snapshotted at escrow creation
+- Cannot change during escrow's lifetime
+
+### Appeal Bond Fee
+
+When a dispute resolution is appealed, the appellant posts a bond.
+
+- A portion may be taken as protocol fee
+- Discourages frivolous appeals
+- Currently inactive at launch
+
+## Fee Summary
+
+| Fee Type        | Default | Max | Applied When       |
+| --------------- | ------- | --- | ------------------ |
+| Escrow creation | 1%      | 2%  | At escrow creation |
+| Yield protocol  | 30%     | 30% | On generated yield |
+| Appeal bond     | 0%      | 10% | On appeal bonds    |
+
+## Fee Recipient
+
+All fees go to a designated fee address controlled by governance.
+
+This funds:
+
+- Protocol development
+- Security audits
+- Ecosystem growth
+
+## Related
+
+- [Protocol Limits](/docs/protocol-limits) - Detailed bounds on all protocol parameters
+- [Governance](/docs/governance) - How protocol parameters are set and updated

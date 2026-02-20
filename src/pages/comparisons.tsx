@@ -249,6 +249,13 @@ export default function Comparisons() {
             </Link>
           </div>
         </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs">View full documentation →</Link>
+          </p>
+        </section>
       </div>
 
       <style jsx>{`
@@ -437,6 +444,20 @@ export default function Comparisons() {
         }
         .cta-button:not(.primary):hover {
           background: var(--accents-6);
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+          border-top: 1px solid var(--accents-6);
+          margin-top: 2rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
         }
         @media (max-width: 600px) {
           .patterns-grid {

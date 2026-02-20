@@ -82,22 +82,15 @@ export default function Token() {
           <h3>Related pages</h3>
           <ul>
             <li>
-              <Link href="/governance">
-                <a>Governance</a>
-              </Link>
-              : How protocol decisions are made
+              <Link href="/governance">Governance</Link>: How protocol decisions
+              are made
             </li>
             <li>
-              <Link href="/how-it-works">
-                <a>How It Works</a>
-              </Link>
-              : Understanding dispute resolution phases
+              <Link href="/how-it-works">How It Works</Link>: Understanding
+              dispute resolution phases
             </li>
             <li>
-              <Link href="/fees">
-                <a>Fees</a>
-              </Link>
-              : Fee structure and revenue use
+              <Link href="/fees">Fees</Link>: Fee structure and revenue use
             </li>
           </ul>
         </section>

@@ -1,0 +1,71 @@
+# Emergency Recovery
+
+Documentation of the protocol's emergency response capabilities and recovery procedures.
+
+## Emergency Philosophy
+
+Sew Protocol is designed with a **containment-first** approach. The goal is to limit damage and preserve user funds, not to provide comprehensive recovery for all failure scenarios.
+
+Emergency mechanisms are intentionally constrained:
+
+- They can reduce risk
+- They cannot extract funds
+- They cannot modify existing escrows
+- They cannot override settlement outcomes
+
+## Guardian Pause
+
+The guardian role can pause the protocol in response to critical vulnerabilities.
+
+### What Pause Affects
+
+- New escrow creation
+- Dispute initiation
+- Dispute escalation
+
+### What Remains Available
+
+- Fund release (for non-disputed escrows)
+- Fund cancellation (for non-disputed escrows)
+- Existing position unwinding
+
+## Guardian Constraints
+
+| Constraint                     | Limit                    |
+| ------------------------------ | ------------------------ |
+| Max pause duration             | 7 days                   |
+| Max pause cycles (per 90 days) | 3                        |
+| Can re-pause while paused      | No                       |
+| Can unpause                    | No (requires governance) |
+| Can extract funds              | No                       |
+| Can modify existing escrows    | No                       |
+
+After maximum duration, pause automatically expires. Governance must manually unpause after addressing the issue.
+
+## Module Disabling
+
+The guardian can disable specific modules (e.g., yield generation integrations) without pausing the entire protocol.
+
+**When used:**
+
+- Vulnerability in a specific integration
+- External protocol (e.g., Aave) experiences issues
+- Resolution module shows problematic behavior
+
+**Effects:**
+
+- New escrows cannot use disabled module
+- Existing escrows using module may be restricted
+- Other protocol functions continue normally
+
+## Position Unwinding
+
+When an integration fails or poses risk, the protocol supports unwinding positions back to escrow custody.
+
+This allows users to exit risky positions while preserving underlying funds.
+
+## Related
+
+- [Protocol Limits](/docs/protocol-limits) - Detailed bounds
+- [Governance](/docs/governance) - Role definitions
+- [Security Model](/docs/security) - Security principles

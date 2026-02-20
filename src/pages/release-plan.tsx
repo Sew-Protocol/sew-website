@@ -185,18 +185,10 @@ export default function ReleasePlan() {
         <section className="related-section fabric-texture fabric-texture-light">
           <h3>Related pages</h3>
           <div className="related-links">
-            <Link href="/dispute-resolution">
-              <a>Dispute Resolution</a>
-            </Link>
-            <Link href="/governance">
-              <a>Governance</a>
-            </Link>
-            <Link href="/security">
-              <a>Security Model</a>
-            </Link>
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>
+            <Link href="/dispute-resolution">Dispute Resolution</Link>
+            <Link href="/governance">Governance</Link>
+            <Link href="/security">Security Model</Link>
+            <Link href="/protocol-limits">Protocol Limits</Link>
           </div>
         </section>
       </div>

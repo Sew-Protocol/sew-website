@@ -125,6 +125,13 @@ export default function UseCases() {
             </Link>
           </div>
         </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs">View full documentation →</Link>
+          </p>
+        </section>
       </div>
 
       <style jsx>{`
@@ -247,6 +254,18 @@ export default function UseCases() {
         }
         .cta-button:not(.primary):hover {
           background: var(--accents-6);
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
         }
         @media (max-width: 600px) {
           .use-cases-grid {

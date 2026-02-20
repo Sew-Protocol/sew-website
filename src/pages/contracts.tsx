@@ -208,24 +208,25 @@ export default function Contracts() {
           <h3>Related Pages</h3>
           <ul>
             <li>
-              <Link href="/developer">
-                <a>Developer Guide</a>
-              </Link>
-              : Integration documentation
+              <Link href="/developer">Developer Guide</Link>: Integration
+              documentation
             </li>
             <li>
-              <Link href="/technical">
-                <a>Technical Resources</a>
-              </Link>
-              : Full technical documentation
+              <Link href="/technical">Technical Resources</Link>: Full technical
+              documentation
             </li>
             <li>
-              <Link href="/security">
-                <a>Security Model</a>
-              </Link>
-              : Security properties and trust model
+              <Link href="/security">Security Model</Link>: Security properties
+              and trust model
             </li>
           </ul>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs/reference">View full documentation →</Link>
+          </p>
         </section>
       </div>
 
@@ -302,6 +303,18 @@ export default function Contracts() {
             font-size: 0.75rem;
             word-break: break-all;
           }
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
         }
       `}</style>
     </>

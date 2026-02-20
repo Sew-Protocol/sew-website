@@ -14,6 +14,11 @@ export default function Index() {
             Payment protection at the transaction layer
           </h2>
           <p className="description">
+            <strong>Protected transfer:</strong> An ERC-20 transfer routed
+            through escrow, with predefined release and dispute resolution
+            paths.
+          </p>
+          <p className="description">
             By "transaction layer" we mean the moment of transfer and settlement
             logic—the default pattern used when value moves—not L1 consensus or
             sequencer infrastructure.
@@ -23,12 +28,12 @@ export default function Index() {
             marketplaces) are built on top.
           </p>
           <div className="btns">
-            <ExtLink href="/architecture" className="button primary">
-              Read the architecture
-            </ExtLink>
-            <ExtLink href="#how-it-works" className="button">
-              How it works
-            </ExtLink>
+            <Link href="/start-here" className="button primary">
+              Get Started
+            </Link>
+            <Link href="/developer" className="button">
+              Build on Sew
+            </Link>
           </div>
         </section>
 
@@ -58,6 +63,28 @@ export default function Index() {
             <span className="pill">Interface-agnostic</span>
           </div>
           <p>Any wallet, marketplace, or application can build on it.</p>
+        </section>
+
+        <section id="what-it-is-not" className="content-section fabric-texture">
+          <h3>What it is NOT</h3>
+          <ul className="not-list">
+            <li>
+              <strong>Not a wallet</strong> — Sew is infrastructure; interfaces
+              like Everyday Wallet are built on top
+            </li>
+            <li>
+              <strong>Not a marketplace</strong> — Sew provides escrow logic,
+              not trade execution
+            </li>
+            <li>
+              <strong>Not a payment processor</strong> — Funds flow directly
+              between parties via smart contracts
+            </li>
+            <li>
+              <strong>Not custodial</strong> — No party controls user funds;
+              rules are enforced by code
+            </li>
+          </ul>
         </section>
 
         <section
@@ -195,12 +222,12 @@ export default function Index() {
 
         <footer className="page-footer">
           <div className="footer-links">
-            <ExtLink href="#how-it-works">How it works</ExtLink>
+            <Link href="/how-it-works">How it works</Link>
             <Link href="/architecture">Architecture</Link>
             <Link href="/security">Security model</Link>
-            <ExtLink href="/governance">Governance</ExtLink>
-            <ExtLink href="/docs">Build on Sew</ExtLink>
-            <ExtLink href="/docs">Docs</ExtLink>
+            <Link href="/governance">Governance</Link>
+            <Link href="/developer">Build on Sew</Link>
+            <Link href="/docs">Docs</Link>
             <ExtLink href="https://everyday.wallet">Everyday Wallet</ExtLink>
           </div>
           <p className="disclaimer">
@@ -295,6 +322,23 @@ export default function Index() {
           .principles-grid {
             grid-template-columns: 1fr;
           }
+        }
+        .not-list {
+          list-style: none;
+          padding: 0;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+          margin-top: 1.5rem;
+        }
+        .not-list li {
+          padding: 1rem;
+          background: #fef2f2;
+          border-left: 3px solid #dc2626;
+          font-size: 0.95rem;
+        }
+        .not-list strong {
+          color: #dc2626;
         }
       `}</style>
     </>

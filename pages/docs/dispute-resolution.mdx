@@ -1,0 +1,56 @@
+# Dispute Resolution
+
+Dispute resolution handles disagreements between parties in a protected transfer.
+
+## Dispute Flow
+
+1. **Initiation**: Either party opens a dispute
+2. **Pause**: Normal release is suspended
+3. **Resolution**: Resolution module determines outcome
+4. **Enforcement**: Funds distributed according to decision
+
+## Resolution Modes
+
+### DRv1: Single Trusted Resolver
+
+A designated arbiter makes binding decisions:
+
+- Fast resolution
+- Suitable for established relationships
+- Resolver identity known upfront
+
+### DRv2: Escalating Resolution
+
+Multi-stage process with escalating complexity:
+
+1. Party submissions
+2. Community voting
+3. Final arbitration
+
+### DRv3: Decentralized Resolution (Future)
+
+Fully decentralized resolver selection and decision-making.
+
+## Resolution Outcomes
+
+The resolver can decide:
+
+- Full release to recipient
+- Full refund to sender
+- Partial split between parties
+
+## Dispute States
+
+| State      | Description                           |
+| ---------- | ------------------------------------- |
+| `DISPUTED` | Dispute opened, release paused        |
+| `RESOLVED` | Resolution decided, funds distributed |
+
+## Fees
+
+Dispute resolution may involve fees:
+
+- Resolution fee paid to resolver
+- Appeal bond (if appeal is available)
+
+See [Fees](/docs/fees) for detailed fee information.

@@ -244,30 +244,29 @@ export default function Emergency() {
           <h3>Related Pages</h3>
           <ul>
             <li>
-              <Link href="/protocol-limits">
-                <a>Protocol Limits</a>
-              </Link>
-              : Detailed constraints on guardian and governance powers
+              <Link href="/protocol-limits">Protocol Limits</Link>: Detailed
+              constraints on guardian and governance powers
             </li>
             <li>
-              <Link href="/governance">
-                <a>Governance</a>
-              </Link>
-              : How protocol changes are coordinated
+              <Link href="/governance">Governance</Link>: How protocol changes
+              are coordinated
             </li>
             <li>
-              <Link href="/security">
-                <a>Security Model</a>
-              </Link>
-              : Overall security philosophy and properties
+              <Link href="/security">Security Model</Link>: Overall security
+              philosophy and properties
             </li>
             <li>
-              <Link href="/how-it-works">
-                <a>How It Works</a>
-              </Link>
-              : Understanding escrow lifecycle
+              <Link href="/how-it-works">How It Works</Link>: Understanding
+              escrow lifecycle
             </li>
           </ul>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs/emergency">View full documentation →</Link>
+          </p>
         </section>
       </div>
 
@@ -328,6 +327,18 @@ export default function Emergency() {
           .timeline-table td {
             padding: 0.75rem 0.5rem;
           }
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
         }
       `}</style>
     </>

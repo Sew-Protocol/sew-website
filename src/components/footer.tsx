@@ -8,9 +8,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <div className="footer-section">
             <p className="footer-label">Reference Interface</p>
-            <Link href="/everyday-wallet">
-              <a>Everyday Wallet</a>
-            </Link>
+            <Link href="/everyday-wallet">Everyday Wallet</Link>
           </div>
           <div className="footer-section">
             <p className="footer-label">Source Code</p>

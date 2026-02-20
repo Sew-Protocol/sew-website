@@ -1,0 +1,56 @@
+# Sew Protocol Documentation
+
+Welcome to the Sew Protocol technical documentation. This documentation covers the smart contracts, architecture, integration guides, and security model for the protocol.
+
+## Quick Links
+
+- [Architecture](/docs/architecture) - System design and contract relationships
+- [Security Model](/docs/security) - Threat analysis and security guarantees
+- [Guides](/docs/guides) - Integration tutorials and development guides
+- [Reference](/docs/reference) - Contract interfaces and API references
+
+## What is Sew Protocol?
+
+Sew Protocol is a non-custodial escrow architecture for ERC20 transfers on Ethereum. It provides:
+
+- **Protected Transfers**: Funds are held in escrow until release conditions are met
+- **Deterministic Settlement**: Release and resolution follow predefined rules
+- **Per-Escrow Isolation**: Each agreement is independent; failures don't propagate
+- **Forward-Only Upgrades**: Changes affect new escrows only, preserving existing agreements
+
+## Getting Started
+
+```bash
+# Clone the contracts repository
+git clone https://github.com/sew-protocol/sew-protocol-contracts
+
+# Install dependencies
+npm install
+
+# Run tests
+npm run test
+```
+
+## Documentation Sections
+
+### Core Concepts
+
+- [Architecture](/docs/architecture) - Understanding the system design
+- [Escrow Lifecycle](/docs/lifecycle) - How protected transfers work
+- [Dispute Resolution](/docs/dispute-resolution) - Handling disagreements
+
+### For Developers
+
+- [Quickstart](/docs/quickstart) - Get started in 5 minutes
+- [Guides](/docs/guides) - Integration tutorials
+- [Reference](/docs/reference) - Contract APIs
+
+### For Auditors
+
+- [Security Model](/docs/security) - Security principles and guarantees
+- [Contract Reference](/docs/reference) - Detailed contract documentation
+
+## Support
+
+- GitHub Issues: https://github.com/sew-protocol/sew-protocol-contracts/issues
+- Discord: https://discord.gg/sewprotocol

@@ -101,6 +101,14 @@ export default function Security() {
           </ul>
         </section>
 
+        <section className="disclaimer-block">
+          <p>
+            <strong>Yield + integrations:</strong> Yield is optional. Principal
+            remains governed by escrow logic. External protocol risk exists.
+            Exposure caps and unwind mechanisms limit potential losses.
+          </p>
+        </section>
+
         <section className="content-block">
           <h3>Emergency response posture</h3>
           <p>
@@ -128,18 +136,23 @@ export default function Security() {
             the rules governing their funds.
           </p>
           <p>
-            See{' '}
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>{' '}
-            for detailed constraints on guardian and governance powers.
+            See <Link href="/protocol-limits">Protocol Limits</Link> for
+            detailed constraints on guardian and governance powers.
           </p>
           <p>
-            See{' '}
-            <Link href="/emergency">
-              <a>Emergency Recovery</a>
-            </Link>{' '}
-            for detailed emergency response procedures.
+            See <Link href="/emergency">Emergency Recovery</Link> for detailed
+            emergency response procedures.
+          </p>
+          <p>
+            See <Link href="/modules">Modules</Link> for information about
+            release strategies, resolution modules, and yield modules.
+          </p>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs/security">View full documentation →</Link>
           </p>
         </section>
       </div>
@@ -184,6 +197,31 @@ export default function Security() {
           .content-block {
             padding: 0 1rem;
           }
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
+        }
+        .disclaimer-block {
+          background: #fef3c7;
+          border: 1px solid #f59e0b;
+          border-radius: 8px;
+          padding: 1rem 1.5rem;
+          margin: 0 auto 3rem;
+          max-width: 800px;
+          font-size: 0.9rem;
+        }
+        .disclaimer-block p {
+          margin: 0;
+          color: #92400e;
         }
       `}</style>
     </>

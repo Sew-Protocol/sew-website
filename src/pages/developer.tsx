@@ -58,13 +58,11 @@ export default function Developer() {
 }
 
 enum YieldPreset {
-  OFF,        // No yield generation
-  TO_SENDER,  // Yield goes to sender
-  TO_RECIPIENT, // Yield goes to recipient
-  SPLIT       // Split between parties
+  OFF,        // No yield generation (default)
+  TO_SENDER   // Yield goes to sender
 }
 
-// Create an escrow
+// Create an escrow with default settings
 function createEscrow(
   address token,
   address to,
@@ -77,6 +75,105 @@ function createEscrow(
             The function returns a workflowId that identifies this escrow
             uniquely.
           </p>
+
+          <h4>Creating with default settings</h4>
+          <p>Use default settings for the simplest integration:</p>
+
+          <div className="code-block">
+            <pre>{`// TypeScript SDK
+const settings = EscrowSettingsFactory.default();
+await escrow.createEscrow(to, amount, settings);
+
+// Solidity integrators
+EscrowSettings memory settings = SettingsValidationLibrary.getDefaultSettings();
+escrow.createEscrow(to, amount, settings);`}</pre>
+          </div>
+
+          <h4>EscrowSettings explained</h4>
+          <table className="settings-table">
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>What it does</th>
+                <th>Default value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <code>customResolver</code>
+                </td>
+                <td>
+                  Override the default dispute resolver with a custom address
+                </td>
+                <td>address(0) = use protocol default</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>releaseAddress</code>
+                </td>
+                <td>Which address can release funds (beyond sender)</td>
+                <td>address(0) = sender only</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>yieldPreset</code>
+                </td>
+                <td>How generated yield is distributed</td>
+                <td>OFF (no yield)</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>autoReleaseTime</code>
+                </td>
+                <td>Unix timestamp when funds auto-release to recipient</td>
+                <td>0 = disabled</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>autoCancelTime</code>
+                </td>
+                <td>
+                  Unix timestamp when escrow auto-cancels (sender gets refund)
+                </td>
+                <td>0 = disabled</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Common configurations</h4>
+          <div className="code-block">
+            <pre>{`// Simple payment - sender releases manually
+settings = {
+  customResolver: address(0),
+  releaseAddress: address(0),
+  yieldPreset: YieldPreset.OFF,
+  autoReleaseTime: 0,
+  autoCancelTime: 0
+}
+
+// Time-based release - auto-releases after 7 days
+settings = {
+  customResolver: address(0),
+  releaseAddress: address(0),
+  yieldPreset: YieldPreset.OFF,
+  autoReleaseTime: block.timestamp + 7 days,
+  autoCancelTime: 0
+}
+
+// Yield to sender - funds earn yield while locked
+settings = {
+  customResolver: address(0),
+  releaseAddress: address(0),
+  yieldPreset: YieldPreset.TO_SENDER,
+  autoReleaseTime: 0,
+  autoCancelTime: 0
+}`}</pre>
+          </div>
+
+          <p className="learn-more">
+            <Link href="/docs/quickstart">See full quickstart guide →</Link>
+          </p>
         </section>
 
         <section className="content-block">
@@ -87,9 +184,9 @@ function createEscrow(
             <pre>{`enum EscrowState {
   NONE,       // Uninitialized
   PENDING,    // Created, awaiting action
-  DISPUTED,   // Under dispute resolution
   RELEASED,   // Funds sent to recipient
   REFUNDED,   // Funds returned to sender
+  DISPUTED,   // Under dispute resolution
   RESOLVED    // Resolver determined outcome
 }
 
@@ -218,24 +315,10 @@ function getModuleSnapshot(uint256 workflowId) external view returns (
               </tr>
               <tr>
                 <td>
-                  <strong>Cancellation Strategy</strong>
-                </td>
-                <td>Define cancel rules</td>
-                <td>ICancellationStrategy</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Yield Generation</strong>
+                  <strong>Yield Module</strong>
                 </td>
                 <td>Generate yield on escrowed funds</td>
-                <td>IYieldGenerationModule</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Yield Distribution</strong>
-                </td>
-                <td>Allocate generated yield</td>
-                <td>IYieldDistributionModule</td>
+                <td>IYieldModule</td>
               </tr>
             </tbody>
           </table>
@@ -243,6 +326,9 @@ function getModuleSnapshot(uint256 workflowId) external view returns (
           <p>
             Modules are selected at escrow creation and remain fixed for that
             escrow's lifetime.
+          </p>
+          <p className="learn-more">
+            <Link href="/modules">Learn more about modules →</Link>
           </p>
         </section>
 
@@ -273,6 +359,9 @@ function getModuleSnapshot(uint256 workflowId) external view returns (
               <strong>Support yield</strong> — Display yield accrued if enabled
             </li>
           </ol>
+          <p className="learn-more">
+            <Link href="/docs/guides">See integration guides →</Link>
+          </p>
         </section>
 
         <section className="content-block">
@@ -341,51 +430,38 @@ event ProtocolFeeCollected(
               <tr>
                 <td>EscrowVault (default)</td>
                 <td>
-                  <Link href="/contracts">
-                    <a>See contract addresses</a>
-                  </Link>
+                  <Link href="/contracts">See contract addresses</Link>
                 </td>
               </tr>
               <tr>
                 <td>DefaultResolutionModule</td>
                 <td>
-                  <Link href="/contracts">
-                    <a>See contract addresses</a>
-                  </Link>
+                  <Link href="/contracts">See contract addresses</Link>
                 </td>
               </tr>
               <tr>
                 <td>DefaultReleaseStrategy</td>
                 <td>
-                  <Link href="/contracts">
-                    <a>See contract addresses</a>
-                  </Link>
+                  <Link href="/contracts">See contract addresses</Link>
                 </td>
               </tr>
               <tr>
                 <td>AaveYieldModule</td>
                 <td>
-                  <Link href="/contracts">
-                    <a>See contract addresses</a>
-                  </Link>
+                  <Link href="/contracts">See contract addresses</Link>
                 </td>
               </tr>
               <tr>
                 <td>ModuleRegistry</td>
                 <td>
-                  <Link href="/contracts">
-                    <a>See contract addresses</a>
-                  </Link>
+                  <Link href="/contracts">See contract addresses</Link>
                 </td>
               </tr>
             </tbody>
           </table>
           <p>
-            See{' '}
-            <Link href="/contracts">
-              <a>Contract Addresses</a>
-            </Link>{' '}
-            for deployed testnet contracts.
+            See <Link href="/contracts">Contract Addresses</Link> for deployed
+            testnet contracts.
           </p>
         </section>
 
@@ -409,11 +485,8 @@ event ProtocolFeeCollected(
             </li>
           </ul>
           <p>
-            See{' '}
-            <Link href="/technical">
-              <a>Technical Resources</a>
-            </Link>{' '}
-            for documentation links.
+            See <Link href="/technical">Technical Resources</Link> for
+            documentation links.
           </p>
         </section>
 
@@ -428,15 +501,9 @@ event ProtocolFeeCollected(
             settlement enforcement from scratch.
           </p>
           <p>
-            See{' '}
-            <Link href="/fees">
-              <a>Fees</a>
-            </Link>{' '}
-            and{' '}
-            <Link href="/protocol-limits">
-              <a>Protocol Limits</a>
-            </Link>{' '}
-            for complete parameter details.
+            See <Link href="/fees">Fees</Link> and{' '}
+            <Link href="/protocol-limits">Protocol Limits</Link> for complete
+            parameter details.
           </p>
         </section>
       </div>
@@ -480,7 +547,8 @@ event ProtocolFeeCollected(
           line-height: 1.5;
         }
         .module-table,
-        .address-table {
+        .address-table,
+        .settings-table {
           width: 100%;
           border-collapse: collapse;
           margin: 1.5rem 0;
@@ -488,15 +556,34 @@ event ProtocolFeeCollected(
         .module-table th,
         .module-table td,
         .address-table th,
-        .address-table td {
+        .address-table td,
+        .settings-table th,
+        .settings-table td {
           text-align: left;
           padding: 0.75rem 1rem;
           border-bottom: 1px solid #eaeaea;
         }
         .module-table th,
-        .address-table th {
+        .address-table th,
+        .settings-table th {
           font-weight: 600;
           background: #fafafa;
+        }
+        .settings-table code {
+          background: #f0f0f0;
+          padding: 0.2rem 0.4rem;
+          border-radius: 4px;
+          font-size: 0.85rem;
+        }
+        .learn-more {
+          margin-top: 1.5rem;
+        }
+        .learn-more a {
+          color: #0070f3;
+          font-weight: 500;
+        }
+        .learn-more a:hover {
+          text-decoration: underline;
         }
         @media (max-width: 600px) {
           .content-block {

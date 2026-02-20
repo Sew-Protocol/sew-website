@@ -48,6 +48,22 @@ body {
   overflow-x: hidden;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background-image: url('/abstract.jpeg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: -1;
+}
+
 code[class*='language-'],
 pre[class*='language-'] {
   color: #000;

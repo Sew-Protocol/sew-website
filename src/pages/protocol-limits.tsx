@@ -142,30 +142,29 @@ export default function ProtocolLimits() {
           <h3>Related Pages</h3>
           <ul>
             <li>
-              <Link href="/fees">
-                <a>Fees</a>
-              </Link>
-              : Complete breakdown of all protocol fees
+              <Link href="/fees">Fees</Link>: Complete breakdown of all protocol
+              fees
             </li>
             <li>
-              <Link href="/governance">
-                <a>Governance</a>
-              </Link>
-              : How protocol constraints are enforced
+              <Link href="/governance">Governance</Link>: How protocol
+              constraints are enforced
             </li>
             <li>
-              <Link href="/how-it-works">
-                <a>How It Works</a>
-              </Link>
-              : Understand the escrow lifecycle
+              <Link href="/how-it-works">How It Works</Link>: Understand the
+              escrow lifecycle
             </li>
             <li>
-              <Link href="/technical">
-                <a>Technical Resources</a>
-              </Link>
-              : Smart contracts and documentation
+              <Link href="/technical">Technical Resources</Link>: Smart
+              contracts and documentation
             </li>
           </ul>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
+          <p>
+            <Link href="/docs/protocol-limits">View full documentation →</Link>
+          </p>
         </section>
       </div>
 
@@ -219,6 +218,18 @@ export default function ProtocolLimits() {
           .limits-table td {
             padding: 0.75rem 0.5rem;
           }
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+        .page-meta p {
+          margin: 0.5rem 0;
+        }
+        .page-meta a {
+          color: #0070f3;
         }
       `}</style>
     </>
