@@ -491,6 +491,88 @@ event ProtocolFeeCollected(
         </section>
 
         <section className="content-block">
+          <h3>Dispute architecture</h3>
+          <p>
+            If parties disagree about an escrow outcome, the protocol provides
+            structured, on-chain resolution mechanisms. This section covers the
+            technical foundations.
+          </p>
+
+          <h4 className="subsection-title">Resolver interfaces</h4>
+          <p>
+            A resolver is a smart contract or EOA that receives dispute evidence
+            and returns a decision. Resolvers implement a standard interface:
+          </p>
+          <ul>
+            <li>
+              <code>resolve(escrowId, evidence) → outcome</code> where outcome is
+              one of RELEASE, REFUND, or SPLIT
+            </li>
+            <li>Decisions are on-chain callable and immutable once recorded</li>
+            <li>Resolvers can be custom per-escrow or protocol-appointed</li>
+          </ul>
+
+          <h4 className="subsection-title">State machine and appeals</h4>
+          <p>
+            Disputes follow a deterministic state machine with optional appeal
+            escalation:
+          </p>
+          <ul>
+            <li>
+              <strong>Level 1 (Standard):</strong> Default or custom resolver
+              decides
+            </li>
+            <li>
+              <strong>Level 2 (Senior):</strong> Higher-tier resolver reviews
+              appealed Level 1 decisions
+            </li>
+            <li>
+              <strong>Level 3 (Final):</strong> External authority; no further
+              appeal
+            </li>
+          </ul>
+          <p>
+            At each level, disputants can appeal by posting a bond. If their
+            appeal succeeds, they recover the bond; if it fails, they lose it.
+          </p>
+
+          <h4 className="subsection-title">Bond mechanics</h4>
+          <ul>
+            <li>v1: No bonds required (single trusted resolver)</li>
+            <li>v2: Standard resolvers post $250; senior resolvers post $25k</li>
+            <li>v3: Bonds are capital-weighted with fee tiers and slashing</li>
+          </ul>
+
+          <h4 className="subsection-title">Deep technical reference</h4>
+          <p>
+            For contract interfaces, state enums, appeal bonding mechanics,
+            slashing calculations, and module isolation details, see:
+          </p>
+          <ul>
+            <li>
+              <Link href="/docs/dispute-resolution/overview">Overview</Link> —
+              Core concepts and workflows
+            </li>
+            <li>
+              <Link href="/docs/dispute-resolution/resolution-modes">Resolution Modes</Link> —
+              v1/v2/v3 comparison matrix
+            </li>
+            <li>
+              <Link href="/docs/dispute-resolution/resolver-guide">Resolver Guide</Link> —
+              Setup, bonding, and operations
+            </li>
+            <li>
+              <Link href="/docs/dispute-resolution/economic-model">Economic Model</Link> —
+              Parameters, bond calculations, slashing rates
+            </li>
+            <li>
+              <Link href="/docs/dispute-resolution/escalation-details">Escalation Details</Link> —
+              Multi-level flows and scenarios
+            </li>
+          </ul>
+        </section>
+
+        <section className="content-block">
           <h3>Summary</h3>
           <p>
             Sew provides a reusable primitive: payments that can be held,
@@ -584,6 +666,12 @@ event ProtocolFeeCollected(
         }
         .learn-more a:hover {
           text-decoration: underline;
+        }
+        .subsection-title {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-top: 1.5rem;
+          margin-bottom: 0.5rem;
         }
         @media (max-width: 600px) {
           .content-block {

@@ -1,0 +1,569 @@
+# Escalation & Appeals
+
+This page explains how disputes move through multiple levels of review, and what happens at each escalation.
+
+## The Escalation Model
+
+Disputes can escalate when a party disagrees with a decision. The number of escalation levels depends on the resolution version:
+
+### v1 (Single Resolver)
+
+```
+Dispute Opened
+        ↓
+Resolver Decides
+        ↓
+Decision Final
+(Governance can override, but not automatic escalation)
+```
+
+**Escalation levels:** 0 (decision is binding immediately)
+
+### v2 (Escalating with Incentives)
+
+```
+Dispute Opened
+        ↓
+Level 1: Resolver Reviews (24h deadline)
+        ↓
+Decision Made
+        ↓
+Disagree?
+        ↓
+Post Appeal Bond
+        ↓
+Level 2: Senior Reviewer Reviews (48h deadline)
+        ↓
+Final Decision
+(All appeals exhausted)
+        ↓
+Funds Distributed
+```
+
+**Escalation levels:** 1 (resolver → senior)
+
+### v3 (Decentralized)
+
+```
+Dispute Opened
+        ↓
+Resolver Selected (capital-weighted, category-based)
+        ↓
+Level 1: Resolver Reviews (24h deadline)
+        ↓
+Decision Made
+        ↓
+Disagree?
+        ↓
+Post Appeal Bond
+        ↓
+Level 2: Senior Reviewer Reviews (48h deadline)
+        ↓
+Decision Made
+        ↓
+Disagree?
+        ↓
+Post Another Appeal Bond
+        ↓
+Level 3: External Arbitrator (Kleros, etc.)
+        ↓
+Final Binding Decision
+        ↓
+Funds Distributed
+```
+
+**Escalation levels:** 2 (resolver → senior → external)
+
+---
+
+## Level 1: Initial Resolver
+
+### Role
+
+The first-level reviewer who makes the **initial decision** on a disputed transfer.
+
+**Responsibilities:**
+- Review evidence from both parties
+- Consider contract terms and facts
+- Make a binding decision (subject to appeal)
+- Document reasoning clearly
+- Meet 24-hour deadline
+
+### Decision Options
+
+The resolver can decide:
+
+1. **Release to recipient**: Funds go to recipient; sender's claim rejected
+2. **Refund to sender**: Funds return to sender; recipient's claim rejected
+3. **Split between parties**: Divide funds based on partial agreement (e.g., 60/40)
+
+### Selection (v3 Only)
+
+In v3, the resolver is selected **capital-weighted** by category:
+
+```
+Categories: "Smart Contracts", "IP Rights", "Goods Delivery", etc.
+
+When dispute is disputed:
+1. Category determined
+2. All resolvers in that category ranked by:
+   a. Available bond (must be sufficient for dispute value)
+   b. Performance history (reversal rate, timeout rate)
+   c. Randomization (prevent selection gaming)
+3. Top resolver offered the dispute
+4. If timeout, next resolver in queue
+```
+
+### Economics for Resolver
+
+| Item | Amount |
+|------|--------|
+| Fee earned | dispute_value × 2% (example) |
+| Slashing risk | ~2-5% of bond annually (conservative) |
+| Net earnings | Fee - expected slashing |
+
+### Risks for Resolver
+
+| Risk | Trigger | Consequence |
+|------|---------|-------------|
+| **Timeout** | Missed 24-hour deadline | 2% slashing |
+| **Reversal** | Senior overturns decision | 5% slashing |
+| **Cascade** | 3+ reversals in epoch | 10% slashing + 7-day freeze |
+
+### Common Mistakes
+
+1. **Not documenting**: Senior can't review your reasoning if you don't provide it
+2. **Ignoring evidence**: Making a decision without carefully examining files/hashes
+3. **Taking too long**: Procrastinating and missing the 24-hour deadline
+4. **Dismissing without reason**: "I reject the claim" with no explanation invites appeal
+
+---
+
+## Level 2: Senior Reviewer (v2+)
+
+### Role
+
+The second-level reviewer who **re-examines** the first resolver's decision when appealed.
+
+**Responsibilities:**
+- Review the original decision and reasoning
+- Consider appellant's evidence of error
+- Make a new independent decision
+- Validate or overturn the original decision
+- Document reasoning
+
+### When Escalation Happens
+
+An appeal is filed when:
+- Appellant disagrees with Level 1 decision
+- Appellant posts an appeal bond (typically 5% of dispute value)
+- Timeline: Within 48 hours of Level 1 decision
+
+### Decision Process
+
+```
+Senior receives:
+├─ Original decision & resolver's reasoning
+├─ Original dispute evidence
+└─ Appellant's challenge (why they think L1 was wrong)
+
+Senior can:
+├─ AGREE with L1 (decision stands)
+│   └─ Appeal bond forfeited → insurance pool
+│   └─ L1 resolver validated
+│
+└─ DISAGREE with L1 (decision overturned)
+    └─ Appeal bond returned to appellant
+    └─ L1 resolver slashed (5%)
+    └─ New decision is final (or escalates to L3 if in v3)
+```
+
+### Senior Responsibilities
+
+Senior resolvers have **more responsibility** than juniors:
+
+1. **Curate junior resolvers** (v3): Select, train, monitor juniors
+2. **Validate decisions**: Ensure juniors are making sound choices
+3. **Manage delegation**: Distribute disputes across juniors strategically
+4. **Maintain bond**: Senior's bond backs juniors (shared slashing in v3)
+
+### Economics for Senior
+
+| Item | Amount |
+|------|--------|
+| Fee per appeal review | dispute_value × 3-5% (higher than L1) |
+| Delegation reward | Varies (governance-dependent) |
+| Performance bonus | For high-quality junior curation |
+| Slashing risk | ~5-10% of bond annually (higher due to backing juniors) |
+
+### Risks for Senior
+
+| Risk | Trigger | Consequence |
+|------|---------|-------------|
+| **Timeout** | Missed 48-hour deadline | 2% slashing |
+| **Bad juniors** | Junior's decision overturned by you | Your bond at risk (v3) |
+| **Cascade** | Multiple juniors fail | Larger slashing exposure |
+| **Insurance failure** | Catastrophic losses | Senior's bond contributes |
+
+---
+
+## Level 3: External Arbitration (v3 Only)
+
+### Role
+
+Final binding arbitration by an external third party (e.g., Kleros court).
+
+**Responsibilities:**
+- Make final, binding decision
+- Not subject to further appeal within Sew
+- Execute fund distribution
+- Protocol enforces outcome
+
+### When Escalation Happens
+
+If the appellant still disagrees after Level 2:
+- Post another appeal bond (typically 5% of dispute value)
+- Case escalates to external arbitrator
+- Timing: Variable (depends on arbitrator's queue)
+
+### External Arbitrators
+
+Possible arbitrators (governance chooses):
+
+1. **Kleros**: Crypto-native court using jury selection
+2. **Arbitrum DAO**: Arbitration via Arbitrum governance
+3. **Umbraco**: On-chain arbitration protocol
+4. **Custom**: Sew Protocol could hire traditional arbitrators
+
+Each arbitrator has:
+- Own fee structure
+- Own timeline
+- Own decision quality guarantees
+
+### Decision at Level 3
+
+```
+External Arbitrator receives:
+├─ Full case history (L1 decision, L2 review)
+├─ All evidence
+└─ Detailed briefs from both L1 resolver and appellant
+
+Arbitrator can:
+├─ Validate entire L1/L2 chain
+│   └─ Original distribution stands
+│
+├─ Find error at L1 only
+│   └─ L1 slashed; L2 validated
+│
+├─ Find error at L2
+│   └─ L2 slashed; case sent back to L1 corrected
+│
+└─ Find completely different outcome
+    └─ All prior decisions reversed; new distribution
+```
+
+### Economics for External Arbitrators
+
+- Sew pays arbitrator fee (governance-determined)
+- Typically 5-15% of dispute value (higher due to final responsibility)
+- Might split with losing party (incentivizes accurate claims)
+
+### Characteristics
+
+| Aspect | Detail |
+|--------|--------|
+| **Speed** | Slow (1-4 weeks typical) |
+| **Cost** | High (5-15% of dispute value) |
+| **Quality** | Highest (true independent review) |
+| **Finality** | Absolute (outside Sew governance) |
+
+---
+
+## Full Dispute Flow Example (v2)
+
+### Scenario
+
+```
+Amount: $1,000 payment for freelance work
+Dispute: Sender claims work was low quality
+Resolution mode: v2 (Escalating with incentives)
+```
+
+### Timeline
+
+**Day 1, 10:00 AM**
+```
+Sender files dispute
+Evidence submitted:
+- Project requirements (contract)
+- Delivered work (files)
+- Sender's complaints (detailed grievance)
+
+Status: Awaiting Level 1 resolver
+```
+
+**Day 1, 11:00 AM**
+```
+Resolver assigned: Alice (smart contract specialist, $500 bond)
+Resolver is notified
+Deadline: Day 2, 11:00 AM (24 hours)
+
+Action: Alice reviews evidence
+```
+
+**Day 2, 09:00 AM**
+```
+Alice submits decision:
+
+"The contract specified 'well-documented, tested code'. 
+The delivered code has:
+- 50 code comments (expected: >100)
+- Missing test suite (contract required full coverage)
+- Works but doesn't meet specifications
+
+Decision: REFUND to sender
+
+Reasoning: Work didn't meet contract terms."
+
+Alice earns: $1,000 × 2% = $20
+```
+
+**Day 2, 10:00 AM**
+```
+Recipient (Bob) receives notification: Funds will be refunded
+
+Bob disagrees: "Work was tested; sender is wrong about requirements"
+Bob decides to appeal
+
+Bob posts appeal bond: $1,000 × 5% = $50
+
+Status: Appeal filed, awaiting Level 2 review
+Deadline for Senior: Day 3, 10:00 AM (48 hours)
+```
+
+**Day 3, 08:00 AM**
+```
+Senior assigned: Carol (senior smart contract expert, $50,000 bond)
+Carol reviews:
+
+1. Alice's decision: Refund sender
+2. Alice's reasoning: Missing tests, insufficient comments
+3. Bob's appeal: Claims work was tested (provides test files)
+4. Contract language: "Must include test suite"
+5. Evidence: Bob's test files attached
+
+Carol's analysis:
+- Bob DID include tests (in separate folder)
+- Test coverage: 87% (contract: ">50%")
+- Comments: Valid criticism (42 comments vs 100+ expected)
+- Mixed quality: Tests met spec, docs did not
+
+Carol's decision: SPLIT 50/50
+- Sender gets $500 (partial work met specs)
+- Recipient gets $500 (tests met specs)
+
+Carol reasoning:
+"Tests met contract requirements (>50% coverage).
+Comments were light but work was functional.
+Partial credit is fair."
+```
+
+**Day 3, 09:00 AM**
+```
+Status: Carol's decision enforced
+- Alice (L1 resolver):
+  - Originally earned: $20
+  - Now: Decision reversed
+  - Slashing: 5% of $500 bond = $25
+  - Alice's bond: $500 → $475
+
+- Bob (appellant):
+  - Posted bond: $50
+  - Appeal succeeded: $50 returned (not forfeited)
+  - Funds received: $500 (corrected distribution)
+
+- Sender:
+  - Funds received: $500 (originally wanted $1,000 refund)
+  - Dispute cost: Winning appeal resulted in fair split
+
+- Carol (L2 senior):
+  - Decision made: $1,000 × 3% = $30 earned
+  - No slashing (her decision stands as final in v2)
+
+Funds distributed. Dispute closed.
+```
+
+---
+
+## Full Dispute Flow Example (v3)
+
+### Scenario (Extended)
+
+```
+Same as above, but:
+- Resolution mode: v3 (Decentralized)
+- Bob decides to appeal Carol's decision at Level 2
+```
+
+### Timeline Continues
+
+**Day 3, 10:00 AM**
+```
+Bob receives notification: Split decision
+
+Bob STILL disagrees: "My work was perfect! I should get 100%"
+Bob decides to escalate to Level 3
+
+Bob posts appeal bond: $1,000 × 5% = $50
+
+Status: Escalation to external arbitration
+Route: Kleros Court
+Typical timeline: 2-4 weeks (depends on jury selection)
+```
+
+**Day 5-21**
+```
+Kleros court assigned
+Jury selection: ~7 days
+Evidence submission: ~3 days
+Jury deliberation: ~5 days
+
+Jury reviews:
+- Full contract
+- All evidence
+- All prior decisions (Alice's, Carol's)
+- Bob's and Sender's briefs
+
+Possible outcomes:
+1. Validate Carol's split (50/50) → Bob loses appeal bond
+2. Award to recipient (100%) → Sender loses, Bob validated
+3. Refund to sender (0%) → Both prior decisions wrong
+```
+
+**Day 22 (Example)**
+```
+Kleros jury decision: 70% to recipient, 30% to sender
+
+Reasoning: "Work was well-tested but documentation was weak.
+70% credit to recipient for test suite quality, 30% to sender
+for legitimate documentation concerns."
+
+Distribution:
+- Sender: $300
+- Recipient (Bob): $700
+
+Slashing:
+- Alice (L1): 5% slashed (reversal) → bond $475
+- Carol (L2): 1% slashed (backed junior but her split was wrong)
+              → bond $50,000 → $49,500
+
+Bob (appellant):
+- Posted $50 bond at L2 appeal (failed, forfeited)
+- Posted $50 bond at L3 appeal (partially succeeded)
+  → $50 returned (jury found him partially right)
+
+Final state:
+- Dispute fully resolved via multi-level review
+- All parties received binding outcome
+- Honest resolvers (Carol, partly) validated
+- Dishonest resolvers (Alice) penalized
+- System incentivizes careful decision-making
+```
+
+---
+
+## Key Mechanics
+
+### Appeal Bond Forfeiture
+
+When an appeal fails, who gets the forfeited bond?
+
+```
+v2:
+- Appeal bond → Insurance pool (system-wide protection)
+
+v3:
+- L1 appeal bond → Insurance pool
+- L2 appeal bond → Insurance pool
+- L3 appeal bond → External arbitrator (payment for service)
+```
+
+### Reversal Chain
+
+What if a higher level is reversed by even higher level?
+
+```
+Level 1 (Alice): Refund
+Level 2 (Carol): Split 50/50
+Level 3 (Kleros): Reverse to 30/70
+
+Slashing:
+- Alice: 5% (reversed by Carol)
+- Carol: 1% (reversed by Kleros, partial responsibility)
+
+Carol's loss is less because Kleros only partially disagreed.
+(Governance can tune this)
+```
+
+### Timeout Cascades
+
+What if multiple levels timeout?
+
+```
+Day 1: Dispute opened
+Day 2, 11:00 AM: L1 deadline missed (Alice timed out)
+  Action: Alice slashed 2%, case escalates to L2 auto
+
+Day 3, 11:00 AM: L1 resolves (Alice finally submits)
+  Status: L1 complete (even though late)
+
+Day 4, 11:00 AM: L2 deadline missed (Carol timed out)
+  Action: Carol slashed 2%, case escalates to L3 auto
+
+Day 5: L2 resolves (Carol submits late)
+  Status: Both L1 and L2 slashed for timeout
+```
+
+---
+
+## Preventing Frivolous Appeals
+
+The appeal bond system is designed to prevent cheap, baseless escalations:
+
+### Economics of Appealing
+
+```
+Dispute value: $1,000
+Appeal bond: 5% = $50
+
+If I appeal:
+- Cost: $50 (forfeited if I lose)
+- Upside: Correct distribution (varies)
+- Calculation: Only appeal if EV[correct distribution] > $50
+
+Examples:
+- If I'm claiming $1,000 refund but only expect 60% chance of winning:
+  EV = $600 - $50 = $550 (rational to appeal)
+
+- If I'm claiming $1,000 refund but only expect 3% chance:
+  EV = $30 - $50 = -$20 (not rational to appeal)
+```
+
+### Governance Can Tune
+
+If appeals are too frequent → raise appeal bond %  
+If appeals are too rare → lower appeal bond %
+
+Governance adjusts based on real data.
+
+---
+
+## Next Steps
+
+- **Economic Model**: Learn about bonds, slashing, and parameters in detail
+- **Guide for Resolvers**: If you're operating at L1 or L2
+- **Overview**: Return to core concepts
+
+---
+
+**Questions?** Ask on [Discord](https://discord.gg/sewprotocol) or see the [index](./index).

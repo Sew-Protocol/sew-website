@@ -1,0 +1,128 @@
+# What is Dispute Resolution?
+
+Sew Protocol is built on the principle that protected transfers are **agreements between parties**. When both parties agree to the terms, everything works smoothly. But what happens when they disagree?
+
+## The Problem
+
+Imagine a protected transfer where:
+- Sender deposits funds into escrow
+- Recipient is supposed to deliver goods or services
+- Recipient claims delivery was complete
+- Sender disagrees
+
+Without dispute resolution, the funds are **stuck indefinitely**. Neither party can act unilaterally. Dispute resolution exists to break this deadlock fairly.
+
+## Core Design Principles
+
+Sew's dispute resolution is built on three pillars:
+
+### 1. **Deterministic Outcomes**
+
+Disputes don't rely on arbitrary judgment. Instead, they follow predefined rules:
+- Decisions must be justified by evidence
+- Escalation paths are automatic
+- Rules are the same for everyone
+
+This prevents favoritism and makes the system predictable.
+
+### 2. **Economic Incentives**
+
+Participants are motivated to:
+- **Resolve honestly**: Slashing penalties for wrong decisions
+- **Avoid frivolous appeals**: Bond forfeiture for failed escalations
+- **Operate reliably**: Better operators earn more workload
+
+Incentives are baked into the protocol, not enforced by reputation alone.
+
+### 3. **Escalation Safeguards**
+
+Instead of a single point of failure, disputes can escalate:
+- **Level 1**: Initial resolver makes a decision
+- **Level 2**: Senior resolver can review
+- **Level 3**: External arbitration (e.g., Kleros) for final binding outcome
+
+Multiple levels prevent one bad actor from permanently mishandling disputes.
+
+## Dispute Lifecycle
+
+### 1. **Initiation**
+Either party opens a dispute by submitting evidence and a claim. The dispute pauses normal release logic.
+
+### 2. **Initial Review (Resolver)**
+A resolver examines evidence and makes a decision:
+- **Outcome A**: Full release to recipient
+- **Outcome B**: Full refund to sender
+- **Outcome C**: Split between parties
+
+### 3. **Appeal (Optional)**
+If either party disagrees, they can post an appeal bond and escalate to the next level. The bond is:
+- **Forfeited** if the appeal fails (discourages frivolous escalation)
+- **Returned** if the appeal succeeds
+
+### 4. **Final Outcome**
+Once all appeals are exhausted or the bond is forfeited, the decision becomes final and funds are distributed.
+
+## Key Concepts
+
+### **Resolver**
+A designated operator who reviews disputes and makes decisions. Resolvers:
+- Post bonds as collateral
+- Earn fees for their work
+- Face slashing penalties for misconduct or timeouts
+- Can be selected based on category expertise or dispute value
+
+### **Appeal Bond**
+A deposit posted by the appellant to escalate a decision. If the higher-level resolver agrees with the original decision, the bond is forfeited and goes into the insurance pool.
+
+### **Slashing**
+An automatic penalty applied to resolvers for:
+- **Timeout**: Missing a deadline (e.g., not making a decision within 24 hours)
+- **Reversal**: Having their decision overturned by a higher-level resolver
+- **Fraud**: Egregious misbehavior (e.g., requesting collateral from parties)
+
+Slashing amounts are conservative by default (2%-10%) and can be adjusted via governance.
+
+### **Freeze Logic**
+If a resolver's bond falls below the minimum required, they are frozen:
+- Cannot accept new disputes
+- Cannot withdraw remaining stake
+- Must replenish bond to resume operations
+
+This prevents undercapitalized operators from accepting high-value disputes.
+
+## Why Three Versions?
+
+Sew's dispute resolution evolves in three phases:
+
+### **v1: Single Trusted Resolver** (Launch)
+- One governance-controlled resolver
+- Fast and simple
+- Suitable for bootstrap phase
+
+### **v2: Decentralized Resolution** (Built, deferred until post-v1)
+- Multiple resolvers with appeal bonds
+- Resolver staking and slashing
+- Economic security without decentralized selection
+
+### **v3: Decentralized Incentives** (Future)
+- Fully decentralized resolver selection
+- Capital-weighted delegation
+- Senior operators curate and train juniors
+- Full capital-at-risk model
+
+The evolution follows the principle: **"Decentralise decisions first, decentralise incentives second, decentralise capital last."**
+
+Capital at risk creates adversarial pressure, so we only introduce it after decisions and incentives are proven stable.
+
+## Next Steps
+
+Ready to dive deeper?
+
+- **Resolution Modes**: Compare v1, v2, and v3 in detail
+- **Economic Model**: Learn about bonds, parameters, and mechanics
+- **Guide for Resolvers**: If you want to operate as a resolver
+- **Escalation & Appeals**: Understand the multi-level flow
+
+---
+
+**Questions?** Start with the [main overview page](./), explore the topic that interests you, or ask on [Discord](https://discord.gg/sewprotocol).

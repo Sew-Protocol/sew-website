@@ -1,0 +1,568 @@
+# Economic Model & Parameters
+
+This page covers the economic mechanics of dispute resolution: how bonds work, how slashing is calculated, and what the parameters mean.
+
+## Core Principle
+
+Sew's dispute resolution uses **economic incentives** rather than trust:
+
+> **"Bonds and slashing align resolver behavior with honest decisions."**
+
+- Post a bond → you have capital at risk
+- Make a bad decision → slashing penalty reduces your bond
+- Result: Your financial interest is to decide honestly
+
+## Bond Mechanics
+
+### What is a Bond?
+
+A bond is **collateral** you post to participate as a resolver. Think of it as:
+- A security deposit to participate
+- Capital at risk if you misbehave
+- Proof that you have "skin in the game"
+
+### How Bonds Work
+
+**1. Staking:**
+```
+You deposit tokens → bond is locked
+You become eligible for disputes → disputes assigned based on bond
+```
+
+**2. Earning fees:**
+```
+You handle dispute → earn fee
+Fee goes into your account (not the bond)
+Bond stays locked
+```
+
+**3. Slashing (if needed):**
+```
+You miss deadline or get reversed → slashing triggered
+Slashing penalty removed from bond
+Bond = original_bond - penalty
+```
+
+**4. Unfreezing / Unstaking:**
+```
+Bond drops below minimum → you're frozen
+Frozen = cannot accept new disputes
+Must replenish bond to minimum → you're unfrozen
+Withdraw remaining bond → 14-21 day unbond delay
+```
+
+### Bond Valuation (v2+)
+
+Bonds can be posted in multiple tokens. Valuation is **conservative** by default:
+
+#### Token Mix Rule (v3)
+
+Recommended: **80% stable + 20% protocol token (SEW)**
+
+```
+Bond value = (stableTokens × 1.0) + (sewTokens × 0.8× sewPrice)
+```
+
+The 0.8 multiplier is conservative to handle SEW price volatility.
+
+**Example:**
+```
+Post $400 USDC + $100 SEW
+SEW price = $1.00
+
+Bond value = ($400 × 1.0) + ($100 × 0.8 × $1.00)
+           = $400 + $80
+           = $480
+```
+
+#### Pure Stable Bonds
+
+If posting only stables (USDC, USDT):
+
+```
+Bond value = stableAmount (1:1)
+```
+
+**Why pure stable?** Lower risk for protocol; still acceptable for v2 launch.
+
+### Bond Requirements by Version
+
+#### v2 (Escalating)
+
+| Role | Minimum | Recommended | Coverage |
+|------|---------|-------------|----------|
+| **Resolver (L1)** | $250 | $500 | Up to $1,000-$2,000 disputes |
+| **Senior (L2)** | $25,000 | $50,000-$100,000 | Backs ~30 juniors |
+
+**Rationale:**
+- Resolvers need enough capital that slashing is meaningful ($250 is ~3 months earnings for small operators)
+- Seniors need significantly more (insurance layer)
+
+#### v3 (Decentralized)
+
+Same as v2, plus:
+
+**Utilization Buffer:**
+- Senior can only appoint juniors with `reservedCoverage ≤ seniorBond × 0.5`
+- Example: $100k senior → max $50k coverage reserved
+
+**Coverage Multiplier (M=3):**
+- Each junior appointment reserves `juniorBond × 3` coverage
+- Example: $500 junior = $1,500 reserved
+- ~33 juniors max per $100k senior
+
+**Effective limits:**
+```
+Max juniors ≈ (seniorBond × utilizationFactor) / (juniorBond × coverageMultiplier)
+            ≈ ($100k × 0.5) / ($500 × 3)
+            ≈ 33 juniors
+```
+
+---
+
+## Slashing Mechanics
+
+### What Triggers Slashing?
+
+Slashing penalties are applied **automatically** when:
+
+#### 1. Timeout
+
+**Trigger:** Resolver misses resolution deadline
+
+```
+Deadline = dispute open time + 24 hours (L1) or 48 hours (L2)
+Missed = didn't submit decision by deadline
+Result = automatic 2% slash
+```
+
+**Example:**
+```
+Bond: $500
+Slash amount: $500 × 2% = $10
+Remaining bond: $490
+```
+
+**Why?** Timeouts indicate unavailability or carelessness. Slashing incentivizes reliability.
+
+#### 2. Reversal
+
+**Trigger:** Your decision is overturned by higher-level resolver
+
+```
+You (L1) decide: Refund to sender
+Senior (L2) reviews: Actually, release to recipient
+Result = 5% slash on your bond
+```
+
+**Example:**
+```
+Bond: $500
+Slash amount: $500 × 5% = $25
+Remaining bond: $475
+```
+
+**Why?** Reversals indicate poor judgment or dishonesty. Slashing incentivizes careful analysis.
+
+#### 3. Severe Misconduct
+
+**Trigger:** Multiple reversals or objective fraud in single epoch
+
+```
+Defined as: 3+ reversals OR 2+ timeouts in 7-day epoch
+Result: 10% slash + 7-day freeze
+```
+
+**Example:**
+```
+Bond: $500
+Slash amount: $500 × 10% = $50
+Remaining bond: $450
+Freeze duration: 7 days (cannot accept new disputes)
+```
+
+**Why?** Repeated failures indicate systemic problems. Larger penalties + freeze protects system.
+
+### Slashing Waterfall (v3)
+
+In v3, slashing is distributed across multiple layers:
+
+```
+User files appeal against Resolver L0
+         ↓
+  Senior L1 reviews
+         ↓
+  L0's decision reversed
+         ↓
+  Slashing triggered
+         ↓
+  WHO PAYS?
+  ├─ L0 resolver: 5% of their bond
+  ├─ L1 senior: Backs L0; 1% of senior's bond if L0 bond insufficient
+  └─ Insurance pool: Catastrophic losses (>5% per epoch) spread
+```
+
+**Rationale:** Seniors have responsibility for juniors they appoint. Shared slashing aligns incentives.
+
+### Freeze Logic
+
+When bond falls below minimum:
+
+```
+Resolver's bond: $450 (started at $500)
+Minimum required: $250
+Shortfall: $200
+
+Status: FROZEN
+├─ Cannot accept new disputes
+├─ Cannot withdraw funds
+└─ Must replenish to $250+ minimum to resume
+```
+
+**Replenishing:**
+```
+Deposit $50 more → bond = $500 → UNFROZEN
+Now eligible again
+```
+
+**Why freeze?** Prevents undercapitalized operators from accepting high-value disputes they can't afford to be slashed on.
+
+---
+
+## Slashing Rates & Penalties
+
+### Conservative Launch Defaults (v2+)
+
+These are **starting safe** numbers. Governance can adjust via slow lane.
+
+| Event | Trigger | Penalty | Rationale |
+|-------|---------|---------|-----------|
+| **Timeout** | Missed deadline (24-48h) | 2% of bond | Minor penalty; incentivizes reliability |
+| **Reversal** | Decision overturned | 5% of bond | Moderate penalty; incentivizes care |
+| **Severe** | 3+ reversals/epoch | 10% + 7d freeze | Major penalty; protects system |
+
+### Slashing Example (Full Scenario)
+
+**Setup:**
+- Resolver bond: $500
+- Minimum bond: $250
+- Resolution deadline: 24 hours from dispute open
+
+**Scenario:**
+```
+Day 1, 10:00 AM: Dispute opened
+Day 1, 10:30 PM: Deadline passed (14.5 hours later)
+Day 2, 12:00 AM: System detects timeout
+
+Action: Slash $10 (2% of $500)
+Resolver's bond: $500 → $490
+
+Resolver still above minimum ($250), not frozen
+```
+
+**Scenario 2 (same resolver, 3 days later):**
+```
+Day 5: Another dispute opened
+Day 6, 10:30 AM: Deadline passed, timeout detected
+Slash another $10
+
+Bond: $490 → $480
+
+Still above minimum
+```
+
+**Scenario 3 (decision reversed):**
+```
+Day 8: Resolver's decision on Day 5 dispute is appealed
+Senior reviewer re-examines evidence
+Senior overturns decision: "Resolver was wrong"
+
+Action: Slash $25 (5% of $500)
+Bond: $480 → $455
+
+Still above minimum
+```
+
+**Scenario 4 (accumulation triggers freeze):**
+```
+Day 10: Third reversal in the epoch
+Event: Three reversals in 7 days (triggered severe misconduct)
+
+Action: Slash $50 (10% of $500)
+Bond: $455 → $405
+
+Still above minimum, but getting close
+```
+
+**Scenario 5 (one more timeout):**
+```
+Day 11: Another timeout
+Slash: $10
+
+Bond: $405 → $395
+Still above minimum
+```
+
+**Scenario 6 (freeze point):**
+```
+Day 13: Yet another reversal (4th in epoch)
+Severe misconduct continues
+Slash: $50
+
+Bond: $395 → $345
+Still above minimum ($250)
+```
+
+**But if the resolver continued:**
+```
+Day 14: One more reversal
+Slash: $50
+
+Bond: $345 → $295
+Still above minimum, but close
+```
+
+**Day 15: Final reversal (6th in epoch):**
+```
+Slash: $50
+
+Bond: $295 → $245
+BELOW MINIMUM ($250)
+
+Status: FROZEN
+├─ Cannot accept new disputes
+├─ Cannot withdraw funds
+└─ Must deposit $5+ to return to $250 and unfreeze
+```
+
+---
+
+## Appeal Bond Mechanics (v2+)
+
+### What is an Appeal Bond?
+
+When a party disagrees with a decision, they post an **appeal bond** to escalate.
+
+```
+Resolver makes decision: Release to recipient
+Sender disagrees: "Recipient didn't deliver"
+Sender posts appeal bond: $50 (example)
+Case escalates to senior
+```
+
+### Appeal Bond Calculation
+
+**Formula:**
+```
+Appeal bond = dispute_value × appeal_rate
+
+Typical rates:
+- Simple disputes (clear cut): 2-3%
+- Moderate disputes (mixed evidence): 5-10%
+- Complex disputes (ambiguous): 10-15%
+```
+
+**Examples:**
+```
+$1,000 dispute, 5% appeal rate → $50 bond
+$5,000 dispute, 5% appeal rate → $250 bond
+$10,000 dispute, 5% appeal rate → $500 bond
+```
+
+### Appeal Bond Outcomes
+
+#### Appeal Succeeds
+
+```
+Senior agrees with appellant
+├─ Original decision overturned
+├─ Appeal bond returned to appellant
+└─ Original resolver is slashed
+```
+
+**Example:**
+```
+Sender posted $50 appeal bond
+Senior agrees: "Recipient didn't deliver"
+Sender gets: $50 bond back + correct distribution
+Resolver loses: 5% of bond slashed
+```
+
+#### Appeal Fails
+
+```
+Senior agrees with original resolver
+├─ Appeal bond forfeited
+├─ Goes to insurance pool (system-wide protection)
+└─ Original resolver is protected
+```
+
+**Example:**
+```
+Sender posted $50 appeal bond
+Senior agrees with resolver: "Evidence supports release"
+Sender loses: $50 bond forfeited
+Sender gets: Wrong distribution (funds went to recipient)
+Resolver keeps: $50 + resolution fee (validated)
+```
+
+### Strategic Considerations
+
+As an appellant, you're making a bet:
+- **Cost**: Appeal bond (lost if you lose)
+- **Upside**: Correct distribution (possibly valuable)
+- **Calculation**: Only appeal if `expected_value_of_correct_decision > appeal_bond`
+
+**Example:**
+```
+Dispute value: $10,000
+Appeal bond: $500 (5%)
+Your claim: "Recipient probably owes me $6,000"
+Your expected upside: ~$6,000
+Your risk: -$500 (bond forfeited)
+Expected value: $6,000 - $500 = $5,500
+
+Rational: Appeal is worth it
+```
+
+---
+
+## Dispute Timelines
+
+### v2 (Escalating)
+
+```
+Day 1, Time 00:00: Dispute opened
+Day 1, Time 24:00: Resolver deadline (must submit decision)
+Day 2, Time 24:00: Appeal period closes (must post appeal bond)
+Day 3, Time 48:00: Senior deadline (must submit review)
+Day 4, Time 00:00: Final decision enforced
+                     Funds distributed
+```
+
+**Total time:** 3-4 days typical
+
+### v3 (Decentralized)
+
+```
+Day 1, Time 00:00: Dispute opened
+         Resolver selected (capital-weighted, category-based)
+
+Day 1, Time 24:00: Resolver deadline
+Day 2, Time 24:00: Appeal period closes (must post bond)
+Day 3, Time 48:00: Senior deadline
+Day 4, Time 24:00: Appeal period closes (optional 2nd escalation)
+Day 5, Time 00:00+: External arbitration (if needed)
+                     Variable (depends on arbitrator)
+Day 7, Time 00:00: Final decision, funds distributed (typical)
+```
+
+**Total time:** 4-7 days typical (5+ if external arbitration needed)
+
+---
+
+## Economics Summary
+
+### Operator Profitability Model
+
+**Assumptions:**
+- Bond: $500
+- Fee rate: 2% of dispute value
+- Average dispute: $2,000
+- Slashing: 1 timeout per 100 disputes (1%)
+- Reversal rate: 1 per 50 disputes (2%)
+
+**Monthly (20 disputes):**
+```
+Earnings:
+- Fee revenue: 20 × $2,000 × 2% = $800
+
+Slashing:
+- Timeouts: 20 × 1% × (2% of $500) = 0.2 × $10 = $2
+- Reversals: 20 × 2% × (5% of $500) = 0.4 × $25 = $10
+- Total slashing: $12
+
+Net monthly: $800 - $12 = $788
+Annual: ~$9,500
+ROI: 9,500 / 500 = 19% annually
+```
+
+### Break-Even Analysis
+
+**Fixed costs** (governance, infrastructure, etc.):
+- Assume: $100/month
+
+**Variable costs** (learning, decision time, etc.):
+- Assume: $5 per dispute
+
+**Break-even:**
+```
+Revenue ≥ Fixed + Variable + Expected Slashing
+
+20 × $2,000 × 2% ≥ $100 + (20 × $5) + $12
+$800 ≥ $212
+
+ROI: $588 / $500 = 118% (healthy)
+```
+
+---
+
+## Parameter Tuning (Governance)
+
+Key parameters that governance can adjust:
+
+| Parameter | Launch Value | Range | Governance Frequency |
+|-----------|--------------|-------|--------|
+| Resolver min bond | $250 | $100-$1,000 | Every 6-12mo |
+| Senior min bond | $25,000 | $10k-$100k | Every 6-12mo |
+| Resolution deadline (L1) | 24 hours | 12h-72h | Rare |
+| Resolution deadline (L2) | 48 hours | 24h-120h | Rare |
+| Timeout slash rate | 2% | 1%-5% | Every 6-12mo |
+| Reversal slash rate | 5% | 2%-10% | Every 6-12mo |
+| Severe slash rate | 10% | 5%-25% | Every 6-12mo |
+| Appeal bond rate | 5% | 1%-15% | Every 3-6mo |
+| Freeze duration | 7 days | 1d-30d | Every 6-12mo |
+| Utilization factor (v3) | 0.5 | 0.3-0.7 | Every 6-12mo |
+| Coverage multiplier (v3) | 3 | 2-5 | Every 6-12mo |
+
+**Why governance tunes?** Real-world data will show whether:
+- Bonds are too high/low (affecting operator supply)
+- Slashing is too harsh/lenient (affecting incentives)
+- Deadlines are too tight/loose (affecting feasibility)
+
+Governance adjusts via **slow lane** (voting + timelock) to avoid manipulation.
+
+---
+
+## Risk Analysis
+
+### Operator Risks
+
+| Risk | Mitigation |
+|------|-----------|
+| Timeout slashing | Set up alerts, batch review disputes |
+| Reversal slashing | Study past cases, request feedback from seniors |
+| Bond depletion | Keep reserves; use fees to replenish |
+| Cascade slashing | Diversify dispute categories; improve decision quality |
+| Protocol vulnerability | Insurance pool covers catastrophic losses |
+
+### System Risks
+
+| Risk | Mitigation |
+|------|-----------|
+| Insufficient bonds (insolvency) | Capital requirements set conservatively |
+| Coordinated slashing (cascade) | Epoch caps + rate limiting |
+| Malicious resolvers (collusion) | Decentralized selection (v3), transparency |
+| Parameter mismatch | Governance tunes over time |
+
+---
+
+## Next Steps
+
+- **Resolution Modes**: Understand v1/v2/v3 differences
+- **Escalation & Appeals**: Learn the multi-level flow in detail
+- **Guide for Resolvers**: If you want to operate
+
+---
+
+**Questions?** Ask on [Discord](https://discord.gg/sewprotocol) or see the [overview](./overview).

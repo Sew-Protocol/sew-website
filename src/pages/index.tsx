@@ -197,6 +197,29 @@ export default function Index() {
 
         <section className="content-section fabric-texture fabric-texture-light">
           <div className="thread-divider" />
+          <h3>Built-in dispute resolution</h3>
+          <p>
+            Ethereum transfers are final. Sew adds structured resolution without
+            custody—neutral outcomes enforced by smart contracts.
+          </p>
+          <p>
+            If parties disagree, a resolver can be assigned. The resolver cannot
+            seize funds or act outside predefined boundaries. The outcome (Release,
+            Refund, or Split) is enforced on-chain.
+          </p>
+          <p>
+            This transforms escrow from a protection mechanism into an{' '}
+            <strong>enforceable coordination primitive</strong>.
+          </p>
+          <p>
+            <Link href="/how-it-works#what-if-disagreement">
+              Learn how dispute resolution works →
+            </Link>
+          </p>
+        </section>
+
+        <section className="content-section fabric-texture fabric-texture-light">
+          <div className="thread-divider" />
           <h3>Vision</h3>
           <p>
             Ethereum made programmable money possible. Sew explores what happens
@@ -224,6 +247,7 @@ export default function Index() {
           <div className="footer-links">
             <Link href="/how-it-works">How it works</Link>
             <Link href="/architecture">Architecture</Link>
+            <Link href="/dispute-resolution">Dispute Resolution</Link>
             <Link href="/security">Security model</Link>
             <Link href="/governance">Governance</Link>
             <Link href="/developer">Build on Sew</Link>

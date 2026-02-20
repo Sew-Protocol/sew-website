@@ -149,6 +149,168 @@ export default function Security() {
           </p>
         </section>
 
+        <section className="content-block">
+          <h3>Neutrality in dispute resolution</h3>
+          <p>
+            If parties disagree, a neutral resolver decides the outcome. The
+            protocol ensures resolvers cannot be biased or capture value.
+          </p>
+          <div className="concept-subsection">
+            <h4>Resolver design constraints</h4>
+            <ul>
+              <li>
+                <strong>No custody:</strong> Resolvers never touch or control
+                funds. They only vote on outcomes.
+              </li>
+              <li>
+                <strong>No discretion:</strong> A resolver can only decide:
+                Release, Refund, or Split. No other actions.
+              </li>
+              <li>
+                <strong>No forced transfers:</strong> A resolver decision must
+                be enforced by code. No manual overrides.
+              </li>
+              <li>
+                <strong>Per-escrow scope:</strong> A bad resolver decision
+                affects only that one dispute. Others remain protected.
+              </li>
+            </ul>
+          </div>
+          <div className="concept-subsection">
+            <h4>Resolver selection</h4>
+            <p>
+              At launch (v1), resolvers are governance-appointed or chosen by
+              users on a per-escrow basis. Future versions (v2+) support
+              decentralized selection with staking and appeals.
+            </p>
+            <p>
+              A user can optionally specify a <code>customResolver</code> address
+              per escrow, allowing arbitrary dispute frameworks without modifying
+              protocol code.
+            </p>
+          </div>
+        </section>
+
+        <section className="content-block">
+          <h3>Economic incentives in dispute resolution</h3>
+          <p>
+            Resolvers are incentivized to behave honestly through economic
+            mechanisms: bonds, appeals, and slashing.
+          </p>
+          <div className="concept-subsection">
+            <h4>Resolver bonds</h4>
+            <p>
+              Resolvers post collateral (a bond) when deciding a dispute. If
+              their decision is appealed and overturned, they lose the bond.
+            </p>
+            <ul>
+              <li>v1: No bond required (single trusted resolver)</li>
+              <li>
+                v2: Resolvers post bonds ($250 standard, $25k senior). Bad
+                decisions are slashed.
+              </li>
+              <li>v3: Bonds are capital-weighted; resolvers earn fees.</li>
+            </ul>
+          </div>
+          <div className="concept-subsection">
+            <h4>Appeal and escalation</h4>
+            <p>
+              If a party disagrees with a resolver decision, they can appeal.
+              Appeals escalate to higher-tier resolvers with larger bonds.
+            </p>
+            <ul>
+              <li>
+                <strong>Discourages frivolous appeals:</strong> Appellants also
+                post bonds. They lose if the appeal fails.
+              </li>
+              <li>
+                <strong>Improves accuracy:</strong> Senior resolvers review only
+                contested decisions, not routine cases.
+              </li>
+              <li>
+                <strong>Bounds complexity:</strong> Escalation stops at a final
+                authority. The dispute is always settled.
+              </li>
+            </ul>
+          </div>
+          <div className="concept-subsection">
+            <h4>Slashing and accountability</h4>
+            <p>
+              Resolvers who vote in the minority are slashed (lose a portion of
+              their bond). This aligns incentives: resolvers want to agree with
+              peers and avoid being outliers.
+            </p>
+            <ul>
+              <li>
+                Typical slashing: 2-5% per bad decision (conservative scaling)
+              </li>
+              <li>
+                Resolvers with consistent track records earn fee tier upgrades
+              </li>
+              <li>
+                High slashing rates eliminate bad resolvers over time
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="content-block">
+          <h3>Isolation model and risk containment</h3>
+          <p>
+            Sew is built to limit the blast radius of any single failure.
+          </p>
+          <div className="concept-subsection">
+            <h4>Per-escrow isolation</h4>
+            <p>
+              Each escrow is an independent smart contract instance (or
+              deterministic state within the protocol contract). If one escrow
+              is compromised:
+            </p>
+            <ul>
+              <li>Only that escrow's funds are at risk</li>
+              <li>
+                Other escrows continue operating normally (no shared state)
+              </li>
+              <li>
+                The issue does not propagate to resolvers, modules, or other
+                participants
+              </li>
+            </ul>
+          </div>
+          <div className="concept-subsection">
+            <h4>No pooled liabilities</h4>
+            <p>
+              Unlike custody pools or shared collateral systems, Sew does not
+              combine funds or risks across escrows.
+            </p>
+            <ul>
+              <li>
+                Each escrow defines its own release rules at creation time
+              </li>
+              <li>
+                Resolution outcomes for one escrow cannot affect others
+              </li>
+              <li>Disputes are settled independently, without shared exposure</li>
+            </ul>
+          </div>
+          <div className="concept-subsection">
+            <h4>Module modularity</h4>
+            <p>
+              Release strategies, resolution modules, and yield strategies are
+              isolated components. A bug in one module does not break others.
+            </p>
+            <ul>
+              <li>
+                Modular architecture allows upgrading or replacing components
+              </li>
+              <li>Failures are scoped to the affected module only</li>
+              <li>
+                Users can choose modules independently, without cascading risk
+              </li>
+            </ul>
+          </div>
+        </section>
+
         <section className="page-meta">
           <p>Last updated: February 2026</p>
           <p>

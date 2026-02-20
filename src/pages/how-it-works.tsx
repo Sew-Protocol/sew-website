@@ -168,24 +168,30 @@ export default function HowItWorks() {
 
           <div className="lifecycle-step">
             <h4>5) Dispute (if needed)</h4>
-            <p>If parties disagree, a dispute can be opened.</p>
-            <p>Resolution modes:</p>
+            <p>
+              If parties disagree about whether to release or refund, either
+              party can open a dispute. Funds remain secure in escrow.
+            </p>
+            <p>
+              <strong>What happens:</strong>
+            </p>
             <ul>
               <li>
-                <strong>Single trusted resolver (available at launch):</strong>{' '}
-                A designated resolver makes the final decision. Suitable for
-                straightforward disputes.
+                Normal release is paused; funds stay locked
               </li>
               <li>
-                <strong>Escalating resolution (staged rollout):</strong>{' '}
-                Multi-level process with Standard → Senior → External resolver
-                tiers. Coming in future phases.
+                A neutral resolver is assigned to review evidence
+              </li>
+              <li>
+                The resolver decides: Release, Refund, or Split
+              </li>
+              <li>
+                The outcome is enforced on-chain; no discretion
               </li>
             </ul>
             <p>
-              At launch, the protocol uses single trusted resolver mode.
-              Escalating resolution will be activated through governance after
-              testing and validation.
+              See <Link href="#what-if-disagreement">What Happens If There Is Disagreement?</Link> below for
+              the full flow.
             </p>
           </div>
 
@@ -198,6 +204,87 @@ export default function HowItWorks() {
               <li>No further changes are possible</li>
             </ul>
             <p>The agreement is complete.</p>
+          </div>
+        </section>
+
+        <section className="content-block fabric-texture fabric-texture-light">
+          <h3 id="what-if-disagreement">What Happens If There Is Disagreement?</h3>
+          <p>
+            Ethereum transfers are final. Sew adds structured resolution without
+            custody: neutral outcomes enforced by smart contracts.
+          </p>
+
+          <div className="concept-block">
+            <h4>When disputes arise</h4>
+            <p>
+              A dispute occurs when either party disagrees about whether funds
+              should be released or refunded. For example:
+            </p>
+            <ul>
+              <li>Recipient claims delivery is complete; sender disagrees</li>
+              <li>Sender changed their mind and wants a refund</li>
+              <li>Evidence is contradictory or ambiguous</li>
+            </ul>
+            <p>
+              Without structured resolution, the funds would be stuck forever.
+              Sew provides a mechanism to break the deadlock fairly.
+            </p>
+          </div>
+
+          <div className="concept-block">
+            <h4>The neutral resolver</h4>
+            <p>
+              When a dispute is opened, a <strong>neutral resolver</strong> is
+              assigned. The resolver:
+            </p>
+            <ul>
+              <li>Reviews evidence from both parties</li>
+              <li>Cannot take custody of the funds</li>
+              <li>Can only decide: Release, Refund, or Split</li>
+              <li>Makes a binding decision on-chain</li>
+            </ul>
+            <p>
+              The resolver has no discretion to act outside these bounds. The
+              outcome is enforced by code, not trusted intermediaries.
+            </p>
+          </div>
+
+          <div className="concept-block">
+            <h4>Isolation of risk</h4>
+            <p>
+              If a resolver makes a bad decision, the impact is limited to that
+              single dispute. Other escrows are unaffected.
+            </p>
+            <p>
+              This is different from centralized escrow, where one compromised
+              resolver could drain multiple accounts.
+            </p>
+          </div>
+
+          <div className="concept-block">
+            <h4>Resolution modes</h4>
+            <p>
+              Sew supports multiple resolution approaches, activated as the
+              protocol matures:
+            </p>
+            <ul>
+              <li>
+                <strong>v1 (Launch):</strong> Single governance-appointed or
+                custom resolver. Fast, simple.
+              </li>
+              <li>
+                <strong>v2 (Built, deferred):</strong> Multiple resolvers with
+                staking and appeal bonds. Escalating review for disagreements.
+              </li>
+              <li>
+                <strong>v3 (Future):</strong> Fully decentralized resolver
+                selection with capital-weighted delegation.
+              </li>
+            </ul>
+            <p>
+              See <Link href="/docs/dispute-resolution">Dispute Resolution documentation</Link> for
+              deep dives on mechanics, economics, and resolver incentives.
+            </p>
           </div>
         </section>
 

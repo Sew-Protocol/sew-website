@@ -1,0 +1,333 @@
+# Resolution Modes: v1, v2, v3
+
+Sew's dispute resolution has three versions, each adding complexity and decentralization as the protocol matures.
+
+## Version 1: Single Trusted Resolver
+
+**Status**: 🟢 Active at launch
+
+### Design
+
+One governance-controlled resolver makes binding decisions for all disputes. **Alternatively, a custom resolver can be specified per-escrow** by passing a `customResolver` address at creation, allowing applications to designate their own resolver.
+
+```
+User Opens Dispute
+        ↓
+    Resolver Reviews
+    (governance-default OR custom-specified)
+        ↓
+   Decision Final
+        ↓
+  Funds Distributed
+```
+
+### Characteristics
+
+| Aspect | Details |
+|--------|---------|
+| **Governance** | Controlled by protocol governance |
+| **Decision Path** | One-level: direct to resolver |
+| **Appeal Options** | None; governance can override |
+| **Speed** | Fast (hours to days) |
+| **Decentralization** | Low (single point of trust) |
+| **Capital Required** | None from resolver (trusted entity) |
+| **Appeal Bonds** | Not applicable |
+
+### Pros
+
+- ✅ **Simple**: Minimal complexity, easy to understand
+- ✅ **Fast**: No escalation delays, decisions are swift
+- ✅ **Governance control**: Protocol can adjust resolver if needed
+- ✅ **Low overhead**: No bond requirements, minimal infrastructure
+
+### Cons
+
+- ❌ **Single point of failure**: If resolver is compromised, all disputes are at risk
+- ❌ **Limited expertise**: One resolver may not have category-specific knowledge
+- ❌ **Scaling bottleneck**: Can become slow if disputes are high volume
+
+### Use Cases
+
+- Bootstrap phase when dispute volume is low
+- High-trust environments with established governance
+- Simple dispute categories requiring quick turnaround
+
+### Parameters (v1)
+
+- **Resolver**: Governance-appointed address
+- **Custom Resolver**: Can be customized by passing a `customResolver` address at escrow creation (allows per-escrow resolver configuration)
+- **Resolution deadline**: 24-48 hours from dispute opening
+- **No appeal mechanism**: Governance override only
+
+---
+
+## Version 2: Decentralized Resolution
+
+**Status**: 🟡 Built, deferred until post-v1 (governance activation required)
+
+### Design
+
+Multiple resolvers with staking and appeal bonds. Decisions can be escalated with economic penalties for frivolous appeals.
+
+```
+User Opens Dispute
+        ↓
+  Resolver Level 1 Reviews
+  (posting bond requirement)
+        ↓
+  Decision Made
+        ↓
+   Party Disagrees?
+        ↓
+   Post Appeal Bond
+        ↓
+  Resolver Level 2 (Senior) Reviews
+        ↓
+   Final Decision
+        ↓
+  Funds Distributed
+```
+
+### Characteristics
+
+| Aspect | Details |
+|--------|---------|
+| **Governance** | Governance selects resolvers; v2 protocols define incentives |
+| **Decision Paths** | Two-level: standard → senior |
+| **Appeal Options** | One escalation level with bond |
+| **Speed** | Medium (1-3 days typical) |
+| **Decentralization** | Medium (multiple resolvers, governance-selected) |
+| **Capital Required** | Resolver staking (minimum bond) |
+| **Appeal Bonds** | Required to escalate; forfeited if appeal fails |
+
+### Key Mechanisms
+
+#### Resolver Staking
+
+Resolvers post bonds to participate:
+- Minimum bond required per resolver tier
+- Bonds serve as collateral for slashing
+- Frozen if insufficient bond remains
+
+#### Appeal Bonds
+
+Appellants post collateral to escalate:
+- Amount: Typically 5-10% of dispute value
+- Outcome: Forfeited if appeal fails; returned if it succeeds
+- Effect: Discourages frivolous escalation
+
+#### Slashing
+
+Automatic penalties for resolver misconduct:
+- **Timeout**: Missed deadline → 2% of bond slashed
+- **Reversal**: Decision overturned → 5% of bond slashed
+- **Severe**: Multiple reversals in epoch → 10% slashed + freeze
+
+Slashing protects the system by making dishonest resolution costly.
+
+### Pros
+
+- ✅ **Economic incentives**: Slashing and bonds align behavior
+- ✅ **Scalability**: Multiple resolvers handle more disputes
+- ✅ **Frivolous appeal prevention**: Bond cost discourages weak escalations
+- ✅ **Specialist selection**: Can assign category experts
+- ✅ **Transparency**: All decisions recorded on-chain
+
+### Cons
+
+- ❌ **Complexity**: Bond mechanics add operational overhead
+- ❌ **Still governance-dependent**: Resolver selection is governance-voted
+- ❌ **Resolver centralization risk**: A few resolvers may dominate
+- ❌ **Capital barriers**: Bond requirements may limit operator entry
+
+### Use Cases
+
+- Medium-scale deployment with significant dispute volume
+- Disputes requiring specialist expertise (e.g., IP, contracts)
+- Systems where multiple rounds of review are valuable
+
+### Parameters (v2) - Conservative Launch Defaults
+
+**Resolver Bonds:**
+- Minimum: $250 per resolver
+- Recommended: $500-$1,000 for reliable operator status
+
+**Appeal Bonds:**
+- Typical: 5% of dispute value
+- Range: 2%-10% depending on dispute category
+
+**Slashing:**
+- Timeout: 2% of resolver bond
+- Reversal: 5% of resolver bond
+- Severe (freeze): 10% + 7-day operational freeze
+
+**Timing:**
+- Level 1 resolution deadline: 24 hours
+- Level 2 (senior) deadline: 48 hours
+- Appeal window: 48 hours after decision
+
+---
+
+## Version 3: Decentralized Incentives
+
+**Status**: 🔵 Future (architecture designed, implementation staged)
+
+### Design
+
+Fully decentralized resolver selection with capital-weighted delegation. Seniors appoint and curate juniors; capital requirements scale with responsibility.
+
+```
+User Opens Dispute
+        ↓
+  Disputed Category Selected
+        ↓
+  Resolver Chosen (Capital-Weighted)
+        ↓
+  Level 1 Review (24h)
+        ↓
+   Disagree?
+        ↓
+  Senior Review (48h)
+        ↓
+   Disagree?
+        ↓
+  External Arbitration (Kleros, etc.)
+        ↓
+  Final Binding Outcome
+        ↓
+  Funds Distributed
+```
+
+### Characteristics
+
+| Aspect | Details |
+|--------|---------|
+| **Governance** | Governance sets parameters; resolver selection is fully decentralized |
+| **Decision Paths** | Three-level: resolver → senior → external arbitration |
+| **Appeal Options** | Two escalation levels with bonds |
+| **Speed** | Slower (2-5 days typical) |
+| **Decentralization** | High (decentralized resolver selection + capital-weighted) |
+| **Capital Required** | Significant (3-10x dispute value reserves) |
+| **Appeal Bonds** | Required at each level |
+
+### Key Mechanisms
+
+#### Capital-Weighted Delegation
+
+Seniors delegate to juniors, but:
+- Each appointment "reserves" coverage = junior_bond × multiplier (M=3)
+- Senior can delegate up to: senior_bond × utilization_factor
+- Forces alignment: bad juniors reduce senior's capacity
+
+**Example:** Senior with $100k bond can appoint ~33 resolvers with $500 bonds (at M=3, U=0.5)
+
+#### Resolver Staking (Advanced)
+
+- **Resolver bond**: $250-$500 minimum (covers ~$1k-$2k disputes)
+- **Senior bond**: $25,000-$100,000 minimum (insurance layer)
+- **Delegation multiplier (M)**: 3x (conservative default)
+- **Utilization factor (U)**: 0.5 (headroom for correlated penalties)
+
+#### Multi-Level Slashing
+
+Slashing waterfall:
+1. **Junior resolver**: Takes first hit for timeouts/reversals
+2. **Senior**: Backs junior's bond; takes hit for senior-level reversals
+3. **Insurance pool**: Catastrophic losses spread across network
+
+#### Epoch-Based Caps
+
+To prevent cascading insolvency:
+- Per-epoch slashing cap: e.g., 5% of total senior bond across protocol
+- Rate-limited escalations: Max appeals per category per epoch
+- Circuit breakers: Pause resolution if too many timeouts
+
+### Pros
+
+- ✅ **True decentralization**: No single resolver or governance bottleneck
+- ✅ **Incentive alignment**: Capital at risk motivates honest decisions
+- ✅ **Scalability**: Network of resolvers can handle arbitrary dispute volume
+- ✅ **Specialization**: Category-based selection matches expertise with disputes
+- ✅ **Insurance model**: Multi-layer capital protects all parties
+
+### Cons
+
+- ❌ **High complexity**: Delegation, slashing, and caps require careful tuning
+- ❌ **Capital requirements**: Large bonds needed for participation
+- ❌ **Slower decisions**: Three levels of escalation take time
+- ❌ **Parameter risk**: Wrong settings can cause unintended freezes or insolvency
+
+### Use Cases
+
+- Mature protocol with significant dispute volume
+- High-value transfers requiring multiple review levels
+- Systems where network-wide security is paramount
+- Long-term vision for fully decentralized dispute resolution
+
+### Parameters (v3) - Conservative Launch Defaults
+
+**Resolver Bonds:**
+- Minimum: $250
+- Recommended: $500 (reliable operator)
+- Max escrow coverage: 4x resolver bond (capped at $2,000)
+
+**Senior Bonds:**
+- Minimum: $25,000
+- Recommended: $50,000-$100,000 (mainnet confidence)
+
+**Delegation:**
+- Coverage multiplier (M): 3 (conservative)
+- Utilization factor (U): 0.5 (headroom buffer)
+- Max junior per senior: ~33 resolvers @ M=3, U=0.5
+
+**Timing:**
+- Level 1 resolution deadline: 24 hours
+- Level 2 (senior) deadline: 48 hours
+- Level 3 (external): Variable (depends on external arbitrator)
+- Appeal window: 48 hours after each level
+
+**Risk Management:**
+- Freeze duration: 72 hours for first severe event, 7 days for repeat
+- Unbond delay: 14 days (resolver), 21 days (senior)
+- Epoch length: 7 days
+
+---
+
+## Comparison Matrix
+
+| Feature | v1 | v2 | v3 |
+|---------|----|----|-----|
+| Governance Control | Full | High | Medium (parameters only) |
+| Resolver Count | 1 | 2-10 | 50+ |
+| Escalation Levels | 0 | 1 | 2 |
+| Resolver Bonds | None | Yes | Yes (higher) |
+| Appeal Bonds | No | Yes | Yes |
+| Slashing | No | Yes | Yes |
+| Decentralization | Low | Medium | High |
+| Speed | Fast | Medium | Slow |
+| Capital Barrier | None | Medium | High |
+
+---
+
+## Migration Path
+
+**v1 → v2**: Add appeal bonds and slashing incentives while keeping governance-selected resolvers.
+
+**v2 → v3**: Enable decentralized resolver selection and capital-weighted delegation; increase bond requirements.
+
+Each transition is **backward compatible**:
+- v1 escrows remain v1 (no forced migration)
+- v2 escrows remain v2
+- New escrows choose their resolution mode at creation
+
+---
+
+## Next Steps
+
+- **Economic Model & Parameters**: Deep dive into bonds, slashing, and calculations
+- **Guide for Resolvers**: If you want to operate in v2 or v3
+- **Escalation & Appeals**: Understand the multi-level flow in detail
+
+---
+
+**Questions?** See the [overview](./overview) or ask on [Discord](https://discord.gg/sewprotocol).

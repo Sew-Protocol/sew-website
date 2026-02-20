@@ -1,0 +1,66 @@
+# Dispute Resolution
+
+Dispute resolution is how Sew Protocol handles disagreements between parties. When a protected transfer is disputed, the protocol provides multiple pathways to reach a binding outcome.
+
+## Quick Overview
+
+- **What**: A mechanism to fairly resolve disagreements about whether funds should be released, refunded, or split
+- **Why**: Transfers involve trust, which sometimes breaks down. Dispute resolution ensures funds don't get permanently stuck
+- **How**: Multiple escalation levels, from simple to complex, with economic incentives to discourage frivolous appeals
+
+## Choose Your Path
+
+**New to Sew?**  
+Start with [What is Dispute Resolution?](./overview) to understand the core concepts and why they matter.
+
+**Building with Sew?**  
+Check out [Resolution Modes](./resolution-modes) to understand v1 (single resolver), v2 (escalating), and v3 (decentralized incentives).
+
+**Operating as a Resolver?**  
+Read the [Guide for Resolvers](./resolver-guide) to learn about bonding requirements, incentives, and how to set up as an operator.
+
+**Want Deep Technical Details?**  
+Explore [Economic Model & Parameters](./economic-model) for concrete numbers, mechanics, and examples. Or dive into [Escalation & Appeals](./escalation-details) for the multi-level flow.
+
+## Key Concepts at a Glance
+
+| Concept | What it does |
+|---------|-------------|
+| **Appeal Bond** | Appellants post collateral to escalate decisions; failed appeals are forfeited |
+| **Resolver Stake** | Resolvers lock capital as collateral; misconduct results in slashing |
+| **Escalation Levels** | Disputes can move from standard → senior → external arbitration |
+| **Slashing** | Automatic penalties for timeouts or reversals; protects honest resolvers |
+| **Freeze Logic** | Resolvers with insufficient bonds are prevented from accepting new disputes |
+
+## For Different Audiences
+
+### Participants (Dispute Openers/Receivers)
+
+You care about:
+- Will my dispute be resolved fairly?
+- How long will it take?
+- What are my appeal options?
+
+👉 See [Escalation & Appeals](./escalation-details) and [Economic Model](./economic-model#dispute-timelines)
+
+### Resolver Operators
+
+You care about:
+- How much do I need to bond?
+- What are my earnings and risks?
+- How do I become a resolver?
+
+👉 See [Guide for Resolvers](./resolver-guide)
+
+### Protocol Designers / Researchers
+
+You care about:
+- How do incentives align?
+- What's the parameter space?
+- What risks exist?
+
+👉 See [Economic Model & Parameters](./economic-model) and [Escalation & Appeals](./escalation-details)
+
+---
+
+**Still have questions?** Check the [FAQ](/faq) or reach out on [Discord](https://discord.gg/sewprotocol).

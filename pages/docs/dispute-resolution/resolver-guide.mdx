@@ -1,0 +1,316 @@
+# Guide for Resolvers
+
+This guide is for operators interested in becoming resolvers—making dispute resolution decisions and earning fees.
+
+## What is a Resolver?
+
+A resolver is an operator who:
+- Reviews dispute evidence and circumstances
+- Makes binding (or appealable) decisions about fund distribution
+- Earns fees for their work
+- Faces economic consequences for misconduct (slashing)
+- Manages a bond as collateral
+
+Think of it as arbitration-as-a-service, with skin in the game.
+
+## Why Become a Resolver?
+
+### Earnings
+
+Resolvers earn **per-dispute fees**:
+- **Fee structure**: Governance-set percentage of dispute value (typically 1-3%)
+- **Example**: 2% fee on a $10,000 dispute = $200 revenue
+- **Volume**: Scale earnings by handling more disputes
+
+### Reputation & Governance Weight
+
+Strong resolvers:
+- Build public track record (all decisions on-chain)
+- May receive preferential selection for higher-value disputes
+- Could be promoted to **senior resolver** in v2/v3 (higher fees, higher responsibility)
+- Earn governance weight or voting power (governance-dependent)
+
+### Economic Incentives (v2/v3)
+
+In versioning with staking:
+- **Rewards**: Earn fees consistently for honest decisions
+- **Penalties**: Slashing for timeouts or reversals (financial pain for misconduct)
+- **Alignment**: Your earnings are tied to being trustworthy
+
+## Capital Requirements
+
+### Version 1 (Single Trusted Resolver)
+- **Bond Required**: None
+- **Who**: Governance-appointed address (cannot be self-selected)
+
+### Version 2 (Decentralized Resolution)
+
+**Resolver (Level 1):**
+- Minimum bond: **$250** (protects disputes up to ~$1,000)
+- Recommended bond: **$500** (covers most disputes, improves selection probability)
+- Maximum escrow coverage: 4x bond (capped at $2,000)
+
+**Senior Resolver (Level 2):**
+- Minimum bond: **$25,000** (insurance layer)
+- Recommended bond: **$50,000-$100,000** (mainnet confidence)
+- Backs up to ~33 junior resolvers (at M=3, U=0.5)
+
+**Why the gap?** Seniors are the insurance layer. If capitals are too cheap, delegation has no teeth.
+
+### Version 3 (Decentralized)
+
+**Same as v2, plus:**
+- **Utilization factor**: Only 50% of senior bond can be reserved for junior appointments
+  - E.g., $100k senior bond = $50k available for delegation
+  - Forces conservative senior operators
+- **Delegation multiplier (M)**: Each junior appointment reserves 3x junior's bond
+  - E.g., $500 junior bond = $1,500 reserved coverage
+  - Limits junior appointments to ~33 per $100k senior
+
+### How to Obtain Bonds
+
+**Token-based:**
+- Stake SEW tokens (protocol's native token)
+- Bond value = token amount × token price
+
+**Stable-coin backed:**
+- Use USDC/USDT as bond collateral
+- Acceptable in launch phase
+- Simplifies risk management
+
+**Mixed (Recommended):**
+- 80% stable, 20% SEW (protocol-aligned incentive)
+- Balances stability with governance alignment
+
+## Getting Started
+
+### Step 1: Register as a Resolver Candidate
+
+```
+1. Deploy a resolver contract or EOA
+2. Stake the minimum bond (governance approval required)
+3. Pass KYC if required (governance-dependent)
+4. Governance approves your candidacy
+```
+
+**Timeline:** 1-2 weeks (typical governance cycle)
+
+### Step 2: Set Your Parameters
+
+Choose **dispute categories** you'll handle:
+- Examples: "Smart Contracts", "IP Rights", "Goods Delivery", "Service Quality"
+- Governance updates router to include you in selection pool
+- Can specialize or be generalist (affects fee levels)
+
+Choose **fee preference** (within governance-set bounds):
+- Higher fees = fewer disputes (selective operator)
+- Lower fees = more disputes (volume operator)
+
+### Step 3: Monitor Your Bond
+
+**Ongoing:**
+- Decisions are reviewed and potentially appealed
+- Honest decisions earn fees
+- Reversals or timeouts trigger slashing
+- Bond must stay above minimum or face freeze
+
+**Maintain sufficient bond:**
+- If bond falls below minimum, you're frozen
+- Cannot accept new disputes
+- Cannot withdraw funds
+- Must replenish to resume
+
+### Step 4: Replenish & Earn
+
+**Earnings cycle:**
+1. Handle disputes, earn fees
+2. Fees cover your operational costs + profit
+3. Use fees to replenish bonds after slashing
+4. Scale with more deposits to handle higher-value disputes
+
+**Long-term:**
+- Strong track record → promoted to senior (if in v2+)
+- Senior role → appoint and curate juniors (v3)
+- Curating juniors well → earn higher fees + delegation rewards
+
+## Expected Returns & Risks
+
+### Conservative Operator Profile
+
+**Setup:**
+- Initial bond: $500
+- Monthly disputes handled: 10-20
+- Average dispute value: $1,000
+- Fee rate: 2%
+
+**Economics:**
+- Monthly fee revenue: $200-$400
+- Annual fee revenue: $2,400-$4,800
+- ROI on bond: 5-10% annually (modest)
+
+**Risks:**
+- 1-2 reversals/timeouts per year (unlikely)
+- Slashing loss: ~$50-$150 per incident
+- Downside: Net break-even or small profit
+
+### Aggressive Operator Profile
+
+**Setup:**
+- Initial bond: $2,000
+- Monthly disputes handled: 50-100
+- Average dispute value: $5,000
+- Fee rate: 2%
+
+**Economics:**
+- Monthly fee revenue: $5,000-$10,000
+- Annual fee revenue: $60,000-$120,000
+- ROI on bond: 30-60% annually (aggressive)
+
+**Risks:**
+- More disputes = more reversals statistically
+- Slashing loss: $500-$2,000 per incident (1-2 per year)
+- Downside: Still profitable, but with variance
+
+### Senior Operator Profile
+
+**Setup:**
+- Bond: $50,000
+- Appoints 20-30 junior resolvers
+- Earns fees + delegation rewards + curating fee
+
+**Economics:**
+- Junior dispute fees: Partially shared with seniors
+- Curating fee: Governance-set bonus for managing juniors well
+- Annual fee revenue: $50,000-$200,000 (scale-dependent)
+- ROI on bond: 20-50% annually
+
+**Risks:**
+- Juniors make bad decisions → senior's bond is at risk
+- Must actively curate and monitor juniors
+- Large bond = large slashing exposure (rare, but catastrophic if happens)
+
+## Tips for Success
+
+### Before You Apply
+
+1. **Understand the dispute categories** you'll handle
+   - Read the whitepaper and FAQ for each category
+   - Join Discord and ask experienced resolvers
+
+2. **Monitor live disputes** (if available in testnet/early stage)
+   - Understand decision patterns
+   - Learn what makes a decision reversible
+   - Build confidence in your judgment
+
+3. **Ensure you can meet timelines**
+   - v1/v2: 24-48 hour resolution deadlines
+   - Missed deadlines → slashing
+   - Only apply if you can respond within hours
+
+4. **Diversify your bond**
+   - Don't use all your capital in bonds
+   - Keep reserves for fees and other obligations
+
+### While Operating
+
+1. **Document your decisions**
+   - Every decision should be justified by evidence
+   - On-chain, this is your defense against appeals
+   - Example: "Recipient provided 3 evidence files, all verifiable via hash"
+
+2. **Respond quickly to appeals**
+   - You'll be notified if your decision is appealed
+   - At senior level, you're the reviewer
+   - Fast, clear explanations reduce reversals
+
+3. **Monitor your metrics**
+   - **Appeal rate**: % of your decisions that are appealed
+   - **Reversal rate**: % of appeals that overturn you
+   - **Timeout rate**: % of deadlines you miss
+   - High metrics trigger freeze; low metrics improve selection probability
+
+4. **Stay engaged with the protocol**
+   - Read governance proposals
+   - Understand parameter changes (bond requirements, fees, slashing)
+   - Participate in feedback (Discord, governance forums)
+
+5. **Plan for slashing**
+   - Assume 1-2% annual slashing risk (conservative estimate)
+   - Your fees should exceed slashing expectations
+   - Example: If slashing is $100/year and fees are $400/year, you net $300/year
+
+### If You're Senior
+
+1. **Curate juniors carefully**
+   - Bad junior decisions = senior's bond at risk
+   - Actively monitor junior performance
+   - Remove unreliable juniors when possible
+
+2. **Set clear expectations**
+   - Juniors should know your expectations
+   - Provide feedback and training
+   - Create incentives for good decisions (e.g., performance bonuses)
+
+3. **Diversify your delegation**
+   - Don't rely on one junior resolver
+   - Spread appointments across categories
+   - Reduces correlation risk if one junior fails
+
+## Governance & Parameter Tuning
+
+Resolvers should be aware of key parameters that affect your business:
+
+| Parameter | Impact | Who Tunes | Frequency |
+|-----------|--------|-----------|-----------|
+| **Bond requirements** | Affects your capital barrier to entry | Governance | Every 6-12 months |
+| **Fee rate** | Affects your per-dispute earnings | Governance | Every 3-6 months |
+| **Slashing penalties** | Affects your downside risk | Governance | Every 6-12 months (only if issues found) |
+| **Resolution deadlines** | Affects your feasibility to operate | Governance | Rare (only if load issues) |
+
+**Governance voting:** If you're an established resolver, you may have voting rights. Use them to advocate for:
+- Fee structures that reward honest operators
+- Slashing penalties that deter misconduct without killing profitability
+- Bond levels that balance decentralization with accessibility
+
+## Troubleshooting
+
+### "I missed a deadline and got slashed. What now?"
+
+- Your bond is reduced by the slashing amount
+- If bond falls below minimum, you're frozen
+- **Next step:** Replenish your bond to the minimum, then resume operations
+- **Prevention:** Set up alerts for dispute deadlines; batch-review disputes at least daily
+
+### "My decision was appealed and I think I was right. Can I defend myself?"
+
+- At the senior level, you'll have a chance to justify your decision
+- Present evidence and reasoning clearly
+- Senior reviews both positions and makes final call
+- If senior agrees with you, appellant's bond is forfeited (validation for you)
+
+### "What if I want to scale to $50k bond but I don't have that capital?"
+
+- **Use staking pools** (if available): Operators pool bonds and share fees
+- **Borrow against expected fees** (if available): Some protocols allow this
+- **Partner with seniors** (in v3): Juniors don't need huge bonds; seniors do
+- **Build gradually:** Start small ($250-$500), earn fees, replenish bond over time
+
+### "What if the protocol is compromised?"
+
+- Resolvers are subject to **emergency pause** (max 7 days, 3x per cycle)
+- During pause, new disputes cannot be opened, but resolution continues
+- If a vulnerability is found in slashing logic, governance may retroactively adjust
+- **Mitigation:** Diversify your capital; don't put everything in bonds
+
+---
+
+## Next Steps
+
+1. **Understand the economic model**: Read [Economic Model & Parameters](./economic-model)
+2. **Learn the decision flow**: Read [Escalation & Appeals](./escalation-details)
+3. **Ask on Discord**: Connect with other resolvers and protocol team
+4. **Register in testnet**: If available, practice on testnet before mainnet
+
+---
+
+**Ready to apply?** Check the [protocol docs](../../docs/) for application instructions, or reach out on [Discord](https://discord.gg/sewprotocol).

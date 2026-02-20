@@ -33,7 +33,6 @@ const protocolNavItems: {
       { label: 'SEW Token', page: '/token' },
       { label: 'Protocol Limits', page: '/protocol-limits' },
       { label: 'Emergency Recovery', page: '/emergency' },
-      { label: 'Dispute Resolution', page: '/dispute-resolution' },
       { label: 'Release Plan', page: '/release-plan' },
       { label: 'Contracts', page: '/contracts' },
       { label: 'Technical Resources', page: '/technical' },
