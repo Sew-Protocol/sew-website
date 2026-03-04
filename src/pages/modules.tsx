@@ -89,7 +89,8 @@ export default function Modules() {
               </li>
               <li>
                 <strong>Configurable distribution:</strong> Yield can go to
-                sender or be disabled (split coming in future releases)
+                sender (TO_SENDER) or be disabled (OFF); recipient and split
+                distribution are planned for future releases
               </li>
               <li>
                 <strong>Escapable:</strong> If the external protocol becomes
@@ -161,7 +162,8 @@ export default function Modules() {
               <li>Module implementation addresses</li>
               <li>Fee percentages and recipients</li>
               <li>
-                Yield distribution settings (sender vs recipient vs split)
+                Yield distribution settings (OFF or TO_SENDER; recipient and
+                split planned)
               </li>
               <li>Time parameters (dispute windows, release delays, etc.)</li>
             </ul>

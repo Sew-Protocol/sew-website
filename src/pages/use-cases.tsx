@@ -117,12 +117,8 @@ export default function UseCases() {
           <h3>Ready to build?</h3>
           <p>Integrate protected transfers into your application</p>
           <div className="cta-buttons">
-            <Link href="/developer">
-              <a className="cta-button primary">Developer Guide</a>
-            </Link>
-            <Link href="/contracts">
-              <a className="cta-button">Contract Addresses</a>
-            </Link>
+            <Link href="/developer" className="cta-button primary">Developer Guide</Link>
+            <Link href="/contracts" className="cta-button">Contract Addresses</Link>
           </div>
         </section>
 

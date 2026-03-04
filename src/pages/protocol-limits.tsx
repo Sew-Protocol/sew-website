@@ -9,7 +9,9 @@ export default function ProtocolLimits() {
       <div className={sharedStyles.layout}>
         <section className="header-section">
           <h1>Protocol Limits</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            Hard bounds enforced by contract, not policy
+          </h2>
           <p className="intro">
             These are the maximum bounds enforced by the protocol. They exist to
             limit risk and ensure predictability.

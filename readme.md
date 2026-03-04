@@ -1,3 +1,40 @@
+
+
+## Readme - Sew protocol static website
+
+WIP - unreleased. 
+
+Primary purpose:
+
+Official protocol website, for various audiences wanting to learn about the protocol.
+
+The pages in /pages should be clear, understandable, and easy to navigate.
+
+Presenting clear, concise information, without overloading with too much detail.
+
+The website should be accessible and usable on all devices.
+
+
+Secondary goals:
+
+Full technical documentation for developers using Nextra (.mdx files in /content)
+Integration with Notion wiki (currently not in use)
+Where relavent, technical documentation should be linked to from the general website, only if it adds clarity and doesn't distract
+
+
+
+First target audience:
+
+Ethereum Foundation security team
+
+Must be well organised, easy to navigate, visually appealing. 
+Serious infrastructure making a contribution to the Ethereum ecosystem.
+
+
+
+
+## Readme from original Next.js + Notion blog template
+
 # Notion Blog
 
 This is an example Next.js project that shows Next.js' upcoming SSG (static-site generation) support using Notion's **private** API for a backend.

@@ -1,6 +1,7 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
 import Link from 'next/link'
+import ExtLink from '../components/ext-link'
 
 export default function FAQ() {
   const faqs = [
@@ -56,6 +57,54 @@ export default function FAQ() {
     },
   ]
 
+  const reviewerFaqs = [
+    {
+      question: 'Has the protocol been audited?',
+      answer:
+        'Not yet. The protocol is currently deployed on Base Sepolia testnet. A third-party security audit by a Tier 1 auditor is planned as part of the current development phase. The Ethereum Foundation grant, if awarded, funds this audit along with formal invariant testing, adversarial simulation, and testnet validation. See the Release Plan for the full timeline.',
+      links: [
+        { label: 'Release Plan →', href: '/release-plan' },
+        { label: 'Contracts →', href: '/contracts' },
+      ],
+    },
+    {
+      question: 'What is the trust model at launch?',
+      answer:
+        'At v1 launch, the protocol uses a single trusted resolver model. The resolver is governance-appointed and cannot seize funds — they can only choose Release or Refund. Funds always remain under smart contract control. Decentralised resolution with multi-resolver escalation, appeal bonds, and staking is roadmapped for v2 (Q2–Q3 2026) and v3.',
+      links: [
+        { label: 'Dispute Architecture →', href: '/dispute-resolution' },
+        { label: 'Release Plan →', href: '/release-plan' },
+      ],
+    },
+    {
+      question: 'What happens if the resolver is compromised?',
+      answer:
+        "A resolver's power is strictly bounded by the protocol. They can only choose one of two outcomes: Release or Refund. They cannot seize funds, redirect payments to arbitrary addresses, or take any action outside that set. A compromised resolver decision affects only the specific escrow under dispute — no other escrows are at risk. In v2+, decisions can be appealed and overturned.",
+      links: [
+        { label: 'Security Model →', href: '/security' },
+        { label: 'Dispute Economics →', href: '/security#dispute-economics' },
+      ],
+    },
+    {
+      question: 'Is there a formal threat model?',
+      answer:
+        "Yes. The Security page documents six threat categories: User Error, Counterparty Risk, Smart Contract Risk, Governance Capture, Resolver Misconduct, and Yield Integration Risk. Each entry includes the attack surface and the protocol's structural mitigation. The Architecture page documents six formal invariants with set-theoretic notation.",
+      links: [
+        { label: 'Threat Model →', href: '/security#threat-model' },
+        { label: 'Architecture →', href: '/architecture' },
+      ],
+    },
+    {
+      question: 'What does the Ethereum Foundation grant fund?',
+      answer:
+        'The grant funds the validation and audit phase of the protocol. Specifically: formal invariant testing across all state transitions, adversarial simulation of dispute escalation paths, bond sizing and slashing rate economic validation, a third-party security audit, testnet deployment and integration test suite, and threat model red-teaming and formal review.',
+      links: [
+        { label: 'Audit Readiness →', href: '/#readiness' },
+        { label: 'Release Plan →', href: '/release-plan' },
+      ],
+    },
+  ]
+
   return (
     <>
       <Header titlePre="FAQ" />
@@ -68,6 +117,46 @@ export default function FAQ() {
             you&apos;re looking for?{' '}
             <a href="https://discord.gg/sew">Ask in Discord</a>.
           </p>
+        </section>
+
+        {/* ── For reviewers and auditors ────────────────────────────────────── */}
+        <section className="reviewer-section">
+          <div className="reviewer-header">
+            <span className="reviewer-tag">For reviewers &amp; auditors</span>
+            <h2 className="reviewer-heading">
+              Grant and security review questions
+            </h2>
+            <p className="reviewer-intro">
+              Questions specifically relevant to the Ethereum Foundation
+              security team and independent auditors evaluating the protocol.
+            </p>
+          </div>
+          <div className="reviewer-grid">
+            {reviewerFaqs.map((faq) => (
+              <div key={faq.question} className="reviewer-card">
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+                {faq.links && (
+                  <div className="reviewer-links">
+                    {faq.links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="reviewer-link"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── General FAQ ──────────────────────────────────────────────────── */}
+        <section className="general-heading-section">
+          <h2 className="general-heading">General questions</h2>
         </section>
 
         <section className="faq-grid">
@@ -84,6 +173,8 @@ export default function FAQ() {
           <div className="related-links">
             <Link href="/how-it-works">How It Works</Link>
             <Link href="/security">Security Model</Link>
+            <Link href="/security#threat-model">Threat Model</Link>
+            <Link href="/architecture">Architecture</Link>
             <Link href="/governance">Governance</Link>
             <Link href="/fees">Fees</Link>
           </div>
@@ -136,7 +227,7 @@ export default function FAQ() {
           font-size: 1rem;
           margin-bottom: 0.75rem;
           padding-bottom: 0.75rem;
-          border-bottom: 1px solid var(--accents-6);
+          border-bottom: 1px solid #eaeaea;
         }
         .faq-card p {
           font-size: 0.9rem;
@@ -144,8 +235,96 @@ export default function FAQ() {
           color: var(--accents-2);
           margin: 0;
         }
+        /* ── Reviewer section ───────────────────────────────────────────────── */
+        .reviewer-section {
+          max-width: 800px;
+          margin: 0 auto 3rem;
+          padding: 0 2rem;
+        }
+        .reviewer-header {
+          margin-bottom: 2rem;
+        }
+        .reviewer-tag {
+          display: inline-block;
+          font-size: 0.68rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #2563eb;
+          background: #eff6ff;
+          padding: 0.25rem 0.65rem;
+          border-radius: 4px;
+          margin-bottom: 0.75rem;
+        }
+        .reviewer-heading {
+          font-size: 1.35rem;
+          font-weight: 800;
+          margin: 0 0 0.5rem;
+          letter-spacing: -0.02em;
+        }
+        .reviewer-intro {
+          font-size: 0.875rem;
+          color: var(--accents-3);
+          margin: 0;
+          line-height: 1.6;
+        }
+        .reviewer-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .reviewer-card {
+          padding: 1.5rem;
+          border: 1.5px solid var(--accents-2);
+          border-radius: var(--radius);
+          background: var(--bg);
+        }
+        .reviewer-card h3 {
+          font-size: 1rem;
+          font-weight: 700;
+          margin: 0 0 0.65rem;
+        }
+        .reviewer-card > p {
+          font-size: 0.875rem;
+          color: var(--accents-2);
+          line-height: 1.7;
+          margin: 0 0 1rem;
+        }
+        .reviewer-links {
+          display: flex;
+          gap: 0.6rem;
+          flex-wrap: wrap;
+        }
+        .reviewer-link {
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: #2563eb;
+          text-decoration: none;
+          padding: 0.25rem 0.65rem;
+          background: #eff6ff;
+          border-radius: 4px;
+          transition: background 0.15s;
+        }
+        .reviewer-link:hover {
+          background: #dbeafe;
+        }
+        /* ── General heading ────────────────────────────────────────────────── */
+        .general-heading-section {
+          max-width: 800px;
+          margin: 0 auto 0.5rem;
+          padding: 0 2rem;
+        }
+        .general-heading {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--accents-3);
+          margin: 0;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid #eaeaea;
+        }
+        /* ── Related section ────────────────────────────────────────────────── */
         .related-section {
-          max-width: 600px;
+          max-width: 700px;
           margin: 4rem auto;
           padding: 3rem 2rem;
           text-align: center;

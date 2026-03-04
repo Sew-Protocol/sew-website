@@ -7,17 +7,29 @@ export default function Footer() {
       <footer>
         <div className="footer-bottom">
           <div className="footer-section">
-            <p className="footer-label">Reference Interface</p>
-            <Link href="/everyday-wallet">Everyday Wallet</Link>
+            <p className="footer-label">Reference</p>
+            <Link href="/faq">FAQ</Link>
+            <Link href="/glossary">Glossary</Link>
+            <Link href="/comparisons">Comparisons</Link>
+          </div>
+          <div className="footer-section">
+            <p className="footer-label">Developers</p>
+            <Link href="/protocol-limits">Protocol Limits</Link>
+            <Link href="/fees">Fees</Link>
+            <Link href="/integrations">Integrations</Link>
+            <Link href="/release-plan">Release Plan</Link>
+          </div>
+          <div className="footer-section">
+            <p className="footer-label">About</p>
+            <Link href="/governance">Governance</Link>
+            <Link href="/token">SEW Token</Link>
+            <Link href="/contact">Contact</Link>
           </div>
           <div className="footer-section">
             <p className="footer-label">Source Code</p>
             <ExtLink href="https://github.com/Sew-Protocol/sew-protocol">
               GitHub Repository
             </ExtLink>
-          </div>
-          <div className="footer-section">
-            <p className="footer-label">Community</p>
             <ExtLink href="https://discord.gg/sew">Discord</ExtLink>
           </div>
         </div>
@@ -45,9 +57,12 @@ export default function Footer() {
         }
         .footer-section {
           text-align: center;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
         }
         .footer-label {
-          margin: 0 0 0.75rem 0;
+          margin: 0 0 0.5rem 0;
           font-size: 0.75rem;
           color: var(--accents-2);
           text-transform: uppercase;
@@ -65,7 +80,7 @@ export default function Footer() {
         .footer-legal {
           margin-top: 2rem;
           padding-top: 2rem;
-          border-top: 1px solid var(--accents-6);
+          border-top: 1px solid #f0f0f0;
           max-width: 600px;
           margin-left: auto;
           margin-right: auto;

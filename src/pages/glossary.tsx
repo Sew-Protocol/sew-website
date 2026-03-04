@@ -5,6 +5,106 @@ import Link from 'next/link'
 export default function Glossary() {
   const terms = [
     {
+      term: 'Appeal Bond',
+      definition:
+        'A deposit required to escalate or appeal a dispute outcome. The bond may be forfeited if the appeal fails, discouraging low-quality challenges.',
+    },
+    {
+      term: 'Composable',
+      definition:
+        'A system design where applications can integrate the protocol and extend it with new modules without modifying the core escrow logic.',
+    },
+    {
+      term: 'customResolver',
+      definition:
+        'A per-escrow field that overrides the protocol default resolver with a specific address. Allows arbitrary dispute frameworks to be used without modifying protocol code. Set at escrow creation and fixed for the lifetime of that escrow.',
+    },
+    {
+      term: 'Deterministic Execution',
+      definition:
+        'Outcomes are determined strictly by predefined rules in smart contracts, not by discretionary decisions.',
+    },
+    {
+      term: 'Dispute Architecture',
+      definition:
+        'The structural and mechanical layer of dispute handling: state machines, resolver interfaces, escalation paths, and how outcomes are enforced on-chain. Distinguished from Dispute Economics, which covers the incentive layer.',
+    },
+    {
+      term: 'Dispute Economics',
+      definition:
+        'The incentive and economic layer of dispute handling: bond sizing, slashing rates, appeal costs, and resolver accountability mechanisms. Distinguished from Dispute Architecture, which covers the mechanical layer.',
+    },
+    {
+      term: 'Dispute Resolution',
+      definition:
+        'The process used when parties disagree on whether funds should be released or refunded. Resolution may involve a resolver or multi-level escalation.',
+    },
+    {
+      term: 'ERC-20',
+      definition:
+        'A standard for fungible tokens on Ethereum that enables consistent transfer and integration across applications.',
+    },
+    {
+      term: 'Escrow',
+      definition:
+        'A smart contract that holds tokens under predefined conditions until release, refund, or resolution. Once created, its rules and configuration are fixed.',
+    },
+    {
+      term: 'Escrow State',
+      definition:
+        'The current lifecycle stage of an escrow. States: NONE (uninitialized), PENDING (active, awaiting action), DISPUTED (under resolution), RELEASED (funds sent to recipient), REFUNDED (funds returned to sender), RESOLVED (resolver determined outcome). RELEASED, REFUNDED, and RESOLVED are terminal — they cannot be reversed.',
+    },
+    {
+      term: 'Exposure Caps',
+      definition:
+        'Limits on how much value can be routed into external integrations (such as yield protocols). Designed to contain risk and reduce systemic exposure.',
+    },
+    {
+      term: 'Forward-Only Upgrades',
+      definition:
+        'A design principle where protocol upgrades affect only new escrows. Existing escrows continue operating under their original rules.',
+    },
+    {
+      term: 'Guardian',
+      definition:
+        'A limited emergency role that can pause the protocol temporarily. Cannot withdraw funds or alter existing escrows. Pause is time-bounded: maximum 7 days per cycle, 3 cycles total.',
+    },
+    {
+      term: 'Invariant',
+      definition:
+        'A property that holds for every escrow under every configuration and governance state. Invariants are encoded at the contract level, not enforced as policy. Examples: non-custodial, outcome-bounded, per-escrow isolation.',
+    },
+    {
+      term: 'Liquidity Pool',
+      definition:
+        'A shared pool of assets used by external protocols (e.g., lending systems). Users receive proportional claims on deposited assets.',
+    },
+    {
+      term: 'Module',
+      definition:
+        'A pluggable smart contract that defines a specific behaviour within an escrow. Modules are selected at creation and remain fixed for that escrow.',
+    },
+    {
+      term: 'Non-Custodial',
+      definition:
+        'Funds are held by smart contracts and controlled by predefined rules. No intermediary can arbitrarily redirect, seize, or access funds.',
+    },
+    {
+      term: 'Peer-to-Peer Transfer',
+      definition:
+        'A direct transfer of tokens between users without a centralized intermediary.',
+    },
+    {
+      term: 'Per-Escrow Snapshot',
+      definition:
+        'The full configuration of an escrow recorded at creation (modules, parameters, fees, timeouts). This configuration cannot be changed afterward.',
+    },
+    {
+      term: 'Protected Payment',
+      definition:
+        'A user-friendly term for a protected transfer. Refers to sending value where funds are held in escrow until conditions are met.',
+    },
+    {
       term: 'Protected Transfer',
       definition:
         'An ERC-20 token transfer routed through escrow with predefined release and resolution rules. Funds are held under deterministic conditions until settlement.',
@@ -90,49 +190,30 @@ export default function Glossary() {
         'Limits on how much value can be routed into external integrations (such as yield protocols). Designed to contain risk and reduce systemic exposure.',
     },
     {
-      term: 'Dispute Resolution',
+      term: 'Release Strategy',
       definition:
-        'The process used when parties disagree on whether funds should be released or refunded. Resolution may involve a resolver or multi-level escalation.',
+        'A module that defines when and how funds can be released. Examples include sender-initiated release, time-based release, or rule-based conditions.',
     },
     {
-      term: 'Appeal Bond',
+      term: 'Resolution Module',
       definition:
-        'A deposit required to escalate or appeal a dispute outcome. The bond may be forfeited if the appeal fails, discouraging low-quality challenges.',
+        'A module that defines how disputes are opened, escalated, and decided.',
     },
     {
-      term: 'ERC-20',
+      term: 'Resolver',
       definition:
-        'A standard for fungible tokens on Ethereum that enables consistent transfer and integration across applications.',
+        'A smart contract or EOA that determines the outcome of a dispute. A resolver can only choose from two outcomes: Release (funds sent to recipient) or Refund (funds returned to sender). Resolvers cannot touch or redirect funds — they only vote on outcomes, which are then enforced by the contract.',
     },
     {
-      term: 'Transfer (ERC-20 Transfer)',
+      term: 'Settlement',
       definition:
-        'The movement of tokens from one address to another on Ethereum.',
+        'The final outcome of an escrow where funds are either released to the recipient or returned to the sender.',
     },
-    {
-      term: 'Peer-to-Peer Transfer',
-      definition:
-        'A direct transfer of tokens between users without a centralized intermediary.',
-    },
-    {
-      term: 'Yield',
-      definition:
-        'Additional tokens earned by temporarily deploying assets into lending or liquidity protocols.',
-    },
-    {
-      term: 'Liquidity Pool',
-      definition:
-        'A shared pool of assets used by external protocols (e.g., lending systems). Users receive proportional claims on deposited assets.',
-    },
+
     {
       term: 'Smart Contract',
       definition:
         'Code deployed on Ethereum that automatically executes predefined logic when triggered by transactions.',
-    },
-    {
-      term: 'Protocol',
-      definition:
-        'A shared on-chain system of smart contracts and rules that anyone can interact with. It is infrastructure, not a service provider.',
     },
     {
       term: 'Smart Contract Architecture',
@@ -140,14 +221,44 @@ export default function Glossary() {
         'The structured system formed by multiple interacting contracts that define how escrows are created, executed, and resolved.',
     },
     {
+      term: 'State Machine',
+      definition:
+        'The set of defined states and valid transitions an escrow can move through. Terminal states (RELEASED, REFUNDED, RESOLVED) are irreversible. No path exists outside the defined transitions.',
+    },
+    {
+      term: 'Timelock',
+      definition:
+        'A delay mechanism for governance changes. Actions are queued and executed only after a defined waiting period, allowing review.',
+    },
+    {
       term: 'Transaction',
       definition:
         'A signed instruction submitted to Ethereum that changes blockchain state (e.g., creating an escrow or releasing funds).',
     },
     {
+      term: 'Transfer (ERC-20 Transfer)',
+      definition:
+        'The movement of tokens from one address to another on Ethereum.',
+    },
+    {
       term: 'Wallet',
       definition:
         'Software that allows users to hold keys, sign transactions, and interact with smart contracts.',
+    },
+    {
+      term: 'workflowId',
+      definition:
+        'A unique uint256 identifier assigned to each escrow at creation. Used to reference, query, and interact with a specific escrow across all protocol functions.',
+    },
+    {
+      term: 'Yield',
+      definition:
+        'Additional tokens earned by temporarily deploying assets into lending or liquidity protocols.',
+    },
+    {
+      term: 'Yield Module',
+      definition:
+        'An optional module that can deploy escrowed funds into external protocols to generate yield while funds remain locked.',
     },
   ]
 
@@ -164,6 +275,68 @@ export default function Glossary() {
           </p>
         </section>
 
+        {/* ── Formal notation ──────────────────────────────────────────────── */}
+        <section className="notation-section">
+          <h2 className="notation-heading">Formal notation</h2>
+          <p className="notation-intro">
+            Several pages use set-theory notation to express protocol invariants
+            precisely. These symbols are defined here for reference.
+          </p>
+          <div className="notation-grid">
+            <div className="notation-item">
+              <code className="notation-symbol">∈</code>
+              <div className="notation-text">
+                <strong>element of</strong>
+                <p>
+                  A value belongs to a set.{' '}
+                  <code>{'Outcome ∈ {RELEASE, REFUND}'}</code> means the outcome
+                  must be one of those two values.
+                </p>
+              </div>
+            </div>
+            <div className="notation-item">
+              <code className="notation-symbol">∉</code>
+              <div className="notation-text">
+                <strong>not an element of</strong>
+                <p>
+                  A value does not belong to a set.{' '}
+                  <code>{'Custody ∉ {operator, resolver}'}</code> means custody
+                  is never held by an operator or resolver.
+                </p>
+              </div>
+            </div>
+            <div className="notation-item">
+              <code className="notation-symbol">⊄</code>
+              <div className="notation-text">
+                <strong>not a subset of</strong>
+                <p>
+                  One set does not include another.{' '}
+                  <code>{'failure(escrow_n) ⊄ escrow_m'}</code> means a failure
+                  in escrow n does not propagate into escrow m.
+                </p>
+              </div>
+            </div>
+            <div className="notation-item">
+              <code className="notation-symbol">∀</code>
+              <div className="notation-text">
+                <strong>for all</strong>
+                <p>
+                  A property holds universally. <code>{'∀ m ≠ n'}</code> means
+                  "for all m that are not equal to n" — i.e., every other
+                  escrow.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p className="notation-ref">
+            Invariants using this notation appear on the{' '}
+            <Link href="/#guarantees">Homepage</Link>,{' '}
+            <Link href="/architecture">Architecture</Link>, and{' '}
+            <Link href="/researcher#invariants">For Researchers</Link> pages.
+          </p>
+        </section>
+
+        {/* ── Terms grid ───────────────────────────────────────────────────── */}
         <section className="glossary-grid">
           {terms.map((item) => (
             <div key={item.term} className="glossary-card fabric-panel">
@@ -179,6 +352,8 @@ export default function Glossary() {
             <Link href="/how-it-works">How It Works</Link>
             <Link href="/architecture">Architecture</Link>
             <Link href="/security">Security Model</Link>
+            <Link href="/dispute-resolution">Dispute Architecture</Link>
+            <Link href="/researcher">For Researchers</Link>
             <Link href="/governance">Governance</Link>
           </div>
         </section>
@@ -226,7 +401,7 @@ export default function Glossary() {
           font-size: 1rem;
           margin: 0 0 0.75rem 0;
           padding-bottom: 0.75rem;
-          border-bottom: 1px solid var(--accents-6);
+          border-bottom: 1px solid #eaeaea;
         }
         .glossary-card p {
           font-size: 0.9rem;
@@ -234,8 +409,104 @@ export default function Glossary() {
           line-height: 1.6;
           margin: 0;
         }
+        /* ── Formal notation section ────────────────────────────────────────── */
+        .notation-section {
+          max-width: 800px;
+          margin: 0 auto 1rem;
+          padding: 2rem 2rem 1.75rem;
+          background: #fafafa;
+          border: 1.5px solid var(--accents-2);
+          border-radius: var(--radius);
+        }
+        .notation-heading {
+          font-size: 1.1rem;
+          font-weight: 700;
+          margin: 0 0 0.5rem;
+          text-align: left;
+        }
+        .notation-intro {
+          font-size: 0.875rem;
+          color: var(--accents-3);
+          margin: 0 0 1.5rem;
+          line-height: 1.6;
+        }
+        .notation-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          margin-bottom: 1.25rem;
+        }
+        .notation-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 1rem;
+          padding: 0.85rem 1rem;
+          background: var(--bg);
+          border: 1px solid #eaeaea;
+          border-radius: var(--radius);
+        }
+        .notation-symbol {
+          font-family: var(--font-mono);
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: var(--fg);
+          background: #f0f0f0;
+          width: 42px;
+          height: 42px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 6px;
+          flex-shrink: 0;
+          line-height: 1;
+        }
+        .notation-text {
+          flex: 1;
+        }
+        .notation-text strong {
+          display: block;
+          font-size: 0.82rem;
+          margin-bottom: 0.2rem;
+        }
+        .notation-text p {
+          margin: 0;
+          font-size: 0.78rem;
+          color: var(--accents-3);
+          line-height: 1.55;
+        }
+        .notation-text code {
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          background: #f0f0f0;
+          padding: 0.1rem 0.3rem;
+          border-radius: 3px;
+          white-space: nowrap;
+        }
+        .notation-ref {
+          font-size: 0.8rem;
+          color: var(--accents-3);
+          margin: 0;
+        }
+        .notation-ref a {
+          color: #0070f3;
+          font-weight: 500;
+          text-decoration: none;
+        }
+        .notation-ref a:hover {
+          text-decoration: underline;
+        }
+        @media (max-width: 700px) {
+          .notation-grid {
+            grid-template-columns: 1fr;
+          }
+          .notation-section {
+            padding: 1.25rem 1rem;
+          }
+        }
+
+        /* ── Related section ────────────────────────────────────────────────── */
         .related-section {
-          max-width: 600px;
+          max-width: 700px;
           margin: 4rem auto;
           padding: 3rem 2rem;
           border-radius: 12px;

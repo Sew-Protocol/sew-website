@@ -185,7 +185,7 @@ export default function ReleasePlan() {
         <section className="related-section fabric-texture fabric-texture-light">
           <h3>Related pages</h3>
           <div className="related-links">
-            <Link href="/dispute-resolution">Dispute Resolution</Link>
+            <Link href="/dispute-resolution">Dispute Architecture</Link>
             <Link href="/governance">Governance</Link>
             <Link href="/security">Security Model</Link>
             <Link href="/protocol-limits">Protocol Limits</Link>
@@ -287,7 +287,7 @@ export default function ReleasePlan() {
         }
         .phase-footer {
           padding-top: 1rem;
-          border-top: 1px solid var(--accents-6);
+          border-top: 1px solid #eaeaea;
         }
         .timeline-indicator {
           font-size: 0.85rem;

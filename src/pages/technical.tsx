@@ -9,7 +9,9 @@ export default function Technical() {
       <div className={sharedStyles.layout}>
         <section className="header-section">
           <h1>Technical Resources</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            References, contracts, and integration starting points
+          </h2>
           <p className="intro">
             Reference materials for developers, auditors, and integrators.
           </p>
@@ -35,27 +37,46 @@ export default function Technical() {
               guardian
             </li>
           </ul>
-          <p>View the complete implementation on GitHub.</p>
+          <p>
+            View deployed addresses on the{' '}
+            <Link href="/contracts">Contracts</Link> page, or browse the{' '}
+            <a
+              href="https://github.com/sew-protocol"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              source code on GitHub
+            </a>
+            .
+          </p>
         </section>
 
         <section className="content-block">
           <h3>Documentation</h3>
           <ul>
             <li>
-              <strong>Architecture</strong>: System design, contract
-              relationships, and data flows
+              <Link href="/architecture">
+                <strong>Architecture</strong>
+              </Link>
+              : System design, contract relationships, and data flows
             </li>
             <li>
-              <strong>Security model</strong>: Threat analysis, containment
-              strategies, and invariant guarantees
+              <Link href="/security">
+                <strong>Security model</strong>
+              </Link>
+              : Threat analysis, containment strategies, and invariant
+              guarantees
             </li>
             <li>
-              <strong>Guides</strong>: Integration tutorials, module
-              development, and deployment procedures
+              <Link href="/developer">
+                <strong>Developer guide</strong>
+              </Link>
+              : Integration tutorials, module development, and deployment
+              procedures
             </li>
             <li>
               <strong>Whitepaper</strong>: Protocol theory, economic model, and
-              long-term vision
+              long-term vision — published before mainnet launch
             </li>
           </ul>
         </section>
@@ -64,16 +85,22 @@ export default function Technical() {
           <h3>External Resources</h3>
           <ul>
             <li>
-              <strong>GitHub Repository</strong>: Source code, issue tracking,
-              and contribution guidelines
+              <a
+                href="https://github.com/sew-protocol"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <strong>GitHub Repository</strong>
+              </a>
+              : Source code, issue tracking, and contribution guidelines
             </li>
             <li>
-              <strong>Block Explorer</strong>: Verify deployed contracts and
-              track transactions
+              <strong>Block Explorer</strong>: Contract verification links will
+              be published at mainnet launch
             </li>
             <li>
-              <strong>Audits</strong>: Independent security reviews (when
-              available)
+              <strong>Audits</strong>: Independent security reviews will be
+              linked here before mainnet launch
             </li>
           </ul>
         </section>
@@ -82,15 +109,24 @@ export default function Technical() {
           <h3>Integration Resources</h3>
           <ul>
             <li>
-              <strong>Contract addresses</strong>: Mainnet and testnet
-              deployments
+              <Link href="/contracts">
+                <strong>Contract addresses</strong>
+              </Link>
+              : Mainnet and testnet deployments
             </li>
             <li>
-              <strong>ABI files</strong>: Interface definitions for contract
-              interaction
+              <a
+                href="https://github.com/sew-protocol"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <strong>ABI files</strong>
+              </a>
+              : Interface definitions available in the GitHub repository
             </li>
             <li>
-              <strong>SDK references</strong>: Client libraries and utilities
+              <strong>SDK references</strong>: Client libraries and utilities —
+              published before mainnet launch
             </li>
           </ul>
         </section>

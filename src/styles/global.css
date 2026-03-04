@@ -9,6 +9,8 @@
   --accents-1: #111;
   --accents-2: #333;
   --accents-3: #888;
+  --accents-5: #bbb;
+  --accents-6: #eaeaea;
   --geist-foreground: #000;
 
   --radius: 8px;
@@ -38,30 +40,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-  background-image: radial-gradient(#ddd 1px, transparent 1px),
-    radial-gradient(#ddd 1px, transparent 1px);
-  background-position: 0 0, 25px 25px;
-  background-attachment: fixed;
-  background-size: 50px 50px;
-
   /* Hack */
   overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 300px;
-  background-image: url('/abstract.jpeg');
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: 100% auto;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: -1;
 }
 
 code[class*='language-'],

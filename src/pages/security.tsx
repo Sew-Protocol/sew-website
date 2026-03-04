@@ -9,7 +9,9 @@ export default function Security() {
       <div className={sharedStyles.layout}>
         <section className="header-section">
           <h1>Security Model</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            Primary reference for auditors and security teams
+          </h2>
           <p className="intro">
             Sew Protocol is designed as a containment layer for protected
             transfers on Ethereum. Rather than attempting to eliminate all risk,
@@ -17,6 +19,20 @@ export default function Security() {
             ensuring that funds always follow deterministic paths.
           </p>
         </section>
+
+        {/* ── In-page navigation ───────────────────────────────────────────── */}
+        <nav className="page-nav">
+          <span className="page-nav-label">Jump to:</span>
+          <a href="#threat-model">Threat Model</a>
+          <span className="page-nav-sep">·</span>
+          <a href="#dispute-economics">Dispute Economics</a>
+          <span className="page-nav-sep">·</span>
+          <a href="#upgrade-semantics">Upgrade Semantics</a>
+          <span className="page-nav-sep">·</span>
+          <a href="#emergency-recovery">Emergency Recovery</a>
+          <span className="page-nav-sep">·</span>
+          <a href="#isolation">Isolation Model</a>
+        </nav>
 
         <section className="content-block">
           <h3>Security philosophy</h3>
@@ -75,30 +91,124 @@ export default function Security() {
           </div>
         </section>
 
-        <section className="content-block">
+        <section id="threat-model" className="content-block">
           <h3>Threat model</h3>
           <p>
-            Sew is designed to operate in an adversarial environment, addressing
-            risks like:
+            Sew is designed to operate in an adversarial environment. Each
+            threat category below includes the attack surface and the protocol's
+            structural mitigation.
           </p>
-          <ul>
-            <li>
-              <strong>User error:</strong> Sending funds to the wrong address or
-              premature release.
-            </li>
-            <li>
-              <strong>Counterparty risk:</strong> Fraudulent participants or
-              failure to deliver.
-            </li>
-            <li>
-              <strong>Smart contract risk:</strong> Bugs in integrations or
-              extension modules.
-            </li>
-            <li>
-              <strong>Governance risk:</strong> Malicious or compromised
-              privileged roles.
-            </li>
-          </ul>
+          <div className="threat-grid">
+            <div className="threat-card">
+              <div className="threat-header">
+                <span className="threat-tag">T1</span>
+                <h4>User error</h4>
+              </div>
+              <p className="threat-desc">
+                Sending to the wrong address, premature release, or
+                misunderstanding escrow state.
+              </p>
+              <div className="threat-mitigation">
+                <span className="mitigation-label">Mitigation</span>
+                <p>
+                  Sender can cancel at any time while PENDING. Dispute pathway
+                  available if counterparty is uncooperative. Auto-cancel
+                  timestamp can be set at creation.
+                </p>
+              </div>
+            </div>
+            <div className="threat-card">
+              <div className="threat-header">
+                <span className="threat-tag">T2</span>
+                <h4>Counterparty risk</h4>
+              </div>
+              <p className="threat-desc">
+                Fraudulent participants, failure to deliver goods or services,
+                or bad-faith dispute initiation.
+              </p>
+              <div className="threat-mitigation">
+                <span className="mitigation-label">Mitigation</span>
+                <p>
+                  Funds held in escrow until conditions are met — neither party
+                  can unilaterally seize them. Dispute pathway available with
+                  neutral resolver. Appeal bonds discourage griefing.
+                </p>
+              </div>
+            </div>
+            <div className="threat-card">
+              <div className="threat-header">
+                <span className="threat-tag">T3</span>
+                <h4>Smart contract risk</h4>
+              </div>
+              <p className="threat-desc">
+                Bugs in integration modules, yield strategies, or third-party
+                contracts depended on by the protocol.
+              </p>
+              <div className="threat-mitigation">
+                <span className="mitigation-label">Mitigation</span>
+                <p>
+                  Per-escrow isolation limits blast radius to the affected
+                  escrow only. Module boundaries prevent cross-module
+                  propagation. Yield modules are opt-in.
+                </p>
+              </div>
+            </div>
+            <div className="threat-card">
+              <div className="threat-header">
+                <span className="threat-tag">T4</span>
+                <h4>Governance capture</h4>
+              </div>
+              <p className="threat-desc">
+                Malicious governance proposals, compromised admin keys, or
+                timelock bypass attempts.
+              </p>
+              <div className="threat-mitigation">
+                <span className="mitigation-label">Mitigation</span>
+                <p>
+                  Governance cannot touch active escrows. All changes are
+                  forward-only. Timelocks enforce delay (48h fast-lane, 7-day
+                  slow-lane). Emergency pause is time-bounded and auto-expiring.
+                </p>
+              </div>
+            </div>
+            <div className="threat-card">
+              <div className="threat-header">
+                <span className="threat-tag">T5</span>
+                <h4>Resolver misconduct</h4>
+              </div>
+              <p className="threat-desc">
+                Biased resolver decisions, resolver unavailability, or collusion
+                between resolver and one party.
+              </p>
+              <div className="threat-mitigation">
+                <span className="mitigation-label">Mitigation</span>
+                <p>
+                  Resolver outcome is bounded to{' '}
+                  <code>{'Release | Refund'}</code>. Resolvers cannot touch
+                  funds. Appeal escalation available. In v2+, resolvers post
+                  bonds and are slashed for overturned decisions.
+                </p>
+              </div>
+            </div>
+            <div className="threat-card">
+              <div className="threat-header">
+                <span className="threat-tag">T6</span>
+                <h4>Yield integration risk</h4>
+              </div>
+              <p className="threat-desc">
+                External yield protocol failure (e.g., Aave insolvency or
+                exploit) while funds are deployed.
+              </p>
+              <div className="threat-mitigation">
+                <span className="mitigation-label">Mitigation</span>
+                <p>
+                  Yield is opt-in. Principal accounting is separated from yield
+                  accounting. Exposure caps and unwind mechanisms limit maximum
+                  loss. Only participating escrows are affected.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="disclaimer-block">
@@ -109,7 +219,36 @@ export default function Security() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section id="isolation" className="content-block">
+          <h3>Isolation model</h3>
+          <p>
+            Isolation is the primary containment mechanism. It operates at three
+            levels simultaneously.
+          </p>
+          <ul>
+            <li>
+              <strong>Between escrows:</strong> Each agreement is independent.
+              No shared funds, shared yield pool, or shared dispute state. A
+              failure in one escrow cannot propagate to another.
+            </li>
+            <li>
+              <strong>Between modules:</strong> Release logic, resolution logic,
+              and yield generation are isolated components. A bug in a yield
+              module cannot affect dispute resolution.
+            </li>
+            <li>
+              <strong>Between governance and settlement:</strong> Governance
+              cannot modify active escrows. Settlement logic is immutable once
+              an escrow is created.
+            </li>
+          </ul>
+          <p>
+            See <Link href="/architecture">Architecture</Link> for the full
+            isolation model with invariant notation.
+          </p>
+        </section>
+
+        <section id="emergency-recovery" className="content-block">
           <h3>Emergency response posture</h3>
           <p>
             In the event of a vulnerability, the protocol is designed for rapid
@@ -122,7 +261,7 @@ export default function Security() {
           </p>
         </section>
 
-        <section className="content-block">
+        <section id="upgrade-semantics" className="content-block">
           <h3>Governance constraints</h3>
           <p>
             Governance can approve new modules and update global parameters for
@@ -164,7 +303,7 @@ export default function Security() {
               </li>
               <li>
                 <strong>No discretion:</strong> A resolver can only decide:
-                Release, Refund, or Split. No other actions.
+                Release or Refund. No other actions.
               </li>
               <li>
                 <strong>No forced transfers:</strong> A resolver decision must
@@ -184,14 +323,14 @@ export default function Security() {
               decentralized selection with staking and appeals.
             </p>
             <p>
-              A user can optionally specify a <code>customResolver</code> address
-              per escrow, allowing arbitrary dispute frameworks without modifying
-              protocol code.
+              A user can optionally specify a <code>customResolver</code>{' '}
+              address per escrow, allowing arbitrary dispute frameworks without
+              modifying protocol code.
             </p>
           </div>
         </section>
 
-        <section className="content-block">
+        <section id="dispute-economics" className="content-block">
           <h3>Economic incentives in dispute resolution</h3>
           <p>
             Resolvers are incentivized to behave honestly through economic
@@ -247,18 +386,14 @@ export default function Security() {
               <li>
                 Resolvers with consistent track records earn fee tier upgrades
               </li>
-              <li>
-                High slashing rates eliminate bad resolvers over time
-              </li>
+              <li>High slashing rates eliminate bad resolvers over time</li>
             </ul>
           </div>
         </section>
 
         <section className="content-block">
           <h3>Isolation model and risk containment</h3>
-          <p>
-            Sew is built to limit the blast radius of any single failure.
-          </p>
+          <p>Sew is built to limit the blast radius of any single failure.</p>
           <div className="concept-subsection">
             <h4>Per-escrow isolation</h4>
             <p>
@@ -287,10 +422,10 @@ export default function Security() {
               <li>
                 Each escrow defines its own release rules at creation time
               </li>
+              <li>Resolution outcomes for one escrow cannot affect others</li>
               <li>
-                Resolution outcomes for one escrow cannot affect others
+                Disputes are settled independently, without shared exposure
               </li>
-              <li>Disputes are settled independently, without shared exposure</li>
             </ul>
           </div>
           <div className="concept-subsection">
@@ -384,6 +519,117 @@ export default function Security() {
         .disclaimer-block p {
           margin: 0;
           color: #92400e;
+        }
+
+        /* ── In-page nav ────────────────────────────────────────────────────── */
+        .page-nav {
+          max-width: 800px;
+          margin: 0 auto 1rem;
+          padding: 0.75rem 2rem;
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          border-bottom: 1px solid #eaeaea;
+          font-size: 0.82rem;
+        }
+        .page-nav-label {
+          font-weight: 700;
+          font-size: 0.72rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: var(--accents-3);
+          margin-right: 0.25rem;
+        }
+        .page-nav a {
+          color: var(--accents-2);
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.15s;
+        }
+        .page-nav a:hover {
+          color: #0070f3;
+        }
+        .page-nav-sep {
+          color: var(--accents-2);
+          opacity: 0.4;
+        }
+
+        /* ── Threat model cards ─────────────────────────────────────────────── */
+        .threat-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
+        }
+        .threat-card {
+          padding: 1.25rem;
+          border: 1px solid #eaeaea;
+          border-radius: var(--radius);
+          background: var(--bg);
+        }
+        .threat-header {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          margin-bottom: 0.5rem;
+        }
+        .threat-tag {
+          font-size: 0.65rem;
+          font-weight: 800;
+          font-family: var(--font-mono);
+          background: #f0f0f0;
+          color: var(--accents-3);
+          padding: 0.15rem 0.45rem;
+          border-radius: 3px;
+          letter-spacing: 0.04em;
+        }
+        .threat-header h4 {
+          margin: 0;
+          font-size: 0.95rem;
+        }
+        .threat-desc {
+          font-size: 0.85rem;
+          color: var(--accents-2);
+          line-height: 1.55;
+          margin: 0 0 0.75rem;
+        }
+        .threat-mitigation {
+          background: #f8f9ff;
+          border-left: 2.5px solid #2563eb;
+          padding: 0.6rem 0.85rem;
+          border-radius: 0 4px 4px 0;
+        }
+        .mitigation-label {
+          display: block;
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #2563eb;
+          margin-bottom: 0.3rem;
+        }
+        .threat-mitigation p {
+          margin: 0;
+          font-size: 0.82rem;
+          color: var(--accents-2);
+          line-height: 1.55;
+        }
+        .threat-mitigation code {
+          font-size: 0.75rem;
+          background: #e8f0fe;
+          padding: 0.1rem 0.3rem;
+          border-radius: 3px;
+          font-family: var(--font-mono);
+          color: #1d4ed8;
+        }
+        @media (max-width: 700px) {
+          .threat-grid {
+            grid-template-columns: 1fr;
+          }
+          .page-nav {
+            padding: 0.75rem 1rem;
+          }
         }
       `}</style>
     </>

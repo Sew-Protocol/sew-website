@@ -9,7 +9,9 @@ export default function Fees() {
       <div className={sharedStyles.layout}>
         <section className="header-section">
           <h1>Fees</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            Bounded, transparent, and locked at escrow creation
+          </h2>
           <p className="intro">
             Sew Protocol fees are bounded and transparent. This page explains
             what fees apply and when.

@@ -9,11 +9,13 @@ export default function WhySew() {
       <div className={sharedStyles.layout}>
         <section className="header-section">
           <h1>Why Sew</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            The case for non-custodial, structured protection on Ethereum
+          </h2>
           <p className="intro">
-            Ethereum transactions are final. But coordination requires optionality.
-            Sew Protocol adds structured protection to payments without
-            introducing custody.
+            Ethereum transactions are final. But coordination requires
+            optionality. Sew Protocol adds structured protection to payments
+            without introducing custody.
           </p>
         </section>
 
@@ -184,9 +186,7 @@ export default function WhySew() {
 
         <section className="content-block">
           <h3>Next steps</h3>
-          <p>
-            Ready to understand how it works?
-          </p>
+          <p>Ready to understand how it works?</p>
           <ul>
             <li>
               <Link href="/how-it-works">How It Works</Link> — See the lifecycle
@@ -243,7 +243,7 @@ export default function WhySew() {
           justify-content: center;
         }
         .pill {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: #2563eb;
           color: white;
           padding: 0.5rem 1.5rem;
           border-radius: 20px;
@@ -263,8 +263,8 @@ export default function WhySew() {
           background: #fafafa;
         }
         .comparison-item.highlight {
-          border: 2px solid #667eea;
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+          border: 2px solid #2563eb;
+          background: rgba(37, 99, 235, 0.04);
         }
         .comparison-item h4 {
           margin-top: 0;
@@ -294,12 +294,12 @@ export default function WhySew() {
         }
         .principle {
           padding: 1.5rem;
-          border-left: 4px solid #667eea;
-          background: #f5f7ff;
+          border-left: 4px solid #2563eb;
+          background: #f0f6ff;
         }
         .principle h4 {
           margin-top: 0;
-          color: #667eea;
+          color: #2563eb;
         }
         .page-meta {
           margin: 4rem auto;

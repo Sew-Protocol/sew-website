@@ -9,7 +9,9 @@ export default function HowItWorks() {
       <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>How It Works</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            Escrow lifecycle, state transitions, and dispute mechanics
+          </h2>
           <p className="intro">
             Sew Protocol is a security layer for payments on Base (Ethereum L2).
             Instead of transferring funds directly, payments can be held in
@@ -176,22 +178,17 @@ export default function HowItWorks() {
               <strong>What happens:</strong>
             </p>
             <ul>
-              <li>
-                Normal release is paused; funds stay locked
-              </li>
-              <li>
-                A neutral resolver is assigned to review evidence
-              </li>
-              <li>
-                The resolver decides: Release, Refund, or Split
-              </li>
-              <li>
-                The outcome is enforced on-chain; no discretion
-              </li>
+              <li>Normal release is paused; funds stay locked</li>
+              <li>A neutral resolver is assigned to review evidence</li>
+              <li>The resolver decides: Release or Refund</li>
+              <li>The outcome is enforced on-chain; no discretion</li>
             </ul>
             <p>
-              See <Link href="#what-if-disagreement">What Happens If There Is Disagreement?</Link> below for
-              the full flow.
+              See{' '}
+              <Link href="#what-if-disagreement">
+                What Happens If There Is Disagreement?
+              </Link>{' '}
+              below for the full flow.
             </p>
           </div>
 
@@ -208,7 +205,9 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3 id="what-if-disagreement">What Happens If There Is Disagreement?</h3>
+          <h3 id="what-if-disagreement">
+            What Happens If There Is Disagreement?
+          </h3>
           <p>
             Ethereum transfers are final. Sew adds structured resolution without
             custody: neutral outcomes enforced by smart contracts.
@@ -240,7 +239,7 @@ export default function HowItWorks() {
             <ul>
               <li>Reviews evidence from both parties</li>
               <li>Cannot take custody of the funds</li>
-              <li>Can only decide: Release, Refund, or Split</li>
+              <li>Can only decide: Release or Refund</li>
               <li>Makes a binding decision on-chain</li>
             </ul>
             <p>
@@ -282,8 +281,11 @@ export default function HowItWorks() {
               </li>
             </ul>
             <p>
-              See <Link href="/docs/dispute-resolution">Dispute Resolution documentation</Link> for
-              deep dives on mechanics, economics, and resolver incentives.
+              See{' '}
+              <Link href="/docs/dispute-resolution">
+                Dispute Resolution documentation
+              </Link>{' '}
+              for deep dives on mechanics, economics, and resolver incentives.
             </p>
           </div>
         </section>

@@ -241,12 +241,8 @@ export default function Comparisons() {
           <h3>Ready to integrate?</h3>
           <p>Build protected transfers into your application</p>
           <div className="cta-buttons">
-            <Link href="/developer">
-              <a className="cta-button primary">Developer Guide</a>
-            </Link>
-            <Link href="/use-cases">
-              <a className="cta-button">See Use Cases</a>
-            </Link>
+            <Link href="/developer" className="cta-button primary">Developer Guide</Link>
+            <Link href="/use-cases" className="cta-button">See Use Cases</Link>
           </div>
         </section>
 

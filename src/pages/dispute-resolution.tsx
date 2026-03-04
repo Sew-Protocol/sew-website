@@ -5,15 +5,22 @@ import Link from 'next/link'
 export default function DisputeResolution() {
   return (
     <>
-      <Header titlePre="Dispute Resolution" />
+      <Header titlePre="Dispute Architecture" />
       <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
-          <h1>Dispute Resolution</h1>
-          <h2 className="tagline">How disagreements are handled</h2>
+          <h1>Dispute Architecture</h1>
+          <h2 className="tagline">
+            Mechanism design — how resolution works structurally
+          </h2>
           <p className="intro">
             Sew Protocol provides multiple dispute resolution pathways, evolving
-            from single trusted resolver at launch to fully decentralized
-            resolution over time.
+            from a single trusted resolver at launch to fully decentralised
+            resolution over time. This page covers the architectural layer:
+            state machines, resolver interfaces, and escalation paths.
+          </p>
+          <p className="intro-crosslink">
+            For the economic layer — bonds, slashing, and incentive alignment —
+            see <a href="/security#dispute-economics">Dispute Economics →</a>
           </p>
         </section>
 
@@ -87,6 +94,12 @@ export default function DisputeResolution() {
 
         <section className="content-block fabric-texture fabric-texture-light">
           <h3>Economic security</h3>
+          <p className="economics-note">
+            The following is a summary. For full bond parameters, slashing
+            rates, and incentive analysis, see{' '}
+            <a href="/security#dispute-economics">Dispute Economics</a> on the
+            Security page.
+          </p>
           <div className="principles-grid">
             <div className="principle-card">
               <h4>Appeal Bonds</h4>
@@ -139,6 +152,8 @@ export default function DisputeResolution() {
         <section className="content-block fabric-texture fabric-texture-light">
           <h3>Related pages</h3>
           <div className="related-links">
+            <Link href="/security#dispute-economics">Dispute Economics</Link>
+            <Link href="/security#threat-model">Threat Model</Link>
             <Link href="/governance">Governance</Link>
             <Link href="/protocol-limits">Protocol Limits</Link>
             <Link href="/release-plan">Release Plan</Link>
@@ -154,14 +169,41 @@ export default function DisputeResolution() {
         }
         .tagline {
           color: var(--accents-3);
-          font-size: 1.2rem;
-          margin-bottom: 1.5rem;
+          font-size: 1.1rem;
+          margin-bottom: 1rem;
         }
         .intro {
-          font-size: 1.1rem;
+          font-size: 1.05rem;
           max-width: 700px;
-          margin: 0 auto;
-          line-height: 1.6;
+          margin: 0 auto 0.75rem;
+          line-height: 1.65;
+        }
+        .intro-crosslink {
+          font-size: 0.9rem;
+          max-width: 700px;
+          margin: 0 auto 1rem;
+          color: var(--accents-3);
+        }
+        .intro-crosslink a {
+          color: #2563eb;
+          font-weight: 600;
+          text-decoration: none;
+        }
+        .intro-crosslink a:hover {
+          text-decoration: underline;
+        }
+        .economics-note {
+          font-size: 0.875rem;
+          color: var(--accents-3);
+          margin-bottom: 1.25rem;
+          padding: 0.65rem 1rem;
+          background: #f8f9ff;
+          border-left: 2.5px solid #2563eb;
+          border-radius: 0 4px 4px 0;
+        }
+        .economics-note a {
+          color: #2563eb;
+          font-weight: 500;
         }
         .header-section {
           text-align: center;

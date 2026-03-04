@@ -9,7 +9,9 @@ export default function Governance() {
       <div className={sharedStyles.layout}>
         <section className="header-section">
           <h1>Governance</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            Protocol evolution bounded by per-escrow immutability
+          </h2>
           <p className="intro">
             Sew Protocol is designed to evolve over time while preserving the
             integrity of existing agreements. Governance is structured around a

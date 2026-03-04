@@ -9,7 +9,9 @@ export default function Token() {
       <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>SEW Token</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            Governance rights and future dispute resolution participation
+          </h2>
           <p className="intro">
             SEW is the governance token for Sew Protocol. It enables holders to
             participate in protocol decision-making.

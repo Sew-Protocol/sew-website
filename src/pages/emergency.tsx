@@ -9,7 +9,9 @@ export default function Emergency() {
       <div className={sharedStyles.layout}>
         <section className="header-section">
           <h1>Emergency Recovery</h1>
-          <h2 className="tagline">Sew Protocol</h2>
+          <h2 className="tagline">
+            Containment-first response with bounded guardian powers
+          </h2>
           <p className="intro">
             This page documents the protocol's emergency response capabilities
             and recovery procedures.

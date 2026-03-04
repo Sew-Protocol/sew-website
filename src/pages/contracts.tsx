@@ -9,12 +9,38 @@ export default function Contracts() {
       <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Contract Addresses</h1>
-          <h2 className="tagline">Base Sepolia Testnet</h2>
+          <h2 className="tagline">Deployment status and addresses</h2>
           <p className="intro">
-            These contracts are deployed on Base Sepolia (Chain ID: 84532) for
-            testing. Mainnet addresses will be published after deployment.
+            All contracts are currently deployed on Base Sepolia testnet.
+            Mainnet deployment is pending audit completion and governance
+            approval.
           </p>
         </section>
+
+        <div className="deployment-status">
+          <div className="status-row">
+            <div className="status-item testnet">
+              <span className="status-dot" />
+              <div className="status-text">
+                <strong>Base Sepolia (Chain ID: 84532)</strong>
+                <span>Testnet — deployed and active</span>
+              </div>
+            </div>
+            <div className="status-item mainnet">
+              <span className="status-dot pending" />
+              <div className="status-text">
+                <strong>Mainnet</strong>
+                <span>
+                  Not yet deployed — pending audit and governance approval
+                </span>
+              </div>
+            </div>
+          </div>
+          <p className="status-note">
+            Testnet contracts are functionally equivalent to planned mainnet
+            contracts. Addresses will differ on mainnet deployment.
+          </p>
+        </div>
 
         <section className="content-block fabric-texture fabric-texture-light">
           <h3>Core Escrow</h3>
@@ -315,6 +341,67 @@ export default function Contracts() {
         }
         .page-meta a {
           color: #0070f3;
+        }
+
+        /* ── Deployment status banner ────────────────────────────────────────── */
+        .deployment-status {
+          max-width: 900px;
+          margin: 0 auto 2rem;
+          padding: 1.25rem 2rem;
+          border: 1.5px solid var(--accents-2);
+          border-radius: var(--radius);
+          background: #fafafa;
+        }
+        .status-row {
+          display: flex;
+          gap: 3rem;
+          flex-wrap: wrap;
+          margin-bottom: 1rem;
+        }
+        .status-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+        }
+        .status-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #059669;
+          flex-shrink: 0;
+          margin-top: 0.35rem;
+        }
+        .status-dot.pending {
+          background: #d1d5db;
+        }
+        .status-text {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+        }
+        .status-text strong {
+          font-size: 0.9rem;
+        }
+        .status-text span {
+          font-size: 0.8rem;
+          color: var(--accents-3);
+        }
+        .status-note {
+          margin: 0;
+          font-size: 0.8rem;
+          color: var(--accents-3);
+          padding-top: 1rem;
+          border-top: 1px solid #eaeaea;
+          line-height: 1.6;
+        }
+        @media (max-width: 600px) {
+          .deployment-status {
+            padding: 1rem;
+          }
+          .status-row {
+            flex-direction: column;
+            gap: 1rem;
+          }
         }
       `}</style>
     </>

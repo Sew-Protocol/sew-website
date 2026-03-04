@@ -8,35 +8,37 @@ export default function Index() {
     <>
       <Header titlePre="Home" />
       <div className={`${sharedStyles.layout} hero-texture`}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section className="hero">
           <h1>Sew Protocol</h1>
           <h2 className="tagline">
-            Payment protection at the transaction layer
+            Protected payments. Dispute resolution built in.
           </h2>
           <p className="description">
-            <strong>Protected transfer:</strong> An ERC-20 transfer routed
-            through escrow, with predefined release and dispute resolution
-            paths.
-          </p>
-          <p className="description">
-            By "transaction layer" we mean the moment of transfer and settlement
-            logic—the default pattern used when value moves—not L1 consensus or
-            sequencer infrastructure.
+            An ERC-20 transfer routed through escrow, with predefined release
+            and dispute resolution paths — enforced by smart contracts, not
+            intermediaries.
           </p>
           <p className="micro-line">
             Sew is infrastructure: contracts and modules. Interfaces (wallets,
             marketplaces) are built on top.
           </p>
           <div className="btns">
-            <Link href="/start-here" className="button primary">
-              Get Started
+            <Link href="/security" className="button primary">
+              Read Security Model
             </Link>
-            <Link href="/developer" className="button">
-              Build on Sew
+            <Link href="/architecture" className="button">
+              View Architecture
             </Link>
+          </div>
+          <div className="proof-chips">
+            <span className="chip">Non-custodial</span>
+            <span className="chip">Isolated per escrow</span>
+            <span className="chip">On-chain enforceable outcomes</span>
           </div>
         </section>
 
+        {/* ── 2. WHAT IT IS ───────────────────────────────────────────────── */}
         <section
           id="what-is-it"
           className="content-section fabric-texture fabric-texture-light"
@@ -65,6 +67,82 @@ export default function Index() {
           <p>Any wallet, marketplace, or application can build on it.</p>
         </section>
 
+        {/* ── 3. CORE GUARANTEES ──────────────────────────────────────────── */}
+        <section id="guarantees" className="content-section">
+          <div className="thread-divider" />
+          <h3>Security properties</h3>
+          <p className="section-subtitle">
+            Invariants the protocol enforces at the contract level, for every
+            escrow.
+          </p>
+          <div className="guarantees-grid">
+            <div className="guarantee-card">
+              <h4>Non-custodial</h4>
+              <p>
+                Funds are held by smart contracts, never by an operator or
+                resolver.
+              </p>
+              <code className="property-notation">
+                {'Custody ∉ {operator, resolver}'}
+              </code>
+            </div>
+            <div className="guarantee-card">
+              <h4>Outcome-bounded</h4>
+              <p>
+                A resolver can only choose from a fixed set of outcomes. No
+                discretion beyond that.
+              </p>
+              <code className="property-notation">
+                {'Outcome ∈ {RELEASE, REFUND}'}
+              </code>
+            </div>
+            <div className="guarantee-card">
+              <h4>Per-escrow isolation</h4>
+              <p>
+                A failure in one escrow cannot affect any other. No shared state
+                between transfers.
+              </p>
+              <code className="property-notation">
+                {'failure(escrow_n) ⊄ escrow_m'}
+              </code>
+            </div>
+            <div className="guarantee-card">
+              <h4>Deterministic state machine</h4>
+              <p>
+                Settlement follows predefined transitions only. No discretionary
+                paths.
+              </p>
+              <code className="property-notation">
+                {'state ∈ {PENDING → RELEASED | REFUNDED | RESOLVED}'}
+              </code>
+            </div>
+            <div className="guarantee-card">
+              <h4>Forward-only upgrades</h4>
+              <p>
+                Governance cannot modify active escrows. Changes apply only to
+                future transfers.
+              </p>
+              <code className="property-notation">
+                {'upgrade(t) → escrow.created < t only'}
+              </code>
+            </div>
+            <div className="guarantee-card">
+              <h4>Bounded emergency controls</h4>
+              <p>
+                Emergency pause is time-limited and auto-expires. Cannot be used
+                indefinitely.
+              </p>
+              <code className="property-notation">
+                {'pause_max = 7d × 3 cycles'}
+              </code>
+            </div>
+          </div>
+          <p className="section-link">
+            <Link href="/security">Full security model →</Link>
+          </p>
+        </section>
+
+        {/* ── 4. WHAT IT IS NOT ───────────────────────────────────────────── */}
         <section id="what-it-is-not" className="content-section fabric-texture">
           <h3>What it is NOT</h3>
           <ul className="not-list">
@@ -87,6 +165,7 @@ export default function Index() {
           </ul>
         </section>
 
+        {/* ── 5. WHY IT EXISTS ────────────────────────────────────────────── */}
         <section
           id="why-it-exists"
           className="content-section fabric-texture fabric-texture-warm"
@@ -106,10 +185,12 @@ export default function Index() {
           <p>
             Protection today is usually added off-chain, through custodians, or
             as application-specific logic. Sew moves protection to the
-            transaction layer itself—the default pattern used when value moves.
+            transaction layer itself — the default pattern used when value
+            moves.
           </p>
         </section>
 
+        {/* ── 6. HOW IT HELPS ─────────────────────────────────────────────── */}
         <section id="how-it-helps" className="content-section">
           <h3>How it helps</h3>
           <p>
@@ -129,6 +210,7 @@ export default function Index() {
           </p>
         </section>
 
+        {/* ── 7. DESIGN PRINCIPLES ────────────────────────────────────────── */}
         <section
           id="design-principles"
           className="content-section fabric-texture fabric-texture-light"
@@ -174,6 +256,7 @@ export default function Index() {
           </div>
         </section>
 
+        {/* ── 8. A PRIMITIVE ──────────────────────────────────────────────── */}
         <section className="content-section fabric-texture fabric-texture-warm">
           <div className="thread-divider" />
           <h3>A primitive for protected transfers</h3>
@@ -195,29 +278,97 @@ export default function Index() {
           </ul>
         </section>
 
+        {/* ── 9. BUILT-IN DISPUTE RESOLUTION ──────────────────────────────── */}
         <section className="content-section fabric-texture fabric-texture-light">
           <div className="thread-divider" />
           <h3>Built-in dispute resolution</h3>
           <p>
             Ethereum transfers are final. Sew adds structured resolution without
-            custody—neutral outcomes enforced by smart contracts.
+            custody — neutral outcomes enforced by smart contracts.
           </p>
           <p>
             If parties disagree, a resolver can be assigned. The resolver cannot
-            seize funds or act outside predefined boundaries. The outcome (Release,
-            Refund, or Split) is enforced on-chain.
+            seize funds or act outside predefined boundaries. The outcome
+            (Release or Refund) is enforced on-chain.
           </p>
           <p>
             This transforms escrow from a protection mechanism into an{' '}
             <strong>enforceable coordination primitive</strong>.
           </p>
           <p>
-            <Link href="/how-it-works#what-if-disagreement">
-              Learn how dispute resolution works →
-            </Link>
+            <Link href="/dispute-resolution">Dispute architecture →</Link>
+            {'  '}
+            <Link href="/security#dispute-economics">Dispute economics →</Link>
           </p>
         </section>
 
+        {/* ── 10. EVIDENCE & READINESS ────────────────────────────────────── */}
+        <section id="readiness" className="content-section">
+          <div className="thread-divider" />
+          <h3>Audit readiness</h3>
+          <p className="section-subtitle">
+            For grant reviewers and independent security auditors.
+          </p>
+          <div className="readiness-grid">
+            <div className="readiness-col">
+              <h4>What is implemented</h4>
+              <ul className="check-list">
+                <li>Core escrow state machine with 6 defined states</li>
+                <li>
+                  ERC-20 protected transfers with deterministic release paths
+                </li>
+                <li>
+                  v1 dispute resolution — single trusted resolver, on-chain
+                  enforcement
+                </li>
+                <li>
+                  Modular architecture — resolution, release strategy, and yield
+                  modules
+                </li>
+                <li>
+                  Per-escrow isolation — no shared state between transfers
+                </li>
+                <li>
+                  Time-bounded emergency pause (7-day max, 3 cycles total)
+                </li>
+                <li>
+                  Governance constraints — no retroactive modification of active
+                  escrows
+                </li>
+              </ul>
+            </div>
+            <div className="readiness-col funded">
+              <h4>What the grant funds</h4>
+              <ul className="check-list">
+                <li>Formal invariant testing across all state transitions</li>
+                <li>Adversarial simulation of dispute escalation paths</li>
+                <li>Bond sizing and slashing rate economic validation</li>
+                <li>Third-party security audit (Tier 1 auditor)</li>
+                <li>Testnet deployment and integration test suite</li>
+                <li>Threat model red-teaming and formal review</li>
+              </ul>
+            </div>
+          </div>
+          <div className="readiness-links">
+            <Link href="/security#threat-model" className="readiness-link">
+              Threat model →
+            </Link>
+            <Link href="/contracts" className="readiness-link">
+              Contracts →
+            </Link>
+            <Link href="/release-plan" className="readiness-link">
+              Release plan →
+            </Link>
+            <ExtLink
+              href="https://github.com/Sew-Protocol/sew-protocol"
+              className="readiness-link"
+            >
+              GitHub →
+            </ExtLink>
+          </div>
+        </section>
+
+        {/* ── 11. VISION ──────────────────────────────────────────────────── */}
         <section className="content-section fabric-texture fabric-texture-light">
           <div className="thread-divider" />
           <h3>Vision</h3>
@@ -243,25 +394,27 @@ export default function Index() {
           </p>
         </section>
 
-        <footer className="page-footer">
-          <div className="footer-links">
-            <Link href="/how-it-works">How it works</Link>
-            <Link href="/architecture">Architecture</Link>
-            <Link href="/dispute-resolution">Dispute Resolution</Link>
-            <Link href="/security">Security model</Link>
-            <Link href="/governance">Governance</Link>
-            <Link href="/developer">Build on Sew</Link>
-            <Link href="/docs">Docs</Link>
-            <ExtLink href="https://everyday.wallet">Everyday Wallet</ExtLink>
-          </div>
-          <p className="disclaimer">
-            Non-custodial protocol software. Interfaces may vary. Users remain
-            responsible for their own keys and transactions.
+        {/* ── 12. FINAL CTA STRIP ─────────────────────────────────────────── */}
+        <section className="cta-strip">
+          <h3>Review the security model.</h3>
+          <p>
+            Designed for auditors, researchers, and grant reviewers. Threat
+            model, invariants, dispute economics, and upgrade semantics — all in
+            one place.
           </p>
-        </footer>
+          <div className="cta-btns">
+            <Link href="/security" className="cta-btn primary">
+              Security Model
+            </Link>
+            <Link href="/developer" className="cta-btn">
+              Developer Docs
+            </Link>
+          </div>
+        </section>
       </div>
 
       <style jsx>{`
+        /* ── Hero ─────────────────────────────────────────────────────────── */
         .hero {
           padding: 4rem 0;
           text-align: center;
@@ -271,14 +424,20 @@ export default function Index() {
           margin-bottom: 2rem;
         }
         .description {
-          max-width: 600px;
+          max-width: 620px;
           margin: 0 auto 2rem;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
+        }
+        .micro-line {
+          font-size: 0.875rem;
+          color: var(--accents-3);
+          margin-bottom: 2rem;
         }
         .btns {
           display: flex;
           gap: 1rem;
           justify-content: center;
+          margin-bottom: 2rem;
         }
         .button {
           padding: 0.75rem 1.5rem;
@@ -286,6 +445,8 @@ export default function Index() {
           font-weight: 600;
           border: 1px solid var(--accents-2);
           transition: all 0.2s;
+          text-decoration: none;
+          color: var(--fg);
         }
         .button.primary {
           background: var(--fg);
@@ -295,12 +456,79 @@ export default function Index() {
         .button:hover {
           opacity: 0.8;
         }
-        .content-section {
-          margin: 4rem 0;
-          max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
+        .proof-chips {
+          display: flex;
+          gap: 0.75rem;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-top: 1rem;
         }
+        .chip {
+          padding: 0.3rem 0.85rem;
+          border: 1px solid var(--accents-2);
+          border-radius: 100px;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          color: var(--accents-2);
+        }
+
+        /* ── Shared section ───────────────────────────────────────────────── */
+        .content-section {
+          margin: 4rem auto;
+          max-width: 800px;
+        }
+        .section-subtitle {
+          color: var(--accents-3);
+          font-size: 0.95rem;
+          margin-top: -0.5rem;
+          margin-bottom: 2rem;
+        }
+        .section-link {
+          margin-top: 2rem;
+        }
+        .section-link a {
+          font-weight: 500;
+        }
+
+        /* ── Core Guarantees ──────────────────────────────────────────────── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
+        }
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
+          border: 1px solid var(--accents-2);
+          border-radius: var(--radius);
+          background: var(--bg);
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0 0 0.75rem 0;
+          font-size: 0.85rem;
+          color: var(--accents-2);
+          line-height: 1.5;
+        }
+        .property-notation {
+          display: block;
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          color: var(--accents-3);
+          background: #f4f4f4;
+          padding: 0.3rem 0.6rem;
+          border-radius: 4px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        /* ── Pill grid ────────────────────────────────────────────────────── */
         .pill-grid {
           display: flex;
           gap: 0.5rem;
@@ -314,6 +542,8 @@ export default function Index() {
           font-size: 0.8rem;
           font-weight: 600;
         }
+
+        /* ── Design principles ────────────────────────────────────────────── */
         .principles-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -323,30 +553,8 @@ export default function Index() {
         .principle h4 {
           margin-bottom: 0.5rem;
         }
-        .page-footer {
-          margin-top: 6rem;
-          padding: 4rem 0;
-          border-top: 1px solid var(--accents-2);
-          text-align: center;
-        }
-        .footer-links {
-          display: flex;
-          gap: 1.5rem;
-          justify-content: center;
-          flex-wrap: wrap;
-          margin-bottom: 2rem;
-        }
-        .disclaimer {
-          font-size: 0.8rem;
-          color: var(--accents-3);
-          max-width: 500px;
-          margin: 0 auto;
-        }
-        @media (max-width: 600px) {
-          .principles-grid {
-            grid-template-columns: 1fr;
-          }
-        }
+
+        /* ── What it is NOT ───────────────────────────────────────────────── */
         .not-list {
           list-style: none;
           padding: 0;
@@ -363,6 +571,139 @@ export default function Index() {
         }
         .not-list strong {
           color: #dc2626;
+        }
+
+        /* ── Evidence & Readiness ─────────────────────────────────────────── */
+        .readiness-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          margin-top: 1.75rem;
+        }
+        .readiness-col h4 {
+          font-size: 0.85rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: var(--accents-3);
+          margin: 0 0 1rem 0;
+        }
+        .readiness-col.funded h4 {
+          color: #2563eb;
+        }
+        .check-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .check-list li {
+          position: relative;
+          padding: 0.45rem 0 0.45rem 1.5rem;
+          font-size: 0.88rem;
+          color: var(--accents-2);
+          border-bottom: 1px solid #f0f0f0;
+          line-height: 1.5;
+        }
+        .check-list li::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #059669;
+          font-weight: 700;
+          font-size: 0.8rem;
+        }
+        .readiness-col.funded .check-list li::before {
+          content: '→';
+          color: #2563eb;
+        }
+        .readiness-links {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          margin-top: 2rem;
+        }
+        .readiness-link {
+          padding: 0.45rem 1rem;
+          border: 1px solid var(--accents-2);
+          border-radius: var(--radius);
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: var(--fg);
+          text-decoration: none;
+          transition: all 0.15s;
+        }
+        .readiness-link:hover {
+          background: var(--fg);
+          color: var(--bg);
+          border-color: var(--fg);
+        }
+
+        /* ── Final CTA strip ──────────────────────────────────────────────── */
+        .cta-strip {
+          margin: 5rem auto 2rem;
+          max-width: 800px;
+          border: 2px solid var(--fg);
+          border-radius: var(--radius);
+          padding: 3rem 3.5rem;
+          text-align: center;
+        }
+        .cta-strip h3 {
+          font-size: 1.75rem;
+          font-weight: 800;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.03em;
+        }
+        .cta-strip p {
+          font-size: 0.92rem;
+          color: var(--accents-3);
+          max-width: 480px;
+          margin: 0 auto 2rem;
+          line-height: 1.6;
+        }
+        .cta-btns {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+        }
+        .cta-btn {
+          padding: 0.75rem 1.75rem;
+          border-radius: var(--radius);
+          font-weight: 600;
+          font-size: 0.95rem;
+          border: 1.5px solid var(--accents-2);
+          text-decoration: none;
+          color: var(--fg);
+          transition: all 0.2s;
+        }
+        .cta-btn.primary {
+          background: var(--fg);
+          color: var(--bg);
+          border-color: var(--fg);
+        }
+        .cta-btn:hover {
+          opacity: 0.8;
+        }
+
+        /* ── Responsive ───────────────────────────────────────────────────── */
+        @media (max-width: 700px) {
+          .guarantees-grid,
+          .readiness-grid,
+          .principles-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-strip {
+            padding: 2rem 1.5rem;
+          }
+          .cta-strip h3 {
+            font-size: 1.35rem;
+          }
+          .cta-btns {
+            flex-direction: column;
+            align-items: center;
+          }
+          .property-notation {
+            font-size: 0.65rem;
+          }
         }
       `}</style>
     </>

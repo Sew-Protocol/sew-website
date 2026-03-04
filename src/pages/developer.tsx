@@ -18,6 +18,27 @@ export default function Developer() {
           </p>
         </section>
 
+        {/* ── Safety callout + in-page nav ─────────────────────────────────── */}
+        <div className="safety-callout">
+          <div className="safety-guarantees">
+            <span className="safety-title">Builder guarantees</span>
+            <ul>
+              <li>Your application never holds custody of funds</li>
+              <li>Settlement follows predefined rules only</li>
+              <li>Governance cannot modify active escrows</li>
+              <li>No role can arbitrarily redirect funds</li>
+              <li>Module changes only affect future escrows</li>
+            </ul>
+          </div>
+          <div className="safety-links">
+            <span className="safety-nav-label">On this page:</span>
+            <a href="#escrow-states">Escrow States</a>
+            <a href="#dispute-architecture">Dispute Architecture</a>
+            <a href="#safety-guarantees">Safety Guarantees</a>
+            <a href="#contracts">Contracts</a>
+          </div>
+        </div>
+
         <section className="content-block">
           <h3>Core concepts</h3>
           <p>
@@ -176,7 +197,7 @@ settings = {
           </p>
         </section>
 
-        <section className="content-block">
+        <section id="escrow-states" className="content-block">
           <h3>Escrow states</h3>
           <p>Every escrow moves through defined states:</p>
 
@@ -404,7 +425,7 @@ event ProtocolFeeCollected(
           </div>
         </section>
 
-        <section className="content-block">
+        <section id="safety-guarantees" className="content-block">
           <h3>Safety guarantees</h3>
           <p>When building on Sew, these invariants hold:</p>
           <ul>
@@ -416,7 +437,7 @@ event ProtocolFeeCollected(
           </ul>
         </section>
 
-        <section className="content-block">
+        <section id="contracts" className="content-block">
           <h3>Contract addresses</h3>
           <p>Mainnet addresses (Base):</p>
           <table className="address-table">
@@ -490,7 +511,7 @@ event ProtocolFeeCollected(
           </p>
         </section>
 
-        <section className="content-block">
+        <section id="dispute-architecture" className="content-block">
           <h3>Dispute architecture</h3>
           <p>
             If parties disagree about an escrow outcome, the protocol provides
@@ -505,8 +526,8 @@ event ProtocolFeeCollected(
           </p>
           <ul>
             <li>
-              <code>resolve(escrowId, evidence) → outcome</code> where outcome is
-              one of RELEASE, REFUND, or SPLIT
+              <code>resolve(escrowId, evidence) → outcome</code> where outcome
+              is one of RELEASE or REFUND
             </li>
             <li>Decisions are on-chain callable and immutable once recorded</li>
             <li>Resolvers can be custom per-escrow or protocol-appointed</li>
@@ -539,7 +560,9 @@ event ProtocolFeeCollected(
           <h4 className="subsection-title">Bond mechanics</h4>
           <ul>
             <li>v1: No bonds required (single trusted resolver)</li>
-            <li>v2: Standard resolvers post $250; senior resolvers post $25k</li>
+            <li>
+              v2: Standard resolvers post $250; senior resolvers post $25k
+            </li>
             <li>v3: Bonds are capital-weighted with fee tiers and slashing</li>
           </ul>
 
@@ -554,20 +577,28 @@ event ProtocolFeeCollected(
               Core concepts and workflows
             </li>
             <li>
-              <Link href="/docs/dispute-resolution/resolution-modes">Resolution Modes</Link> —
-              v1/v2/v3 comparison matrix
+              <Link href="/docs/dispute-resolution/resolution-modes">
+                Resolution Modes
+              </Link>{' '}
+              — v1/v2/v3 comparison matrix
             </li>
             <li>
-              <Link href="/docs/dispute-resolution/resolver-guide">Resolver Guide</Link> —
-              Setup, bonding, and operations
+              <Link href="/docs/dispute-resolution/resolver-guide">
+                Resolver Guide
+              </Link>{' '}
+              — Setup, bonding, and operations
             </li>
             <li>
-              <Link href="/docs/dispute-resolution/economic-model">Economic Model</Link> —
-              Parameters, bond calculations, slashing rates
+              <Link href="/docs/dispute-resolution/economic-model">
+                Economic Model
+              </Link>{' '}
+              — Parameters, bond calculations, slashing rates
             </li>
             <li>
-              <Link href="/docs/dispute-resolution/escalation-details">Escalation Details</Link> —
-              Multi-level flows and scenarios
+              <Link href="/docs/dispute-resolution/escalation-details">
+                Escalation Details
+              </Link>{' '}
+              — Multi-level flows and scenarios
             </li>
           </ul>
         </section>
@@ -666,6 +697,63 @@ event ProtocolFeeCollected(
         }
         .learn-more a:hover {
           text-decoration: underline;
+        }
+        /* ── Safety callout ─────────────────────────────────────────────────── */
+        .safety-callout {
+          max-width: 800px;
+          margin: 0 auto 1rem;
+          padding: 1.25rem 1.5rem;
+          border: 1.5px solid var(--accents-2);
+          border-radius: var(--radius);
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 1.5rem;
+          align-items: start;
+        }
+        .safety-title {
+          display: block;
+          font-size: 0.7rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.09em;
+          color: var(--accents-3);
+          margin-bottom: 0.6rem;
+        }
+        .safety-guarantees ul {
+          margin: 0;
+          padding-left: 1.15rem;
+          font-size: 0.84rem;
+          color: var(--accents-2);
+          line-height: 1.7;
+        }
+        .safety-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          min-width: 170px;
+        }
+        .safety-nav-label {
+          font-size: 0.7rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.09em;
+          color: var(--accents-3);
+          margin-bottom: 0.25rem;
+        }
+        .safety-links a {
+          font-size: 0.84rem;
+          color: var(--accents-2);
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.15s;
+        }
+        .safety-links a:hover {
+          color: #0070f3;
+        }
+        @media (max-width: 700px) {
+          .safety-callout {
+            grid-template-columns: 1fr;
+          }
         }
         .subsection-title {
           font-size: 1.1rem;
