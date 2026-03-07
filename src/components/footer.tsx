@@ -75,12 +75,12 @@ export default function Footer() {
           transition: color 0.2s;
         }
         .footer-section a:hover {
-          color: #0070f3;
+          color: #7adddc;
         }
         .footer-legal {
           margin-top: 2rem;
           padding-top: 2rem;
-          border-top: 1px solid #f0f0f0;
+          border-top: 1px solid #22343a;
           max-width: 600px;
           margin-left: auto;
           margin-right: auto;

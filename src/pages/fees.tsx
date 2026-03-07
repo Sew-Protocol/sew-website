@@ -200,11 +200,11 @@ export default function Fees() {
         .fee-table td {
           text-align: left;
           padding: 1rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
         }
         .fee-table th {
           font-weight: 600;
-          background: #fafafa;
+          background: #1b2a2e;
         }
         @media (max-width: 600px) {
           .content-block {
@@ -228,7 +228,7 @@ export default function Fees() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
       `}</style>
     </>

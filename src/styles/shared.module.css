@@ -117,8 +117,8 @@
 
 /* Fabric Panel Card */
 .fabric-panel {
-  background: linear-gradient(135deg, #faf9f7 0%, #f5f3f0 100%);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: linear-gradient(135deg, #1b2a2e 0%, #183146 100%);
+  border: 1px solid #2a3a3e;
   border-radius: 12px;
   padding: 2rem;
   position: relative;
@@ -134,10 +134,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--accents-3),
+    rgba(122, 221, 220, 0.4),
     transparent
   );
-  opacity: 0.3;
   border-radius: 12px 12px 0 0;
 }
 
@@ -198,19 +197,6 @@
 /* Textured Background for Hero */
 .hero-texture {
   position: relative;
-  background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
-}
-
-.hero-texture::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 Q50 0 100 100 T200 100' fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.03'/%3E%3Cpath d='M0 50 Q100 150 200 50' fill='none' stroke='%23ffffff' stroke-width='0.3' opacity='0.02'/%3E%3C/svg%3E");
-  background-size: 400px 400px;
-  pointer-events: none;
 }
 
 /* Subtle Grid Texture */

@@ -505,11 +505,11 @@ export default function Security() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         .disclaimer-block {
-          background: #fef3c7;
-          border: 1px solid #f59e0b;
+          background: rgba(245, 158, 11, 0.08);
+          border: 1px solid rgba(245, 158, 11, 0.4);
           border-radius: 8px;
           padding: 1rem 1.5rem;
           margin: 0 auto 3rem;
@@ -518,7 +518,7 @@ export default function Security() {
         }
         .disclaimer-block p {
           margin: 0;
-          color: #92400e;
+          color: #ffd166;
         }
 
         /* ── In-page nav ────────────────────────────────────────────────────── */
@@ -530,7 +530,7 @@ export default function Security() {
           align-items: center;
           flex-wrap: wrap;
           gap: 0.5rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
           font-size: 0.82rem;
         }
         .page-nav-label {
@@ -548,7 +548,7 @@ export default function Security() {
           transition: color 0.15s;
         }
         .page-nav a:hover {
-          color: #0070f3;
+          color: #7adddc;
         }
         .page-nav-sep {
           color: var(--accents-2);
@@ -564,7 +564,7 @@ export default function Security() {
         }
         .threat-card {
           padding: 1.25rem;
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
           border-radius: var(--radius);
           background: var(--bg);
         }
@@ -578,7 +578,7 @@ export default function Security() {
           font-size: 0.65rem;
           font-weight: 800;
           font-family: var(--font-mono);
-          background: #f0f0f0;
+          background: #1b2a2e;
           color: var(--accents-3);
           padding: 0.15rem 0.45rem;
           border-radius: 3px;
@@ -595,8 +595,8 @@ export default function Security() {
           margin: 0 0 0.75rem;
         }
         .threat-mitigation {
-          background: #f8f9ff;
-          border-left: 2.5px solid #2563eb;
+          background: rgba(122, 221, 220, 0.08);
+          border-left: 2.5px solid #7adddc;
           padding: 0.6rem 0.85rem;
           border-radius: 0 4px 4px 0;
         }
@@ -606,7 +606,7 @@ export default function Security() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.08em;
-          color: #2563eb;
+          color: #7adddc;
           margin-bottom: 0.3rem;
         }
         .threat-mitigation p {
@@ -617,11 +617,11 @@ export default function Security() {
         }
         .threat-mitigation code {
           font-size: 0.75rem;
-          background: #e8f0fe;
+          background: rgba(122, 221, 220, 0.08);
           padding: 0.1rem 0.3rem;
           border-radius: 3px;
           font-family: var(--font-mono);
-          color: #1d4ed8;
+          color: #7adddc;
         }
         @media (max-width: 700px) {
           .threat-grid {

@@ -9,7 +9,7 @@ export default function UseCases() {
       icon: '📦',
       description: 'Buying or selling physical items directly',
       whyProtected:
-        'Buyer protection against non-delivery; seller assurance of payment before shipping',
+        'Buyer protection against non-delivery; seller assurance of transfer before shipping',
       pattern:
         'Buyer creates escrow → Seller ships → Buyer confirms → Auto/timed release',
     },
@@ -17,15 +17,15 @@ export default function UseCases() {
       title: 'Event Tickets',
       icon: '🎫',
       description: 'Reselling tickets for concerts, sports, flights',
-      whyProtected: 'Prevents fraud; ensures ticket transfer upon payment',
-      pattern: 'Payment escrow → Ticket transfer → Confirmation → Release',
+      whyProtected: 'Prevents fraud; ensures ticket transfer upon transfer',
+      pattern: 'transfer escrow → Ticket transfer → Confirmation → Release',
     },
     {
       title: 'Freelance Services',
       icon: '💼',
       description: 'Contracting developers, designers, writers',
       whyProtected:
-        'Milestone-based protection; payment held until work delivered',
+        'Milestone-based protection; transfer held until work delivered',
       pattern:
         'Milestone escrow created → Work submitted → Review → Release or dispute',
     },
@@ -57,13 +57,13 @@ export default function UseCases() {
         'Agreement terms encoded → Conditions met → Auto release per rules',
     },
     {
-      title: 'DAO Payments',
+      title: 'DAO transfers',
       icon: '🏛',
-      description: 'Streaming or milestone-based contractor payments',
+      description: 'Streaming or milestone-based contractor transfers',
       whyProtected:
         'Funds held until work verified; prevents front-running or default',
       pattern:
-        'Payment streaming escrow → Milestone completion → Progressive release',
+        'transfer streaming escrow → Milestone completion → Progressive release',
     },
     {
       title: 'Cross-Chain Settlement',
@@ -117,8 +117,12 @@ export default function UseCases() {
           <h3>Ready to build?</h3>
           <p>Integrate protected transfers into your application</p>
           <div className="cta-buttons">
-            <Link href="/developer" className="cta-button primary">Developer Guide</Link>
-            <Link href="/contracts" className="cta-button">Contract Addresses</Link>
+            <Link href="/developer" className="cta-button primary">
+              Developer Guide
+            </Link>
+            <Link href="/contracts" className="cta-button">
+              Contract Addresses
+            </Link>
           </div>
         </section>
 
@@ -261,7 +265,7 @@ export default function UseCases() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         @media (max-width: 600px) {
           .use-cases-grid {

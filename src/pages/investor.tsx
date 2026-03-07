@@ -23,7 +23,7 @@ export default function Investor() {
 
         <section className="content-block fabric-texture fabric-texture-light">
           <h3>The opportunity</h3>
-          <p>Ethereum enables global, permissionless payments.</p>
+          <p>Ethereum enables global, permissionless transfers.</p>
           <p>
             But most transfers today are immediate, irreversible, and
             unprotected.
@@ -43,8 +43,8 @@ export default function Investor() {
             settlement.
           </p>
           <p>
-            Sew introduces a way to structure payments so that funds can be held
-            under predefined rules and released when conditions are met.
+            Sew introduces a way to structure transfers so that funds can be
+            held under predefined rules and released when conditions are met.
           </p>
         </section>
 
@@ -54,7 +54,7 @@ export default function Investor() {
             Sew Protocol is a non-custodial escrow architecture for ERC20
             transfers.
           </p>
-          <p>It acts as a settlement layer that allows payments to be:</p>
+          <p>It acts as a settlement layer that allows transfers to be:</p>
           <ul>
             <li>Held</li>
             <li>Coordinated</li>
@@ -80,7 +80,7 @@ export default function Investor() {
         <section className="content-block">
           <h3>Category positioning</h3>
           <p>
-            Sew is not a wallet. It is not a marketplace. It is not a payment
+            Sew is not a wallet. It is not a marketplace. It is not a transfer
             processor.
           </p>
           <p>
@@ -142,7 +142,7 @@ export default function Investor() {
           </ul>
           <p>
             Everyday Wallet serves as a reference interface demonstrating how
-            protected payments can work in practice.
+            protected transfers can work in practice.
           </p>
           <p>
             Over time, multiple interfaces can coexist over the same protocol
@@ -158,7 +158,7 @@ export default function Investor() {
           </p>
           <ul>
             <li>Safer peer-to-peer commerce</li>
-            <li>Structured payment agreements</li>
+            <li>Structured transfer agreements</li>
             <li>Coordination between strangers</li>
             <li>Risk-aware settlement flows</li>
           </ul>
@@ -289,7 +289,7 @@ export default function Investor() {
           <p>Everyday Wallet is a product built on Sew.</p>
           <p>It demonstrates:</p>
           <ul>
-            <li>Protected payment flows</li>
+            <li>Protected transfer flows</li>
             <li>Real-world coordination use cases</li>
             <li>UX patterns for safe transfers</li>
           </ul>
@@ -314,7 +314,7 @@ export default function Investor() {
         <section className="content-block">
           <h3>Summary</h3>
           <p>
-            Sew Protocol introduces a new primitive: a payment that can be held
+            Sew Protocol introduces a new primitive: a transfer that can be held
             and settled under rules without custody.
           </p>
           <p>
@@ -351,9 +351,9 @@ export default function Investor() {
         .defensibility-item {
           margin-top: 2rem;
           padding: 1.5rem;
-          background: #fafafa;
+          background: #1b2a2e;
           border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
         }
         .defensibility-item h4 {
           margin-top: 0;

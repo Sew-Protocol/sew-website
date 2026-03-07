@@ -66,7 +66,7 @@ const Header = ({ titlePre = '' }) => {
         <title>{titlePre ? `${titlePre} |` : ''} Sew Protocol</title>
         <meta
           name="description"
-          content="Payment protection at the transaction layer"
+          content="transfer protection at the transaction layer"
         />
         <meta name="og:title" content="Sew Protocol" />
         <meta property="og:image" content={ogImageUrl} />

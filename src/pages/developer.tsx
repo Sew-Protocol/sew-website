@@ -13,7 +13,7 @@ export default function Developer() {
           <p className="intro">
             Sew Protocol introduces protected transfers as a composable
             primitive for Ethereum applications. Developers can integrate
-            escrow-backed payments directly into wallets, marketplaces, and
+            escrow-backed transfers directly into wallets, marketplaces, and
             coordination tools.
           </p>
         </section>
@@ -164,7 +164,7 @@ escrow.createEscrow(to, amount, settings);`}</pre>
 
           <h4>Common configurations</h4>
           <div className="code-block">
-            <pre>{`// Simple payment - sender releases manually
+            <pre>{`// Simple transfer - sender releases manually
 settings = {
   customResolver: address(0),
   releaseAddress: address(0),
@@ -515,7 +515,7 @@ event ProtocolFeeCollected(
           <h3>Dispute architecture</h3>
           <p>
             If parties disagree about an escrow outcome, the protocol provides
-            structured, on-chain resolution mechanisms. This section covers the
+            structured, onchain resolution mechanisms. This section covers the
             technical foundations.
           </p>
 
@@ -529,7 +529,7 @@ event ProtocolFeeCollected(
               <code>resolve(escrowId, evidence) → outcome</code> where outcome
               is one of RELEASE or REFUND
             </li>
-            <li>Decisions are on-chain callable and immutable once recorded</li>
+            <li>Decisions are onchain callable and immutable once recorded</li>
             <li>Resolvers can be custom per-escrow or protocol-appointed</li>
           </ul>
 
@@ -606,7 +606,7 @@ event ProtocolFeeCollected(
         <section className="content-block">
           <h3>Summary</h3>
           <p>
-            Sew provides a reusable primitive: payments that can be held,
+            Sew provides a reusable primitive: transactions that can be held,
             coordinated, and settled under rules.
           </p>
           <p>
@@ -646,8 +646,8 @@ event ProtocolFeeCollected(
           padding: 0 2rem;
         }
         .code-block {
-          background: #1a1a1a;
-          color: #e0e0e0;
+          background: #0e1a1d;
+          color: #b0c8cc;
           padding: 1.5rem;
           border-radius: 8px;
           overflow-x: auto;
@@ -674,16 +674,16 @@ event ProtocolFeeCollected(
         .settings-table td {
           text-align: left;
           padding: 0.75rem 1rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
         }
         .module-table th,
         .address-table th,
         .settings-table th {
           font-weight: 600;
-          background: #fafafa;
+          background: #1b2a2e;
         }
         .settings-table code {
-          background: #f0f0f0;
+          background: #1b2a2e;
           padding: 0.2rem 0.4rem;
           border-radius: 4px;
           font-size: 0.85rem;
@@ -692,7 +692,7 @@ event ProtocolFeeCollected(
           margin-top: 1.5rem;
         }
         .learn-more a {
-          color: #0070f3;
+          color: #7adddc;
           font-weight: 500;
         }
         .learn-more a:hover {
@@ -748,7 +748,7 @@ event ProtocolFeeCollected(
           transition: color 0.15s;
         }
         .safety-links a:hover {
-          color: #0070f3;
+          color: #7adddc;
         }
         @media (max-width: 700px) {
           .safety-callout {

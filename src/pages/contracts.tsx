@@ -57,7 +57,7 @@ export default function Contracts() {
                 <td>EscrowVault</td>
                 <td>Core escrow contract (multi-token)</td>
                 <td>
-                  <code>0xBcDefBdEEA5C00f128bE83534646427b7248c5F9</code>
+                  <code>0x13b8b7572c72b46879662BFEA53851cBeD3bC47a</code>
                 </td>
               </tr>
             </tbody>
@@ -79,21 +79,21 @@ export default function Contracts() {
                 <td>SewToken</td>
                 <td>Governance token for voting</td>
                 <td>
-                  <code>0x7428c13e158ab6eB3E9e7780f05d58181172Ab5A</code>
+                  <code>0x79913fCa36Ea4e747F4742a4c1C7bC93a1522a14</code>
                 </td>
               </tr>
               <tr>
                 <td>TimelockController</td>
                 <td>Governance timelock (executes queued proposals)</td>
                 <td>
-                  <code>0xF0f2134CB24296781ABCa41A536c7C17600a7E47</code>
+                  <code>0xF61053a82F5dBd0a2eCDebb9748e457119305F6a</code>
                 </td>
               </tr>
               <tr>
                 <td>GovGovernor</td>
-                <td>On-chain Governor (absolute quorum)</td>
+                <td>Onchain Governor (absolute quorum)</td>
                 <td>
-                  <code>0xaFf6b4b8cF3bBDa62d4A40839c6c8244aacAC166</code>
+                  <code>0xa9d598AE5b185dd249A1E4b64c32f18f4500d2fA</code>
                 </td>
               </tr>
             </tbody>
@@ -115,35 +115,35 @@ export default function Contracts() {
                 <td>CreateOps</td>
                 <td>Escrow creation orchestration</td>
                 <td>
-                  <code>0x7816EB2022B7AFB3A53a41eaa5ED5a2c3924De3b</code>
+                  <code>0xBC60481020457CAC819B6938396a1002B0518f34</code>
                 </td>
               </tr>
               <tr>
                 <td>SettlementOps</td>
                 <td>Release/cancel/settlement orchestration</td>
                 <td>
-                  <code>0x1d0BE2d3b91A26537b5A8d75Ae721dE5Ea1a4054</code>
+                  <code>0x2cB13cefF8E5326647454aa2d50db15f5282c3A4</code>
                 </td>
               </tr>
               <tr>
                 <td>DisputeOps</td>
                 <td>Dispute flow orchestration</td>
                 <td>
-                  <code>0x5456edb1f266D6F3FaeAfFa4be33a7891eC9b3D2</code>
+                  <code>0xd62A061bcC7b934558bd4c5dDa4E1FbeDC06D394</code>
                 </td>
               </tr>
               <tr>
                 <td>YieldOps</td>
                 <td>Yield deposit/withdraw orchestration</td>
                 <td>
-                  <code>0xFf1AaC122A1Ab02aA76E43Cf8641A4a33277C653</code>
+                  <code>0xEc421d01E88754dAe5AAdE24C7616F8161f9f0F3</code>
                 </td>
               </tr>
               <tr>
                 <td>BondCollector</td>
                 <td>Bond/fee collector helper</td>
                 <td>
-                  <code>0x0f0526297983260fa92e71149322f13d74B4Cdca</code>
+                  <code>0x24240912ed0143A47Cda4b7d32C8AB8CdFA825B4</code>
                 </td>
               </tr>
             </tbody>
@@ -179,7 +179,7 @@ export default function Contracts() {
                 <td>DefaultReleaseStrategy</td>
                 <td>Default release strategy module</td>
                 <td>
-                  <code>0x9738584Db6D171e6BE9d0F104aAbF4C1cAd0fb3b</code>
+                  <code>0xAaB4EeE521768df1f39501798A8D2a39b19c4E18</code>
                 </td>
               </tr>
             </tbody>
@@ -218,9 +218,9 @@ export default function Contracts() {
         <section className="content-block">
           <h3>Explorer</h3>
           <p>
-            View all contracts on{' '}
+            View EscrowVault on{' '}
             <a
-              href="https://sepolia.basescan.org"
+              href="https://sepolia.basescan.org/address/0x13b8b7572c72b46879662BFEA53851cBeD3bC47a"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -279,6 +279,7 @@ export default function Contracts() {
           margin: 3rem auto;
           max-width: 900px;
           padding: 0 2rem;
+          overflow-x: auto;
         }
         .content-block h3 {
           margin-bottom: 1.5rem;
@@ -288,16 +289,19 @@ export default function Contracts() {
           border-collapse: collapse;
           margin: 1rem 0;
           font-size: 0.9rem;
+          table-layout: fixed;
         }
         .address-table th,
         .address-table td {
           text-align: left;
           padding: 1rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
+          overflow-wrap: break-word;
+          word-break: break-word;
         }
         .address-table th {
           font-weight: 600;
-          background: #fafafa;
+          background: #1b2a2e;
           color: var(--accents-3);
           font-size: 0.8rem;
           text-transform: uppercase;
@@ -305,10 +309,12 @@ export default function Contracts() {
         }
         .address-table code {
           font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-          font-size: 0.85rem;
-          background: #f5f5f5;
+          font-size: 0.82rem;
+          background: #1b2a2e;
           padding: 0.2rem 0.4rem;
           border-radius: 4px;
+          word-break: break-all;
+          white-space: normal;
         }
         .content-block a {
           color: var(--fg);
@@ -326,8 +332,7 @@ export default function Contracts() {
             padding: 0.75rem 0.5rem;
           }
           .address-table code {
-            font-size: 0.75rem;
-            word-break: break-all;
+            font-size: 0.72rem;
           }
         }
         .page-meta {
@@ -340,7 +345,7 @@ export default function Contracts() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
 
         /* ── Deployment status banner ────────────────────────────────────────── */
@@ -350,7 +355,7 @@ export default function Contracts() {
           padding: 1.25rem 2rem;
           border: 1.5px solid var(--accents-2);
           border-radius: var(--radius);
-          background: #fafafa;
+          background: #1b2a2e;
         }
         .status-row {
           display: flex;
@@ -372,7 +377,7 @@ export default function Contracts() {
           margin-top: 0.35rem;
         }
         .status-dot.pending {
-          background: #d1d5db;
+          background: #506a70;
         }
         .status-text {
           display: flex;
@@ -391,7 +396,7 @@ export default function Contracts() {
           font-size: 0.8rem;
           color: var(--accents-3);
           padding-top: 1rem;
-          border-top: 1px solid #eaeaea;
+          border-top: 1px solid #2a3a3e;
           line-height: 1.6;
         }
         @media (max-width: 600px) {

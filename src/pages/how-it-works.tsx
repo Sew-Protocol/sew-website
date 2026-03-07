@@ -13,15 +13,15 @@ export default function HowItWorks() {
             Escrow lifecycle, state transitions, and dispute mechanics
           </h2>
           <p className="intro">
-            Sew Protocol is a security layer for payments on Base (Ethereum L2).
-            Instead of transferring funds directly, payments can be held in
-            escrow until conditions are met.
+            Sew Protocol is a security layer for transfers on Base (Ethereum
+            L2). Instead of transferring funds directly, transfers can be held
+            in escrow until conditions are met.
           </p>
           <p className="glossary-note">
             <small>
-              <strong>Glossary:</strong> A protected payment is an ERC-20
-              transfer routed through escrow. "Transfer" refers to the on-chain
-              token movement; "payment" refers to the user intent.
+              <strong>Glossary:</strong> A protected transfer is an ERC-20
+              transfer routed through escrow. "Transfer" refers to the onchain
+              token movement; "transfer" refers to the user intent.
             </small>
           </p>
         </section>
@@ -31,7 +31,7 @@ export default function HowItWorks() {
           <p>Sew is not a marketplace, a wallet, or a court.</p>
           <p>
             Sew is a <strong>security layer for transfers</strong>. It provides
-            the infrastructure for protected payments while leaving user
+            the infrastructure for protected transfers while leaving user
             experience, dispute evaluation, and interface design to the
             applications built on top.
           </p>
@@ -63,7 +63,7 @@ export default function HowItWorks() {
           <div className="lifecycle-step">
             <h4>1) Creation</h4>
             <p>
-              A user initiates a payment through an interface (such as a wallet
+              A user initiates a transfer through an interface (such as a wallet
               or marketplace).
             </p>
             <p>At creation time, the following are defined:</p>
@@ -160,7 +160,7 @@ export default function HowItWorks() {
             </ul>
             <p>
               When released: funds leave escrow, the recipient receives the
-              payment, and any generated yield is included in settlement.
+              transfer, and any generated yield is included in settlement.
             </p>
             <p>If a dispute is opened, release is paused until resolution.</p>
             <p className="learn-more">
@@ -181,7 +181,7 @@ export default function HowItWorks() {
               <li>Normal release is paused; funds stay locked</li>
               <li>A neutral resolver is assigned to review evidence</li>
               <li>The resolver decides: Release or Refund</li>
-              <li>The outcome is enforced on-chain; no discretion</li>
+              <li>The outcome is enforced onchain; no discretion</li>
             </ul>
             <p>
               See{' '}
@@ -240,7 +240,7 @@ export default function HowItWorks() {
               <li>Reviews evidence from both parties</li>
               <li>Cannot take custody of the funds</li>
               <li>Can only decide: Release or Refund</li>
-              <li>Makes a binding decision on-chain</li>
+              <li>Makes a binding decision onchain</li>
             </ul>
             <p>
               The resolver has no discretion to act outside these bounds. The
@@ -436,7 +436,7 @@ export default function HowItWorks() {
               governed by the rules that existed when they were created.
             </li>
             <li>
-              <strong>Yield on escrowed payments</strong>: Funds held in escrow
+              <strong>Yield on escrowed transfers</strong>: Funds held in escrow
               can generate yield through integrations like Aave V3. This yield
               accrues to the escrow and is included in final settlement.
             </li>
@@ -483,7 +483,7 @@ export default function HowItWorks() {
             Sew Protocol adds structure to token transfers without introducing
             custody.
           </p>
-          <p>It allows a payment to be:</p>
+          <p>It allows a transfer to be:</p>
           <ul>
             <li>Held</li>
             <li>Coordinated</li>
@@ -512,6 +512,14 @@ export default function HowItWorks() {
           margin-left: auto;
           margin-right: auto;
         }
+        .glossary-note {
+          max-width: 800px;
+          margin: 1rem auto 0;
+          padding: 0 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+          line-height: 1.6;
+        }
         .header-section {
           margin-bottom: 4rem;
           text-align: center;
@@ -524,9 +532,9 @@ export default function HowItWorks() {
         .lifecycle-step {
           margin-top: 2rem;
           padding: 1.5rem;
-          background: #fafafa;
+          background: #1b2a2e;
           border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
         }
         .lifecycle-step h4 {
           margin-top: 0;
@@ -535,15 +543,15 @@ export default function HowItWorks() {
           margin-top: 1rem;
         }
         .learn-more a {
-          color: #0070f3;
+          color: #7adddc;
           font-weight: 500;
         }
         .learn-more a:hover {
           text-decoration: underline;
         }
         .disclaimer-block {
-          background: #fef3c7;
-          border: 1px solid #f59e0b;
+          background: rgba(245, 158, 11, 0.08);
+          border: 1px solid rgba(245, 158, 11, 0.4);
           border-radius: 8px;
           padding: 1rem 1.5rem;
           margin: 1.5rem 0;
@@ -551,7 +559,7 @@ export default function HowItWorks() {
         }
         .disclaimer-block p {
           margin: 0;
-          color: #92400e;
+          color: #ffd166;
         }
         @media (max-width: 600px) {
           .content-block {

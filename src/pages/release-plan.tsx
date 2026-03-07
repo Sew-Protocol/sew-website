@@ -249,12 +249,12 @@ export default function ReleasePlan() {
           letter-spacing: 0.05em;
         }
         .phase-status.active {
-          background: #ecfdf5;
+          background: rgba(108, 229, 177, 0.08);
           color: #059669;
         }
         .phase-status.upcoming {
-          background: #eff6ff;
-          color: #2563eb;
+          background: rgba(122, 221, 220, 0.08);
+          color: #7adddc;
         }
         .phase-subtitle {
           color: var(--accents-3);
@@ -287,7 +287,7 @@ export default function ReleasePlan() {
         }
         .phase-footer {
           padding-top: 1rem;
-          border-top: 1px solid #eaeaea;
+          border-top: 1px solid #2a3a3e;
         }
         .timeline-indicator {
           font-size: 0.85rem;

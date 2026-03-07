@@ -12,7 +12,7 @@ export default function Index() {
         <section className="hero">
           <h1>Sew Protocol</h1>
           <h2 className="tagline">
-            Protected payments. Dispute resolution built in.
+            Protected transfers. Dispute resolution built in.
           </h2>
           <p className="description">
             An ERC-20 transfer routed through escrow, with predefined release
@@ -34,7 +34,7 @@ export default function Index() {
           <div className="proof-chips">
             <span className="chip">Non-custodial</span>
             <span className="chip">Isolated per escrow</span>
-            <span className="chip">On-chain enforceable outcomes</span>
+            <span className="chip">Onchain enforceable outcomes</span>
           </div>
         </section>
 
@@ -49,7 +49,7 @@ export default function Index() {
             Ethereum.
           </p>
           <p>
-            A <strong>protected payment</strong> is an ERC-20 transfer routed
+            A <strong>protected transfer</strong> is an ERC-20 transfer routed
             through escrow, with predefined release and dispute resolution
             paths.
           </p>
@@ -155,7 +155,7 @@ export default function Index() {
               not trade execution
             </li>
             <li>
-              <strong>Not a payment processor</strong> — Funds flow directly
+              <strong>Not a transfer processor</strong> — Funds flow directly
               between parties via smart contracts
             </li>
             <li>
@@ -194,8 +194,8 @@ export default function Index() {
         <section id="how-it-helps" className="content-section">
           <h3>How it helps</h3>
           <p>
-            Sew allows a payment to be structured as an escrowed transfer with
-            clear release paths. This enables:
+            Sew allows an erc20 transfer to be structured as an escrowed
+            transfer with clear release paths. This enables:
           </p>
           <ul>
             <li>Funds held until conditions are met</li>
@@ -261,7 +261,7 @@ export default function Index() {
           <div className="thread-divider" />
           <h3>A primitive for protected transfers</h3>
           <p>
-            Sew defines a simple idea: A payment can be protected before it is
+            Sew defines a simple idea: A transfer can be protected before it is
             finalized.
           </p>
           <p>
@@ -273,7 +273,7 @@ export default function Index() {
             <li>Peer-to-peer commerce</li>
             <li>Marketplaces</li>
             <li>Onchain agreements</li>
-            <li>Service payments</li>
+            <li>Service transfers</li>
             <li>Interface-level safety features</li>
           </ul>
         </section>
@@ -289,7 +289,7 @@ export default function Index() {
           <p>
             If parties disagree, a resolver can be assigned. The resolver cannot
             seize funds or act outside predefined boundaries. The outcome
-            (Release or Refund) is enforced on-chain.
+            (Release or Refund) is enforced onchain.
           </p>
           <p>
             This transforms escrow from a protection mechanism into an{' '}
@@ -318,7 +318,7 @@ export default function Index() {
                   ERC-20 protected transfers with deterministic release paths
                 </li>
                 <li>
-                  v1 dispute resolution — single trusted resolver, on-chain
+                  v1 dispute resolution — single trusted resolver, onchain
                   enforcement
                 </li>
                 <li>
@@ -374,7 +374,7 @@ export default function Index() {
           <h3>Vision</h3>
           <p>
             Ethereum made programmable money possible. Sew explores what happens
-            when payments themselves become programmable agreements.
+            when transfers themselves become programmable agreements.
           </p>
           <p>
             By introducing protection at the moment of transfer, the protocol
@@ -500,9 +500,9 @@ export default function Index() {
         }
         .guarantee-card {
           padding: 1.25rem 1.5rem;
-          border: 1px solid var(--accents-2);
+          border: 1px solid var(--border);
           border-radius: var(--radius);
-          background: var(--bg);
+          background: #1b2a2e;
         }
         .guarantee-card h4 {
           margin: 0 0 0.4rem 0;
@@ -512,15 +512,15 @@ export default function Index() {
         .guarantee-card p {
           margin: 0 0 0.75rem 0;
           font-size: 0.85rem;
-          color: var(--accents-2);
+          color: var(--accents-3);
           line-height: 1.5;
         }
         .property-notation {
           display: block;
           font-family: var(--font-mono);
           font-size: 0.72rem;
-          color: var(--accents-3);
-          background: #f4f4f4;
+          color: #7adddc;
+          background: #22343a;
           padding: 0.3rem 0.6rem;
           border-radius: 4px;
           white-space: nowrap;
@@ -536,7 +536,8 @@ export default function Index() {
           margin: 1rem 0;
         }
         .pill {
-          background: #f0f0f0;
+          background: #22343a;
+          color: var(--accents-2);
           padding: 0.25rem 0.75rem;
           border-radius: 100px;
           font-size: 0.8rem;
@@ -565,7 +566,7 @@ export default function Index() {
         }
         .not-list li {
           padding: 1rem;
-          background: #fef2f2;
+          background: rgba(220, 38, 38, 0.1);
           border-left: 3px solid #dc2626;
           font-size: 0.95rem;
         }
@@ -589,7 +590,7 @@ export default function Index() {
           margin: 0 0 1rem 0;
         }
         .readiness-col.funded h4 {
-          color: #2563eb;
+          color: #7adddc;
         }
         .check-list {
           list-style: none;
@@ -601,7 +602,7 @@ export default function Index() {
           padding: 0.45rem 0 0.45rem 1.5rem;
           font-size: 0.88rem;
           color: var(--accents-2);
-          border-bottom: 1px solid #f0f0f0;
+          border-bottom: 1px solid #22343a;
           line-height: 1.5;
         }
         .check-list li::before {
@@ -614,7 +615,7 @@ export default function Index() {
         }
         .readiness-col.funded .check-list li::before {
           content: '→';
-          color: #2563eb;
+          color: #7adddc;
         }
         .readiness-links {
           display: flex;

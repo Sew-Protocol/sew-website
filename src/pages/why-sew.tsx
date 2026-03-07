@@ -14,7 +14,7 @@ export default function WhySew() {
           </h2>
           <p className="intro">
             Ethereum transactions are final. But coordination requires
-            optionality. Sew Protocol adds structured protection to payments
+            optionality. Sew Protocol adds structured protection to transfers
             without introducing custody.
           </p>
         </section>
@@ -22,7 +22,7 @@ export default function WhySew() {
         <section className="content-block">
           <h3>The problem</h3>
           <p>
-            Today, on-chain value transfer has a stark choice: send or don't
+            Today, onchain value transfer has a stark choice: send or don't
             send.
           </p>
           <ul>
@@ -56,7 +56,7 @@ export default function WhySew() {
             A protected transfer is an ERC-20 transfer routed through escrow,
             with predefined release and dispute resolution paths. Neither party
             loses custody. Both know the rules upfront. Settlement is enforced
-            on-chain.
+            onchain.
           </p>
           <div className="pill-grid">
             <span className="pill">Non-custodial</span>
@@ -69,7 +69,7 @@ export default function WhySew() {
         <section className="content-block">
           <h3>How it compares</h3>
           <p>
-            Different payment patterns serve different needs. Here's how Sew
+            Different transfer patterns serve different needs. Here's how Sew
             fits in:
           </p>
           <div className="comparison-grid">
@@ -88,7 +88,7 @@ export default function WhySew() {
 
             <div className="comparison-item">
               <h4>Custodial Escrow</h4>
-              <p className="desc">Marketplace, payment processor</p>
+              <p className="desc">Marketplace, transfer processor</p>
               <ul className="pros">
                 <li>✓ Protection</li>
                 <li>✓ Dispute handling</li>
@@ -145,7 +145,7 @@ export default function WhySew() {
               neutrality guarantees
             </li>
             <li>
-              <strong>Service payments:</strong> Work-for-hire with protection
+              <strong>Service transfers:</strong> Work-for-hire with protection
             </li>
             <li>
               <strong>Wallet integrations:</strong> Safety features at the
@@ -243,8 +243,9 @@ export default function WhySew() {
           justify-content: center;
         }
         .pill {
-          background: #2563eb;
-          color: white;
+          background: #22343a;
+          color: #7adddc;
+          border: 1px solid rgba(122, 221, 220, 0.3);
           padding: 0.5rem 1.5rem;
           border-radius: 20px;
           font-size: 0.9rem;
@@ -257,14 +258,14 @@ export default function WhySew() {
           margin: 2rem 0;
         }
         .comparison-item {
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
           border-radius: 8px;
           padding: 1.5rem;
-          background: #fafafa;
+          background: #1b2a2e;
         }
         .comparison-item.highlight {
-          border: 2px solid #2563eb;
-          background: rgba(37, 99, 235, 0.04);
+          border: 2px solid #7adddc;
+          background: rgba(122, 221, 220, 0.05);
         }
         .comparison-item h4 {
           margin-top: 0;
@@ -272,7 +273,7 @@ export default function WhySew() {
         }
         .comparison-item .desc {
           font-size: 0.9rem;
-          color: var(--accents-5);
+          color: var(--accents-3);
           margin: 0.5rem 0 1rem;
         }
         .comparison-item ul {
@@ -281,10 +282,10 @@ export default function WhySew() {
           font-size: 0.9rem;
         }
         .comparison-item .pros {
-          color: #22863a;
+          color: #6ce5b1;
         }
         .comparison-item .cons {
-          color: #cb2431;
+          color: #ff6f61;
         }
         .principle-grid {
           display: grid;
@@ -294,22 +295,22 @@ export default function WhySew() {
         }
         .principle {
           padding: 1.5rem;
-          border-left: 4px solid #2563eb;
-          background: #f0f6ff;
+          border-left: 4px solid #7adddc;
+          background: #1b2a2e;
         }
         .principle h4 {
           margin-top: 0;
-          color: #2563eb;
+          color: #7adddc;
         }
         .page-meta {
           margin: 4rem auto;
           max-width: 800px;
           padding: 0 2rem;
           font-size: 0.9rem;
-          color: var(--accents-5);
+          color: var(--accents-3);
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         @media (max-width: 600px) {
           .comparison-grid {

@@ -4,14 +4,21 @@
   --gap: 1rem;
   --gap-double: 2rem;
 
-  --bg: #fff;
-  --fg: #000;
-  --accents-1: #111;
-  --accents-2: #333;
-  --accents-3: #888;
-  --accents-5: #bbb;
-  --accents-6: #eaeaea;
-  --geist-foreground: #000;
+  --bg: #0e1a1d;
+  --fg: #ffffff;
+  --accents-1: #7adddc;
+  --accents-2: #b0c8cc;
+  --accents-3: #73949b;
+  --accents-5: #506a70;
+  --accents-6: #22343a;
+  --geist-foreground: #ffffff;
+
+  --surface: #1b2a2e;
+  --surface-variant: #22343a;
+  --card: #183146;
+  --border: #2a3a3e;
+  --primary: #7adddc;
+  --accent: #d9fbff;
 
   --radius: 8px;
 
@@ -248,11 +255,11 @@ figure {
 }
 
 a {
-  color: #0070f3;
+  color: #7adddc;
   text-decoration: none;
 }
 a:hover {
-  color: #3291ff;
+  color: #d9fbff;
 }
 
 .links {
@@ -302,7 +309,7 @@ h2 {
 }
 
 p {
-  color: #555;
+  color: #b0c8cc;
   font-weight: 400;
   font-size: 0.94rem;
   line-height: 1.7;
@@ -317,7 +324,8 @@ pre :global(code) {
 
 code {
   font-size: 0.8rem;
-  background: #f1f1f1;
+  background: #22343a;
+  color: #b0c8cc;
   padding: 0.2rem;
   border-radius: var(--radius);
   font-family: var(--font-mono);
@@ -369,4 +377,78 @@ footer span:nth-child(3) {
 
 footer span:nth-child(3) a {
   color: inherit;
+}
+
+/* ── Global fabric texture classes ─────────────────────────────────────────
+   These are used as plain class names across all pages.
+   Defines subtle sewing-inspired texture for elevated content areas.
+─────────────────────────────────────────────────────────────────────────── */
+
+/* Subtle thread-path overlay on the whole page layout */
+.hero-texture {
+  position: relative;
+}
+.hero-texture::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 Q75 30 150 100 T300 100' fill='none' stroke='%237ADDDC' stroke-width='0.5'/%3E%3Cpath d='M0 160 Q150 80 300 160' fill='none' stroke='%237ADDDC' stroke-width='0.3'/%3E%3C/svg%3E");
+  background-size: 300px 200px;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Elevated section with subtle woven grain */
+.fabric-texture {
+  position: relative;
+  background: #1b2a2e;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+}
+.fabric-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 14px,
+      rgba(122, 221, 220, 0.025) 14px,
+      rgba(122, 221, 220, 0.025) 15px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 14px,
+      rgba(122, 221, 220, 0.025) 14px,
+      rgba(122, 221, 220, 0.025) 15px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fabric-texture-light {
+  background: #1b2a2e;
+}
+
+/* Slightly blue-tinted card zones */
+.fabric-texture-warm {
+  background: #183146;
+}
+
+/* Teal thread line divider between sections */
+.thread-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(122, 221, 220, 0.35) 20%,
+    rgba(122, 221, 220, 0.35) 80%,
+    transparent 100%
+  );
+  margin: 2rem auto 2.5rem;
+  max-width: 600px;
 }

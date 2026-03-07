@@ -36,19 +36,20 @@ export default function About() {
           </p>
           <ul>
             <li>
-              <strong>Core escrow:</strong> Non-custodial payment protection with
-              defined release and resolution rules
+              <strong>Core escrow:</strong> Non-custodial transfer protection
+              with defined release and resolution rules
             </li>
             <li>
-              <strong>Modular architecture:</strong> Pluggable release strategies,
-              dispute resolvers, and yield generators
+              <strong>Modular architecture:</strong> Pluggable release
+              strategies, dispute resolvers, and yield generators
             </li>
             <li>
               <strong>Dispute resolution:</strong> Structured, incentivized
               mechanisms for fair conflict resolution
             </li>
             <li>
-              <strong>Governance:</strong> Community-controlled protocol evolution
+              <strong>Governance:</strong> Community-controlled protocol
+              evolution
             </li>
           </ul>
           <p>
@@ -60,8 +61,8 @@ export default function About() {
         <section className="content-block">
           <h3>Governance and token</h3>
           <p>
-            Sew Protocol is governed by the community through the SEW token. Governance
-            controls:
+            Sew Protocol is governed by the community through the SEW token.
+            Governance controls:
           </p>
           <ul>
             <li>Protocol parameters and fee allocation</li>
@@ -76,9 +77,7 @@ export default function About() {
 
         <section className="content-block">
           <h3>Security-first design</h3>
-          <p>
-            Security is not an afterthought. Sew is designed with:
-          </p>
+          <p>Security is not an afterthought. Sew is designed with:</p>
           <ul>
             <li>
               <strong>Non-custodial architecture:</strong> Funds never leave
@@ -104,21 +103,19 @@ export default function About() {
 
         <section className="content-block">
           <h3>Roadmap</h3>
-          <p>
-            Sew is under active development. Our roadmap includes:
-          </p>
+          <p>Sew is under active development. Our roadmap includes:</p>
           <ul>
             <li>
               <strong>v1 (Launch):</strong> Core escrow with single-tier dispute
               resolution
             </li>
             <li>
-              <strong>v2 (Post-launch):</strong> Multi-tier escalating resolution
-              with staking and appeals
+              <strong>v2 (Post-launch):</strong> Multi-tier escalating
+              resolution with staking and appeals
             </li>
             <li>
-              <strong>v3 (Future):</strong> Fully decentralized resolver selection
-              with capital-weighted delegation
+              <strong>v3 (Future):</strong> Fully decentralized resolver
+              selection with capital-weighted delegation
             </li>
           </ul>
           <p>
@@ -128,9 +125,7 @@ export default function About() {
 
         <section className="content-block">
           <h3>Get involved</h3>
-          <p>
-            Sew Protocol is open source and community-driven.
-          </p>
+          <p>Sew Protocol is open source and community-driven.</p>
           <ul>
             <li>
               <strong>Developers:</strong>{' '}
@@ -156,9 +151,7 @@ export default function About() {
             </li>
             <li>
               <strong>Source code:</strong>{' '}
-              <a href="https://github.com/Sew-Protocol/sew-protocol">
-                GitHub
-              </a>{' '}
+              <a href="https://github.com/Sew-Protocol/sew-protocol">GitHub</a>{' '}
               — Audit and contribute
             </li>
           </ul>
@@ -166,9 +159,7 @@ export default function About() {
 
         <section className="content-block">
           <h3>Contact</h3>
-          <p>
-            Questions? Reach out to the team.
-          </p>
+          <p>Questions? Reach out to the team.</p>
           <ul>
             <li>
               <strong>Email:</strong> info@sewprotocol.com
@@ -221,7 +212,7 @@ export default function About() {
           color: var(--accents-5);
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         @media (max-width: 600px) {
           .content-block {

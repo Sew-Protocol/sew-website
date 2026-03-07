@@ -21,7 +21,7 @@ export default function Technical() {
           <h3>Smart Contracts</h3>
           <p>
             The Sew Protocol smart contracts are the source of truth. All
-            protocol behavior is enforced on-chain.
+            protocol behavior is enforced onchain.
           </p>
           <ul>
             <li>

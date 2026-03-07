@@ -78,7 +78,7 @@
 }
 
 .header :global(a.active) {
-  color: #0070f3;
+  color: #7adddc;
   font-weight: 600;
 }
 
@@ -96,9 +96,9 @@
 }
 
 .header .secondaryNav :global(a.active) {
-  background: #0070f3;
-  color: white;
-  border-color: #0070f3;
+  background: #7adddc;
+  color: #0e1a1d;
+  border-color: #7adddc;
 }
 
 @media (max-width: 600px) {

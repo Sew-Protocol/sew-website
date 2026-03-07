@@ -185,7 +185,7 @@ export default function DisputeResolution() {
           color: var(--accents-3);
         }
         .intro-crosslink a {
-          color: #2563eb;
+          color: #7adddc;
           font-weight: 600;
           text-decoration: none;
         }
@@ -197,12 +197,12 @@ export default function DisputeResolution() {
           color: var(--accents-3);
           margin-bottom: 1.25rem;
           padding: 0.65rem 1rem;
-          background: #f8f9ff;
-          border-left: 2.5px solid #2563eb;
+          background: rgba(122, 221, 220, 0.08);
+          border-left: 2.5px solid #7adddc;
           border-radius: 0 4px 4px 0;
         }
         .economics-note a {
-          color: #2563eb;
+          color: #7adddc;
           font-weight: 500;
         }
         .header-section {
@@ -243,12 +243,12 @@ export default function DisputeResolution() {
           letter-spacing: 0.05em;
         }
         .mode-badge.active {
-          background: #ecfdf5;
+          background: rgba(108, 229, 177, 0.08);
           color: #059669;
         }
         .mode-badge.planned {
-          background: #eff6ff;
-          color: #2563eb;
+          background: rgba(122, 221, 220, 0.08);
+          color: #7adddc;
         }
         .mode-card h4 {
           margin: 0;

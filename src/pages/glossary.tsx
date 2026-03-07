@@ -27,7 +27,7 @@ export default function Glossary() {
     {
       term: 'Dispute Architecture',
       definition:
-        'The structural and mechanical layer of dispute handling: state machines, resolver interfaces, escalation paths, and how outcomes are enforced on-chain. Distinguished from Dispute Economics, which covers the incentive layer.',
+        'The structural and mechanical layer of dispute handling: state machines, resolver interfaces, escalation paths, and how outcomes are enforced onchain. Distinguished from Dispute Economics, which covers the incentive layer.',
     },
     {
       term: 'Dispute Economics',
@@ -100,7 +100,7 @@ export default function Glossary() {
         'The full configuration of an escrow recorded at creation (modules, parameters, fees, timeouts). This configuration cannot be changed afterward.',
     },
     {
-      term: 'Protected Payment',
+      term: 'Protected transfer',
       definition:
         'A user-friendly term for a protected transfer. Refers to sending value where funds are held in escrow until conditions are met.',
     },
@@ -110,7 +110,7 @@ export default function Glossary() {
         'An ERC-20 token transfer routed through escrow with predefined release and resolution rules. Funds are held under deterministic conditions until settlement.',
     },
     {
-      term: 'Protected Payment',
+      term: 'Protected transfer',
       definition:
         'A user-friendly term for a protected transfer. Refers to sending value where funds are held in escrow until conditions are met.',
     },
@@ -401,7 +401,7 @@ export default function Glossary() {
           font-size: 1rem;
           margin: 0 0 0.75rem 0;
           padding-bottom: 0.75rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
         }
         .glossary-card p {
           font-size: 0.9rem;
@@ -414,7 +414,7 @@ export default function Glossary() {
           max-width: 800px;
           margin: 0 auto 1rem;
           padding: 2rem 2rem 1.75rem;
-          background: #fafafa;
+          background: #1b2a2e;
           border: 1.5px solid var(--accents-2);
           border-radius: var(--radius);
         }
@@ -442,7 +442,7 @@ export default function Glossary() {
           gap: 1rem;
           padding: 0.85rem 1rem;
           background: var(--bg);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
           border-radius: var(--radius);
         }
         .notation-symbol {
@@ -450,7 +450,7 @@ export default function Glossary() {
           font-size: 1.3rem;
           font-weight: 700;
           color: var(--fg);
-          background: #f0f0f0;
+          background: #1b2a2e;
           width: 42px;
           height: 42px;
           display: flex;
@@ -477,7 +477,7 @@ export default function Glossary() {
         .notation-text code {
           font-family: var(--font-mono);
           font-size: 0.72rem;
-          background: #f0f0f0;
+          background: #1b2a2e;
           padding: 0.1rem 0.3rem;
           border-radius: 3px;
           white-space: nowrap;
@@ -488,7 +488,7 @@ export default function Glossary() {
           margin: 0;
         }
         .notation-ref a {
-          color: #0070f3;
+          color: #7adddc;
           font-weight: 500;
           text-decoration: none;
         }
@@ -544,7 +544,7 @@ export default function Glossary() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         @media (max-width: 600px) {
           .glossary-grid {

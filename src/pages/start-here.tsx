@@ -38,7 +38,7 @@ export default function StartHere() {
             </div>
             <h2>I&apos;m a User</h2>
             <p className="pathway-desc">
-              I want to make protected payments on Ethereum
+              I want to make protected transfers on Ethereum
             </p>
             <div className="pathway-actions">
               <Link href="/everyday-wallet">

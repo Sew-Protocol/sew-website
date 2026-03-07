@@ -189,12 +189,12 @@ export default function Integrations() {
           letter-spacing: 0.05em;
         }
         .status-badge.active {
-          background: #ecfdf5;
+          background: rgba(108, 229, 177, 0.08);
           color: #059669;
         }
         .status-badge.planned {
-          background: #eff6ff;
-          color: #2563eb;
+          background: rgba(122, 221, 220, 0.08);
+          color: #7adddc;
         }
         .integration-category {
           font-size: 0.85rem;
@@ -297,11 +297,11 @@ export default function Integrations() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         .disclaimer-block {
-          background: #fef3c7;
-          border: 1px solid #f59e0b;
+          background: rgba(245, 158, 11, 0.08);
+          border: 1px solid rgba(245, 158, 11, 0.4);
           border-radius: 8px;
           padding: 1rem 1.5rem;
           margin: 0 auto 3rem;
@@ -310,7 +310,7 @@ export default function Integrations() {
         }
         .disclaimer-block p {
           margin: 0;
-          color: #92400e;
+          color: #ffd166;
         }
         @media (max-width: 600px) {
           .integrations-grid {

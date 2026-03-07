@@ -20,7 +20,7 @@ export default function Comparisons() {
       title: 'Custodial Escrow',
       icon: '🔐',
       description:
-        'Funds held by a trusted third party (marketplace, payment processor)',
+        'Funds held by a trusted third party (marketplace, transfer processor)',
       characteristics: [
         'Centralized party controls funds',
         'Requires trust in custodian',
@@ -241,8 +241,12 @@ export default function Comparisons() {
           <h3>Ready to integrate?</h3>
           <p>Build protected transfers into your application</p>
           <div className="cta-buttons">
-            <Link href="/developer" className="cta-button primary">Developer Guide</Link>
-            <Link href="/use-cases" className="cta-button">See Use Cases</Link>
+            <Link href="/developer" className="cta-button primary">
+              Developer Guide
+            </Link>
+            <Link href="/use-cases" className="cta-button">
+              See Use Cases
+            </Link>
           </div>
         </section>
 
@@ -453,7 +457,7 @@ export default function Comparisons() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         @media (max-width: 600px) {
           .patterns-grid {

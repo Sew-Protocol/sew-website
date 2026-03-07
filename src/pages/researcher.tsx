@@ -120,7 +120,7 @@ export default function Researcher() {
               on outcomes, and trust formation between strangers.
             </p>
             <p>
-              Protected transfers introduce a structured phase between payment
+              Protected transfers introduce a structured phase between transfer
               and settlement, which can influence coordination behaviour.
             </p>
           </div>
@@ -335,7 +335,7 @@ export default function Researcher() {
             <li>Traditional escrow services</li>
             <li>Smart contract vaults and pools</li>
             <li>Arbitration protocols (e.g., Kleros, UMA)</li>
-            <li>Payment coordination systems</li>
+            <li>transfer coordination systems</li>
             <li>Optimistic rollup dispute games</li>
           </ul>
           <p>
@@ -503,7 +503,7 @@ export default function Researcher() {
           align-items: center;
           flex-wrap: wrap;
           gap: 0.5rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
           font-size: 0.82rem;
         }
         .page-nav-label {
@@ -521,7 +521,7 @@ export default function Researcher() {
           transition: color 0.15s;
         }
         .page-nav a:hover {
-          color: #0070f3;
+          color: #7adddc;
         }
         .sep {
           color: var(--accents-3);
@@ -555,9 +555,9 @@ export default function Researcher() {
         .research-domain {
           margin-top: 1.5rem;
           padding: 1.5rem;
-          background: #fafafa;
+          background: #1b2a2e;
           border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
         }
         .research-domain h4 {
           margin-top: 0;
@@ -582,9 +582,9 @@ export default function Researcher() {
         .system-property {
           margin-top: 1.5rem;
           padding: 1.5rem;
-          background: #fafafa;
+          background: #1b2a2e;
           border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
         }
         .system-property h4 {
           margin-top: 0;
@@ -624,7 +624,7 @@ export default function Researcher() {
           font-family: var(--font-mono);
           font-size: 0.65rem;
           font-weight: 800;
-          background: #f0f0f0;
+          background: #1b2a2e;
           color: var(--accents-3);
           padding: 0.15rem 0.45rem;
           border-radius: 3px;
@@ -644,7 +644,7 @@ export default function Researcher() {
           font-family: var(--font-mono);
           font-size: 0.73rem;
           color: var(--accents-3);
-          background: #f4f4f4;
+          background: #1b2a2e;
           padding: 0.3rem 0.65rem;
           border-radius: 4px;
           letter-spacing: 0.01em;
@@ -656,7 +656,7 @@ export default function Researcher() {
           line-height: 1.6;
         }
         .invariant-ref a {
-          color: #0070f3;
+          color: #7adddc;
           font-weight: 500;
           text-decoration: none;
         }
@@ -666,7 +666,7 @@ export default function Researcher() {
 
         /* ── Responsible disclosure ─────────────────────────────────────────── */
         .disclosure-block {
-          background: #fafafa;
+          background: #1b2a2e;
           border: 1.5px solid var(--accents-2);
           border-radius: var(--radius);
           padding: 2rem 2rem 1.75rem !important;
@@ -687,7 +687,7 @@ export default function Researcher() {
           padding: 1rem 1.25rem;
           background: var(--bg);
           border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
         }
         .disclosure-label {
           display: block;
@@ -705,7 +705,7 @@ export default function Researcher() {
           line-height: 1.65;
         }
         .disclosure-item a {
-          color: #0070f3;
+          color: #7adddc;
           font-weight: 500;
           text-decoration: none;
         }
@@ -715,7 +715,7 @@ export default function Researcher() {
         .disclosure-item code {
           font-family: var(--font-mono);
           font-size: 0.78rem;
-          background: #f0f0f0;
+          background: #1b2a2e;
           padding: 0.1rem 0.3rem;
           border-radius: 3px;
           color: var(--accents-2);

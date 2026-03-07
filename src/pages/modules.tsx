@@ -565,6 +565,86 @@ On release:
           </ul>
         </section>
       </div>
+
+      <style jsx>{`
+        h1 {
+          margin-bottom: 0.5rem;
+        }
+        .tagline {
+          color: var(--accents-3);
+          margin-bottom: 2rem;
+        }
+        .intro {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        .header-section {
+          margin-bottom: 4rem;
+          text-align: center;
+        }
+        .content-block {
+          margin: 4rem auto;
+          max-width: 800px;
+          padding: 0 2rem;
+        }
+        .module-type,
+        .characteristic,
+        .yield-method,
+        .protocol,
+        .safety-guarantee,
+        .evolution-phase,
+        .governance-rule {
+          margin-top: 2rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--border);
+        }
+        .module-type:first-of-type,
+        .characteristic:first-of-type,
+        .yield-method:first-of-type,
+        .protocol:first-of-type,
+        .safety-guarantee:first-of-type,
+        .evolution-phase:first-of-type,
+        .governance-rule:first-of-type {
+          border-top: none;
+          padding-top: 0.5rem;
+        }
+        .module-type h4,
+        .characteristic h4,
+        .yield-method h4,
+        .protocol h4,
+        .safety-guarantee h4,
+        .evolution-phase h4,
+        .governance-rule h4 {
+          margin-top: 0;
+          color: var(--fg);
+        }
+        .learn-more {
+          margin-top: 1.5rem;
+        }
+        .code-example {
+          margin-top: 1.5rem;
+          background: #0e1a1d;
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          overflow-x: auto;
+        }
+        .code-example pre {
+          margin: 0;
+          padding: 1.25rem 1.5rem;
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          line-height: 1.6;
+          color: #b0c8cc;
+          white-space: pre;
+        }
+        @media (max-width: 600px) {
+          .content-block {
+            padding: 0 1rem;
+          }
+        }
+      `}</style>
     </>
   )
 }

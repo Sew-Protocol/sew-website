@@ -33,7 +33,7 @@ export default function FAQ() {
     {
       question: 'Is Sew a wallet or marketplace?',
       answer:
-        'No. Sew is infrastructure—a security layer for payments. Wallets, marketplaces, and applications build on top of Sew to provide protected transfers. Everyday Wallet is one example interface built on the protocol.',
+        'No. Sew is infrastructure—a security layer for transfers. Wallets, marketplaces, and applications build on top of Sew to provide protected transfers. Everyday Wallet is one example interface built on the protocol.',
     },
     {
       question: 'Are my funds at risk if an integration (like Aave) fails?',
@@ -79,7 +79,7 @@ export default function FAQ() {
     {
       question: 'What happens if the resolver is compromised?',
       answer:
-        "A resolver's power is strictly bounded by the protocol. They can only choose one of two outcomes: Release or Refund. They cannot seize funds, redirect payments to arbitrary addresses, or take any action outside that set. A compromised resolver decision affects only the specific escrow under dispute — no other escrows are at risk. In v2+, decisions can be appealed and overturned.",
+        "A resolver's power is strictly bounded by the protocol. They can only choose one of two outcomes: Release or Refund. They cannot seize funds, redirect transfers to arbitrary addresses, or take any action outside that set. A compromised resolver decision affects only the specific escrow under dispute — no other escrows are at risk. In v2+, decisions can be appealed and overturned.",
       links: [
         { label: 'Security Model →', href: '/security' },
         { label: 'Dispute Economics →', href: '/security#dispute-economics' },
@@ -227,7 +227,7 @@ export default function FAQ() {
           font-size: 1rem;
           margin-bottom: 0.75rem;
           padding-bottom: 0.75rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
         }
         .faq-card p {
           font-size: 0.9rem;
@@ -250,8 +250,8 @@ export default function FAQ() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #2563eb;
-          background: #eff6ff;
+          color: #7adddc;
+          background: rgba(122, 221, 220, 0.08);
           padding: 0.25rem 0.65rem;
           border-radius: 4px;
           margin-bottom: 0.75rem;
@@ -298,15 +298,15 @@ export default function FAQ() {
         .reviewer-link {
           font-size: 0.8rem;
           font-weight: 600;
-          color: #2563eb;
+          color: #7adddc;
           text-decoration: none;
           padding: 0.25rem 0.65rem;
-          background: #eff6ff;
+          background: rgba(122, 221, 220, 0.08);
           border-radius: 4px;
           transition: background 0.15s;
         }
         .reviewer-link:hover {
-          background: #dbeafe;
+          background: #22343a;
         }
         /* ── General heading ────────────────────────────────────────────────── */
         .general-heading-section {
@@ -320,7 +320,7 @@ export default function FAQ() {
           color: var(--accents-3);
           margin: 0;
           padding-bottom: 0.75rem;
-          border-bottom: 1px solid #eaeaea;
+          border-bottom: 1px solid #2a3a3e;
         }
         /* ── Related section ────────────────────────────────────────────────── */
         .related-section {
@@ -362,7 +362,7 @@ export default function FAQ() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #0070f3;
+          color: #7adddc;
         }
         @media (max-width: 600px) {
           .faq-grid {

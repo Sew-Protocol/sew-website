@@ -121,7 +121,7 @@ export default function Architecture() {
             </div>
             <div className="state-row">
               <code>RESOLVED</code>
-              <span>Resolver outcome enforced on-chain</span>
+              <span>Resolver outcome enforced onchain</span>
               <span className="badge yes">Yes</span>
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function Architecture() {
             </div>
             <p>
               Handle disagreements between parties. Define who can resolve, how
-              decisions escalate, and how outcomes are enforced on-chain.
+              decisions escalate, and how outcomes are enforced onchain.
               Resolvers cannot touch funds — they only determine outcomes.
             </p>
             <ul>
@@ -507,8 +507,8 @@ export default function Architecture() {
           max-width: 800px;
           margin: 0 auto 1rem;
           padding: 1rem 1.5rem;
-          background: #f8f9ff;
-          border-left: 3px solid #2563eb;
+          background: rgba(122, 221, 220, 0.08);
+          border-left: 3px solid #7adddc;
           border-radius: 0 var(--radius) var(--radius) 0;
           font-size: 0.88rem;
           line-height: 1.6;
@@ -518,7 +518,7 @@ export default function Architecture() {
           color: var(--accents-2);
         }
         .reviewer-callout a {
-          color: #2563eb;
+          color: #7adddc;
           font-weight: 500;
         }
 
@@ -544,7 +544,7 @@ export default function Architecture() {
           padding: 2rem 1.5rem;
           border: 1.5px solid var(--accents-2);
           border-radius: var(--radius);
-          background: #fafafa;
+          background: #1b2a2e;
           font-size: 0.85rem;
         }
         .flow-top-row,
@@ -574,7 +574,7 @@ export default function Architecture() {
           text-align: center;
         }
         .active-node {
-          border-color: #2563eb;
+          border-color: #7adddc;
         }
         .terminal {
           border-color: #059669;
@@ -623,7 +623,7 @@ export default function Architecture() {
           font-family: var(--font-mono);
           font-size: 0.7rem;
           color: #059669;
-          background: #ecfdf5;
+          background: rgba(108, 229, 177, 0.08);
           padding: 0.2rem 0.6rem;
           border-radius: 4px;
         }
@@ -633,7 +633,7 @@ export default function Architecture() {
           gap: 0.75rem;
           margin-top: 0.75rem;
           padding-top: 0.75rem;
-          border-top: 1px dashed #e0e0e0;
+          border-top: 1px dashed #2a3a3e;
         }
         .refund-branch {
           display: flex;
@@ -648,7 +648,7 @@ export default function Architecture() {
 
         /* ── State table ────────────────────────────────────────────────────── */
         .state-table {
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
           border-radius: var(--radius);
           overflow: hidden;
           margin-top: 1.5rem;
@@ -659,14 +659,14 @@ export default function Architecture() {
           grid-template-columns: 140px 1fr 80px;
           gap: 0;
           padding: 0.7rem 1rem;
-          border-bottom: 1px solid #f0f0f0;
+          border-bottom: 1px solid #2a3a3e;
           align-items: center;
         }
         .state-row:last-child {
           border-bottom: none;
         }
         .state-header {
-          background: #fafafa;
+          background: #1b2a2e;
           font-size: 0.75rem;
           font-weight: 700;
           text-transform: uppercase;
@@ -676,7 +676,7 @@ export default function Architecture() {
         .state-row code {
           font-family: var(--font-mono);
           font-size: 0.78rem;
-          background: #f4f4f4;
+          background: #1b2a2e;
           padding: 0.15rem 0.4rem;
           border-radius: 3px;
           display: inline-block;
@@ -690,11 +690,11 @@ export default function Architecture() {
           text-align: center;
         }
         .badge.yes {
-          background: #ecfdf5;
+          background: rgba(108, 229, 177, 0.08);
           color: #059669;
         }
         .badge.no {
-          background: #f4f4f4;
+          background: #1b2a2e;
           color: var(--accents-3);
         }
 
@@ -702,9 +702,9 @@ export default function Architecture() {
         .component {
           margin-top: 1.5rem;
           padding: 1.5rem;
-          background: #fafafa;
+          background: #1b2a2e;
           border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
         }
         .component-header {
           display: flex;
@@ -721,7 +721,7 @@ export default function Architecture() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.08em;
-          background: #f0f0f0;
+          background: #1b2a2e;
           color: var(--accents-3);
           padding: 0.2rem 0.5rem;
           border-radius: 3px;
@@ -775,7 +775,7 @@ export default function Architecture() {
           font-family: var(--font-mono);
           font-size: 0.68rem;
           color: var(--accents-3);
-          background: #f4f4f4;
+          background: #1b2a2e;
           padding: 0.25rem 0.5rem;
           border-radius: 3px;
           white-space: nowrap;
@@ -795,16 +795,16 @@ export default function Architecture() {
           align-items: flex-start;
           gap: 1.25rem;
           padding: 1.25rem;
-          background: #fafafa;
+          background: #1b2a2e;
           border-radius: var(--radius);
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
         }
         .level-marker {
           font-size: 0.7rem;
           font-weight: 800;
           font-family: var(--font-mono);
           color: var(--accents-3);
-          background: #f0f0f0;
+          background: #1b2a2e;
           width: 32px;
           height: 32px;
           border-radius: 50%;
@@ -830,7 +830,7 @@ export default function Architecture() {
 
         /* ── Registry table ─────────────────────────────────────────────────── */
         .registry-table {
-          border: 1px solid #eaeaea;
+          border: 1px solid #2a3a3e;
           border-radius: var(--radius);
           overflow: hidden;
           margin: 1.5rem 0;
@@ -840,7 +840,7 @@ export default function Architecture() {
           display: grid;
           grid-template-columns: 180px 200px 1fr;
           padding: 0.7rem 1rem;
-          border-bottom: 1px solid #f0f0f0;
+          border-bottom: 1px solid #2a3a3e;
           align-items: center;
           gap: 1rem;
         }
@@ -848,7 +848,7 @@ export default function Architecture() {
           border-bottom: none;
         }
         .registry-header {
-          background: #fafafa;
+          background: #1b2a2e;
           font-size: 0.75rem;
           font-weight: 700;
           text-transform: uppercase;
@@ -858,7 +858,7 @@ export default function Architecture() {
         .registry-row code {
           font-family: var(--font-mono);
           font-size: 0.78rem;
-          background: #f4f4f4;
+          background: #1b2a2e;
           padding: 0.15rem 0.4rem;
           border-radius: 3px;
         }
@@ -877,15 +877,15 @@ export default function Architecture() {
         .gov-col {
           padding: 1.25rem 1.5rem;
           border-radius: var(--radius);
-          border: 1.5px solid #eaeaea;
+          border: 1.5px solid #2a3a3e;
         }
         .gov-col.can {
           border-color: #059669;
-          background: #f0fdf4;
+          background: rgba(108, 229, 177, 0.08);
         }
         .gov-col.cannot {
           border-color: #dc2626;
-          background: #fef2f2;
+          background: rgba(255, 111, 97, 0.08);
         }
         .gov-col h4 {
           margin: 0 0 0.85rem;
@@ -915,7 +915,7 @@ export default function Architecture() {
           color: var(--accents-3);
         }
         .content-block > p:last-child a {
-          color: #0070f3;
+          color: #7adddc;
           font-weight: 500;
         }
 
@@ -952,7 +952,7 @@ export default function Architecture() {
           transition: color 0.15s;
         }
         .nav-link-group a:hover {
-          color: #0070f3;
+          color: #7adddc;
         }
 
         /* ── Responsive ─────────────────────────────────────────────────────── */
