@@ -6,7 +6,7 @@ export default function ProtocolLimits() {
   return (
     <>
       <Header titlePre="Protocol Limits" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Protocol Limits</h1>
           <h2 className="tagline">

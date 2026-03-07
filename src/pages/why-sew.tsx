@@ -6,8 +6,8 @@ export default function WhySew() {
   return (
     <>
       <Header titlePre="Why Sew" />
-      <div className={sharedStyles.layout}>
-        <section className="header-section">
+      <div className={`${sharedStyles.layout} hero-texture`}>
+        <section className="header-section stitched">
           <h1>Why Sew</h1>
           <h2 className="tagline">
             The case for non-custodial, structured protection on Ethereum
@@ -20,7 +20,7 @@ export default function WhySew() {
         </section>
 
         <section className="content-block">
-          <h3>The problem</h3>
+          <h3>⚠️ The problem</h3>
           <p>
             Today, onchain value transfer has a stark choice: send or don't
             send.
@@ -47,7 +47,7 @@ export default function WhySew() {
         </section>
 
         <section className="content-block">
-          <h3>The solution: Protected transfers</h3>
+          <h3>🪡 The solution: Protected transfers</h3>
           <p>
             Sew Protocol introduces protected transfers as a native pattern on
             Ethereum.
@@ -67,7 +67,7 @@ export default function WhySew() {
         </section>
 
         <section className="content-block">
-          <h3>How it compares</h3>
+          <h3>⚖️ How it compares</h3>
           <p>
             Different transfer patterns serve different needs. Here's how Sew
             fits in:
@@ -126,7 +126,7 @@ export default function WhySew() {
         </section>
 
         <section className="content-block">
-          <h3>What Sew enables</h3>
+          <h3>🚀 What Sew enables</h3>
           <p>
             By separating the protection layer from any single application, Sew
             becomes infrastructure that any use case can build on.
@@ -155,7 +155,7 @@ export default function WhySew() {
         </section>
 
         <section className="content-block">
-          <h3>Core principles</h3>
+          <h3>🔷 Core principles</h3>
           <p>
             Sew is built on three principles that shape every design decision:
           </p>
@@ -185,7 +185,7 @@ export default function WhySew() {
         </section>
 
         <section className="content-block">
-          <h3>Next steps</h3>
+          <h3>👉 Next steps</h3>
           <p>Ready to understand how it works?</p>
           <ul>
             <li>
@@ -229,6 +229,11 @@ export default function WhySew() {
         .header-section {
           margin-bottom: 4rem;
           text-align: center;
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 2.5rem 2rem;
+          border-radius: 12px;
         }
         .content-block {
           margin: 4rem auto;

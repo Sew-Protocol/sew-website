@@ -6,7 +6,7 @@ export default function Security() {
   return (
     <>
       <Header titlePre="Security" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Security Model</h1>
           <h2 className="tagline">

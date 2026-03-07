@@ -379,6 +379,16 @@ footer span:nth-child(3) a {
   color: inherit;
 }
 
+/* Page header icon strip — used across sub-pages */
+.page-icons {
+  font-size: 1.5rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+  display: block;
+  text-align: center;
+}
+
 /* ── Global fabric texture classes ─────────────────────────────────────────
    These are used as plain class names across all pages.
    Defines subtle sewing-inspired texture for elevated content areas.

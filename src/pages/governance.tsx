@@ -6,7 +6,7 @@ export default function Governance() {
   return (
     <>
       <Header titlePre="Governance" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Governance</h1>
           <h2 className="tagline">

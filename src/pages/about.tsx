@@ -6,8 +6,8 @@ export default function About() {
   return (
     <>
       <Header titlePre="About" />
-      <div className={sharedStyles.layout}>
-        <section className="header-section">
+      <div className={`${sharedStyles.layout} hero-texture`}>
+        <section className="header-section stitched">
           <h1>About Sew Protocol</h1>
           <h2 className="tagline">Sew Protocol</h2>
           <p className="intro">
@@ -16,7 +16,7 @@ export default function About() {
         </section>
 
         <section className="content-block">
-          <h3>Mission</h3>
+          <h3>🎯 Mission</h3>
           <p>
             Sew Protocol makes coordination possible on Ethereum without
             requiring custody or centralized trust.
@@ -29,7 +29,7 @@ export default function About() {
         </section>
 
         <section className="content-block">
-          <h3>What we're building</h3>
+          <h3>🏗️ What we're building</h3>
           <p>
             Sew is composable infrastructure: a set of smart contracts and
             modules that applications, wallets, and protocols can build on.
@@ -59,7 +59,7 @@ export default function About() {
         </section>
 
         <section className="content-block">
-          <h3>Governance and token</h3>
+          <h3>🗳️ Governance and token</h3>
           <p>
             Sew Protocol is governed by the community through the SEW token.
             Governance controls:
@@ -76,7 +76,7 @@ export default function About() {
         </section>
 
         <section className="content-block">
-          <h3>Security-first design</h3>
+          <h3>🛡️ Security-first design</h3>
           <p>Security is not an afterthought. Sew is designed with:</p>
           <ul>
             <li>
@@ -102,7 +102,7 @@ export default function About() {
         </section>
 
         <section className="content-block">
-          <h3>Roadmap</h3>
+          <h3>🗺️ Roadmap</h3>
           <p>Sew is under active development. Our roadmap includes:</p>
           <ul>
             <li>
@@ -124,7 +124,7 @@ export default function About() {
         </section>
 
         <section className="content-block">
-          <h3>Get involved</h3>
+          <h3>🤝 Get involved</h3>
           <p>Sew Protocol is open source and community-driven.</p>
           <ul>
             <li>
@@ -158,7 +158,7 @@ export default function About() {
         </section>
 
         <section className="content-block">
-          <h3>Contact</h3>
+          <h3>✉️ Contact</h3>
           <p>Questions? Reach out to the team.</p>
           <ul>
             <li>

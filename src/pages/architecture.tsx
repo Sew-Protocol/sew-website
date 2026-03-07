@@ -6,7 +6,7 @@ export default function Architecture() {
   return (
     <>
       <Header titlePre="Architecture" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         {/* ── Header ───────────────────────────────────────────────────────── */}
         <section className="header-section">
           <h1>Architecture</h1>

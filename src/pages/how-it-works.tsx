@@ -7,7 +7,7 @@ export default function HowItWorks() {
     <>
       <Header titlePre="How It Works" />
       <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
+        <section className="header-section stitched">
           <h1>How It Works</h1>
           <h2 className="tagline">
             Escrow lifecycle, state transitions, and dispute mechanics
@@ -27,7 +27,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>What Sew Is Not</h3>
+          <h3>🚫 What Sew Is Not</h3>
           <p>Sew is not a marketplace, a wallet, or a court.</p>
           <p>
             Sew is a <strong>security layer for transfers</strong>. It provides
@@ -38,7 +38,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>The core idea</h3>
+          <h3>💡 The core idea</h3>
           <p>A standard token transfer is immediate and final.</p>
           <p>A protected transfer is different:</p>
           <ul>
@@ -58,7 +58,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Lifecycle of a protected transfer</h3>
+          <h3>🪡 Lifecycle of a protected transfer</h3>
 
           <div className="lifecycle-step">
             <h4>1) Creation</h4>
@@ -291,7 +291,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Escrow states</h3>
+          <h3>🔄 Escrow states</h3>
           <p>An escrow moves through defined states during its lifecycle:</p>
           <ul>
             <li>
@@ -325,7 +325,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Module architecture</h3>
+          <h3>🧩 Module architecture</h3>
           <p>Sew uses pluggable modules to define escrow behavior:</p>
           <ul>
             <li>
@@ -352,7 +352,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Module independence</h3>
+          <h3>🔒 Module independence</h3>
           <p>
             Each escrow uses three independent pluggable modules that work
             together:
@@ -389,7 +389,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Safety mechanisms</h3>
+          <h3>🛡️ Safety mechanisms</h3>
           <p>To support system stability:</p>
           <ul>
             <li>Governance can limit exposure to external integrations</li>
@@ -408,7 +408,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Fees</h3>
+          <h3>💸 Fees</h3>
           <p>
             Escrow creation fees are capped at 2%. The protocol may take a share
             of generated yield and appeal bonds. All fees are bounded and
@@ -420,7 +420,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>What Makes Sew Different</h3>
+          <h3>⭐ What Makes Sew Different</h3>
           <p>Sew introduces several original design concepts:</p>
           <ul>
             <li>
@@ -450,7 +450,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-warm">
-          <h3>Who can do what?</h3>
+          <h3>👥 Who can do what?</h3>
           <p>Each role in the protocol has specific, bounded powers:</p>
           <ul>
             <li>
@@ -478,7 +478,7 @@ export default function HowItWorks() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Summary</h3>
+          <h3>📋 Summary</h3>
           <p>
             Sew Protocol adds structure to token transfers without introducing
             custody.

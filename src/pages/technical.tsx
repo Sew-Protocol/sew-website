@@ -6,7 +6,7 @@ export default function Technical() {
   return (
     <>
       <Header titlePre="Technical Resources" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Technical Resources</h1>
           <h2 className="tagline">

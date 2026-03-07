@@ -6,8 +6,8 @@ export default function Developer() {
   return (
     <>
       <Header titlePre="Build on Sew" />
-      <div className={sharedStyles.layout}>
-        <section className="header-section">
+      <div className={`${sharedStyles.layout} hero-texture`}>
+        <section className="header-section stitched">
           <h1>Build on Sew Protocol</h1>
           <h2 className="tagline">Developer Guide</h2>
           <p className="intro">
@@ -40,7 +40,7 @@ export default function Developer() {
         </div>
 
         <section className="content-block">
-          <h3>Core concepts</h3>
+          <h3>📖 Core concepts</h3>
           <p>
             At its core, Sew provides a settlement pattern where tokens are held
             until conditions are met.
@@ -61,7 +61,7 @@ export default function Developer() {
         </section>
 
         <section className="content-block">
-          <h3>Escrow creation</h3>
+          <h3>🏗️ Escrow creation</h3>
           <p>Creating an escrow requires defining the terms upfront:</p>
 
           <div className="code-block">
@@ -198,7 +198,7 @@ settings = {
         </section>
 
         <section id="escrow-states" className="content-block">
-          <h3>Escrow states</h3>
+          <h3>🔄 Escrow states</h3>
           <p>Every escrow moves through defined states:</p>
 
           <div className="code-block">
@@ -222,7 +222,7 @@ function getEscrowState(uint256 workflowId) external view returns (EscrowState)`
         </section>
 
         <section className="content-block">
-          <h3>Release interactions</h3>
+          <h3>✅ Release interactions</h3>
           <p>Funds can be released in several ways:</p>
 
           <div className="code-block">
@@ -247,7 +247,7 @@ function canRelease(
         </section>
 
         <section className="content-block">
-          <h3>Dispute handling</h3>
+          <h3>⚖️ Dispute handling</h3>
           <p>Disputes pause normal release and invoke resolution:</p>
 
           <div className="code-block">
@@ -276,7 +276,7 @@ function getResolutionStatus(uint256 workflowId) external view returns (
         </section>
 
         <section className="content-block">
-          <h3>Querying escrow details</h3>
+          <h3>🔍 Querying escrow details</h3>
           <p>Read interface for integration:</p>
 
           <div className="code-block">
@@ -308,7 +308,7 @@ function getModuleSnapshot(uint256 workflowId) external view returns (
         </section>
 
         <section className="content-block">
-          <h3>Module types</h3>
+          <h3>🧩 Module types</h3>
           <p>Sew uses pluggable modules for extensibility:</p>
 
           <table className="module-table">
@@ -354,7 +354,7 @@ function getModuleSnapshot(uint256 workflowId) external view returns (
         </section>
 
         <section className="content-block">
-          <h3>Integration checklist</h3>
+          <h3>✔️ Integration checklist</h3>
           <ol>
             <li>
               <strong>Import interfaces</strong> — Include Sew interface
@@ -386,7 +386,7 @@ function getModuleSnapshot(uint256 workflowId) external view returns (
         </section>
 
         <section className="content-block">
-          <h3>Event references</h3>
+          <h3>📡 Event references</h3>
           <p>Key events to watch:</p>
 
           <div className="code-block">
@@ -426,7 +426,7 @@ event ProtocolFeeCollected(
         </section>
 
         <section id="safety-guarantees" className="content-block">
-          <h3>Safety guarantees</h3>
+          <h3>🛡️ Safety guarantees</h3>
           <p>When building on Sew, these invariants hold:</p>
           <ul>
             <li>Your application never holds custody of funds</li>
@@ -604,7 +604,7 @@ event ProtocolFeeCollected(
         </section>
 
         <section className="content-block">
-          <h3>Summary</h3>
+          <h3>📋 Summary</h3>
           <p>
             Sew provides a reusable primitive: transactions that can be held,
             coordinated, and settled under rules.

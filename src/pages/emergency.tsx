@@ -6,7 +6,7 @@ export default function Emergency() {
   return (
     <>
       <Header titlePre="Emergency Recovery" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Emergency Recovery</h1>
           <h2 className="tagline">

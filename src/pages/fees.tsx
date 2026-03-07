@@ -6,7 +6,7 @@ export default function Fees() {
   return (
     <>
       <Header titlePre="Fees" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Fees</h1>
           <h2 className="tagline">

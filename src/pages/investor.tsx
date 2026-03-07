@@ -6,7 +6,7 @@ export default function Investor() {
     <>
       <Header titlePre="For Investors" />
       <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
+        <section className="header-section stitched">
           <h1>For Investors</h1>
           <h2 className="tagline">Sew Protocol</h2>
           <p className="intro">
@@ -22,7 +22,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block fabric-texture fabric-texture-light">
-          <h3>The opportunity</h3>
+          <h3>🌍 The opportunity</h3>
           <p>Ethereum enables global, permissionless transfers.</p>
           <p>
             But most transfers today are immediate, irreversible, and
@@ -49,7 +49,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>What Sew is</h3>
+          <h3>🪡 What Sew is</h3>
           <p>
             Sew Protocol is a non-custodial escrow architecture for ERC20
             transfers.
@@ -78,7 +78,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Category positioning</h3>
+          <h3>🗂️ Category positioning</h3>
           <p>
             Sew is not a wallet. It is not a marketplace. It is not a transfer
             processor.
@@ -104,7 +104,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Why this matters</h3>
+          <h3>💡 Why this matters</h3>
           <p>
             Irreversible settlement is a strength of Ethereum, but also a
             barrier to broader everyday use.
@@ -128,7 +128,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Adoption path</h3>
+          <h3>📈 Adoption path</h3>
           <p>
             The protocol is designed to grow through interfaces and
             integrations.
@@ -151,7 +151,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Long-term role in the ecosystem</h3>
+          <h3>🌐 Long-term role in the ecosystem</h3>
           <p>
             If protected transfers become a common pattern, Sew can function as
             a base layer for:
@@ -169,7 +169,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Defensibility</h3>
+          <h3>🏰 Defensibility</h3>
           <p>Sew's defensibility comes from:</p>
 
           <div className="defensibility-item">
@@ -206,7 +206,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Token and sustainability</h3>
+          <h3>🪙 Token and sustainability</h3>
           <p>
             The protocol is designed to support long-term sustainability through
             aligned incentives.
@@ -227,7 +227,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Governance trajectory</h3>
+          <h3>🗳️ Governance trajectory</h3>
           <p>Governance is expected to evolve over time.</p>
           <p>Early stages may involve:</p>
           <ul>
@@ -246,7 +246,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Risk awareness</h3>
+          <h3>⚠️ Risk awareness</h3>
           <p>
             Sew is infrastructure and carries typical risks associated with
             early-stage protocols:
@@ -267,7 +267,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Why now</h3>
+          <h3>⏱️ Why now</h3>
           <p>Several conditions are aligning:</p>
           <ul>
             <li>Increasing everyday use of stablecoins and tokens</li>
@@ -285,7 +285,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Relationship to Everyday Wallet</h3>
+          <h3>👛 Relationship to Everyday Wallet</h3>
           <p>Everyday Wallet is a product built on Sew.</p>
           <p>It demonstrates:</p>
           <ul>
@@ -297,7 +297,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Vision</h3>
+          <h3>🔭 Vision</h3>
           <p>Ethereum introduced programmable money.</p>
           <p>Sew explores programmable settlement.</p>
           <p>
@@ -312,7 +312,7 @@ export default function Investor() {
         </section>
 
         <section className="content-block">
-          <h3>Summary</h3>
+          <h3>📋 Summary</h3>
           <p>
             Sew Protocol introduces a new primitive: a transfer that can be held
             and settled under rules without custody.

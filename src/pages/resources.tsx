@@ -6,7 +6,7 @@ export default function Resources() {
   return (
     <>
       <Header titlePre="Resources" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Resources</h1>
           <h2 className="tagline">Sew Protocol</h2>

@@ -5,7 +5,7 @@ export default function EverydayWallet() {
   return (
     <>
       <Header titlePre="Everyday Wallet" />
-      <div className={sharedStyles.layout}>
+      <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Everyday Wallet</h1>
           <h2 className="tagline">Safe transfers for real-world exchanges</h2>
