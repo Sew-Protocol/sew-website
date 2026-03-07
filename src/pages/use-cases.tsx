@@ -82,16 +82,19 @@ export default function UseCases() {
       <div className={`${sharedStyles.layout} hero-texture`}>
         <section className="header-section">
           <h1>Use Cases</h1>
-          <h2 className="tagline">Protected transfers in action</h2>
+          <h2 className="tagline">The Patterns of Protection</h2>
           <p className="intro">
             Sew Protocol enables safe transactions across everyday scenarios.
-            Below are common patterns where escrow protection adds value.
+            Below are the "stitch patterns" where escrow protection adds value.
           </p>
         </section>
 
         <section className="use-cases-grid">
           {useCases.map((useCase) => (
-            <div key={useCase.title} className="use-case-card fabric-panel">
+            <div
+              key={useCase.title}
+              className="use-case-card fabric-panel stitched"
+            >
               <div className="use-case-header">
                 <span className="use-case-icon">{useCase.icon}</span>
                 <h3>{useCase.title}</h3>
@@ -100,12 +103,14 @@ export default function UseCases() {
               <div className="use-case-details">
                 <div className="detail-block">
                   <span className="detail-label">
-                    Why protected transfer helps
+                    🧵 Why protected transfer helps
                   </span>
                   <span className="detail-value">{useCase.whyProtected}</span>
                 </div>
                 <div className="detail-block">
-                  <span className="detail-label">Typical release pattern</span>
+                  <span className="detail-label">
+                    📍 Typical release pattern
+                  </span>
                   <span className="detail-value">{useCase.pattern}</span>
                 </div>
               </div>

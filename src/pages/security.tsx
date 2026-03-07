@@ -58,31 +58,31 @@ export default function Security() {
         </section>
 
         <section className="content-block">
-          <h3>Core security properties</h3>
+          <h3>🔐 Core security properties</h3>
           <div className="property-grid">
-            <div className="property">
-              <h4>Non-custodial by design</h4>
+            <div className="property fabric-panel seam-accent">
+              <h4>🤝 Non-custodial by design</h4>
               <p>
                 Funds are held by smart contracts, not by an operator or
                 intermediary.
               </p>
             </div>
-            <div className="property">
-              <h4>Deterministic release paths</h4>
+            <div className="property fabric-panel seam-accent">
+              <h4>⚙️ Deterministic release paths</h4>
               <p>
                 Every escrow defines its release and resolution rules at
                 creation. Settlement follows predefined state transitions.
               </p>
             </div>
-            <div className="property">
-              <h4>Per-escrow isolation</h4>
+            <div className="property fabric-panel seam-accent">
+              <h4>📦 Per-escrow isolation</h4>
               <p>
                 Each protected transfer is independent. If one fails, others are
                 unaffected.
               </p>
             </div>
-            <div className="property">
-              <h4>Forward-only evolution</h4>
+            <div className="property fabric-panel seam-accent">
+              <h4>⏩ Forward-only evolution</h4>
               <p>
                 Protocol upgrades do not alter existing agreements. Historical
                 agreements remain stable.
@@ -92,119 +92,112 @@ export default function Security() {
         </section>
 
         <section id="threat-model" className="content-block">
-          <h3>Threat model</h3>
+          <h3>🎯 Threat model</h3>
           <p>
             Sew is designed to operate in an adversarial environment. Each
             threat category below includes the attack surface and the protocol's
             structural mitigation.
           </p>
           <div className="threat-grid">
-            <div className="threat-card">
+            <div className="threat-card fabric-panel stitched">
               <div className="threat-header">
                 <span className="threat-tag">T1</span>
-                <h4>User error</h4>
+                <h4>👤 User error</h4>
               </div>
               <p className="threat-desc">
                 Sending to the wrong address, premature release, or
                 misunderstanding escrow state.
               </p>
               <div className="threat-mitigation">
-                <span className="mitigation-label">Mitigation</span>
+                <span className="mitigation-label">📍 Mitigation</span>
                 <p>
                   Sender can cancel at any time while PENDING. Dispute pathway
-                  available if counterparty is uncooperative. Auto-cancel
-                  timestamp can be set at creation.
+                  available if counterparty is uncooperative.
                 </p>
               </div>
             </div>
-            <div className="threat-card">
+            <div className="threat-card fabric-panel stitched">
               <div className="threat-header">
                 <span className="threat-tag">T2</span>
-                <h4>Counterparty risk</h4>
+                <h4>🎭 Counterparty risk</h4>
               </div>
               <p className="threat-desc">
                 Fraudulent participants, failure to deliver goods or services,
                 or bad-faith dispute initiation.
               </p>
               <div className="threat-mitigation">
-                <span className="mitigation-label">Mitigation</span>
+                <span className="mitigation-label">📍 Mitigation</span>
                 <p>
-                  Funds held in escrow until conditions are met — neither party
-                  can unilaterally seize them. Dispute pathway available with
-                  neutral resolver. Appeal bonds discourage griefing.
+                  Funds held in escrow until conditions are met. Dispute pathway
+                  available with neutral resolver.
                 </p>
               </div>
             </div>
-            <div className="threat-card">
+            <div className="threat-card fabric-panel stitched">
               <div className="threat-header">
                 <span className="threat-tag">T3</span>
-                <h4>Smart contract risk</h4>
+                <h4>🐛 Smart contract risk</h4>
               </div>
               <p className="threat-desc">
                 Bugs in integration modules, yield strategies, or third-party
-                contracts depended on by the protocol.
+                contracts.
               </p>
               <div className="threat-mitigation">
-                <span className="mitigation-label">Mitigation</span>
+                <span className="mitigation-label">📍 Mitigation</span>
                 <p>
-                  Per-escrow isolation limits blast radius to the affected
-                  escrow only. Module boundaries prevent cross-module
-                  propagation. Yield modules are opt-in.
+                  Per-escrow isolation limits blast radius. Module boundaries
+                  prevent cross-module propagation.
                 </p>
               </div>
             </div>
-            <div className="threat-card">
+            <div className="threat-card fabric-panel stitched">
               <div className="threat-header">
                 <span className="threat-tag">T4</span>
-                <h4>Governance capture</h4>
+                <h4>🏛️ Governance capture</h4>
               </div>
               <p className="threat-desc">
-                Malicious governance proposals, compromised admin keys, or
-                timelock bypass attempts.
+                Malicious proposals, compromised admin keys, or timelock bypass
+                attempts.
               </p>
               <div className="threat-mitigation">
-                <span className="mitigation-label">Mitigation</span>
+                <span className="mitigation-label">📍 Mitigation</span>
                 <p>
-                  Governance cannot touch active escrows. All changes are
-                  forward-only. Timelocks enforce delay (48h fast-lane, 7-day
-                  slow-lane). Emergency pause is time-bounded and auto-expiring.
+                  Governance cannot touch active escrows. Changes are
+                  forward-only. Timelocks enforce delay.
                 </p>
               </div>
             </div>
-            <div className="threat-card">
+            <div className="threat-card fabric-panel stitched">
               <div className="threat-header">
                 <span className="threat-tag">T5</span>
-                <h4>Resolver misconduct</h4>
+                <h4>⚖️ Resolver misconduct</h4>
               </div>
               <p className="threat-desc">
                 Biased resolver decisions, resolver unavailability, or collusion
                 between resolver and one party.
               </p>
               <div className="threat-mitigation">
-                <span className="mitigation-label">Mitigation</span>
+                <span className="mitigation-label">📍 Mitigation</span>
                 <p>
-                  Resolver outcome is bounded to{' '}
-                  <code>{'Release | Refund'}</code>. Resolvers cannot touch
-                  funds. Appeal escalation available. In v2+, resolvers post
-                  bonds and are slashed for overturned decisions.
+                  Resolver outcome is bounded to RELEASE | REFUND. Resolvers
+                  cannot touch funds. Appeal escalation available.
                 </p>
               </div>
             </div>
-            <div className="threat-card">
+            <div className="threat-card fabric-panel stitched">
               <div className="threat-header">
                 <span className="threat-tag">T6</span>
-                <h4>Yield integration risk</h4>
+                <h4>🏦 Yield integration risk</h4>
               </div>
               <p className="threat-desc">
                 External yield protocol failure (e.g., Aave insolvency or
                 exploit) while funds are deployed.
               </p>
               <div className="threat-mitigation">
-                <span className="mitigation-label">Mitigation</span>
+                <span className="mitigation-label">📍 Mitigation</span>
                 <p>
-                  Yield is opt-in. Principal accounting is separated from yield
-                  accounting. Exposure caps and unwind mechanisms limit maximum
-                  loss. Only participating escrows are affected.
+                  Yield is opt-in. Principal accounting is separated. Exposure
+                  caps and unwind mechanisms limit maximum loss.
                 </p>
               </div>
             </div>

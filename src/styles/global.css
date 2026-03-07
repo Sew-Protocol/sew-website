@@ -405,6 +405,7 @@ footer span:nth-child(3) a {
   background: #1b2a2e;
   border-radius: 12px;
   padding: 2rem 2.5rem;
+  overflow: hidden;
 }
 .fabric-texture::before {
   content: '';
@@ -438,6 +439,56 @@ footer span:nth-child(3) a {
   background: #183146;
 }
 
+/* Fabric Panel Card - A more contained version of fabric-texture */
+.fabric-panel {
+  background: #1b2a2e;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.fabric-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Stitched border effect */
+.stitched {
+  position: relative;
+  border: 1px dashed rgba(122, 221, 220, 0.3);
+  padding: 1.25rem;
+}
+
+/* Seam Line Accent */
+.seam-accent {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.seam-accent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--accents-3) 0px,
+    var(--accents-3) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  opacity: 0.4;
+}
+
 /* Teal thread line divider between sections */
 .thread-divider {
   position: relative;
@@ -451,4 +502,16 @@ footer span:nth-child(3) a {
   );
   margin: 2rem auto 2.5rem;
   max-width: 600px;
+}
+
+.thread-divider::after {
+  content: '✂';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg);
+  padding: 0 0.5rem;
+  color: var(--accents-3);
+  font-size: 0.8rem;
 }

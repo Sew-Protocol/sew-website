@@ -41,9 +41,9 @@ export default function Index() {
         {/* ── 2. WHAT IT IS ───────────────────────────────────────────────── */}
         <section
           id="what-is-it"
-          className="content-section fabric-texture fabric-texture-light"
+          className="content-section fabric-texture fabric-texture-light stitched"
         >
-          <h3>What it is</h3>
+          <h3>🧵 What it is</h3>
           <p>
             Sew Protocol introduces protected transfers as a native pattern on
             Ethereum.
@@ -70,14 +70,14 @@ export default function Index() {
         {/* ── 3. CORE GUARANTEES ──────────────────────────────────────────── */}
         <section id="guarantees" className="content-section">
           <div className="thread-divider" />
-          <h3>Security properties</h3>
+          <h3>🛡️ Security properties</h3>
           <p className="section-subtitle">
             Invariants the protocol enforces at the contract level, for every
             escrow.
           </p>
           <div className="guarantees-grid">
-            <div className="guarantee-card">
-              <h4>Non-custodial</h4>
+            <div className="guarantee-card fabric-panel">
+              <h4>🤝 Non-custodial</h4>
               <p>
                 Funds are held by smart contracts, never by an operator or
                 resolver.
@@ -86,8 +86,8 @@ export default function Index() {
                 {'Custody ∉ {operator, resolver}'}
               </code>
             </div>
-            <div className="guarantee-card">
-              <h4>Outcome-bounded</h4>
+            <div className="guarantee-card fabric-panel">
+              <h4>⚖️ Outcome-bounded</h4>
               <p>
                 A resolver can only choose from a fixed set of outcomes. No
                 discretion beyond that.
@@ -96,8 +96,8 @@ export default function Index() {
                 {'Outcome ∈ {RELEASE, REFUND}'}
               </code>
             </div>
-            <div className="guarantee-card">
-              <h4>Per-escrow isolation</h4>
+            <div className="guarantee-card fabric-panel">
+              <h4>📦 Per-escrow isolation</h4>
               <p>
                 A failure in one escrow cannot affect any other. No shared state
                 between transfers.
@@ -106,8 +106,8 @@ export default function Index() {
                 {'failure(escrow_n) ⊄ escrow_m'}
               </code>
             </div>
-            <div className="guarantee-card">
-              <h4>Deterministic state machine</h4>
+            <div className="guarantee-card fabric-panel">
+              <h4>⚙️ Deterministic state machine</h4>
               <p>
                 Settlement follows predefined transitions only. No discretionary
                 paths.
@@ -116,8 +116,8 @@ export default function Index() {
                 {'state ∈ {PENDING → RELEASED | REFUNDED | RESOLVED}'}
               </code>
             </div>
-            <div className="guarantee-card">
-              <h4>Forward-only upgrades</h4>
+            <div className="guarantee-card fabric-panel">
+              <h4>⏩ Forward-only upgrades</h4>
               <p>
                 Governance cannot modify active escrows. Changes apply only to
                 future transfers.
@@ -126,8 +126,8 @@ export default function Index() {
                 {'upgrade(t) → escrow.created < t only'}
               </code>
             </div>
-            <div className="guarantee-card">
-              <h4>Bounded emergency controls</h4>
+            <div className="guarantee-card fabric-panel">
+              <h4>🛑 Bounded emergency controls</h4>
               <p>
                 Emergency pause is time-limited and auto-expires. Cannot be used
                 indefinitely.
@@ -143,23 +143,26 @@ export default function Index() {
         </section>
 
         {/* ── 4. WHAT IT IS NOT ───────────────────────────────────────────── */}
-        <section id="what-it-is-not" className="content-section fabric-texture">
-          <h3>What it is NOT</h3>
+        <section
+          id="what-it-is-not"
+          className="content-section fabric-texture stitched"
+        >
+          <h3>🚫 What it is NOT</h3>
           <ul className="not-list">
             <li>
-              <strong>Not a wallet</strong> — Sew is infrastructure; interfaces
-              like Everyday Wallet are built on top
+              <strong>💳 Not a wallet</strong> — Sew is infrastructure;
+              interfaces like Everyday Wallet are built on top
             </li>
             <li>
-              <strong>Not a marketplace</strong> — Sew provides escrow logic,
+              <strong>🏪 Not a marketplace</strong> — Sew provides escrow logic,
               not trade execution
             </li>
             <li>
-              <strong>Not a transfer processor</strong> — Funds flow directly
+              <strong>⚡ Not a transfer processor</strong> — Funds flow directly
               between parties via smart contracts
             </li>
             <li>
-              <strong>Not custodial</strong> — No party controls user funds;
+              <strong>🔒 Not custodial</strong> — No party controls user funds;
               rules are enforced by code
             </li>
           </ul>
@@ -167,20 +170,21 @@ export default function Index() {
 
         {/* ── 5. WHY IT EXISTS ────────────────────────────────────────────── */}
         <section
-          id="why-it-exists"
-          className="content-section fabric-texture fabric-texture-warm"
+          id="why-exists"
+          className="content-section fabric-texture fabric-texture-warm stitched"
         >
-          <div className="thread-divider" />
-          <h3>Why it exists</h3>
+          <h3>❓ Why it exists</h3>
           <p>
             Ethereum transactions are irreversible by design. This property
             enables trustless settlement, but it also creates persistent risks:
           </p>
           <ul>
-            <li>Funds sent to the wrong address cannot be recovered</li>
-            <li>Buyers and sellers must rely on trust or external platforms</li>
-            <li>Disputes are difficult to resolve without custody</li>
-            <li>Smart contract risk can propagate across shared systems</li>
+            <li>💸 Funds sent to the wrong address cannot be recovered</li>
+            <li>
+              🤝 Buyers and sellers must rely on trust or external platforms
+            </li>
+            <li>⚖️ Disputes are difficult to resolve without custody</li>
+            <li>⚠️ Smart contract risk can propagate across shared systems</li>
           </ul>
           <p>
             Protection today is usually added off-chain, through custodians, or
@@ -192,74 +196,76 @@ export default function Index() {
 
         {/* ── 6. HOW IT HELPS ─────────────────────────────────────────────── */}
         <section id="how-it-helps" className="content-section">
-          <h3>How it helps</h3>
+          <h3>🚀 How it helps</h3>
           <p>
             Sew allows an erc20 transfer to be structured as an escrowed
             transfer with clear release paths. This enables:
           </p>
-          <ul>
-            <li>Funds held until conditions are met</li>
-            <li>Buyer-initiated release flows</li>
-            <li>Timed releases</li>
-            <li>Dispute resolution pathways</li>
-            <li>Isolation of risk to individual transactions</li>
-          </ul>
-          <p>
-            The goal is not to replace direct transfers, but to establish a
-            safer default pattern where protection is needed.
-          </p>
+          <div className="guarantees-grid">
+            <div className="guarantee-card fabric-panel">
+              <h4>⏳ Funds held until conditions are met</h4>
+              <p>
+                Ensures both parties fulfill their obligations before finality.
+              </p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>✅ Buyer-initiated release flows</h4>
+              <p>Gives buyers control over when funds are settled.</p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>⏰ Timed releases</h4>
+              <p>Automated settlement based on time-based triggers.</p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>⚖️ Dispute resolution pathways</h4>
+              <p>Structured arbitration without introducing custody risk.</p>
+            </div>
+          </div>
         </section>
 
         {/* ── 7. DESIGN PRINCIPLES ────────────────────────────────────────── */}
         <section
           id="design-principles"
-          className="content-section fabric-texture fabric-texture-light"
+          className="content-section fabric-texture fabric-texture-light stitched"
         >
           <div className="thread-divider" />
-          <h3>Design principles</h3>
+          <h3>📐 Design principles</h3>
           <div className="principles-grid">
-            <div className="principle">
+            <div className="principle seam-accent">
               <h4>Non-custodial by construction</h4>
               <p>
                 Funds remain under smart contract control. No party can
                 arbitrarily redirect assets.
               </p>
             </div>
-            <div className="principle">
+            <div className="principle seam-accent">
               <h4>Deterministic execution</h4>
               <p>
                 Release and resolution follow predefined rules encoded at escrow
                 creation.
               </p>
             </div>
-            <div className="principle">
+            <div className="principle seam-accent">
               <h4>Isolation of risk</h4>
               <p>
                 Each escrow is self-contained. Failures do not propagate across
                 the system.
               </p>
             </div>
-            <div className="principle">
+            <div className="principle seam-accent">
               <h4>Changes affect only new escrows</h4>
               <p>
                 Upgrades and module swaps apply forward, preserving the
                 integrity of existing agreements.
               </p>
             </div>
-            <div className="principle">
-              <h4>Composable infrastructure</h4>
-              <p>
-                The protocol exposes a base primitive that other systems can
-                extend.
-              </p>
-            </div>
           </div>
         </section>
 
         {/* ── 8. A PRIMITIVE ──────────────────────────────────────────────── */}
-        <section className="content-section fabric-texture fabric-texture-warm">
+        <section className="content-section fabric-texture fabric-texture-warm stitched">
           <div className="thread-divider" />
-          <h3>A primitive for protected transfers</h3>
+          <h3>📦 A primitive for protected transfers</h3>
           <p>
             Sew defines a simple idea: A transfer can be protected before it is
             finalized.
@@ -269,19 +275,19 @@ export default function Index() {
             agreements without introducing custody. The same primitive can
             support:
           </p>
-          <ul>
-            <li>Peer-to-peer commerce</li>
-            <li>Marketplaces</li>
-            <li>Onchain agreements</li>
-            <li>Service transfers</li>
-            <li>Interface-level safety features</li>
+          <ul className="not-list">
+            <li>🛒 Peer-to-peer commerce</li>
+            <li>🏪 Marketplaces</li>
+            <li>📝 Onchain agreements</li>
+            <li>💼 Service transfers</li>
+            <li>🛡️ Interface-level safety</li>
           </ul>
         </section>
 
         {/* ── 9. BUILT-IN DISPUTE RESOLUTION ──────────────────────────────── */}
-        <section className="content-section fabric-texture fabric-texture-light">
+        <section className="content-section fabric-texture fabric-texture-light stitched">
           <div className="thread-divider" />
-          <h3>Built-in dispute resolution</h3>
+          <h3>⚖️ Built-in dispute resolution</h3>
           <p>
             Ethereum transfers are final. Sew adds structured resolution without
             custody — neutral outcomes enforced by smart contracts.
@@ -305,47 +311,34 @@ export default function Index() {
         {/* ── 10. EVIDENCE & READINESS ────────────────────────────────────── */}
         <section id="readiness" className="content-section">
           <div className="thread-divider" />
-          <h3>Audit readiness</h3>
+          <h3>🔍 Audit readiness</h3>
           <p className="section-subtitle">
             For grant reviewers and independent security auditors.
           </p>
           <div className="readiness-grid">
-            <div className="readiness-col">
-              <h4>What is implemented</h4>
+            <div className="readiness-col fabric-panel">
+              <h4>🛠️ What is implemented</h4>
               <ul className="check-list">
                 <li>Core escrow state machine with 6 defined states</li>
                 <li>
                   ERC-20 protected transfers with deterministic release paths
                 </li>
-                <li>
-                  v1 dispute resolution — single trusted resolver, onchain
-                  enforcement
-                </li>
-                <li>
-                  Modular architecture — resolution, release strategy, and yield
-                  modules
-                </li>
-                <li>
-                  Per-escrow isolation — no shared state between transfers
-                </li>
-                <li>
-                  Time-bounded emergency pause (7-day max, 3 cycles total)
-                </li>
-                <li>
-                  Governance constraints — no retroactive modification of active
-                  escrows
-                </li>
+                <li>v1 dispute resolution — single trusted resolver</li>
+                <li>Modular architecture — resolution and yield</li>
+                <li>Per-escrow isolation — no shared state</li>
+                <li>Time-bounded emergency pause (7-day max)</li>
+                <li>Governance constraints — no retroactive changes</li>
               </ul>
             </div>
-            <div className="readiness-col funded">
-              <h4>What the grant funds</h4>
+            <div className="readiness-col funded fabric-panel stitched">
+              <h4>💰 What the grant funds</h4>
               <ul className="check-list">
-                <li>Formal invariant testing across all state transitions</li>
-                <li>Adversarial simulation of dispute escalation paths</li>
-                <li>Bond sizing and slashing rate economic validation</li>
+                <li>Formal invariant testing across all transitions</li>
+                <li>Adversarial simulation of dispute escalation</li>
+                <li>Bond sizing and slashing rate validation</li>
                 <li>Third-party security audit (Tier 1 auditor)</li>
-                <li>Testnet deployment and integration test suite</li>
-                <li>Threat model red-teaming and formal review</li>
+                <li>Testnet deployment and integration suite</li>
+                <li>Threat model red-teaming and review</li>
               </ul>
             </div>
           </div>
@@ -369,9 +362,9 @@ export default function Index() {
         </section>
 
         {/* ── 11. VISION ──────────────────────────────────────────────────── */}
-        <section className="content-section fabric-texture fabric-texture-light">
+        <section className="content-section fabric-texture fabric-texture-light stitched">
           <div className="thread-divider" />
-          <h3>Vision</h3>
+          <h3>🔭 Vision</h3>
           <p>
             Ethereum made programmable money possible. Sew explores what happens
             when transfers themselves become programmable agreements.
@@ -383,15 +376,10 @@ export default function Index() {
           </p>
           <p>This is a long-term infrastructure effort focused on:</p>
           <ul>
-            <li>Safer everyday transactions</li>
-            <li>Clearer settlement patterns</li>
-            <li>Reduced reliance on custodial intermediaries</li>
+            <li>🛡️ Safer everyday transactions</li>
+            <li>📏 Clearer settlement patterns</li>
+            <li>🔒 Reduced reliance on intermediaries</li>
           </ul>
-          <p>
-            <strong>
-              Protection is not an add-on. It becomes a default option.
-            </strong>
-          </p>
         </section>
 
         {/* ── 12. FINAL CTA STRIP ─────────────────────────────────────────── */}
