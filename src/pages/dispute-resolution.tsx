@@ -6,7 +6,7 @@ export default function DisputeResolution() {
   return (
     <>
       <Header titlePre="Dispute Architecture" />
-      <div className={sharedStyles.layout}>
+      <div>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"

@@ -51,7 +51,7 @@ export default function Resources() {
               with code examples
             </li>
             <li>
-              <Link href="/technical">Technical Resources</Link>— Smart
+              <Link href="/docs/reference">Technical Reference</Link>— Smart
               contracts, documentation, and external resources
             </li>
           </ul>

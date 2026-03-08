@@ -18,7 +18,7 @@ export default function Contact() {
     {
       title: 'GitHub',
       label: 'Sew-Protocol',
-      link: 'https://github.com/Sew-Protocol',
+      link: 'https://github.com/sew-protocol/sew-protocol',
       Icon: GitHub,
     },
     {

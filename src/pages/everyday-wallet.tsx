@@ -2,7 +2,7 @@ export default function EverydayWallet() {
   return (
     <>
       <Header titlePre="Everyday Wallet" />
-      <div className={sharedStyles.layout}>
+      <div>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
@@ -14,7 +14,9 @@ export default function EverydayWallet() {
         >
           <div className="hero-inner">
             <div className="hero-text">
-              <span className="hero-eyebrow">User Interface</span>
+              <span className="hero-eyebrow">
+                Ecosystem / Reference Implementation
+              </span>
               <h1>Everyday Wallet</h1>
               <h2 className="tagline">
                 Safe transfers for real-world exchanges

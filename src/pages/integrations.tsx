@@ -156,7 +156,7 @@ export default function Integrations() {
               <Link href="/security" className="cta-btn primary">
                 Security Model
               </Link>
-              <Link href="/modules" className="cta-btn">
+              <Link href="/architecture#the-module-system" className="cta-btn">
                 Module System
               </Link>
             </div>

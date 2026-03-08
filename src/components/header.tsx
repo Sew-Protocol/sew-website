@@ -11,32 +11,37 @@ const protocolNavItems: {
   submenu?: { label: string; page: string }[]
 }[] = [
   { label: 'Home', page: '/' },
-  { label: 'Why Sew', page: '/why-sew' },
   { label: 'How It Works', page: '/how-it-works' },
-  { label: 'Use Cases', page: '/use-cases' },
   {
     label: 'Developers',
     page: '/developer',
     submenu: [
-      { label: 'Architecture', page: '/architecture' },
-      { label: 'Modules', page: '/modules' },
+      { label: 'Concepts', page: '/architecture' },
+      { label: 'Guides', page: '/docs/guides' },
+      { label: 'Reference', page: '/docs/reference' },
       { label: 'Contracts', page: '/contracts' },
-      { label: 'Integrations', page: '/integrations' },
       { label: 'Protocol Limits', page: '/protocol-limits' },
       { label: 'Fees', page: '/fees' },
-      { label: 'Dispute Architecture', page: '/dispute-resolution' },
       { label: 'Release Plan', page: '/release-plan' },
-      { label: 'For Researchers', page: '/researcher' },
+    ],
+  },
+  {
+    label: 'Build',
+    page: '/use-cases',
+    submenu: [
+      { label: 'Use Cases', page: '/use-cases' },
+      { label: 'Everyday Wallet (Ref)', page: '/everyday-wallet' },
+      { label: 'Integrations', page: '/integrations' },
     ],
   },
   {
     label: 'Security',
     page: '/security',
     submenu: [
-      { label: 'Threat Model', page: '/security' },
-      { label: 'Dispute Economics', page: '/dispute-resolution' },
-      { label: 'Upgrade Semantics', page: '/technical' },
+      { label: 'Security Model', page: '/security' },
+      { label: 'Dispute Architecture', page: '/dispute-resolution' },
       { label: 'Emergency Recovery', page: '/emergency' },
+      { label: 'For Researchers', page: '/researcher' },
     ],
   },
   {
@@ -51,7 +56,7 @@ const protocolNavItems: {
   },
   {
     label: 'Source Code',
-    link: 'https://github.com/Sew-Protocol/sew-protocol',
+    link: 'https://github.com/sew-protocol/sew-protocol',
   },
 ]
 
@@ -107,10 +112,10 @@ const Header = ({ titlePre = '' }) => {
       <ul className={styles.secondaryNav}>
         <li>
           <Link
-            href="/everyday-wallet"
-            className={pathname === '/everyday-wallet' ? 'active' : undefined}
+            href="/docs"
+            className={pathname.startsWith('/docs') ? 'active' : undefined}
           >
-            Everyday Wallet
+            Documentation
           </Link>
         </li>
       </ul>

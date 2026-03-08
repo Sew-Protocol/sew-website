@@ -88,7 +88,7 @@ export default function Researcher() {
         </section>
 
         {/* ── 4. INVARIANTS ───────────────────────────────────────────────── */}
-        <section className="content-section">
+        <section id="invariants" className="content-section">
           <h3>Protocol invariants</h3>
           <div className="guarantees-grid">
             <div className="guarantee-card fabric-panel stitched">

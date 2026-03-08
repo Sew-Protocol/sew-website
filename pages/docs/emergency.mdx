@@ -13,6 +13,18 @@ Emergency mechanisms are intentionally constrained:
 - They cannot modify existing escrows
 - They cannot override settlement outcomes
 
+## Emergency vs. Dispute
+
+It is critical to distinguish between a **Protocol Emergency** (a technical failure) and a **User Dispute** (a disagreement between parties).
+
+| Feature    | Protocol Emergency                      | User Dispute                        |
+| :--------- | :-------------------------------------- | :---------------------------------- |
+| **Scope**  | System-wide or module-specific          | Individual transaction              |
+| **Cause**  | Smart contract bug, integration failure | Non-delivery, disagreement on terms |
+| **Actor**  | Guardian multisig                       | Sender or Recipient                 |
+| **Action** | Pause, Disable Module, Unwind           | Initiate Dispute, Resolver Decision |
+| **Impact** | Affects new/disputed escrows            | Affects only that single escrow     |
+
 ## Guardian Pause
 
 The guardian role can pause the protocol in response to critical vulnerabilities.

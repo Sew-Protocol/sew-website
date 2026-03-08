@@ -30,20 +30,15 @@ Governance cannot retroactively alter how an existing escrow resolves.
 
 ### Timelock Governance
 
-Responsible for protocol evolution:
+Responsible for protocol evolution. All governance actions are subject to a **48-hour timelock** before execution.
 
-- Registering new modules
-- Updating system configuration
-- Setting exposure caps
-- Managing supported integrations
-- Appointing/removed guardian roles
-- Adjusting protocol parameters
-
-Changes are delayed through a timelock for transparency and review.
+- **Standard Lane**: Used for configuration changes, module registration, and exposure caps.
+- **Slow Lane**: Used for critical protocol upgrades or changing core settlement logic. Requires a **7-day delay** for maximum security.
+- **Votes**: SEW token holders vote on proposals. Quorum requirements and voting periods are enforced on-chain.
 
 ### Guardian Role
 
-Exists for emergency response with intentionally limited scope:
+Exists for emergency response with intentionally limited scope. The Guardian is a **3-of-5 multisig** held by independent security entities.
 
 - Disable integrations (e.g., yield module)
 - Lower risk parameters

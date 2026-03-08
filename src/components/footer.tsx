@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
           <div className="footer-section">
             <p className="footer-label">Source Code</p>
-            <ExtLink href="https://github.com/Sew-Protocol/sew-protocol">
+            <ExtLink href="https://github.com/sew-protocol/sew-protocol">
               GitHub Repository
             </ExtLink>
             <ExtLink href="https://discord.gg/sew">Discord</ExtLink>

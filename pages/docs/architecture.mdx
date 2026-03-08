@@ -62,8 +62,16 @@ Funds are always held by smart contracts.
 Sew is designed to minimize blast radius. Isolation happens at multiple levels:
 
 - **Per-escrow isolation**: Each agreement is independent. Failures do not propagate.
-- **Module boundaries**: Release logic, resolution logic, and extensions are separated.
-- **Forward-only upgrades**: Changes affect new escrows only.
+- **Module boundaries**: Modules store state, but it is strictly namespaced by `(vault, workflowId)` to prevent shared-risk contamination.
+- **Forward-only upgrades**: Module addresses are snapshotted at creation. Upgrades apply to new escrows only.
+
+### Module State Model
+
+While core logic is held in the Vault, modules maintain their own namespaced storage:
+
+1.  **Yield Modules**: Store per-escrow positions (`positions[vault][workflowId]`) to track principal and accounting isolated from other agreements.
+2.  **Resolution Modules**: Store per-dispute metadata alongside global resolver registries and analytics.
+3.  **Configuration**: Modules derive their behavioral settings (e.g., auto-release times, resolver addresses) by reading the `EscrowSettings` stored in the core Vault.
 
 ## Governance Surface
 

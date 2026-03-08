@@ -6,7 +6,7 @@ export default function Security() {
   return (
     <>
       <Header titlePre="Security" />
-      <div className={sharedStyles.layout}>
+      <div>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"

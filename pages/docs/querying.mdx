@@ -1,0 +1,57 @@
+# Querying Data
+
+Sew Protocol data is indexed and searchable via The Graph. This allows developers to query escrow states, transfer history, and dispute details.
+
+## Subgraph Endpoint
+
+**Base Sepolia (Beta):**
+`https://api.studio.thegraph.com/query/1721372/sew-base-sepolia/version/latest`
+
+## Example Queries
+
+### 1. Get Escrows for a User
+
+```graphql
+query GetUserEscrows($address: Bytes!) {
+  escrows(where: { sender: $address }) {
+    id
+    token
+    amount
+    recipient
+    state
+    createdAt
+  }
+}
+```
+
+### 2. Get All Active Disputes
+
+```graphql
+query GetActiveDisputes {
+  disputes(where: { resolved: false }) {
+    id
+    escrow {
+      id
+      amount
+      token
+    }
+    createdAt
+  }
+}
+```
+
+### 3. Track Yield Earned
+
+```graphql
+query GetEscrowYield($id: ID!) {
+  escrow(id: $id) {
+    yieldGenerated
+    yieldDistribution
+  }
+}
+```
+
+## Related
+
+- [Quickstart](/docs/quickstart) - How to interact with contracts
+- [Architecture](/docs/architecture) - System design and events

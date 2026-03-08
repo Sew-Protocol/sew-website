@@ -6,7 +6,7 @@ export default function HowItWorks() {
   return (
     <>
       <Header titlePre="How It Works" />
-      <div className={sharedStyles.layout}>
+      <div>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
@@ -88,6 +88,25 @@ export default function HowItWorks() {
         {/* ── 4. LIFECYCLE ────────────────────────────────────────────────── */}
         <section className="content-section">
           <h3>Lifecycle of a protected transfer</h3>
+
+          <div className="sequence-diagram fabric-panel">
+            <div className="sequence-step">
+              <div className="step-node sender">Sender</div>
+              <div className="step-arrow">Create Escrow (Token + Amount)</div>
+              <div className="step-node vault">Sew Vault</div>
+            </div>
+            <div className="sequence-step active">
+              <div className="step-node vault highlight">Held in Escrow</div>
+              <div className="step-label">
+                Conditions: Pending Release or Dispute
+              </div>
+            </div>
+            <div className="sequence-step">
+              <div className="step-node vault">Sew Vault</div>
+              <div className="step-arrow">Settlement (Release or Resolve)</div>
+              <div className="step-node recipient">Recipient</div>
+            </div>
+          </div>
 
           <div className="lifecycle-grid">
             <div className="lifecycle-step fabric-panel seam-accent">
@@ -220,7 +239,9 @@ export default function HowItWorks() {
               </div>
             </div>
             <p className="learn-more" style={{ marginTop: '2rem' }}>
-              <Link href="/modules">Learn more about modules →</Link>
+              <Link href="/architecture#the-module-system">
+                Learn more about modules →
+              </Link>
             </p>
           </div>
         </section>
@@ -299,6 +320,65 @@ export default function HowItWorks() {
           font-size: 0.8rem;
           line-height: 1.6;
           max-width: 480px;
+        }
+        .sequence-diagram {
+          margin: 2rem 0 4rem;
+          padding: 2.5rem;
+          background: rgba(122, 221, 220, 0.02);
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+        .sequence-step {
+          display: grid;
+          grid-template-columns: 100px 1fr 100px;
+          align-items: center;
+          gap: 1rem;
+        }
+        .step-node {
+          padding: 0.5rem;
+          border-radius: 4px;
+          border: 1px solid var(--accents-2);
+          text-align: center;
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+        .step-node.vault {
+          border-color: var(--primary);
+          color: var(--primary);
+        }
+        .step-node.highlight {
+          background: var(--primary);
+          color: #000;
+        }
+        .step-arrow {
+          height: 2px;
+          background: var(--accents-2);
+          position: relative;
+          font-size: 0.75rem;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          padding-bottom: 0.25rem;
+          color: var(--accents-3);
+        }
+        .step-arrow::after {
+          content: '→';
+          position: absolute;
+          right: -5px;
+          top: -9px;
+          font-size: 1.2rem;
+          color: var(--accents-2);
+        }
+        .sequence-step.active {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          gap: 0.5rem;
+        }
+        .step-label {
+          font-size: 0.75rem;
+          color: var(--accents-3);
+          font-style: italic;
         }
         .content-section {
           margin: 0 auto;

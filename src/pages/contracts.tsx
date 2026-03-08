@@ -6,7 +6,7 @@ export default function Contracts() {
   return (
     <>
       <Header titlePre="Contract Addresses" />
-      <div className={sharedStyles.layout}>
+      <div>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
@@ -196,8 +196,11 @@ export default function Contracts() {
               <Link href="/developer" className="cta-btn primary">
                 Developer Guide
               </Link>
-              <Link href="https://github.com/Sew-Protocol" className="cta-btn">
-                GitHub
+              <Link
+                href="https://github.com/sew-protocol/sew-protocol"
+                className="cta-btn"
+              >
+                Source Code
               </Link>
             </div>
           </div>

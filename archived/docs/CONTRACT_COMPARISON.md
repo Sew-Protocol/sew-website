@@ -7,7 +7,7 @@
 
 ## Summary
 
-This document compares the static website content (in `/docs/input-*.md`) with the actual smart contract implementation in `/references/sew-protocol-contracts/` to identify:
+This document compares the static website content (in `/docs/input-*.md`) with the actual smart contract implementation in `/references/sew-protocol/` to identify:
 
 - Misleading or inaccurate information that needs updating
 - Important details missing from the website

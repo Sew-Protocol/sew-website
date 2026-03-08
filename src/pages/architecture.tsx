@@ -6,7 +6,7 @@ export default function Architecture() {
   return (
     <>
       <Header titlePre="Architecture" />
-      <div className={sharedStyles.layout}>
+      <div className={sharedStyles['grid-texture']}>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
@@ -88,75 +88,113 @@ export default function Architecture() {
         </section>
 
         {/* ── 4. COMPONENTS ───────────────────────────────────────────────── */}
-        <section className="content-section">
-          <h3>Core components</h3>
-          <div className="guarantees-grid">
+        <section id="the-module-system" className="content-section">
+          <h3>The module system</h3>
+          <p>
+            Sew Protocol uses pluggable, immutable modules to define escrow
+            behavior. The protocol <strong>snapshots</strong> active module
+            addresses at creation, ensuring that historical agreements are never
+            retroactively affected by governance updates.
+          </p>
+          <div className="guarantees-grid guarantees-grid--wide">
             <div className="guarantee-card fabric-panel">
-              <h4>Escrow layer</h4>
+              <h4>Release Strategy</h4>
               <p>
-                Core vault holding funds under rule-bound conditions. Enforces
-                all state transitions deterministically.
-              </p>
-            </div>
-            <div className="guarantee-card fabric-panel">
-              <h4>Release strategies</h4>
-              <p>
-                Pluggable modules determining when funds leave escrow (Sender,
+                Controls authorization and timing for settlement (Immediate,
                 Time-based, or Conditional).
               </p>
             </div>
             <div className="guarantee-card fabric-panel">
-              <h4>Resolution modules</h4>
+              <h4>Resolution Module</h4>
               <p>
-                Handle disagreements. Resolvers cannot touch funds—they only
-                determine binary distribution outcomes.
+                Manages per-dispute state, resolver registries, and binary
+                outcome enforcement.
               </p>
             </div>
             <div className="guarantee-card fabric-panel">
-              <h4>Yield modules</h4>
+              <h4>Yield Module</h4>
               <p>
-                Optional integration for generating yield on locked principal
-                (e.g. Aave V3). Opt-in at creation.
+                Tracks per-escrow positions and principal across external
+                protocols (Aave V3).
+              </p>
+            </div>
+          </div>
+
+          <div className="property-grid" style={{ marginTop: '2rem' }}>
+            <div className="property fabric-panel seam-accent">
+              <h4>Snapshotted at Creation</h4>
+              <p>
+                Module addresses are permanently stored in the escrow state.
+                Governance changes only affect new escrows.
+              </p>
+            </div>
+            <div className="property fabric-panel seam-accent">
+              <h4>Isolated Namespacing</h4>
+              <p>
+                Module state is indexed by <code>(vault, workflowId)</code>. A
+                module failure in one escrow cannot affect another.
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── 5. INVARIANTS ───────────────────────────────────────────────── */}
+        {/* ── 5. SAFETY INVARIANTS ────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Architectural invariants</h3>
+            <h3>Module safety invariants</h3>
             <div className="principles-grid">
               <div className="principle seam-accent">
-                <h4>Non-custodial</h4>
+                <h4>No Silent Loss</h4>
                 <p>
-                  Funds held by contract. No operator or module can redirect
-                  assets outside defined transitions.
+                  Modules must return <strong>all funds</strong> or revert.
+                  Partial returns are not allowed. Escrow proves balance changes
+                  via before/after snapshots.
                 </p>
-                <code className="invariant-notation">
-                  Custody ∉ {'{operator, resolver, module}'}
-                </code>
               </div>
               <div className="principle seam-accent">
-                <h4>Isolated</h4>
+                <h4>No Fund Redirect</h4>
                 <p>
-                  Each escrow is independent. Failure in one cannot propagate to
-                  another. No shared risk.
+                  Modules only send funds back to the specific calling escrow
+                  vault. No discretionary redirection.
                 </p>
-                <code className="invariant-notation">
-                  failure(escrow_n) ⊄ escrow_m ∀ m ≠ n
-                </code>
               </div>
-              <div className="principle seam-accent">
-                <h4>Forward-only</h4>
-                <p>
-                  Upgrades apply only to new escrows. Active agreements remain
-                  bound to original rules.
-                </p>
-                <code className="invariant-notation">
-                  upgrade(t) → escrow.created &lt; t only
-                </code>
-              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 6. ARCHITECTURAL INVARIANTS ─────────────────────────────────── */}
+        <section className="content-section">
+          <h3>Architectural invariants</h3>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Non-custodial</h4>
+              <p>
+                Funds held by contract. No operator or module can redirect
+                assets outside defined transitions.
+              </p>
+              <code className="invariant-notation">
+                Custody ∉ {'{operator, resolver, module}'}
+              </code>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Isolated</h4>
+              <p>
+                Each escrow is independent. Failure in one cannot propagate to
+                another. No shared risk.
+              </p>
+              <code className="invariant-notation">
+                failure(escrow_n) ⊄ escrow_m ∀ m ≠ n
+              </code>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Forward-only</h4>
+              <p>
+                Upgrades apply only to new escrows. Active agreements remain
+                bound to original rules.
+              </p>
+              <code className="invariant-notation">
+                upgrade(t) → escrow.created &lt; t only
+              </code>
             </div>
           </div>
         </section>
@@ -271,20 +309,27 @@ export default function Architecture() {
           font-weight: 500;
         }
 
-        /* ── Shared block ───────────────────────────────────────────────────── */
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
+        /* ── Shared section ─────────────────────────────────────────────────── */
+        .content-section {
+          margin: 0 auto;
+          max-width: 1000px;
+          padding: 4rem 2rem;
         }
-        .content-block h3 {
+        .content-section h3 {
           margin-bottom: 1rem;
         }
-        .content-block > p {
+        .content-section > p {
           color: var(--accents-2);
           font-size: 0.95rem;
           line-height: 1.7;
           margin-bottom: 1.5rem;
+        }
+        .content-section > p:last-child {
+          margin-bottom: 0;
+        }
+        .content-section > p:last-child a {
+          color: #7adddc;
+          text-decoration: underline;
         }
 
         /* ── System flow diagram ────────────────────────────────────────────── */
@@ -444,6 +489,49 @@ export default function Architecture() {
         }
         .badge.no {
           background: #1b2a2e;
+          color: var(--accents-3);
+        }
+
+        /* ── Property grid ──────────────────────────────────────────────────── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 1.75rem;
+        }
+        .guarantees-grid--wide {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .guarantee-card {
+          padding: 1.5rem;
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.5rem 0;
+          font-size: 1rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .property-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 2rem;
+        }
+        .property {
+          padding: 1.5rem;
+        }
+        .property h4 {
+          margin-top: 0;
+          margin-bottom: 0.5rem;
+        }
+        .property p {
+          margin: 0;
+          font-size: 0.9rem;
           color: var(--accents-3);
         }
 
@@ -692,8 +780,15 @@ export default function Architecture() {
           color: #7adddc;
         }
 
+        @media (max-width: 900px) {
+          .guarantees-grid--wide {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
         /* ── Responsive ─────────────────────────────────────────────────────── */
         @media (max-width: 700px) {
+          .guarantees-grid,
+          .guarantees-grid--wide,
           .invariant-list,
           .gov-cols {
             grid-template-columns: 1fr;

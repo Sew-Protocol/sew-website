@@ -1,6 +1,6 @@
 # Whitepaper vs Website Comparison
 
-**Whitepaper:** `/references/sew-protocol-contracts/docs/WHITEPAPER.md`
+**Whitepaper:** `/references/sew-protocol/docs/WHITEPAPER.md`
 **Website:** Static site in `/src/pages/`
 **Date:** 2026-02-12
 

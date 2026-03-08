@@ -6,12 +6,12 @@ export default function Developer() {
   return (
     <>
       <Header titlePre="Build on Sew" />
-      <div className={sharedStyles.layout}>
+      <div>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
           style={{
-            backgroundImage: "url('/images/ancient-sewing-machine.jpg')",
+            backgroundImage: "url('/images/abstract-texture.jpeg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -193,7 +193,9 @@ function createEscrow(
           </div>
 
           <p className="learn-more" style={{ marginTop: '2rem' }}>
-            <Link href="/modules">Learn more about modules →</Link>
+            <Link href="/architecture#the-module-system">
+              Learn more about modules →
+            </Link>
           </p>
         </section>
 

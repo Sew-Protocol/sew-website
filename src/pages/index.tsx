@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <>
       <Header titlePre="Home" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
+      <div className={sharedStyles['hero-texture']}>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section className="hero">
           <div className="hero-inner">
@@ -173,23 +173,53 @@ export default function Index() {
             <h3>Why it exists</h3>
             <p>
               Ethereum transactions are irreversible by design. This property
-              enables trustless settlement, but it also creates persistent
-              risks:
+              enables trustless settlement, but it also creates persistent risks
+              for commerce and agreements.
             </p>
-            <ul>
-              <li>💸 Funds sent to the wrong address cannot be recovered</li>
-              <li>
-                🤝 Buyers and sellers must rely on trust or external platforms
-              </li>
-              <li>⚖️ Disputes are difficult to resolve without custody</li>
-              <li>
-                ⚠️ Smart contract risk can propagate across shared systems
-              </li>
-            </ul>
-            <p>
+
+            <div className="comparison-grid">
+              <div className="comparison-item fabric-panel seam-accent">
+                <h4>Direct Transfer</h4>
+                <p className="desc">Standard ERC20 transfer</p>
+                <ul className="pros">
+                  <li>✓ Instant</li>
+                  <li>✓ Simple</li>
+                </ul>
+                <ul className="cons">
+                  <li>✗ No protection</li>
+                  <li>✗ No conditions</li>
+                </ul>
+              </div>
+
+              <div className="comparison-item fabric-panel seam-accent">
+                <h4>Custodial Escrow</h4>
+                <p className="desc">Marketplace, processor</p>
+                <ul className="pros">
+                  <li>✓ Protection</li>
+                  <li>✓ Dispute handling</li>
+                </ul>
+                <ul className="cons">
+                  <li>✗ Custody required</li>
+                  <li>✗ Trust cost</li>
+                </ul>
+              </div>
+
+              <div className="comparison-item fabric-panel highlight stitched">
+                <h4>Sew Protocol</h4>
+                <p className="desc">Protected escrow layer</p>
+                <ul className="pros">
+                  <li>✓ Non-custodial</li>
+                  <li>✓ Structured protection</li>
+                  <li>✓ Dispute resolution</li>
+                  <li>✓ Composable</li>
+                </ul>
+              </div>
+            </div>
+
+            <p style={{ marginTop: '2rem' }}>
               Protection today is usually added off-chain, through custodians,
               or as application-specific logic. Sew moves protection to the
-              transaction layer itself.
+              transaction layer itself, enabling coordination without custody.
             </p>
           </div>
         </section>
@@ -355,9 +385,18 @@ export default function Index() {
       <style jsx>{`
         /* ── Hero overrides ── */
         .hero {
-          background-image: url('/images/stitch-texture.jpeg');
+          background-image: url('/images/abstract-texture.jpeg');
           background-size: cover;
           background-position: center 40%;
+        }
+        .hero::before {
+          background: linear-gradient(
+            108deg,
+            rgba(14, 26, 29, 0.98) 0%,
+            rgba(14, 26, 29, 0.95) 38%,
+            rgba(14, 26, 29, 0.85) 58%,
+            rgba(14, 26, 29, 0.75) 100%
+          );
         }
 
         .tagline {
@@ -471,18 +510,18 @@ export default function Index() {
           inset: 0;
           background: linear-gradient(
             180deg,
-            rgba(14, 26, 29, 0.88) 0%,
-            rgba(14, 26, 29, 0.78) 40%,
-            rgba(14, 26, 29, 0.88) 100%
+            rgba(14, 26, 29, 0.96) 0%,
+            rgba(14, 26, 29, 0.92) 40%,
+            rgba(14, 26, 29, 0.96) 100%
           );
           z-index: 0;
         }
         /* Cards on the breakout need slightly elevated glass look */
         .guarantees-breakout .guarantee-card {
-          background: rgba(14, 26, 29, 0.72);
-          backdrop-filter: blur(6px);
-          -webkit-backdrop-filter: blur(6px);
-          border-color: rgba(122, 221, 220, 0.2);
+          background: rgba(14, 26, 29, 0.85);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border-color: rgba(122, 221, 220, 0.25);
         }
         /* Final CTA — vintage needle close-up */
         .cta-breakout {
@@ -497,9 +536,9 @@ export default function Index() {
           inset: 0;
           background: linear-gradient(
             108deg,
-            rgba(14, 26, 29, 0.92) 0%,
-            rgba(14, 26, 29, 0.8) 50%,
-            rgba(14, 26, 29, 0.72) 100%
+            rgba(14, 26, 29, 0.98) 0%,
+            rgba(14, 26, 29, 0.94) 50%,
+            rgba(14, 26, 29, 0.9) 100%
           );
           z-index: 0;
         }
@@ -546,6 +585,47 @@ export default function Index() {
           font-weight: 600;
         }
 
+        .comparison-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 1.5rem;
+          margin: 2rem 0;
+        }
+        .comparison-item {
+          padding: 1.5rem;
+        }
+        .comparison-item.highlight {
+          border: 4px solid var(--primary);
+          background: rgba(122, 221, 220, 0.05);
+        }
+        .comparison-item h4 {
+          margin-top: 0;
+          margin-bottom: 0.5rem;
+        }
+        .comparison-item .desc {
+          font-size: 0.9rem;
+          color: var(--accents-3);
+          margin: 0.5rem 0 1rem;
+        }
+        .comparison-item ul {
+          margin: 0.5rem 0;
+          padding-left: 1.5rem;
+          font-size: 0.9rem;
+          list-style: none;
+        }
+        .comparison-item .pros li::before {
+          content: '✓ ';
+          color: #6ce5b1;
+          font-weight: bold;
+          margin-left: -1.2rem;
+        }
+        .comparison-item .cons li::before {
+          content: '✗ ';
+          color: #ff6f61;
+          font-weight: bold;
+          margin-left: -1.2rem;
+        }
+
         /* ── Design principles ────────────────────────────────────────────── */
         .principles-grid {
           display: grid;
@@ -568,12 +648,14 @@ export default function Index() {
         }
         .not-list li {
           padding: 1rem;
-          background: rgba(220, 38, 38, 0.1);
-          border-left: 3px solid #dc2626;
+          background: rgba(122, 221, 220, 0.04);
+          border: 1px solid rgba(245, 158, 11, 0.3);
+          border-left: 4px solid #f59e0b;
+          border-radius: 4px;
           font-size: 0.95rem;
         }
         .not-list strong {
-          color: #dc2626;
+          color: #f59e0b;
         }
 
         /* ── Evidence & Readiness ─────────────────────────────────────────── */

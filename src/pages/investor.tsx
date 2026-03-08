@@ -1,16 +1,17 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
+import Link from 'next/link'
 
 export default function Investor() {
   return (
     <>
       <Header titlePre="For Investors" />
-      <div className={sharedStyles.layout}>
+      <div>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
           style={{
-            backgroundImage: "url('/images/stitch-texture.jpeg')",
+            backgroundImage: "url('/images/abstract-texture.jpeg')",
             backgroundSize: 'cover',
             backgroundPosition: 'center 40%',
           }}

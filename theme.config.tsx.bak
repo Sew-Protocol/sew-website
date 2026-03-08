@@ -8,7 +8,7 @@ const logo = (
 export default {
   logo,
   project: {
-    link: 'https://github.com/sew-protocol/sew-protocol-contracts',
+    link: 'https://github.com/sew-protocol/sew-protocol',
   },
   chat: {
     link: 'https://discord.gg/sewprotocol',

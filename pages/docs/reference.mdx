@@ -71,6 +71,41 @@ interface IResolutionModule {
 }
 ```
 
+### IYieldModule
+
+Yield modules implement a common interface to manage optional yield generation through external protocols like Aave or Morpho.
+
+```solidity
+interface IYieldModule {
+    /**
+     * @dev Called during escrow creation to deposit principal.
+     */
+    function initializeYield(
+        bytes32 escrowId,
+        address token,
+        uint256 amount
+    ) external;
+
+    /**
+     * @dev Called during settlement to withdraw funds and accumulated yield.
+     */
+    function unwindToEscrow(
+        bytes32 escrowId,
+        address token,
+        uint256 amount
+    ) external returns (uint256 totalRecovered);
+
+    /**
+     * @dev Force-recovery mechanism if normal withdrawal fails.
+     */
+    function emergencyUnwind(
+        bytes32 escrowId,
+        address token,
+        uint256 amount
+    ) external;
+}
+```
+
 ## Events
 
 ```solidity

@@ -7,10 +7,10 @@ const logo = (
   <span style={{ fontWeight: 800, fontSize: '1.2rem' }}>SEW Protocol</span>
 )
 
-export default {
+const config: DocsThemeConfig = {
   logo,
   project: {
-    link: 'https://github.com/sew-protocol/sew-protocol-contracts',
+    link: 'https://github.com/sew-protocol/sew-protocol',
   },
   chat: {
     link: 'https://discord.gg/sewprotocol',
@@ -19,14 +19,27 @@ export default {
     defaultMenuCollapseLevel: 1,
     toggleButton: true,
   },
+  darkMode: true,
+  nextThemes: {
+    defaultTheme: 'dark',
+    forcedTheme: 'dark',
+  },
   footer: {
     text: '© 2026 Sew Protocol. All rights reserved.',
   },
   head: (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta property="og:title" content="Sew Protocol - Technical Documentation" />
-      <meta property="og:description" content="Technical documentation for Sew Protocol smart contracts" />
+      <meta
+        property="og:title"
+        content="Sew Protocol - Technical Documentation"
+      />
+      <meta
+        property="og:description"
+        content="Technical documentation for Sew Protocol smart contracts"
+      />
     </>
   ),
-} satisfies DocsThemeConfig
+}
+
+export default config
