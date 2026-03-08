@@ -6,349 +6,187 @@ export default function Governance() {
   return (
     <>
       <Header titlePre="Governance" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Governance</h1>
-          <h2 className="tagline">
-            Protocol evolution bounded by per-escrow immutability
-          </h2>
-          <p className="intro">
-            Sew Protocol is designed to evolve over time while preserving the
-            integrity of existing agreements. Governance is structured around a
-            simple principle: Protocol coordination should never become custody.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/abstract-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">System Evolution</span>
+              <h1>Governance</h1>
+              <h2 className="tagline">
+                Protocol evolution bounded by per-escrow immutability
+              </h2>
+              <p className="description">
+                Sew Protocol is designed to evolve while preserving the
+                integrity of existing agreements. Governance follows one simple
+                principle: Coordination should never become custody.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
+        <section className="content-section">
           <h3>Governance philosophy</h3>
-          <p>Sew separates two responsibilities:</p>
-          <ul>
-            <li>
-              <strong>Protocol evolution</strong> — introducing new modules and
-              improving safety over time
-            </li>
-            <li>
-              <strong>Operational safety</strong> — responding to emergencies or
-              integration risks
-            </li>
-          </ul>
-          <p>Governance is designed to:</p>
-          <ul>
-            <li>Allow defensive action when needed</li>
-            <li>Prevent discretionary interference in active escrows</li>
-            <li>Ensure upgrades affect only future agreements</li>
-          </ul>
-          <p>The goal is long-term stability, not constant change.</p>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Containment</h4>
+              <p>
+                Allow defensive action to reduce risk without affecting active
+                settlement.
+              </p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Stability</h4>
+              <p>
+                Upgrades only affect future escrows. Rules for active escrows
+                are immutable.
+              </p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Minimalism</h4>
+              <p>
+                Narrowly scoped authority focused on module approval and
+                parameter bounds.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Core design constraint</h3>
-          <p>Once an escrow is created, its rules are fixed.</p>
-          <p>This means:</p>
-          <ul>
-            <li>The release strategy is locked</li>
-            <li>The resolution path is locked</li>
-            <li>The yield module (if selected) is locked</li>
-            <li>The settlement logic cannot be rewritten</li>
-          </ul>
-          <p>
-            Governance cannot retroactively alter how an existing escrow
-            resolves. This is a foundational property of the system.
-          </p>
-        </section>
-
-        <section className="content-block">
+        <section className="content-section">
           <h3>Roles and responsibilities</h3>
-          <p>Sew uses role-based governance with clearly bounded authority.</p>
-
-          <div className="role">
-            <h4>Timelock governance</h4>
-            <p>The timelock is responsible for protocol evolution.</p>
-            <p>Typical responsibilities:</p>
-            <ul>
-              <li>Registering new modules</li>
-              <li>Updating system configuration</li>
-              <li>Setting exposure caps</li>
-              <li>Managing supported integrations</li>
-              <li>Appointing or removing guardian roles</li>
-              <li>Adjusting protocol parameters</li>
-            </ul>
-            <p>
-              Changes are delayed through a timelock mechanism to allow
-              visibility and review before activation. This provides
-              transparency, predictability, and time to react to risky changes.
-            </p>
-          </div>
-
-          <div className="role">
-            <h4>Guardian role</h4>
-            <p>
-              The guardian exists for emergency response. Scope is intentionally
-              limited.
-            </p>
-            <p>Typical actions:</p>
-            <ul>
-              <li>Disable integrations (e.g., yield module)</li>
-              <li>Lower risk parameters (such as caps)</li>
-              <li>Pause certain system components</li>
-            </ul>
-            <p>
-              <strong>Guardian constraints:</strong>
-            </p>
-            <ul>
-              <li>Pause maximum duration: 7 days</li>
-              <li>Maximum 3 pauses per 90-day rolling window</li>
-              <li>Cannot re-pause while already paused</li>
-              <li>Unpause requires governance, not guardian</li>
-            </ul>
-            <p>
-              The guardian cannot withdraw funds, redirect assets, rewrite
-              settlement outcomes, or change the rules of existing escrows. The
-              role is defensive, not managerial.
-            </p>
-          </div>
-
-          <div className="role">
-            <h4>Escrow contracts</h4>
-            <p>
-              Escrow contracts are registered as authorized participants in
-              modules. They initiate yield deposits, trigger withdrawals, and
-              interact with protocol modules on behalf of users.
-            </p>
-            <p>
-              This allows governance and operational controls to be scoped at
-              the integration boundary. Exposure caps can be applied per escrow
-              contract, and integrations can be managed without affecting
-              unrelated components.
-            </p>
+          <div className="guarantees-grid">
+            <div className="guarantee-card fabric-panel">
+              <h4>Timelock governance</h4>
+              <p>
+                Responsible for protocol evolution: registering modules,
+                updating configuration, and adjusting parameters. All changes
+                subject to delays.
+              </p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>Guardian role</h4>
+              <p>
+                Defensive role for emergency response: can pause high-risk
+                actions or lower exposure caps. Cannot touch funds or change
+                terms.
+              </p>
+            </div>
           </div>
         </section>
 
-        <section className="content-block">
-          <h3>Governance lanes</h3>
-          <p>
-            Different types of changes use different timelines and approval
-            requirements:
-          </p>
-
-          <table className="lanes-table">
-            <thead>
-              <tr>
-                <th>Lane</th>
-                <th>Typical Use Cases</th>
-                <th>Delay</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <strong>Fast lane</strong>
-                </td>
-                <td>
-                  Small parameter adjustments, token registration, minor
-                  configuration changes
-                </td>
-                <td>48 hours</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Slow lane</strong>
-                </td>
-                <td>
-                  Module upgrades, high-risk parameter changes, new integrations
-                </td>
-                <td>~9 days</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Emergency lane</strong>
-                </td>
-                <td>
-                  Risk reduction only—pauses, caps, disabling integrations
-                </td>
-                <td>0 hours (immediate)</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <p>
-            This layered approach balances agility with safety. Critical changes
-            require more review time.
-          </p>
+        <section className="content-section">
+          <div className="stitched">
+            <h3>Governance lanes</h3>
+            <table className="lanes-table">
+              <thead>
+                <tr>
+                  <th>Lane</th>
+                  <th>Typical Use Cases</th>
+                  <th>Delay</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Fast lane</strong>
+                  </td>
+                  <td>Small parameter adjustments, minor config changes</td>
+                  <td>48 hours</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Slow lane</strong>
+                  </td>
+                  <td>Module upgrades, new integrations, major changes</td>
+                  <td>~9 days</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Emergency lane</strong>
+                  </td>
+                  <td>Risk reduction: pauses, disabling modules</td>
+                  <td>Immediate</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
-        <section className="content-block">
+        <section className="content-section">
           <h3>Change boundaries</h3>
-          <p>There are clear limits on what governance can and cannot do.</p>
-          <p>
-            <strong>Governance can:</strong>
-          </p>
-          <ul>
-            <li>Approve new modules</li>
-            <li>Set exposure limits</li>
-            <li>Enable or disable integrations</li>
-            <li>Adjust system parameters for future activity</li>
-            <li>Register new tokens</li>
-            <li>Appoint or remove guardian roles</li>
-          </ul>
-          <p>
-            <strong>Governance cannot:</strong>
-          </p>
-          <ul>
-            <li>Seize funds from escrows</li>
-            <li>Redirect assets</li>
-            <li>Force settlement outcomes</li>
-            <li>Change the rules of an active escrow</li>
-            <li>Modify past decisions</li>
-          </ul>
-          <p>These constraints are enforced by contract design, not policy.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Module governance</h3>
-          <p>
-            Modules are the primary mechanism for protocol evolution. Each
-            module type has specific governance considerations:
-          </p>
-
-          <div className="module-governance">
-            <h4>Resolution modules</h4>
-            <p>
-              Govern how disputes are handled. Changes to resolution logic only
-              affect new escrows. Existing disputes continue under the
-              resolution module selected at escrow creation.
-            </p>
-          </div>
-
-          <div className="module-governance">
-            <h4>Release strategies</h4>
-            <p>
-              Define who can release funds and under what conditions. New
-              release strategies can be introduced for future escrows without
-              affecting existing agreements.
-            </p>
-          </div>
-
-          <div className="module-governance">
-            <h4>Yield generation modules</h4>
-            <p>
-              Manage how escrowed funds generate yield. Governance can add new
-              yield integrations or disable existing ones. Module changes only
-              affect new escrows.
-            </p>
+          <p>Enforced by smart contract design, not policy.</p>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Can:</h4>
+              <p>
+                Approve modules, set exposure limits, and adjust future
+                parameters.
+              </p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Cannot:</h4>
+              <p>Seize funds, redirect assets, or force settlement outcomes.</p>
+            </div>
           </div>
         </section>
 
-        <section className="content-block">
-          <h3>Exposure management</h3>
-          <p>Governance manages system-level risk through exposure controls:</p>
-          <ul>
-            <li>
-              <strong>Per-token caps</strong>: Maximum exposure for each
-              supported token
-            </li>
-            <li>
-              <strong>Per-contract caps</strong>: Maximum deposits into specific
-              escrow contracts
-            </li>
-            <li>
-              <strong>Module-level limits</strong>: Exposure limits for each
-              integration
-            </li>
-          </ul>
-          <p>
-            These controls are applied at deposit time and designed to limit
-            systemic risk, prevent over-concentration, and maintain stability
-            across integrations. They do not affect the ability to withdraw or
-            unwind existing positions.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Trust assumptions</h3>
-          <p>
-            Users rely on governance to act within defined constraints. Key
-            assumptions:
-          </p>
-          <ul>
-            <li>Timelock delays provide transparency into upcoming changes</li>
-            <li>Guardians act to reduce risk, not increase it</li>
-            <li>Governance powers remain narrowly scoped</li>
-            <li>Role appointments follow proper procedures</li>
-          </ul>
-          <p>
-            The protocol is designed so that even in worst-case governance
-            failures: funds remain under contract control, settlement paths
-            remain deterministic, and existing agreements stay protected.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Long-term direction</h3>
-          <p>
-            Governance is expected to decentralize over time. Early phases may
-            involve core team stewardship, carefully managed module rollouts,
-            and conservative exposure policies.
-          </p>
-          <p>
-            As the system matures, governance participation can broaden, module
-            development can expand, and decision-making can become more
-            distributed. The underlying constraint remains: existing escrows
-            must remain predictable and protected.
-          </p>
-          <p>
-            See <Link href="/protocol-limits">Protocol Limits</Link> for
-            detailed constraints on governance and guardian powers.
-          </p>
-          <p>
-            See <Link href="/emergency">Emergency Recovery</Link> for emergency
-            response procedures.
-          </p>
+        {/* ── FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/needle-threads.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 35%',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Review protocol constraints.</h3>
+            <p>
+              Explore the hard limits and safety bounds that ensure Sew Protocol
+              remains predictable and secure.
+            </p>
+            <div className="cta-btns">
+              <Link href="/protocol-limits" className="cta-btn primary">
+                Protocol Limits
+              </Link>
+              <Link href="/security" className="cta-btn">
+                Security Model
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="page-meta">
           <p>Last updated: February 2026</p>
-          <p>
-            <Link href="/docs/governance">View full documentation →</Link>
-          </p>
         </section>
       </div>
 
       <style jsx>{`
-        h1 {
-          margin-bottom: 0.5rem;
-        }
         .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
-          margin-bottom: 2rem;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
+        .content-section {
+          margin: 0 auto;
           max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .header-section {
-          margin-bottom: 4rem;
-          text-align: center;
-        }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
-        }
-        .role,
-        .module-governance {
-          margin-top: 2rem;
-          padding: 1.5rem;
-          background: #1b2a2e;
-          border-radius: var(--radius);
-          border: 1px solid #2a3a3e;
-        }
-        .role h4,
-        .module-governance h4 {
-          margin-top: 0;
+          padding: 4rem 2rem;
         }
         .lanes-table {
           width: 100%;
@@ -359,23 +197,14 @@ export default function Governance() {
         .lanes-table td {
           text-align: left;
           padding: 1rem;
-          border-bottom: 1px solid #2a3a3e;
+          border-bottom: 1px solid rgba(122, 221, 220, 0.1);
         }
         .lanes-table th {
           font-weight: 600;
-          background: #1b2a2e;
-        }
-        @media (max-width: 600px) {
-          .content-block {
-            padding: 0 1rem;
-          }
-          .lanes-table {
-            font-size: 0.9rem;
-          }
-          .lanes-table th,
-          .lanes-table td {
-            padding: 0.75rem 0.5rem;
-          }
+          color: var(--accents-3);
+          text-transform: uppercase;
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
         }
         .page-meta {
           text-align: center;
@@ -383,11 +212,63 @@ export default function Governance() {
           color: var(--accents-3);
           font-size: 0.85rem;
         }
-        .page-meta p {
-          margin: 0.5rem 0;
+
+        /* ── Shared Grids ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
         }
-        .page-meta a {
-          color: #7adddc;
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1rem;
+        }
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .guarantees-grid,
+          .principles-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
+          }
         }
       `}</style>
     </>

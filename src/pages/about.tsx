@@ -6,173 +6,181 @@ export default function About() {
   return (
     <>
       <Header titlePre="About" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section stitched">
-          <h1>About Sew Protocol</h1>
-          <h2 className="tagline">Sew Protocol</h2>
-          <p className="intro">
-            Building infrastructure for protected transfers on Ethereum.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/stitch-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 40%',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">The Fabric of the Protocol</span>
+              <h1>About Sew Protocol</h1>
+              <h2 className="tagline">
+                Infrastructure for protected transfers
+              </h2>
+              <p className="description">
+                Sew Protocol makes coordination possible on Ethereum without
+                requiring custody or centralized trust. We believe every
+                transfer should be optionally protected.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>🎯 Mission</h3>
-          <p>
-            Sew Protocol makes coordination possible on Ethereum without
-            requiring custody or centralized trust.
-          </p>
-          <p>
-            We believe every transfer should be optionally protected. Buyers and
-            sellers should be able to transact with confidence. Applications
-            should reuse infrastructure rather than reinvent escrow.
-          </p>
+        {/* ── 2. MISSION ──────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Mission</h3>
+            <p>
+              We believe every transfer should be optionally protected. Buyers
+              and sellers should be able to transact with confidence.
+              Applications should reuse infrastructure rather than reinvent
+              escrow.
+            </p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card fabric-panel">
+                <h4>Confidence</h4>
+                <p>
+                  Ensuring both parties fulfill obligations before finality.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Neutrality</h4>
+                <p>
+                  Enforcing rules defined at creation, not by intermediaries.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>🏗️ What we're building</h3>
+        {/* ── 3. BUILDING ─────────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>What we're building</h3>
           <p>
             Sew is composable infrastructure: a set of smart contracts and
             modules that applications, wallets, and protocols can build on.
           </p>
-          <ul>
-            <li>
-              <strong>Core escrow:</strong> Non-custodial transfer protection
-              with defined release and resolution rules
-            </li>
-            <li>
-              <strong>Modular architecture:</strong> Pluggable release
-              strategies, dispute resolvers, and yield generators
-            </li>
-            <li>
-              <strong>Dispute resolution:</strong> Structured, incentivized
-              mechanisms for fair conflict resolution
-            </li>
-            <li>
-              <strong>Governance:</strong> Community-controlled protocol
-              evolution
-            </li>
-          </ul>
-          <p>
-            Rather than a platform with proprietary integrations, Sew is a
-            primitive that works across ecosystems.
-          </p>
+          <div className="property-grid">
+            <div className="property fabric-panel seam-accent">
+              <h4>Core escrow</h4>
+              <p>
+                Non-custodial transfer protection with defined release and
+                resolution rules.
+              </p>
+            </div>
+            <div className="property fabric-panel seam-accent">
+              <h4>Modular architecture</h4>
+              <p>
+                Pluggable release strategies, dispute resolvers, and yield
+                generators.
+              </p>
+            </div>
+            <div className="property fabric-panel seam-accent">
+              <h4>Dispute resolution</h4>
+              <p>
+                Structured, incentivized mechanisms for fair conflict
+                resolution.
+              </p>
+            </div>
+            <div className="property fabric-panel seam-accent">
+              <h4>Governance</h4>
+              <p>Community-controlled evolution through the SEW token.</p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>🗳️ Governance and token</h3>
-          <p>
-            Sew Protocol is governed by the community through the SEW token.
-            Governance controls:
-          </p>
-          <ul>
-            <li>Protocol parameters and fee allocation</li>
-            <li>Module approvals and upgrades</li>
-            <li>Resolver appointment and slashing</li>
-            <li>Emergency response procedures</li>
-          </ul>
-          <p>
-            <Link href="/token">Learn more about the SEW token →</Link>
-          </p>
+        {/* ── 4. ROADMAP ──────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Roadmap</h3>
+            <p>
+              Sew is under active development. Our path to decentralization:
+            </p>
+            <div className="principles-grid">
+              <div className="principle">
+                <h4>v1 (Launch)</h4>
+                <p>Core escrow with single-tier dispute resolution.</p>
+              </div>
+              <div className="principle">
+                <h4>v2 (Post-launch)</h4>
+                <p>
+                  Multi-tier escalating resolution with staking and appeals.
+                </p>
+              </div>
+              <div className="principle">
+                <h4>v3 (Future)</h4>
+                <p>Fully decentralized resolver selection with delegation.</p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>🛡️ Security-first design</h3>
-          <p>Security is not an afterthought. Sew is designed with:</p>
-          <ul>
-            <li>
-              <strong>Non-custodial architecture:</strong> Funds never leave
-              user control except to the recipient
-            </li>
-            <li>
-              <strong>Deterministic rules:</strong> Code enforces settlement,
-              not human judgment
-            </li>
-            <li>
-              <strong>Per-escrow isolation:</strong> Failures are contained to
-              individual transfers
-            </li>
-            <li>
-              <strong>Emergency procedures:</strong> Escape hatches for extreme
-              scenarios
-            </li>
-          </ul>
-          <p>
-            <Link href="/security">View our security model →</Link>
-          </p>
+        {/* ── 5. GET INVOLVED ──────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>Get involved</h3>
+          <div className="guarantees-grid">
+            <div className="guarantee-card fabric-panel">
+              <h4>Developers</h4>
+              <p>
+                Integrate escrow into your app.{' '}
+                <Link href="/developer">Build on Sew →</Link>
+              </p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>Operators</h4>
+              <p>
+                Earn fees as a resolver.{' '}
+                <Link href="/docs/dispute-resolution/resolver-guide">
+                  Resolver Guide →
+                </Link>
+              </p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>Researchers</h4>
+              <p>
+                Analyze protocol mechanics.{' '}
+                <Link href="/researcher">Resources →</Link>
+              </p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>Investors</h4>
+              <p>
+                Learn about the token.{' '}
+                <Link href="/investor">Token Info →</Link>
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>🗺️ Roadmap</h3>
-          <p>Sew is under active development. Our roadmap includes:</p>
-          <ul>
-            <li>
-              <strong>v1 (Launch):</strong> Core escrow with single-tier dispute
-              resolution
-            </li>
-            <li>
-              <strong>v2 (Post-launch):</strong> Multi-tier escalating
-              resolution with staking and appeals
-            </li>
-            <li>
-              <strong>v3 (Future):</strong> Fully decentralized resolver
-              selection with capital-weighted delegation
-            </li>
-          </ul>
-          <p>
-            <Link href="/release-plan">View the full release plan →</Link>
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>🤝 Get involved</h3>
-          <p>Sew Protocol is open source and community-driven.</p>
-          <ul>
-            <li>
-              <strong>Developers:</strong>{' '}
-              <Link href="/developer">Build on Sew</Link> — Integrate escrow
-              into your app
-            </li>
-            <li>
-              <strong>Operators:</strong>{' '}
-              <Link href="/docs/dispute-resolution/resolver-guide">
-                Become a resolver
-              </Link>{' '}
-              — Earn fees by resolving disputes
-            </li>
-            <li>
-              <strong>Researchers:</strong>{' '}
-              <Link href="/researcher">Research resources</Link> — Analyze
-              protocol mechanics
-            </li>
-            <li>
-              <strong>Investors:</strong>{' '}
-              <Link href="/investor">Investor information</Link> — Learn about
-              the SEW token
-            </li>
-            <li>
-              <strong>Source code:</strong>{' '}
-              <a href="https://github.com/Sew-Protocol/sew-protocol">GitHub</a>{' '}
-              — Audit and contribute
-            </li>
-          </ul>
-        </section>
-
-        <section className="content-block">
-          <h3>✉️ Contact</h3>
-          <p>Questions? Reach out to the team.</p>
-          <ul>
-            <li>
-              <strong>Email:</strong> info@sewprotocol.com
-            </li>
-            <li>
-              <strong>Twitter:</strong>{' '}
-              <a href="https://twitter.com/sewprotocol">@sewprotocol</a>
-            </li>
-            <li>
-              <strong>Discord:</strong>{' '}
-              <a href="https://discord.gg/sewprotocol">Community server</a>
-            </li>
-          </ul>
+        {/* ── 6. FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/needle-threads.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 35%',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Ready to secure the fabric of Ethereum?</h3>
+            <p>
+              Explore our documentation or reach out to the team to get started.
+            </p>
+            <div className="cta-btns">
+              <Link href="/developer" className="cta-btn primary">
+                Developer Guide
+              </Link>
+              <Link href="/contact" className="cta-btn">
+                Contact Us
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="page-meta">
@@ -181,42 +189,97 @@ export default function About() {
       </div>
 
       <style jsx>{`
-        h1 {
-          margin-bottom: 0.5rem;
-        }
         .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
-          margin-bottom: 2rem;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
+        .content-section {
+          margin: 0 auto;
           max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
+          padding: 4rem 2rem;
         }
-        .header-section {
-          margin-bottom: 4rem;
-          text-align: center;
+        .property-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 2rem;
         }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
+        .property {
+          padding: 1.5rem;
         }
         .page-meta {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
-          font-size: 0.9rem;
-          color: var(--accents-5);
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
         }
-        .page-meta a {
-          color: #7adddc;
+
+        /* ── Shared Grids ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
         }
-        @media (max-width: 600px) {
-          .content-block {
-            padding: 0 1rem;
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1rem;
+        }
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .guarantees-grid,
+          .property-grid,
+          .principles-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
           }
         }
       `}</style>

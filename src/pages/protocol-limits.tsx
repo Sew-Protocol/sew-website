@@ -6,193 +6,212 @@ export default function ProtocolLimits() {
   return (
     <>
       <Header titlePre="Protocol Limits" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Protocol Limits</h1>
-          <h2 className="tagline">
-            Hard bounds enforced by contract, not policy
-          </h2>
-          <p className="intro">
-            These are the maximum bounds enforced by the protocol. They exist to
-            limit risk and ensure predictability.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/abstract-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">Safety Bounds</span>
+              <h1>Protocol Limits</h1>
+              <h2 className="tagline">
+                Hard bounds enforced by contract, not policy
+              </h2>
+              <p className="description">
+                These are the maximum bounds enforced by Sew Protocol. They
+                exist to limit systemic risk, prevent governance capture, and
+                ensure long-term predictability.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Fee limits</h3>
-          <table className="limits-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Maximum</th>
-                <th>Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Escrow creation fee</td>
-                <td>2%</td>
-                <td>Prevent excessive fees on transactions</td>
-              </tr>
-              <tr>
-                <td>Yield protocol fee</td>
-                <td>30%</td>
-                <td>Limit protocol share of generated yield</td>
-              </tr>
-              <tr>
-                <td>Appeal bond protocol fee</td>
-                <td>30%</td>
-                <td>Limit fees on dispute appeals</td>
-              </tr>
-            </tbody>
-          </table>
+        <section className="content-section">
+          <div className="stitched">
+            <h3>Fee limits</h3>
+            <table className="limits-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Maximum</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Escrow creation fee</td>
+                  <td>2%</td>
+                  <td>Prevent excessive fees on transactions</td>
+                </tr>
+                <tr>
+                  <td>Yield protocol fee</td>
+                  <td>30%</td>
+                  <td>Limit protocol share of generated yield</td>
+                </tr>
+                <tr>
+                  <td>Appeal bond protocol fee</td>
+                  <td>30%</td>
+                  <td>Limit fees on dispute appeals</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Time limits</h3>
-          <table className="limits-table">
-            <thead>
-              <tr>
-                <th>Parameter</th>
-                <th>Maximum</th>
-                <th>Purpose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Guardian pause duration</td>
-                <td>7 days</td>
-                <td>Prevent indefinite pauses</td>
-              </tr>
-              <tr>
-                <td>Dispute duration</td>
-                <td>90 days</td>
-                <td>Ensure disputes are resolved within bounded time</td>
-              </tr>
-              <tr>
-                <td>Appeal window</td>
-                <td>2 days</td>
-                <td>Allow time to appeal resolutions</td>
-              </tr>
-            </tbody>
-          </table>
+        <section className="content-section">
+          <div className="stitched">
+            <h3>Time limits</h3>
+            <table className="limits-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Maximum</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Guardian pause duration</td>
+                  <td>7 days</td>
+                  <td>Prevent indefinite pauses</td>
+                </tr>
+                <tr>
+                  <td>Dispute duration</td>
+                  <td>90 days</td>
+                  <td>Ensure resolution within bounded time</td>
+                </tr>
+                <tr>
+                  <td>Appeal window</td>
+                  <td>2 days</td>
+                  <td>Allow time to appeal Level 1/2 decisions</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Guardian constraints</h3>
-          <table className="limits-table">
-            <thead>
-              <tr>
-                <th>Constraint</th>
-                <th>Limit</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Maximum pause duration</td>
-                <td>7 days</td>
-              </tr>
-              <tr>
-                <td>Pause cycles per 90-day window</td>
-                <td>3 pauses</td>
-              </tr>
-              <tr>
-                <td>Can re-pause while paused</td>
-                <td>No</td>
-              </tr>
-              <tr>
-                <td>Can unpause</td>
-                <td>No (requires governance)</td>
-              </tr>
-              <tr>
-                <td>Can extract funds</td>
-                <td>No</td>
-              </tr>
-              <tr>
-                <td>Can modify existing escrows</td>
-                <td>No</td>
-              </tr>
-            </tbody>
-          </table>
+        <section className="content-section">
+          <div className="stitched">
+            <h3>Guardian constraints</h3>
+            <table className="limits-table">
+              <thead>
+                <tr>
+                  <th>Constraint</th>
+                  <th>Limit / Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Maximum pause duration</td>
+                  <td>7 days</td>
+                </tr>
+                <tr>
+                  <td>Pause cycles per 90-day window</td>
+                  <td>3 pauses</td>
+                </tr>
+                <tr>
+                  <td>Can re-pause while paused</td>
+                  <td>No</td>
+                </tr>
+                <tr>
+                  <td>Can unpause</td>
+                  <td>No (requires governance)</td>
+                </tr>
+                <tr>
+                  <td>Can extract funds</td>
+                  <td>No</td>
+                </tr>
+                <tr>
+                  <td>Can modify existing escrows</td>
+                  <td>No</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
-        <section className="content-block">
+        <section className="content-section">
           <h3>Governance constraints</h3>
-          <ul>
-            <li>Cannot seize funds from escrows</li>
-            <li>Cannot redirect assets</li>
-            <li>Cannot force settlement outcomes</li>
-            <li>Cannot change rules of existing escrows</li>
-            <li>All changes subject to timelock delays</li>
-          </ul>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Non-custodial</h4>
+              <p>
+                Governance cannot seize funds or redirect assets from any
+                escrow.
+              </p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Forward-only</h4>
+              <p>
+                Changes only affect future escrows. Term overrides are
+                impossible.
+              </p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Timelocked</h4>
+              <p>
+                All parameter changes are subject to mandatory delay periods.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Per-escrow immutability</h3>
-          <p>Once an escrow is created, the following are permanently fixed:</p>
-          <ul>
-            <li>Release strategy</li>
-            <li>Resolution module</li>
-            <li>Yield generation module</li>
-            <li>Fee percentage</li>
-            <li>Timeout settings</li>
-          </ul>
-          <p>Governance changes only affect future escrows.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Related Pages</h3>
-          <ul>
-            <li>
-              <Link href="/fees">Fees</Link>: Complete breakdown of all protocol
-              fees
-            </li>
-            <li>
-              <Link href="/governance">Governance</Link>: How protocol
-              constraints are enforced
-            </li>
-            <li>
-              <Link href="/how-it-works">How It Works</Link>: Understand the
-              escrow lifecycle
-            </li>
-            <li>
-              <Link href="/technical">Technical Resources</Link>: Smart
-              contracts and documentation
-            </li>
-          </ul>
+        {/* ── FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/needle-closeup.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 60%',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Review the security properties.</h3>
+            <p>
+              Understand the core invariants and threat model that protect user
+              funds in Sew Protocol.
+            </p>
+            <div className="cta-btns">
+              <Link href="/security" className="cta-btn primary">
+                Security Model
+              </Link>
+              <Link href="/fees" className="cta-btn">
+                Fees
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="page-meta">
           <p>Last updated: February 2026</p>
-          <p>
-            <Link href="/docs/protocol-limits">View full documentation →</Link>
-          </p>
         </section>
       </div>
 
       <style jsx>{`
-        h1 {
-          margin-bottom: 0.5rem;
-        }
         .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
-          margin-bottom: 2rem;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
+        .content-section {
+          margin: 0 auto;
           max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .header-section {
-          margin-bottom: 4rem;
-          text-align: center;
-        }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
+          padding: 4rem 2rem;
         }
         .limits-table {
           width: 100%;
@@ -203,23 +222,14 @@ export default function ProtocolLimits() {
         .limits-table td {
           text-align: left;
           padding: 1rem;
-          border-bottom: 1px solid #2a3a3e;
+          border-bottom: 1px solid rgba(122, 221, 220, 0.1);
         }
         .limits-table th {
           font-weight: 600;
-          background: #1b2a2e;
-        }
-        @media (max-width: 600px) {
-          .content-block {
-            padding: 0 1rem;
-          }
-          .limits-table {
-            font-size: 0.9rem;
-          }
-          .limits-table th,
-          .limits-table td {
-            padding: 0.75rem 0.5rem;
-          }
+          color: var(--accents-3);
+          text-transform: uppercase;
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
         }
         .page-meta {
           text-align: center;
@@ -227,11 +237,42 @@ export default function ProtocolLimits() {
           color: var(--accents-3);
           font-size: 0.85rem;
         }
-        .page-meta p {
-          margin: 0.5rem 0;
+
+        /* ── Shared Grids ── */
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
         }
-        .page-meta a {
-          color: #7adddc;
+        .principle {
+          padding: 1rem;
+        }
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .principles-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
+          }
         }
       `}</style>
     </>

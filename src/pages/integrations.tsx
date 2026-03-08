@@ -41,21 +41,35 @@ export default function Integrations() {
   return (
     <>
       <Header titlePre="Integrations" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Integrations</h1>
-          <h2 className="tagline">External protocols and services</h2>
-          <p className="intro">
-            Sew Protocol integrates with external services to provide yield
-            generation, dispute resolution, and blockchain infrastructure.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/ancient-sewing-machine.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">Ecosystem Partners</span>
+              <h1>Integrations</h1>
+              <h2 className="tagline">External protocols and services</h2>
+              <p className="description">
+                Sew Protocol integrates with external services to provide yield
+                generation, dispute resolution, and blockchain infrastructure.
+              </p>
+            </div>
+          </div>
         </section>
 
+        {/* ── 2. GRID ─────────────────────────────────────────────────────── */}
         <section className="integrations-grid">
           {integrations.map((integration) => (
             <div
               key={integration.name}
-              className="integration-card fabric-panel"
+              className="integration-card fabric-panel stitched"
             >
               <div className="integration-header">
                 <h3>{integration.name}</h3>
@@ -83,87 +97,97 @@ export default function Integrations() {
           ))}
         </section>
 
-        <section className="integration-principles fabric-texture fabric-texture-light">
-          <h2>Integration Principles</h2>
-          <div className="principles-grid">
-            <div className="principle-card">
-              <h4>Opt-In by Default</h4>
-              <p>
-                Integrations are not required. Users and applications choose
-                which integrations to enable.
-              </p>
-            </div>
-            <div className="principle-card">
-              <h4>Exposure Caps</h4>
-              <p>
-                External protocol exposure is bounded per token. Failures are
-                contained.
-              </p>
-            </div>
-            <div className="principle-card">
-              <h4>Pause Controls</h4>
-              <p>
-                Guardian can disable integrations immediately without pausing
-                the entire protocol.
-              </p>
-            </div>
-            <div className="principle-card">
-              <h4>Per-Escrow Isolation</h4>
-              <p>Integration failures in one escrow do not affect others.</p>
+        {/* ── 3. PRINCIPLES ────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Integration principles</h3>
+            <div className="principles-grid">
+              <div className="principle seam-accent">
+                <h4>Opt-In by Default</h4>
+                <p>
+                  Integrations are not required. Users and applications choose
+                  which integrations to enable.
+                </p>
+              </div>
+              <div className="principle seam-accent">
+                <h4>Exposure Caps</h4>
+                <p>
+                  External protocol exposure is bounded per token. Failures are
+                  contained.
+                </p>
+              </div>
+              <div className="principle seam-accent">
+                <h4>Pause Controls</h4>
+                <p>
+                  Guardian can disable integrations immediately without pausing
+                  the entire protocol.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="disclaimer-block">
-          <p>
-            <strong>Yield disclaimer:</strong> Yield is optional. Principal
-            remains governed by escrow logic. External protocol risk exists.
-            Exposure caps and unwind mechanisms limit potential losses.
-          </p>
+        <section className="content-section">
+          <div className="disclaimer-block">
+            <p>
+              <strong>Yield disclaimer:</strong> Yield is optional. Principal
+              remains governed by escrow logic. External protocol risk exists.
+              Exposure caps and unwind mechanisms limit potential losses.
+            </p>
+          </div>
         </section>
 
-        <section className="related-section">
-          <h3>Learn more</h3>
-          <div className="related-links">
-            <Link href="/security">Security Model</Link>
-            <Link href="/protocol-limits">Protocol Limits</Link>
-            <Link href="/emergency">Emergency Recovery</Link>
+        {/* ── 4. FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/needle-threads.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 35%',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Review the security model.</h3>
+            <p>
+              Explore the invariants, threat model, and recovery procedures that
+              protect Sew Protocol.
+            </p>
+            <div className="cta-btns">
+              <Link href="/security" className="cta-btn primary">
+                Security Model
+              </Link>
+              <Link href="/modules" className="cta-btn">
+                Module System
+              </Link>
+            </div>
           </div>
         </section>
 
         <section className="page-meta">
           <p>Last updated: February 2026</p>
-          <p>
-            <Link href="/docs">View full documentation →</Link>
-          </p>
         </section>
       </div>
 
       <style jsx>{`
-        .header-section {
-          text-align: center;
-          padding: 4rem 2rem;
-          max-width: 800px;
-          margin: 0 auto;
-        }
-        .header-section h1 {
-          font-size: 2.5rem;
-          margin-bottom: 0.5rem;
-        }
         .tagline {
-          color: var(--accents-3);
-          font-size: 1.2rem;
-          margin-bottom: 1rem;
-        }
-        .intro {
-          font-size: 1.1rem;
+          font-size: 1.15rem;
+          font-weight: 400;
           color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
+          color: var(--accents-3);
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
         .integrations-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
           gap: 1.5rem;
-          padding: 2rem;
+          padding: 4rem 2rem;
           max-width: 1200px;
           margin: 0 auto;
         }
@@ -209,7 +233,7 @@ export default function Integrations() {
         }
         .integration-details {
           padding-top: 1rem;
-          border-top: 1px solid var(--accents-6);
+          border-top: 1px solid rgba(122, 221, 220, 0.1);
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
@@ -230,75 +254,6 @@ export default function Integrations() {
           color: var(--fg);
           line-height: 1.4;
         }
-        .integration-principles {
-          max-width: 1000px;
-          margin: 4rem auto;
-          padding: 3rem 2rem;
-          border-radius: 12px;
-        }
-        .integration-principles h2 {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-        .principles-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1.5rem;
-        }
-        .principle-card {
-          padding: 1.25rem;
-          background: var(--bg);
-          border-radius: 8px;
-        }
-        .principle-card h4 {
-          font-size: 0.95rem;
-          margin: 0 0 0.5rem 0;
-        }
-        .principle-card p {
-          font-size: 0.85rem;
-          color: var(--accents-2);
-          margin: 0;
-          line-height: 1.4;
-        }
-        .related-section {
-          text-align: center;
-          padding: 4rem 2rem;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-        .related-section h3 {
-          margin-bottom: 1.5rem;
-        }
-        .related-links {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-        .related-links a {
-          padding: 0.5rem 1rem;
-          background: var(--accents-6);
-          border-radius: 6px;
-          color: var(--fg);
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: background 0.2s;
-        }
-        .related-links a:hover {
-          background: var(--accents-5);
-        }
-        .page-meta {
-          text-align: center;
-          padding: 3rem 2rem;
-          color: var(--accents-3);
-          font-size: 0.85rem;
-        }
-        .page-meta p {
-          margin: 0.5rem 0;
-        }
-        .page-meta a {
-          color: #7adddc;
-        }
         .disclaimer-block {
           background: rgba(245, 158, 11, 0.08);
           border: 1px solid rgba(245, 158, 11, 0.4);
@@ -312,9 +267,48 @@ export default function Integrations() {
           margin: 0;
           color: #ffd166;
         }
-        @media (max-width: 600px) {
-          .integrations-grid {
-            padding: 1rem;
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+
+        /* ── Shared Grids ── */
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1rem;
+        }
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .integrations-grid,
+          .principles-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
           }
         }
       `}</style>

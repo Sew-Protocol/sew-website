@@ -6,74 +6,98 @@ export default function WhySew() {
   return (
     <>
       <Header titlePre="Why Sew" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section stitched">
-          <h1>Why Sew</h1>
-          <h2 className="tagline">
-            The case for non-custodial, structured protection on Ethereum
-          </h2>
-          <p className="intro">
-            Ethereum transactions are final. But coordination requires
-            optionality. Sew Protocol adds structured protection to transfers
-            without introducing custody.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/thread-spools.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">The Value Proposition</span>
+              <h1>Why Sew Protocol?</h1>
+
+              <h2 className="tagline">
+                The case for non-custodial, structured protection on Ethereum
+              </h2>
+              <p className="description">
+                Ethereum transactions are final. But coordination requires
+                optionality. Sew Protocol adds structured protection to
+                transfers without introducing custody.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>⚠️ The problem</h3>
+        {/* ── 2. THE PROBLEM ──────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>The problem</h3>
+
           <p>
             Today, onchain value transfer has a stark choice: send or don't
             send.
           </p>
-          <ul>
-            <li>
-              <strong>Direct transfer:</strong> Immediate, irreversible, no
-              protection
-            </li>
-            <li>
-              <strong>Custodial escrow:</strong> Protection exists, but you must
-              trust a third party with your funds
-            </li>
-          </ul>
-          <p>
+          <div className="guarantees-grid">
+            <div className="guarantee-card fabric-panel">
+              <h4>Direct transfer</h4>
+              <p>
+                Immediate, irreversible, no protection. Great for trust-heavy
+                exchanges, risky for strangers.
+              </p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>Custodial escrow</h4>
+              <p>
+                Protection exists, but you must trust a third party with your
+                funds. Introducing counterparty risk with the intermediary.
+              </p>
+            </div>
+          </div>
+          <p style={{ marginTop: '2rem' }}>
             This creates friction for any exchange, delivery, or agreement
-            requiring coordination between parties.
-          </p>
-          <p>
-            For peer-to-peer trades, marketplaces, and services, someone has to
-            go first and trust the other party. That trust risk limits who can
+            requiring coordination between parties. Trust risk limits who can
             participate and on what terms.
           </p>
         </section>
 
-        <section className="content-block">
-          <h3>🪡 The solution: Protected transfers</h3>
-          <p>
-            Sew Protocol introduces protected transfers as a native pattern on
-            Ethereum.
-          </p>
-          <p>
-            A protected transfer is an ERC-20 transfer routed through escrow,
-            with predefined release and dispute resolution paths. Neither party
-            loses custody. Both know the rules upfront. Settlement is enforced
-            onchain.
-          </p>
-          <div className="pill-grid">
-            <span className="pill">Non-custodial</span>
-            <span className="pill">Composable</span>
-            <span className="pill">Deterministic</span>
-            <span className="pill">Dispute-enabled</span>
+        {/* ── 3. THE SOLUTION ─────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>The solution: Protected transfers</h3>
+
+            <p>
+              Sew Protocol introduces protected transfers as a native pattern on
+              Ethereum.
+            </p>
+            <p>
+              A protected transfer is an ERC-20 transfer routed through escrow,
+              with predefined release and dispute resolution paths. Neither
+              party loses custody. Both know the rules upfront. Settlement is
+              enforced onchain.
+            </p>
+            <div className="pill-grid">
+              <span className="pill">Non-custodial</span>
+              <span className="pill">Composable</span>
+              <span className="pill">Deterministic</span>
+              <span className="pill">Dispute-enabled</span>
+            </div>
           </div>
         </section>
 
-        <section className="content-block">
-          <h3>⚖️ How it compares</h3>
-          <p>
+        {/* ── 4. COMPARISON ───────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>How it compares</h3>
+
+          <p className="section-subtitle">
             Different transfer patterns serve different needs. Here's how Sew
-            fits in:
+            fits in.
           </p>
           <div className="comparison-grid">
-            <div className="comparison-item">
+            <div className="comparison-item fabric-panel seam-accent">
               <h4>Direct Transfer</h4>
               <p className="desc">Standard ERC20 transfer</p>
               <ul className="pros">
@@ -86,9 +110,9 @@ export default function WhySew() {
               </ul>
             </div>
 
-            <div className="comparison-item">
+            <div className="comparison-item fabric-panel seam-accent">
               <h4>Custodial Escrow</h4>
-              <p className="desc">Marketplace, transfer processor</p>
+              <p className="desc">Marketplace, processor</p>
               <ul className="pros">
                 <li>✓ Protection</li>
                 <li>✓ Dispute handling</li>
@@ -99,20 +123,7 @@ export default function WhySew() {
               </ul>
             </div>
 
-            <div className="comparison-item">
-              <h4>Multisig</h4>
-              <p className="desc">Shared control agreement</p>
-              <ul className="pros">
-                <li>✓ Non-custodial</li>
-                <li>✓ Transparent</li>
-              </ul>
-              <ul className="cons">
-                <li>✗ Requires coordination</li>
-                <li>✗ No conditional logic</li>
-              </ul>
-            </div>
-
-            <div className="comparison-item highlight">
+            <div className="comparison-item fabric-panel highlight stitched">
               <h4>Sew Protocol</h4>
               <p className="desc">Protected escrow layer</p>
               <ul className="pros">
@@ -125,85 +136,83 @@ export default function WhySew() {
           </div>
         </section>
 
-        <section className="content-block">
-          <h3>🚀 What Sew enables</h3>
-          <p>
-            By separating the protection layer from any single application, Sew
-            becomes infrastructure that any use case can build on.
-          </p>
-          <ul>
-            <li>
-              <strong>Peer-to-peer commerce:</strong> Direct trades without
-              intermediaries
-            </li>
-            <li>
-              <strong>Marketplaces:</strong> Reusable escrow logic across
-              platforms
-            </li>
-            <li>
-              <strong>Onchain agreements:</strong> Conditional settlement with
-              neutrality guarantees
-            </li>
-            <li>
-              <strong>Service transfers:</strong> Work-for-hire with protection
-            </li>
-            <li>
-              <strong>Wallet integrations:</strong> Safety features at the
-              transfer layer
-            </li>
-          </ul>
+        {/* ── 5. ENABLES ──────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>What Sew enables</h3>
+
+            <p>
+              By separating the protection layer from any single application,
+              Sew becomes infrastructure that any use case can build on.
+            </p>
+            <div className="guarantees-grid guarantees-grid--wide">
+              <div className="guarantee-card fabric-panel">
+                <h4>P2P Commerce</h4>
+                <p>Direct trades without intermediaries.</p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Marketplaces</h4>
+                <p>Reusable escrow logic across platforms.</p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Onchain agreements</h4>
+                <p>Conditional settlement with neutrality.</p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>🔷 Core principles</h3>
-          <p>
-            Sew is built on three principles that shape every design decision:
-          </p>
-          <div className="principle-grid">
-            <div className="principle">
+        {/* ── 6. PRINCIPLES ───────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>Core principles</h3>
+
+          <div className="principles-grid">
+            <div className="principle seam-accent">
               <h4>Non-custodial</h4>
               <p>
                 Funds are held by smart contracts, never by operators or
                 intermediaries.
               </p>
             </div>
-            <div className="principle">
+            <div className="principle seam-accent">
               <h4>Deterministic</h4>
               <p>
                 Release and resolution rules are defined at escrow creation.
-                Settlement follows code, not judgment calls.
               </p>
             </div>
-            <div className="principle">
+            <div className="principle seam-accent">
               <h4>Composable</h4>
               <p>
-                Built as a reusable primitive. Wallets, apps, and protocols can
-                build on top without reinventing escrow.
+                Built as a reusable primitive for any wallet, app, or protocol.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="content-block">
-          <h3>👉 Next steps</h3>
-          <p>Ready to understand how it works?</p>
-          <ul>
-            <li>
-              <Link href="/how-it-works">How It Works</Link> — See the lifecycle
-              and dispute resolution
-            </li>
-            <li>
-              <Link href="/use-cases">Use Cases</Link> — Real-world examples
-            </li>
-            <li>
-              <Link href="/developer">Build on Sew</Link> — Get started
-              integrating
-            </li>
-            <li>
-              <Link href="/comparisons">Detailed Comparisons</Link> — Deep dive
-              into alternatives
-            </li>
-          </ul>
+        {/* ── 7. FINAL CTA breakout ───────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/ancient-sewing-machine.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Ready to secure your transfers?</h3>
+            <p>
+              Explore how Sew Protocol can protect your everyday exchanges on
+              Ethereum.
+            </p>
+            <div className="cta-btns">
+              <Link href="/how-it-works" className="cta-btn primary">
+                How It Works
+              </Link>
+              <Link href="/developer" className="cta-btn">
+                Developer Docs
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="page-meta">
@@ -212,49 +221,45 @@ export default function WhySew() {
       </div>
 
       <style jsx>{`
-        h1 {
-          margin-bottom: 0.5rem;
-        }
         .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
+          margin: 0 0 2rem;
+          line-height: 1.75;
+          max-width: 480px;
+        }
+        .content-section {
+          margin: 0 auto;
+          max-width: 800px;
+          padding: 4rem 2rem;
+        }
+        .section-subtitle {
+          color: var(--accents-3);
+          font-size: 0.95rem;
+          margin-top: -0.5rem;
           margin-bottom: 2rem;
-        }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
-          max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .header-section {
-          margin-bottom: 4rem;
-          text-align: center;
-          max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
-          padding: 2.5rem 2rem;
-          border-radius: 12px;
-        }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
         }
         .pill-grid {
           display: flex;
           flex-wrap: wrap;
           gap: 1rem;
           margin: 2rem 0;
-          justify-content: center;
         }
         .pill {
-          background: #22343a;
-          color: #7adddc;
-          border: 1px solid rgba(122, 221, 220, 0.3);
-          padding: 0.5rem 1.5rem;
-          border-radius: 20px;
-          font-size: 0.9rem;
-          font-weight: 500;
+          background: rgba(122, 221, 220, 0.08);
+          color: var(--primary);
+          border: 1px solid rgba(122, 221, 220, 0.35);
+          padding: 0.4rem 1.2rem;
+          border-radius: 100px;
+          font-size: 0.8rem;
+          font-weight: 600;
         }
         .comparison-grid {
           display: grid;
@@ -263,13 +268,10 @@ export default function WhySew() {
           margin: 2rem 0;
         }
         .comparison-item {
-          border: 1px solid #2a3a3e;
-          border-radius: 8px;
           padding: 1.5rem;
-          background: #1b2a2e;
         }
         .comparison-item.highlight {
-          border: 2px solid #7adddc;
+          border: 4px solid var(--primary);
           background: rgba(122, 221, 220, 0.05);
         }
         .comparison-item h4 {
@@ -300,32 +302,74 @@ export default function WhySew() {
         }
         .principle {
           padding: 1.5rem;
-          border-left: 4px solid #7adddc;
-          background: #1b2a2e;
-        }
-        .principle h4 {
-          margin-top: 0;
-          color: #7adddc;
         }
         .page-meta {
           margin: 4rem auto;
           max-width: 800px;
           padding: 0 2rem;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           color: var(--accents-3);
+          text-align: center;
         }
-        .page-meta a {
-          color: #7adddc;
+
+        /* ── Grids from Index ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
         }
-        @media (max-width: 600px) {
-          .comparison-grid {
-            grid-template-columns: 1fr;
+        .guarantees-grid--wide {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+
+        /* ── Breakout CTA Specifics ── */
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 900px) {
+          .guarantees-grid--wide {
+            grid-template-columns: 1fr 1fr;
           }
+        }
+        @media (max-width: 700px) {
+          .guarantees-grid,
+          .guarantees-grid--wide,
+          .comparison-grid,
           .principle-grid {
             grid-template-columns: 1fr;
           }
-          .pill-grid {
-            justify-content: flex-start;
+          .cta-inner h3 {
+            font-size: 1.65rem;
           }
         }
       `}</style>

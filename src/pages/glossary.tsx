@@ -287,44 +287,38 @@ export default function Glossary() {
               <code className="notation-symbol">∈</code>
               <div className="notation-text">
                 <strong>element of</strong>
-                <p>
-                  A value belongs to a set.{' '}
-                  <code>{'Outcome ∈ {RELEASE, REFUND}'}</code> means the outcome
-                  must be one of those two values.
-                </p>
+                <p>A value belongs to a set.</p>
+                <code className="property-notation">
+                  {'Outcome ∈ {RELEASE, REFUND}'}
+                </code>
               </div>
             </div>
             <div className="notation-item">
               <code className="notation-symbol">∉</code>
               <div className="notation-text">
                 <strong>not an element of</strong>
-                <p>
-                  A value does not belong to a set.{' '}
-                  <code>{'Custody ∉ {operator, resolver}'}</code> means custody
-                  is never held by an operator or resolver.
-                </p>
+                <p>A value does not belong to a set.</p>
+                <code className="property-notation">
+                  {'Custody ∉ {operator, resolver}'}
+                </code>
               </div>
             </div>
             <div className="notation-item">
               <code className="notation-symbol">⊄</code>
               <div className="notation-text">
                 <strong>not a subset of</strong>
-                <p>
-                  One set does not include another.{' '}
-                  <code>{'failure(escrow_n) ⊄ escrow_m'}</code> means a failure
-                  in escrow n does not propagate into escrow m.
-                </p>
+                <p>One set does not include another.</p>
+                <code className="property-notation">
+                  {'failure(escrow_n) ⊄ escrow_m'}
+                </code>
               </div>
             </div>
             <div className="notation-item">
               <code className="notation-symbol">∀</code>
               <div className="notation-text">
                 <strong>for all</strong>
-                <p>
-                  A property holds universally. <code>{'∀ m ≠ n'}</code> means
-                  "for all m that are not equal to n" — i.e., every other
-                  escrow.
-                </p>
+                <p>A property holds universally.</p>
+                <code className="property-notation">{'∀ m ≠ n'}</code>
               </div>
             </div>
           </div>
@@ -473,14 +467,6 @@ export default function Glossary() {
           font-size: 0.78rem;
           color: var(--accents-3);
           line-height: 1.55;
-        }
-        .notation-text code {
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          background: #1b2a2e;
-          padding: 0.1rem 0.3rem;
-          border-radius: 3px;
-          white-space: nowrap;
         }
         .notation-ref {
           font-size: 0.8rem;

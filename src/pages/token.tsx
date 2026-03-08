@@ -6,125 +6,216 @@ export default function Token() {
   return (
     <>
       <Header titlePre="SEW Token" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>SEW Token</h1>
-          <h2 className="tagline">
-            Governance rights and future dispute resolution participation
-          </h2>
-          <p className="intro">
-            SEW is the governance token for Sew Protocol. It enables holders to
-            participate in protocol decision-making.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/stitch-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 40%',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">Governance Assets</span>
+              <h1>SEW Token</h1>
+              <h2 className="tagline">Governance rights and future staking</h2>
+              <p className="description">
+                SEW is the utility and governance token for Sew Protocol. It
+                enables the community to coordinate protocol evolution and
+                secure the dispute resolution system.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Token utility</h3>
-          <p>SEW serves two primary purposes:</p>
-          <ul>
-            <li>
-              <strong>Governance:</strong> Vote on proposals for protocol
-              upgrades, parameter changes, fee adjustments, and module
-              activations.
-            </li>
-            <li>
-              <strong>Staking (future):</strong> In later phases, SEW can be
-              staked as part of the dispute resolution system, subject to
-              governance activation.
-            </li>
-          </ul>
+        {/* ── 2. UTILITY ──────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Token utility</h3>
+            <p>SEW serves two primary purposes within the ecosystem:</p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card fabric-panel">
+                <h4>Governance</h4>
+                <p>
+                  Vote on upgrades, parameter changes, fee adjustments, and
+                  module activations.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Staking (future)</h4>
+                <p>
+                  Participate in the decentralized dispute resolution system via
+                  mixed-bond staking.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
+        {/* ── 3. RIGHTS ───────────────────────────────────────────────────── */}
+        <section className="content-section">
           <h3>Governance rights</h3>
-          <p>SEW holders can vote on:</p>
-          <ul>
-            <li>Module swaps and upgrades</li>
-            <li>Protocol fee adjustments</li>
-            <li>Risk parameter changes</li>
-            <li>Guardian role appointments</li>
-            <li>Emergency response coordination</li>
-          </ul>
-          <p>
-            All governance changes are subject to timelock delays, ensuring
-            transparency and community review before execution.
-          </p>
+          <p>SEW holders can participate in the decision machine for:</p>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Module Registry</h4>
+              <p>Approving and upgrading the library of available modules.</p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Economics</h4>
+              <p>Adjusting fee parameters and revenue allocation policies.</p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Safety</h4>
+              <p>
+                Appointing guardian roles and coordinating emergency response.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Staking in dispute resolution (future)</h3>
-          <p>
-            In later phases of decentralized dispute resolution (DR v3), SEW
-            will be used alongside stablecoins in a mixed-bond staking model:
-          </p>
-          <ul>
-            <li>Resolvers stake a mix of USDC and SEW</li>
-            <li>Composition: ≥80% stablecoin / ≤20% SEW post-haircut</li>
-            <li>Slashed SEW is burned, reducing supply</li>
-          </ul>
-          <p>
-            This aligns resolver incentives with long-term protocol health while
-            limiting exposure to SEW price volatility.
-          </p>
+        {/* ── 4. STAKING ──────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Staking in dispute resolution</h3>
+            <p className="description" style={{ maxWidth: 'none' }}>
+              In later phases (DR v3), SEW will be used alongside stablecoins in
+              a mixed-bond model:
+            </p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card fabric-panel">
+                <h4>Stable Anchor</h4>
+                <p>
+                  Bonds are ≥80% stablecoins to reduce volatility risk for
+                  resolvers.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Incentive Alignment</h4>
+                <p>
+                  Up to 20% of bonds in SEW. Slashed SEW is burned, reducing
+                  total supply.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Distribution</h3>
-          <p>
-            Token distribution details will be published before mainnet launch.
-          </p>
-          <p>
-            The protocol is designed so that governance cannot modify in-flight
-            escrows. Your token holdings and voting power cannot be affected by
-            governance decisions.
-          </p>
+        {/* ── 5. FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/ancient-sewing-machine.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Coordinate the evolution.</h3>
+            <p>
+              Learn how SEW holders participate in the governance process and
+              technical timelocks.
+            </p>
+            <div className="cta-btns">
+              <Link href="/governance" className="cta-btn primary">
+                Governance
+              </Link>
+              <Link href="/release-plan" className="cta-btn">
+                Release Plan
+              </Link>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Related pages</h3>
-          <ul>
-            <li>
-              <Link href="/governance">Governance</Link>: How protocol decisions
-              are made
-            </li>
-            <li>
-              <Link href="/how-it-works">How It Works</Link>: Understanding
-              dispute resolution phases
-            </li>
-            <li>
-              <Link href="/fees">Fees</Link>: Fee structure and revenue use
-            </li>
-          </ul>
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
         </section>
       </div>
 
       <style jsx>{`
-        h1 {
-          margin-bottom: 0.5rem;
-        }
         .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
-          margin-bottom: 2rem;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
+        .content-section {
+          margin: 0 auto;
           max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
+          padding: 4rem 2rem;
         }
-        .header-section {
-          margin-bottom: 4rem;
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+
+        /* ── Shared Grids ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
+        }
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1rem;
+        }
+        .cta-inner {
           text-align: center;
         }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
         }
-        @media (max-width: 600px) {
-          .content-block {
-            padding: 0 1rem;
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .guarantees-grid,
+          .principles-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
           }
         }
       `}</style>

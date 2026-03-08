@@ -6,133 +6,118 @@ export default function Fees() {
   return (
     <>
       <Header titlePre="Fees" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Fees</h1>
-          <h2 className="tagline">
-            Bounded, transparent, and locked at escrow creation
-          </h2>
-          <p className="intro">
-            Sew Protocol fees are bounded and transparent. This page explains
-            what fees apply and when.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/abstract-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">Protocol Economics</span>
+              <h1>Fees</h1>
+              <h2 className="tagline">
+                Bounded, transparent, and locked at creation
+              </h2>
+              <p className="description">
+                Sew Protocol fees are enforced by smart contracts. All fee
+                parameters are bounded by hard limits and are snapshotted at the
+                moment of escrow creation.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
+        <section className="content-section">
           <h3>Fee principles</h3>
-          <ul>
-            <li>Fees are capped at protocol level</li>
-            <li>Fees are known at escrow creation</li>
-            <li>Escrow fees are deducted upfront</li>
-            <li>Yield and appeal fees are taken from generated amounts</li>
-          </ul>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Hard-capped</h4>
+              <p>
+                Fees cannot exceed the maximums defined in the core protocol
+                contracts.
+              </p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Immutable</h4>
+              <p>Fees for an active escrow cannot be changed by governance.</p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Transparent</h4>
+              <p>
+                All fees are disclosed upfront and deducted during predefined
+                transitions.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Escrow creation fee</h3>
-          <p>
-            <strong>Default at launch: 1% | Maximum: 2%</strong>
-          </p>
-          <p>
-            A small fee is charged when creating an escrow. This fee is deducted
-            from the transaction amount at creation time. The fee percentage is
-            set by governance but cannot exceed 2%.
-          </p>
+        <section className="content-section">
+          <div className="stitched">
+            <h3>Fee schedule</h3>
+            <table className="fee-table">
+              <thead>
+                <tr>
+                  <th>Fee Type</th>
+                  <th>Default at Launch</th>
+                  <th>Max Cap</th>
+                  <th>Applied When</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Escrow creation</td>
+                  <td>1%</td>
+                  <td>2%</td>
+                  <td>At escrow creation</td>
+                </tr>
+                <tr>
+                  <td>Yield protocol share</td>
+                  <td>30%</td>
+                  <td>30%</td>
+                  <td>On generated yield</td>
+                </tr>
+                <tr>
+                  <td>Appeal bond</td>
+                  <td>0% (inactive)</td>
+                  <td>30%</td>
+                  <td>On appeal bonds</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Yield protocol fee</h3>
-          <p>
-            <strong>Default at launch: 30% | Maximum: 30%</strong>
-          </p>
-          <p>
-            When escrowed funds generate yield through integrations (e.g., Aave
-            V3), the protocol takes a share of the generated yield. This fee is
-            set by governance but is capped at 30%.
-          </p>
-          <p>The yield protocol fee does not affect the principal amount.</p>
-          <p>
-            Fee is snapshotted at escrow creation and cannot change during the
-            escrow's lifetime.
-          </p>
+        <section className="content-section">
+          <div className="fabric-panel stitched">
+            <h3>Example: 100 USDC escrow</h3>
+            <p className="description" style={{ maxWidth: 'none' }}>
+              With 1% escrow fee and 30% yield protocol fee (active):
+            </p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card">
+                <h4>Upfront</h4>
+                <p>
+                  Sender pays 100 USDC. 1 USDC goes to protocol; 99 USDC enters
+                  escrow.
+                </p>
+              </div>
+              <div className="guarantee-card">
+                <h4>Settlement</h4>
+                <p>
+                  Recipient receives 99 USDC + their share of any generated
+                  yield.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Appeal bond fee</h3>
-          <p>
-            <strong>Default at launch: 0% | Maximum: 30%</strong>
-          </p>
-          <p>
-            When a dispute resolution is appealed, the appellant posts a bond. A
-            portion of this bond may be taken as a protocol fee. This
-            discourages frivolous appeals while funding protocol development.
-          </p>
-          <p>
-            Currently inactive at launch. Can be enabled by governance in the
-            future.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Fee summary</h3>
-          <table className="fee-table">
-            <thead>
-              <tr>
-                <th>Fee Type</th>
-                <th>Default at Launch</th>
-                <th>Max</th>
-                <th>Applied When</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Escrow creation</td>
-                <td>1%</td>
-                <td>2%</td>
-                <td>At escrow creation</td>
-              </tr>
-              <tr>
-                <td>Yield protocol share</td>
-                <td>30%</td>
-                <td>30%</td>
-                <td>On generated yield</td>
-              </tr>
-              <tr>
-                <td>Appeal bond</td>
-                <td>0% (inactive)</td>
-                <td>30%</td>
-                <td>On appeal bonds</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section className="content-block fabric-panel">
-          <h3>Example: 100 USDC escrow</h3>
-          <p>With 1% escrow fee and 30% yield protocol fee (active):</p>
-          <ul>
-            <li>
-              <strong>Sender pays:</strong> 100 USDC
-            </li>
-            <li>
-              <strong>Escrow locked:</strong> 99 USDC (1 USDC fee to protocol)
-            </li>
-            <li>
-              <strong>If yield earned:</strong> Protocol takes 30% of yield; 70%
-              to configured recipient
-            </li>
-            <li>
-              <strong>On release:</strong> Recipient receives 99 USDC + their
-              share of yield
-            </li>
-          </ul>
-          <p>
-            Fees are deducted from the amount specified—no surprises at
-            settlement.
-          </p>
-        </section>
-
-        <section className="content-block">
+        <section className="content-section">
           <h3>Fee recipient</h3>
           <p>
             All fees go to a designated fee address controlled by governance.
@@ -141,55 +126,56 @@ export default function Fees() {
           </p>
         </section>
 
-        <section className="content-block">
-          <h3>Related Pages</h3>
-          <ul>
-            <li>
-              <Link href="/protocol-limits">Protocol Limits</Link>: Detailed
-              bounds on all protocol parameters
-            </li>
-            <li>
-              <Link href="/governance">Governance</Link>: How protocol
-              parameters are set and updated
-            </li>
-            <li>
-              <Link href="/how-it-works">How It Works</Link>: Understand escrow
-              lifecycle and fees in context
-            </li>
-          </ul>
+        {/* ── FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/ancient-sewing-machine.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>View protocol constraints.</h3>
+            <p>
+              Explore the hard limits and safety bounds that ensure Sew Protocol
+              remains predictable and secure.
+            </p>
+            <div className="cta-btns">
+              <Link href="/protocol-limits" className="cta-btn primary">
+                Protocol Limits
+              </Link>
+              <Link href="/governance" className="cta-btn">
+                Governance
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="page-meta">
           <p>Last updated: February 2026</p>
-          <p>
-            <Link href="/docs/fees">View full documentation →</Link>
-          </p>
         </section>
       </div>
 
       <style jsx>{`
-        h1 {
-          margin-bottom: 0.5rem;
-        }
         .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
-          margin-bottom: 2rem;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
+        .content-section {
+          margin: 0 auto;
           max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .header-section {
-          margin-bottom: 4rem;
-          text-align: center;
-        }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
+          padding: 4rem 2rem;
         }
         .fee-table {
           width: 100%;
@@ -200,23 +186,14 @@ export default function Fees() {
         .fee-table td {
           text-align: left;
           padding: 1rem;
-          border-bottom: 1px solid #2a3a3e;
+          border-bottom: 1px solid rgba(122, 221, 220, 0.1);
         }
         .fee-table th {
           font-weight: 600;
-          background: #1b2a2e;
-        }
-        @media (max-width: 600px) {
-          .content-block {
-            padding: 0 1rem;
-          }
-          .fee-table {
-            font-size: 0.9rem;
-          }
-          .fee-table th,
-          .fee-table td {
-            padding: 0.75rem 0.5rem;
-          }
+          color: var(--accents-3);
+          text-transform: uppercase;
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
         }
         .page-meta {
           text-align: center;
@@ -224,11 +201,60 @@ export default function Fees() {
           color: var(--accents-3);
           font-size: 0.85rem;
         }
-        .page-meta p {
-          margin: 0.5rem 0;
+
+        /* ── Shared Grids ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1rem;
         }
-        .page-meta a {
-          color: #7adddc;
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1rem;
+        }
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .guarantees-grid,
+          .principles-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
+          }
         }
       `}</style>
     </>

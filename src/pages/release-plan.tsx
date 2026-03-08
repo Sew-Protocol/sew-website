@@ -6,355 +6,333 @@ export default function ReleasePlan() {
   return (
     <>
       <Header titlePre="Release Plan" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Release Plan</h1>
-          <h2 className="tagline">Phased rollout strategy</h2>
-          <p className="intro">
-            Sew Protocol evolves through phases, each adding capabilities while
-            maintaining security. This page documents the planned progression
-            from launch to full decentralization.
-          </p>
-        </section>
-
-        <section className="timeline">
-          <div className="timeline-phase phase-active">
-            <div className="phase-header">
-              <span className="phase-status active">Active</span>
-              <h3>Phase 1: IEO (Initial Escrow Offering)</h3>
-            </div>
-            <p className="phase-subtitle">Core escrow with single resolver</p>
-            <div className="phase-content">
-              <div className="phase-block">
-                <h4>What is included</h4>
-                <ul>
-                  <li>Core escrow contracts (immutable)</li>
-                  <li>DefaultResolutionModule (single trusted resolver)</li>
-                  <li>Basic governance infrastructure</li>
-                  <li>Guardian emergency controls</li>
-                  <li>Optional Aave yield integration</li>
-                </ul>
-              </div>
-              <div className="phase-block">
-                <h4>What is not included</h4>
-                <ul className="not-included">
-                  <li>Multi-resolver escalation</li>
-                  <li>Appeal bonds</li>
-                  <li>Resolver staking/slashing</li>
-                  <li>External arbitration (Kleros)</li>
-                </ul>
-              </div>
-            </div>
-            <div className="phase-footer">
-              <span className="timeline-indicator">Timeline: Q1 2026</span>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/abstract-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">The Path to Decentralization</span>
+              <h1>Release Plan</h1>
+              <h2 className="tagline">Phased rollout strategy</h2>
+              <p className="description">
+                Sew Protocol evolves through phases, adding capabilities while
+                maintaining strict security. Our roadmap progresses from launch
+                to full capital-weighted decentralization.
+              </p>
             </div>
           </div>
+        </section>
 
-          <div className="timeline-arrow">v</div>
+        {/* ── 2. TIMELINE ─────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Rollout timeline</h3>
+            <div className="timeline-grid">
+              <div className="timeline-phase active fabric-panel">
+                <div className="phase-header">
+                  <span className="phase-status active">Active</span>
+                  <h4>Phase 1: IEO</h4>
+                </div>
+                <p className="phase-desc">
+                  Initial Escrow Offering. Core immutable escrow with single
+                  trusted resolver.
+                </p>
+                <ul className="phase-list">
+                  <li>Core escrow contracts</li>
+                  <li>DefaultResolutionModule</li>
+                  <li>Aave yield integration</li>
+                </ul>
+              </div>
 
-          <div className="timeline-phase phase-next">
-            <div className="phase-header">
-              <span className="phase-status upcoming">Upcoming</span>
-              <h3>Phase 2: DR v1 (Decentralize Decisions)</h3>
-            </div>
-            <p className="phase-subtitle">
-              Multi-resolver escalation without staking
-            </p>
-            <div className="phase-content">
-              <div className="phase-block">
-                <h4>What is added</h4>
-                <ul>
-                  <li>DecentralizedResolutionModule v1</li>
+              <div className="timeline-phase fabric-panel">
+                <div className="phase-header">
+                  <span className="phase-status upcoming">Q2-Q3 2026</span>
+                  <h4>Phase 2: Decisions</h4>
+                </div>
+                <p className="phase-desc">
+                  Multi-resolver escalation. Focus on decentralizing the
+                  decision machine.
+                </p>
+                <ul className="phase-list">
                   <li>Multiple resolver registry</li>
-                  <li>Fair resolver selection (round-robin)</li>
-                  <li>Three-level escalation: Standard / Senior / External</li>
-                  <li>Category-based dispute routing</li>
+                  <li>Round-robin selection</li>
+                  <li>Standard / Senior escalation</li>
                 </ul>
               </div>
-              <div className="phase-block">
-                <h4>What is not added yet</h4>
-                <ul className="not-included">
-                  <li>Appeal bonds (still v0)</li>
-                  <li>Resolver staking/slashing</li>
-                </ul>
-              </div>
-            </div>
-            <div className="phase-footer">
-              <span className="timeline-indicator">Timeline: Q2-Q3 2026</span>
-            </div>
-          </div>
 
-          <div className="timeline-arrow">v</div>
+              <div className="timeline-phase fabric-panel">
+                <div className="phase-header">
+                  <span className="phase-status upcoming">Q3-Q4 2026</span>
+                  <h4>Phase 3: Incentives</h4>
+                </div>
+                <p className="phase-desc">
+                  Decentralize incentives via appeal bonds. Economic gating for
+                  escalation.
+                </p>
+                <ul className="phase-list">
+                  <li>Appeal bonds active</li>
+                  <li>Quadratic cost curves</li>
+                  <li>Forfeit/Refund outcomes</li>
+                </ul>
+              </div>
 
-          <div className="timeline-phase phase-next">
-            <div className="phase-header">
-              <span className="phase-status upcoming">Upcoming</span>
-              <h3>Phase 3: DR v2 (Decentralize Incentives)</h3>
-            </div>
-            <p className="phase-subtitle">Appeal bonds for escalation</p>
-            <div className="phase-content">
-              <div className="phase-block">
-                <h4>What is added</h4>
-                <ul>
-                  <li>Appeal bonds for escalation</li>
-                  <li>
-                    Bond outcomes: refunded on success, forfeited on failure
-                  </li>
-                  <li>Quadratic cost curves for escalation</li>
-                  <li>Bond collection and distribution</li>
+              <div className="timeline-phase fabric-panel">
+                <div className="phase-header">
+                  <span className="phase-status upcoming">2027</span>
+                  <h4>Phase 4: Capital</h4>
+                </div>
+                <p className="phase-desc">
+                  Decentralize capital through resolver staking and slashing for
+                  misconduct.
+                </p>
+                <ul className="phase-list">
+                  <li>Resolver staking reqs</li>
+                  <li>SEW/Stable mixed bonds</li>
+                  <li>Objective slashing</li>
                 </ul>
               </div>
-              <div className="phase-block">
-                <h4>What is not added yet</h4>
-                <ul className="not-included">
-                  <li>Resolver staking/slashing</li>
-                </ul>
-              </div>
-            </div>
-            <div className="phase-footer">
-              <span className="timeline-indicator">Timeline: Q3-Q4 2026</span>
-            </div>
-          </div>
-
-          <div className="timeline-arrow">v</div>
-
-          <div className="timeline-phase phase-next">
-            <div className="phase-header">
-              <span className="phase-status upcoming">Upcoming</span>
-              <h3>Phase 4: DR v3 (Decentralize Capital)</h3>
-            </div>
-            <p className="phase-subtitle">Resolver staking and slashing</p>
-            <div className="phase-content">
-              <div className="phase-block">
-                <h4>What is added</h4>
-                <ul>
-                  <li>Resolver staking requirements</li>
-                  <li>Mixed-bond design (80% stablecoin / 20% SEW)</li>
-                  <li>Objective slashing for misconduct</li>
-                  <li>Fraud slashing path</li>
-                  <li>Coverage/underwriting mechanics</li>
-                </ul>
-              </div>
-              <div className="phase-block">
-                <h4>Key properties</h4>
-                <ul>
-                  <li>Capital at risk aligns incentives</li>
-                  <li>Stablecoin anchoring reduces volatility risk</li>
-                  <li>Slashed SEW is burned</li>
-                </ul>
-              </div>
-            </div>
-            <div className="phase-footer">
-              <span className="timeline-indicator">Timeline: 2027</span>
             </div>
           </div>
         </section>
 
-        <section className="content-block fabric-texture fabric-texture-light">
-          <h3>Design principle</h3>
-          <p className="principle-quote">
-            Decentralise decisions first, decentralise incentives second,
-            decentralise capital last.
-          </p>
-          <p>
-            This staged approach minimizes risk by introducing adversarial
-            pressure gradually, only after each phase proves stable.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Governance activation</h3>
-          <p>Each phase requires governance approval:</p>
-          <div className="governance-steps">
-            <div className="gov-step">
-              <strong>Deploy</strong> - New module deployed and tested
+        {/* ── 3. PRINCIPLES ────────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>Rollout principles</h3>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Decentralize decisions first</h4>
+              <p>
+                Establishing correct settlement paths before introducing
+                economic pressure.
+              </p>
             </div>
-            <div className="gov-step">
-              <strong>Queue</strong> - Governance proposal (48h timelock)
+            <div className="principle seam-accent">
+              <h4>Decentralize incentives second</h4>
+              <p>
+                Aligning disputant behavior through bonds after the paths are
+                stable.
+              </p>
             </div>
-            <div className="gov-step">
-              <strong>Wait</strong> - 7-day slow lane delay
-            </div>
-            <div className="gov-step">
-              <strong>Activate</strong> - Second proposal (48h timelock)
+            <div className="principle seam-accent">
+              <h4>Decentralize capital last</h4>
+              <p>
+                Putting capital at risk only once the incentive mechanisms are
+                proven.
+              </p>
             </div>
           </div>
-          <p>Total time: approximately 9 days from proposal to activation.</p>
         </section>
 
-        <section className="related-section fabric-texture fabric-texture-light">
-          <h3>Related pages</h3>
-          <div className="related-links">
-            <Link href="/dispute-resolution">Dispute Architecture</Link>
-            <Link href="/governance">Governance</Link>
-            <Link href="/security">Security Model</Link>
-            <Link href="/protocol-limits">Protocol Limits</Link>
+        {/* ── 4. ACTIVATION ───────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Governance activation</h3>
+            <p className="description" style={{ maxWidth: 'none' }}>
+              Each phase requires a multi-stage governance process via the
+              timelock:
+            </p>
+            <div className="guarantees-grid guarantees-grid--wide">
+              <div className="guarantee-card">
+                <h4>1. Deploy</h4>
+                <p>
+                  New module implementation deployed and tested on Base Sepolia.
+                </p>
+              </div>
+              <div className="guarantee-card">
+                <h4>2. Queue</h4>
+                <p>
+                  Governance proposal queued in the timelock (48h fast-lane).
+                </p>
+              </div>
+              <div className="guarantee-card">
+                <h4>3. Delay</h4>
+                <p>
+                  Mandatory slow-lane delay period (approx. 7 days) for review.
+                </p>
+              </div>
+            </div>
           </div>
+        </section>
+
+        {/* ── 5. FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/ancient-sewing-machine.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Review the technical architecture.</h3>
+            <p>
+              Understand how the modular system supports this phased evolution
+              without retroactive changes.
+            </p>
+            <div className="cta-btns">
+              <Link href="/architecture" className="cta-btn primary">
+                Architecture
+              </Link>
+              <Link href="/governance" className="cta-btn">
+                Governance
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
         </section>
       </div>
 
       <style jsx>{`
-        .header-section {
-          text-align: center;
-          padding: 4rem 2rem;
-          max-width: 800px;
-          margin: 0 auto;
-        }
-        h1 {
-          font-size: 2.5rem;
-          margin-bottom: 0.5rem;
-        }
         .tagline {
-          color: var(--accents-3);
-          font-size: 1.2rem;
-          margin-bottom: 1rem;
-        }
-        .intro {
-          font-size: 1.1rem;
-          line-height: 1.6;
+          font-size: 1.15rem;
+          font-weight: 400;
           color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
         }
-        .timeline {
-          max-width: 700px;
-          margin: 0 auto;
-          padding: 2rem;
-        }
-        .timeline-phase {
-          background: var(--bg);
-          border-radius: 12px;
-          padding: 2rem;
-        }
-        .phase-active {
-          border: 2px solid #059669;
-        }
-        .phase-next {
-          border: 1px solid var(--accents-2);
-        }
-        .phase-header {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          margin-bottom: 0.5rem;
-        }
-        .phase-header h3 {
-          margin: 0;
-          font-size: 1.2rem;
-        }
-        .phase-status {
-          font-size: 0.7rem;
-          padding: 0.25rem 0.5rem;
-          border-radius: 4px;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-        .phase-status.active {
-          background: rgba(108, 229, 177, 0.08);
-          color: #059669;
-        }
-        .phase-status.upcoming {
-          background: rgba(122, 221, 220, 0.08);
-          color: #7adddc;
-        }
-        .phase-subtitle {
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
-          margin: 0 0 1.5rem 0;
-          font-size: 0.95rem;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
-        .phase-content {
+        .content-section {
+          margin: 0 auto;
+          max-width: 800px;
+          padding: 4rem 2rem;
+        }
+        .timeline-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 1.5rem;
-          margin-bottom: 1.5rem;
+          margin-top: 2rem;
         }
-        .phase-block h4 {
-          font-size: 0.8rem;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--accents-3);
-          margin: 0 0 0.75rem 0;
+        .timeline-phase {
+          padding: 1.5rem;
         }
-        .phase-block ul {
+        .timeline-phase.active {
+          border-color: #059669;
+          box-shadow: 0 0 0 1px #059669;
+        }
+        .phase-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 0.75rem;
+        }
+        .phase-header h4 {
           margin: 0;
-          padding-left: 1.25rem;
-          font-size: 0.9rem;
+          font-size: 1.1rem;
         }
-        .phase-block li {
-          margin-bottom: 0.25rem;
+        .phase-status {
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
         }
-        .not-included {
-          opacity: 0.7;
+        .phase-status.active {
+          background: rgba(5, 150, 105, 0.1);
+          color: #059669;
         }
-        .phase-footer {
-          padding-top: 1rem;
-          border-top: 1px solid #2a3a3e;
-        }
-        .timeline-indicator {
-          font-size: 0.85rem;
+        .phase-status.upcoming {
+          background: rgba(122, 221, 220, 0.1);
           color: var(--accents-3);
         }
-        .timeline-arrow {
-          text-align: center;
-          font-size: 1.5rem;
-          color: var(--accents-3);
-          padding: 0.5rem 0;
-        }
-        .content-block {
-          max-width: 700px;
-          margin: 4rem auto;
-          padding: 0 2rem;
-        }
-        .content-block h3 {
+        .phase-desc {
+          font-size: 0.88rem;
+          color: var(--accents-2);
+          line-height: 1.5;
           margin-bottom: 1rem;
         }
-        .principle-quote {
-          font-size: 1.25rem;
-          font-style: italic;
-          border-left: 3px solid var(--accents-3);
-          padding-left: 1.5rem;
-          margin: 1.5rem 0;
+        .phase-list {
+          margin: 0;
+          padding-left: 1.15rem;
+          font-size: 0.82rem;
+          color: var(--accents-3);
         }
-        .governance-steps {
-          display: grid;
-          gap: 0.75rem;
-          margin: 1.5rem 0;
+        .phase-list li {
+          margin-bottom: 0.25rem;
         }
-        .gov-step {
-          padding: 1rem;
-          background: var(--bg);
-          border-radius: 8px;
-        }
-        .related-section {
-          max-width: 700px;
-          margin: 4rem auto;
-          padding: 3rem 2rem;
-          border-radius: 12px;
-        }
-        .related-section h3 {
+
+        .page-meta {
           text-align: center;
-          margin-bottom: 1.5rem;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
         }
-        .related-links {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          justify-content: center;
+
+        /* ── Shared Grids ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
         }
-        .related-links a {
-          padding: 0.5rem 1rem;
-          background: var(--bg);
-          border: 1px solid var(--accents-2);
-          border-radius: 6px;
-          color: var(--fg);
-          text-decoration: none;
-          font-size: 0.9rem;
+        .guarantees-grid--wide {
+          grid-template-columns: repeat(3, 1fr);
         }
-        .related-links a:hover {
-          background: var(--accents-6);
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
         }
-        @media (max-width: 600px) {
-          .phase-content {
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1rem;
+        }
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .timeline-grid,
+          .guarantees-grid,
+          .guarantees-grid--wide,
+          .principles-grid {
             grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
           }
         }
       `}</style>

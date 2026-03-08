@@ -189,8 +189,7 @@ export default function Index() {
             <p>
               Protection today is usually added off-chain, through custodians,
               or as application-specific logic. Sew moves protection to the
-              transaction layer itself — the default pattern used when value
-              moves.
+              transaction layer itself.
             </p>
           </div>
         </section>
@@ -200,7 +199,8 @@ export default function Index() {
           <h3>How it helps</h3>
           <p>
             Sew allows an erc20 transfer to be structured as an escrowed
-            transfer with clear release paths. This enables:
+            transfer with clear release and dispute resolution paths. This
+            enables:
           </p>
           <div className="guarantees-grid">
             <div className="guarantee-card fabric-panel">
@@ -228,7 +228,7 @@ export default function Index() {
         <section id="design-principles" className="abstract-band">
           <div className="abstract-band-inner">
             <div className="thread-divider" />
-            <h3>📐 Design principles</h3>
+            <h3>Design principles</h3>
             <div className="principles-grid">
               <div className="principle seam-accent">
                 <h4>Non-custodial by construction</h4>
@@ -265,7 +265,7 @@ export default function Index() {
         {/* ── 8. A PRIMITIVE ──────────────────────────────────────────────── */}
         <section className="content-section">
           <div className="thread-divider" />
-          <h3>📦 A primitive for protected transfers</h3>
+          <h3>A primitive for protected transfers</h3>
           <p>
             Sew defines a simple idea: A transfer can be protected before it is
             finalized.
@@ -311,64 +311,10 @@ export default function Index() {
             </p>
           </div>
         </section>
-
-        {/* ── 10. EVIDENCE & READINESS ────────────────────────────────────── */}
-        <section id="readiness" className="content-section">
-          <div className="thread-divider" />
-          <h3>🔍 Audit readiness</h3>
-          <p className="section-subtitle">
-            For grant reviewers and independent security auditors.
-          </p>
-          <div className="readiness-grid">
-            <div className="readiness-col fabric-panel">
-              <h4>🛠️ What is implemented</h4>
-              <ul className="check-list">
-                <li>Core escrow state machine with 6 defined states</li>
-                <li>
-                  ERC-20 protected transfers with deterministic release paths
-                </li>
-                <li>v1 dispute resolution — single trusted resolver</li>
-                <li>Modular architecture — resolution and yield</li>
-                <li>Per-escrow isolation — no shared state</li>
-                <li>Time-bounded emergency pause (7-day max)</li>
-                <li>Governance constraints — no retroactive changes</li>
-              </ul>
-            </div>
-            <div className="readiness-col funded fabric-panel stitched">
-              <h4>💰 What the grant funds</h4>
-              <ul className="check-list">
-                <li>Formal invariant testing across all transitions</li>
-                <li>Adversarial simulation of dispute escalation</li>
-                <li>Bond sizing and slashing rate validation</li>
-                <li>Third-party security audit (Tier 1 auditor)</li>
-                <li>Testnet deployment and integration suite</li>
-                <li>Threat model red-teaming and review</li>
-              </ul>
-            </div>
-          </div>
-          <div className="readiness-links">
-            <Link href="/security#threat-model" className="readiness-link">
-              Threat model →
-            </Link>
-            <Link href="/contracts" className="readiness-link">
-              Contracts →
-            </Link>
-            <Link href="/release-plan" className="readiness-link">
-              Release plan →
-            </Link>
-            <ExtLink
-              href="https://github.com/Sew-Protocol/sew-protocol"
-              className="readiness-link"
-            >
-              GitHub →
-            </ExtLink>
-          </div>
-        </section>
-
         {/* ── 11. VISION ──────────────────────────────────────────────────── */}
         <section className="content-section">
           <div className="thread-divider" />
-          <h3>🔭 Vision</h3>
+          <h3>Vision</h3>
           <p>
             Ethereum made programmable money possible. Sew explores what happens
             when transfers themselves become programmable agreements.
@@ -391,9 +337,8 @@ export default function Index() {
           <div className="breakout-inner cta-inner">
             <h3>Review the security model.</h3>
             <p>
-              Designed for auditors, researchers, and grant reviewers. Threat
-              model, invariants, dispute economics, and upgrade semantics — all
-              in one place.
+              Threat model, invariants, dispute economics, and upgrade semantics
+              — all in one place.
             </p>
             <div className="cta-btns">
               <Link href="/security" className="cta-btn primary">
@@ -408,72 +353,13 @@ export default function Index() {
       </div>
 
       <style jsx>{`
-        /* ── Hero ─────────────────────────────────────────────────────────── */
+        /* ── Hero overrides ── */
         .hero {
-          border: 1px solid rgba(122, 221, 220, 0.18);
-          border-radius: 20px;
-          margin: 1rem 1.5rem 3.5rem;
-          overflow: hidden;
-          position: relative;
           background-image: url('/images/stitch-texture.jpeg');
           background-size: cover;
           background-position: center 40%;
-          min-height: 460px;
         }
-        /* Directional overlay: near-opaque on the left, fading to transparent right
-           so the sewing image sits in a natural "window" in the texture */
-        .hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            108deg,
-            rgba(14, 26, 29, 0.97) 0%,
-            rgba(14, 26, 29, 0.95) 38%,
-            rgba(14, 26, 29, 0.75) 58%,
-            rgba(14, 26, 29, 0.25) 100%
-          );
-          pointer-events: none;
-          z-index: 0;
-        }
-        .hero-inner {
-          position: relative;
-          z-index: 1;
-          max-width: 760px;
-          min-height: 460px;
-          padding: 5rem 3.5rem;
-          display: flex;
-          align-items: center;
-        }
-        /* ── Text column ── */
-        .hero-text {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .hero-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--primary);
-          border: 1px solid rgba(122, 221, 220, 0.3);
-          border-radius: 100px;
-          padding: 0.3rem 0.9rem;
-          margin-bottom: 1.5rem;
-          background: rgba(122, 221, 220, 0.06);
-        }
-        .hero-text h1 {
-          margin: 0 0 0.75rem;
-          font-size: 3.2rem;
-          font-weight: 900;
-          line-height: 1.05;
-          letter-spacing: -0.04rem;
-          color: #ffffff;
-        }
+
         .tagline {
           font-size: 1.15rem;
           font-weight: 400;
@@ -552,7 +438,7 @@ export default function Index() {
           }
         }
 
-        /* ── Shared section ───────────────────────────────────────────────── */
+        /* ── Shared section overrides ── */
         .content-section {
           margin: 0 auto;
           max-width: 800px;
@@ -571,42 +457,7 @@ export default function Index() {
           font-weight: 500;
         }
 
-        /* ── Abstract-texture alternating bands (Plan A) ──────────────────── */
-        .abstract-band {
-          position: relative;
-          background-image: url('/images/abstract-texture.jpeg');
-          background-size: cover;
-          background-position: center;
-        }
-        .abstract-band::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: rgba(14, 26, 29, 0.84);
-          pointer-events: none;
-          z-index: 0;
-        }
-        .abstract-band-inner {
-          position: relative;
-          z-index: 1;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 4rem 2rem;
-        }
-
-        /* ── Full-bleed breakout sections (Plan D) ────────────────────────── */
-        .section-breakout {
-          position: relative;
-          width: 100%;
-          overflow: hidden;
-        }
-        .breakout-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 5rem 3rem;
-          position: relative;
-          z-index: 1;
-        }
+        /* ── Breakout Specifics ── */
         /* Security properties — needle + threads photo */
         .guarantees-breakout {
           background-image: url('/images/needle-threads.jpg');
@@ -652,51 +503,6 @@ export default function Index() {
           );
           z-index: 0;
         }
-        .cta-inner {
-          text-align: center;
-        }
-        .cta-inner h3 {
-          font-size: 2.2rem;
-          font-weight: 900;
-          margin: 0 0 0.75rem 0;
-          letter-spacing: -0.04em;
-          color: #fff;
-        }
-        .cta-inner p {
-          font-size: 1rem;
-          color: var(--accents-2);
-          max-width: 500px;
-          margin: 0 auto 2.5rem;
-          line-height: 1.65;
-        }
-        .cta-btns {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-        }
-        .cta-btn {
-          padding: 0.8rem 2rem;
-          border-radius: var(--radius);
-          font-weight: 600;
-          font-size: 0.95rem;
-          border: 1.5px solid rgba(122, 221, 220, 0.4);
-          text-decoration: none;
-          color: var(--fg);
-          transition: all 0.18s;
-          background: rgba(122, 221, 220, 0.07);
-        }
-        .cta-btn.primary {
-          background: var(--primary);
-          color: var(--bg);
-          border-color: var(--primary);
-        }
-        .cta-btn.primary:hover {
-          background: var(--accent);
-          border-color: var(--accent);
-        }
-        .cta-btn:not(.primary):hover {
-          background: rgba(122, 221, 220, 0.15);
-        }
 
         /* ── Core Guarantees grid ─────────────────────────────────────────── */
         .guarantees-grid {
@@ -710,9 +516,6 @@ export default function Index() {
         }
         .guarantee-card {
           padding: 1.25rem 1.5rem;
-          border: 1px solid var(--border);
-          border-radius: var(--radius);
-          background: #1b2a2e;
         }
         .guarantee-card h4 {
           margin: 0 0 0.4rem 0;
@@ -725,20 +528,9 @@ export default function Index() {
           color: var(--accents-3);
           line-height: 1.5;
         }
-        .property-notation {
-          display: block;
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          color: #7adddc;
-          background: rgba(14, 26, 29, 0.6);
-          padding: 0.3rem 0.6rem;
-          border-radius: 4px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
 
-        /* ── Pill grid ────────────────────────────────────────────────────── */
+        /* ── Breakout inner spacing ───────────────────────────────────────── */
+
         .pill-grid {
           display: flex;
           gap: 0.5rem;
@@ -871,9 +663,6 @@ export default function Index() {
           .cta-btns {
             flex-direction: column;
             align-items: center;
-          }
-          .property-notation {
-            font-size: 0.65rem;
           }
           .breakout-inner {
             padding: 3rem 1.5rem;

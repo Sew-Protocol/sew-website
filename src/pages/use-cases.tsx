@@ -79,16 +79,31 @@ export default function UseCases() {
   return (
     <>
       <Header titlePre="Use Cases" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Use Cases</h1>
-          <h2 className="tagline">The Patterns of Protection</h2>
-          <p className="intro">
-            Sew Protocol enables safe transactions across everyday scenarios.
-            Below are the "stitch patterns" where escrow protection adds value.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/needle-threads.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 35%',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">Real-world applications</span>
+              <h1>Use Cases</h1>
+              <h2 className="tagline">The Patterns of Protection</h2>
+              <p className="description">
+                Sew Protocol enables safe transactions across everyday
+                scenarios. Below are the "stitch patterns" where escrow
+                protection adds value.
+              </p>
+            </div>
+          </div>
         </section>
 
+        {/* ── 2. GRID ─────────────────────────────────────────────────────── */}
         <section className="use-cases-grid">
           {useCases.map((useCase) => (
             <div
@@ -103,7 +118,7 @@ export default function UseCases() {
               <div className="use-case-details">
                 <div className="detail-block">
                   <span className="detail-label">
-                    🧵 Why protected transfer helps
+                    Why protected transfer helps
                   </span>
                   <span className="detail-value">{useCase.whyProtected}</span>
                 </div>
@@ -118,16 +133,22 @@ export default function UseCases() {
           ))}
         </section>
 
-        <section className="cta-section fabric-texture fabric-texture-light">
-          <h3>Ready to build?</h3>
-          <p>Integrate protected transfers into your application</p>
-          <div className="cta-buttons">
-            <Link href="/developer" className="cta-button primary">
-              Developer Guide
-            </Link>
-            <Link href="/contracts" className="cta-button">
-              Contract Addresses
-            </Link>
+        {/* ── 3. CTA ──────────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner cta-band-inner">
+            <h3>Ready to build?</h3>
+            <p className="description" style={{ margin: '0 auto 2rem' }}>
+              Integrate protected transfers into your application using Sew
+              Protocol infrastructure.
+            </p>
+            <div className="cta-btns">
+              <Link href="/developer" className="cta-btn primary">
+                Developer Guide
+              </Link>
+              <Link href="/contracts" className="cta-btn">
+                Contract Addresses
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -140,31 +161,25 @@ export default function UseCases() {
       </div>
 
       <style jsx>{`
-        .header-section {
-          text-align: center;
-          padding: 4rem 2rem;
-          max-width: 800px;
-          margin: 0 auto;
-        }
-        .header-section h1 {
-          font-size: 2.5rem;
-          margin-bottom: 0.5rem;
-        }
         .tagline {
-          color: var(--accents-3);
-          font-size: 1.2rem;
-          margin-bottom: 1.5rem;
-        }
-        .intro {
-          font-size: 1.1rem;
-          line-height: 1.6;
+          font-size: 1.15rem;
+          font-weight: 400;
           color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
+          color: var(--accents-3);
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
         .use-cases-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
           gap: 1.5rem;
-          padding: 2rem;
+          padding: 4rem 2rem;
           max-width: 1400px;
           margin: 0 auto;
         }
@@ -194,7 +209,7 @@ export default function UseCases() {
           font-size: 0.9rem;
           margin-bottom: 1rem;
           padding-bottom: 1rem;
-          border-bottom: 1px solid var(--accents-6);
+          border-bottom: 1px solid rgba(122, 221, 220, 0.1);
         }
         .use-case-details {
           display: flex;
@@ -217,48 +232,13 @@ export default function UseCases() {
           line-height: 1.4;
           color: var(--fg);
         }
-        .cta-section {
-          max-width: 600px;
-          margin: 4rem auto;
-          padding: 3rem 2rem;
+        .cta-band-inner {
           text-align: center;
-          border-radius: 12px;
         }
-        .cta-section h3 {
-          font-size: 1.5rem;
-          margin-bottom: 0.5rem;
-        }
-        .cta-section p {
-          color: var(--accents-3);
-          margin-bottom: 1.5rem;
-        }
-        .cta-buttons {
+        .cta-btns {
           display: flex;
           gap: 1rem;
           justify-content: center;
-        }
-        .cta-button {
-          display: inline-block;
-          padding: 0.75rem 1.5rem;
-          border-radius: 6px;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.2s;
-        }
-        .cta-button.primary {
-          background: var(--fg);
-          color: var(--bg);
-        }
-        .cta-button.primary:hover {
-          opacity: 0.9;
-        }
-        .cta-button:not(.primary) {
-          background: transparent;
-          color: var(--fg);
-          border: 1px solid var(--accents-2);
-        }
-        .cta-button:not(.primary):hover {
-          background: var(--accents-6);
         }
         .page-meta {
           text-align: center;
@@ -270,14 +250,15 @@ export default function UseCases() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #7adddc;
+          color: var(--primary);
         }
         @media (max-width: 600px) {
           .use-cases-grid {
-            padding: 1rem;
+            padding: 2rem 1rem;
           }
-          .cta-buttons {
+          .cta-btns {
             flex-direction: column;
+            align-items: center;
           }
         }
       `}</style>

@@ -6,18 +6,30 @@ export default function Security() {
   return (
     <>
       <Header titlePre="Security" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Security Model</h1>
-          <h2 className="tagline">
-            Primary reference for auditors and security teams
-          </h2>
-          <p className="intro">
-            Sew Protocol is designed as a containment layer for protected
-            transfers on Ethereum. Rather than attempting to eliminate all risk,
-            the protocol focuses on narrowing scope, isolating failures, and
-            ensuring that funds always follow deterministic paths.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/needle-closeup.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 60%',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">Security First</span>
+              <h1>Security Model</h1>
+              <h2 className="tagline">
+                Primary reference for auditors and security teams
+              </h2>
+              <p className="description">
+                Sew Protocol is designed as a containment layer for protected
+                transfers on Ethereum. We focus on narrowing scope, isolating
+                failures, and ensuring funds always follow deterministic paths.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* ── In-page navigation ───────────────────────────────────────────── */}
@@ -34,459 +46,308 @@ export default function Security() {
           <a href="#isolation">Isolation Model</a>
         </nav>
 
-        <section className="content-block">
-          <h3>Security philosophy</h3>
-          <p>
-            Ethereum transactions are irreversible. Smart contracts introduce
-            new capabilities, but also new forms of risk. Sew approaches
-            security through three principles:
-          </p>
-          <ul>
-            <li>
-              <strong>Containment over prevention:</strong> Failures may occur.
-              The protocol is designed to limit their impact.
-            </li>
-            <li>
-              <strong>Determinism over discretion:</strong> Funds move according
-              to predefined rules, not human judgment.
-            </li>
-            <li>
-              <strong>Isolation over shared risk:</strong> Each escrow is
-              treated as an independent agreement.
-            </li>
-          </ul>
+        {/* ── 2. PHILOSOPHY ───────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Security philosophy</h3>
+            <p>
+              Ethereum transactions are irreversible. Sew approaches security
+              through three core principles:
+            </p>
+            <div className="guarantees-grid guarantees-grid--wide">
+              <div className="guarantee-card fabric-panel">
+                <h4>Containment</h4>
+                <p>
+                  Failures may occur. The protocol is designed to limit their
+                  impact to the affected escrow.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Determinism</h4>
+                <p>
+                  Funds move according to predefined rules, not discretionary
+                  human judgment.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Isolation</h4>
+                <p>
+                  Each escrow is treated as an independent agreement with no
+                  shared state risk.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>🔐 Core security properties</h3>
+        {/* ── 3. PROPERTIES ───────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>Core security properties</h3>
           <div className="property-grid">
             <div className="property fabric-panel seam-accent">
-              <h4>🤝 Non-custodial by design</h4>
+              <h4>🤝 Non-custodial</h4>
               <p>
                 Funds are held by smart contracts, not by an operator or
                 intermediary.
               </p>
+              <code className="property-notation">
+                Custody ∉ {'{operator, resolver, module}'}
+              </code>
             </div>
             <div className="property fabric-panel seam-accent">
-              <h4>⚙️ Deterministic release paths</h4>
+              <h4>⚙️ Deterministic</h4>
               <p>
-                Every escrow defines its release and resolution rules at
-                creation. Settlement follows predefined state transitions.
+                Every escrow defines its rules at creation. Settlement follows
+                predefined state transitions.
               </p>
+              <code className="property-notation">
+                state ∈ {'{PENDING → RELEASED | REFUNDED | RESOLVED}'}
+              </code>
             </div>
             <div className="property fabric-panel seam-accent">
-              <h4>📦 Per-escrow isolation</h4>
+              <h4>📦 Isolated</h4>
               <p>
                 Each protected transfer is independent. If one fails, others are
                 unaffected.
               </p>
+              <code className="property-notation">
+                failure(escrow_n) ⊄ escrow_m ∀ m ≠ n
+              </code>
             </div>
             <div className="property fabric-panel seam-accent">
-              <h4>⏩ Forward-only evolution</h4>
+              <h4>⏩ Forward-only</h4>
               <p>
-                Protocol upgrades do not alter existing agreements. Historical
-                agreements remain stable.
+                Upgrades do not alter existing agreements. Historical agreements
+                remain stable.
               </p>
+              <code className="property-notation">
+                upgrade(t) → escrow.created &lt; t only
+              </code>
             </div>
           </div>
         </section>
 
-        <section id="threat-model" className="content-block">
-          <h3>🎯 Threat model</h3>
-          <p>
-            Sew is designed to operate in an adversarial environment. Each
-            threat category below includes the attack surface and the protocol's
-            structural mitigation.
-          </p>
-          <div className="threat-grid">
-            <div className="threat-card fabric-panel stitched">
-              <div className="threat-header">
-                <span className="threat-tag">T1</span>
-                <h4>👤 User error</h4>
-              </div>
-              <p className="threat-desc">
-                Sending to the wrong address, premature release, or
-                misunderstanding escrow state.
-              </p>
-              <div className="threat-mitigation">
-                <span className="mitigation-label">📍 Mitigation</span>
-                <p>
-                  Sender can cancel at any time while PENDING. Dispute pathway
-                  available if counterparty is uncooperative.
+        {/* ── 4. THREAT MODEL ─────────────────────────────────────────────── */}
+        <section id="threat-model" className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Threat model</h3>
+            <p className="description" style={{ maxWidth: 'none' }}>
+              Sew is designed to operate in an adversarial environment. Each
+              threat category includes the attack surface and structural
+              mitigation.
+            </p>
+            <div className="threat-grid">
+              <div className="threat-card fabric-panel stitched">
+                <div className="threat-header">
+                  <span className="threat-tag">T1</span>
+                  <h4>👤 User error</h4>
+                </div>
+                <p className="threat-desc">
+                  Sending to the wrong address, premature release, or
+                  misunderstanding escrow state.
                 </p>
+                <div className="threat-mitigation">
+                  <span className="mitigation-label">📍 Mitigation</span>
+                  <p>
+                    Sender can cancel while PENDING. Dispute pathway available
+                    if uncooperative.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="threat-card fabric-panel stitched">
-              <div className="threat-header">
-                <span className="threat-tag">T2</span>
-                <h4>🎭 Counterparty risk</h4>
-              </div>
-              <p className="threat-desc">
-                Fraudulent participants, failure to deliver goods or services,
-                or bad-faith dispute initiation.
-              </p>
-              <div className="threat-mitigation">
-                <span className="mitigation-label">📍 Mitigation</span>
-                <p>
-                  Funds held in escrow until conditions are met. Dispute pathway
-                  available with neutral resolver.
+              <div className="threat-card fabric-panel stitched">
+                <div className="threat-header">
+                  <span className="threat-tag">T2</span>
+                  <h4>🎭 Counterparty risk</h4>
+                </div>
+                <p className="threat-desc">
+                  Fraudulent participants or failure to deliver goods/services.
                 </p>
+                <div className="threat-mitigation">
+                  <span className="mitigation-label">📍 Mitigation</span>
+                  <p>
+                    Funds held in escrow until conditions are met. Neutral
+                    resolver decides outcome.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="threat-card fabric-panel stitched">
-              <div className="threat-header">
-                <span className="threat-tag">T3</span>
-                <h4>🐛 Smart contract risk</h4>
-              </div>
-              <p className="threat-desc">
-                Bugs in integration modules, yield strategies, or third-party
-                contracts.
-              </p>
-              <div className="threat-mitigation">
-                <span className="mitigation-label">📍 Mitigation</span>
-                <p>
-                  Per-escrow isolation limits blast radius. Module boundaries
-                  prevent cross-module propagation.
+              <div className="threat-card fabric-panel stitched">
+                <div className="threat-header">
+                  <span className="threat-tag">T3</span>
+                  <h4>🐛 Smart contract risk</h4>
+                </div>
+                <p className="threat-desc">
+                  Bugs in integration modules, yield strategies, or third-party
+                  contracts.
                 </p>
+                <div className="threat-mitigation">
+                  <span className="mitigation-label">📍 Mitigation</span>
+                  <p>
+                    Per-escrow isolation limits blast radius. Module boundaries
+                    prevent propagation.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="threat-card fabric-panel stitched">
-              <div className="threat-header">
-                <span className="threat-tag">T4</span>
-                <h4>🏛️ Governance capture</h4>
-              </div>
-              <p className="threat-desc">
-                Malicious proposals, compromised admin keys, or timelock bypass
-                attempts.
-              </p>
-              <div className="threat-mitigation">
-                <span className="mitigation-label">📍 Mitigation</span>
-                <p>
-                  Governance cannot touch active escrows. Changes are
-                  forward-only. Timelocks enforce delay.
+              <div className="threat-card fabric-panel stitched">
+                <div className="threat-header">
+                  <span className="threat-tag">T4</span>
+                  <h4>🏛️ Governance capture</h4>
+                </div>
+                <p className="threat-desc">
+                  Malicious proposals or compromised admin keys.
                 </p>
-              </div>
-            </div>
-            <div className="threat-card fabric-panel stitched">
-              <div className="threat-header">
-                <span className="threat-tag">T5</span>
-                <h4>⚖️ Resolver misconduct</h4>
-              </div>
-              <p className="threat-desc">
-                Biased resolver decisions, resolver unavailability, or collusion
-                between resolver and one party.
-              </p>
-              <div className="threat-mitigation">
-                <span className="mitigation-label">📍 Mitigation</span>
-                <p>
-                  Resolver outcome is bounded to RELEASE | REFUND. Resolvers
-                  cannot touch funds. Appeal escalation available.
-                </p>
-              </div>
-            </div>
-            <div className="threat-card fabric-panel stitched">
-              <div className="threat-header">
-                <span className="threat-tag">T6</span>
-                <h4>🏦 Yield integration risk</h4>
-              </div>
-              <p className="threat-desc">
-                External yield protocol failure (e.g., Aave insolvency or
-                exploit) while funds are deployed.
-              </p>
-              <div className="threat-mitigation">
-                <span className="mitigation-label">📍 Mitigation</span>
-                <p>
-                  Yield is opt-in. Principal accounting is separated. Exposure
-                  caps and unwind mechanisms limit maximum loss.
-                </p>
+                <div className="threat-mitigation">
+                  <span className="mitigation-label">📍 Mitigation</span>
+                  <p>
+                    Governance cannot touch active escrows. Changes are
+                    forward-only with timelocks.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="disclaimer-block">
-          <p>
-            <strong>Yield + integrations:</strong> Yield is optional. Principal
-            remains governed by escrow logic. External protocol risk exists.
-            Exposure caps and unwind mechanisms limit potential losses.
-          </p>
-        </section>
-
-        <section id="isolation" className="content-block">
+        {/* ── 5. ISOLATION ────────────────────────────────────────────────── */}
+        <section id="isolation" className="content-section">
           <h3>Isolation model</h3>
           <p>
-            Isolation is the primary containment mechanism. It operates at three
+            Isolation is the primary containment mechanism, operating at three
             levels simultaneously.
           </p>
-          <ul>
-            <li>
-              <strong>Between escrows:</strong> Each agreement is independent.
-              No shared funds, shared yield pool, or shared dispute state. A
-              failure in one escrow cannot propagate to another.
-            </li>
-            <li>
-              <strong>Between modules:</strong> Release logic, resolution logic,
-              and yield generation are isolated components. A bug in a yield
-              module cannot affect dispute resolution.
-            </li>
-            <li>
-              <strong>Between governance and settlement:</strong> Governance
-              cannot modify active escrows. Settlement logic is immutable once
-              an escrow is created.
-            </li>
-          </ul>
-          <p>
-            See <Link href="/architecture">Architecture</Link> for the full
-            isolation model with invariant notation.
-          </p>
-        </section>
-
-        <section id="emergency-recovery" className="content-block">
-          <h3>Emergency response posture</h3>
-          <p>
-            In the event of a vulnerability, the protocol is designed for rapid
-            containment. A guardian role can pause the system for up to 7 days
-            (maximum 3 cycles total). While paused, dispute initiation and
-            escalation are blocked to prevent further risk exposure. Normal
-            settlement operations (release, cancellation, new escrow creation)
-            remain available. Pause is an emergency circuit-breaker for
-            high-risk operations and automatically expires after the time limit.
-          </p>
-        </section>
-
-        <section id="upgrade-semantics" className="content-block">
-          <h3>Governance constraints</h3>
-          <p>
-            Governance can approve new modules and update global parameters for
-            future escrows. However, governance <strong>cannot</strong> rewrite
-            existing agreements. Each escrow is locked to the modules and
-            configuration selected at creation time.
-          </p>
-          <p>
-            This ensures that protocol evolution does not introduce retroactive
-            changes to active transfers. Users have permanent visibility into
-            the rules governing their funds.
-          </p>
-          <p>
-            See <Link href="/protocol-limits">Protocol Limits</Link> for
-            detailed constraints on guardian and governance powers.
-          </p>
-          <p>
-            See <Link href="/emergency">Emergency Recovery</Link> for detailed
-            emergency response procedures.
-          </p>
-          <p>
-            See <Link href="/modules">Modules</Link> for information about
-            release strategies, resolution modules, and yield modules.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Neutrality in dispute resolution</h3>
-          <p>
-            If parties disagree, a neutral resolver decides the outcome. The
-            protocol ensures resolvers cannot be biased or capture value.
-          </p>
-          <div className="concept-subsection">
-            <h4>Resolver design constraints</h4>
-            <ul>
-              <li>
-                <strong>No custody:</strong> Resolvers never touch or control
-                funds. They only vote on outcomes.
-              </li>
-              <li>
-                <strong>No discretion:</strong> A resolver can only decide:
-                Release or Refund. No other actions.
-              </li>
-              <li>
-                <strong>No forced transfers:</strong> A resolver decision must
-                be enforced by code. No manual overrides.
-              </li>
-              <li>
-                <strong>Per-escrow scope:</strong> A bad resolver decision
-                affects only that one dispute. Others remain protected.
-              </li>
-            </ul>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>Between escrows</h4>
+              <p>
+                Independent agreements. No shared funds or shared dispute state.
+                Failure in one cannot propagate.
+              </p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Between modules</h4>
+              <p>
+                Release, resolution, and yield logic are isolated. A bug in
+                yield cannot affect resolution.
+              </p>
+            </div>
           </div>
-          <div className="concept-subsection">
-            <h4>Resolver selection</h4>
+        </section>
+
+        {/* ── 6. DISPUTE ECONOMICS ────────────────────────────────────────── */}
+        <section id="dispute-economics" className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Economic incentives</h3>
             <p>
-              At launch (v1), resolvers are governance-appointed or chosen by
-              users on a per-escrow basis. Future versions (v2+) support
-              decentralized selection with staking and appeals.
+              Resolvers are incentivized to behave honestly through economic
+              mechanisms: bonds, appeals, and slashing.
             </p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card fabric-panel">
+                <h4>Resolver bonds</h4>
+                <p>
+                  Resolvers post collateral when deciding. If overturned on
+                  appeal, they lose the bond.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Appeal escalation</h4>
+                <p>
+                  Disputed decisions escalate to higher-tier resolvers with
+                  larger bonds and senior review.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 7. GOVERNANCE ───────────────────────────────────────────────── */}
+        <section id="upgrade-semantics" className="content-section">
+          <h3>Governance and upgrades</h3>
+          <p>
+            Governance can approve new modules, but <strong>cannot</strong>{' '}
+            rewrite existing agreements. Each escrow is locked to its
+            configuration at creation.
+          </p>
+          <div
+            className="lifecycle-step fabric-panel stitched"
+            style={{ marginTop: '2rem' }}
+          >
+            <h4>Emergency response</h4>
             <p>
-              A user can optionally specify a <code>customResolver</code>{' '}
-              address per escrow, allowing arbitrary dispute frameworks without
-              modifying protocol code.
+              A guardian role can pause high-risk operations (dispute
+              initiation) for up to 7 days. Settlement operations remain
+              available. Pause automatically expires.
             </p>
           </div>
         </section>
 
-        <section id="dispute-economics" className="content-block">
-          <h3>Economic incentives in dispute resolution</h3>
-          <p>
-            Resolvers are incentivized to behave honestly through economic
-            mechanisms: bonds, appeals, and slashing.
-          </p>
-          <div className="concept-subsection">
-            <h4>Resolver bonds</h4>
+        {/* ── 8. FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/needle-threads.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 35%',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Review the technical architecture.</h3>
             <p>
-              Resolvers post collateral (a bond) when deciding a dispute. If
-              their decision is appealed and overturned, they lose the bond.
+              Deep dive into the contract structure, state machines, and modular
+              integration patterns.
             </p>
-            <ul>
-              <li>v1: No bond required (single trusted resolver)</li>
-              <li>
-                v2: Resolvers post bonds ($250 standard, $25k senior). Bad
-                decisions are slashed.
-              </li>
-              <li>v3: Bonds are capital-weighted; resolvers earn fees.</li>
-            </ul>
-          </div>
-          <div className="concept-subsection">
-            <h4>Appeal and escalation</h4>
-            <p>
-              If a party disagrees with a resolver decision, they can appeal.
-              Appeals escalate to higher-tier resolvers with larger bonds.
-            </p>
-            <ul>
-              <li>
-                <strong>Discourages frivolous appeals:</strong> Appellants also
-                post bonds. They lose if the appeal fails.
-              </li>
-              <li>
-                <strong>Improves accuracy:</strong> Senior resolvers review only
-                contested decisions, not routine cases.
-              </li>
-              <li>
-                <strong>Bounds complexity:</strong> Escalation stops at a final
-                authority. The dispute is always settled.
-              </li>
-            </ul>
-          </div>
-          <div className="concept-subsection">
-            <h4>Slashing and accountability</h4>
-            <p>
-              Resolvers who vote in the minority are slashed (lose a portion of
-              their bond). This aligns incentives: resolvers want to agree with
-              peers and avoid being outliers.
-            </p>
-            <ul>
-              <li>
-                Typical slashing: 2-5% per bad decision (conservative scaling)
-              </li>
-              <li>
-                Resolvers with consistent track records earn fee tier upgrades
-              </li>
-              <li>High slashing rates eliminate bad resolvers over time</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="content-block">
-          <h3>Isolation model and risk containment</h3>
-          <p>Sew is built to limit the blast radius of any single failure.</p>
-          <div className="concept-subsection">
-            <h4>Per-escrow isolation</h4>
-            <p>
-              Each escrow is an independent smart contract instance (or
-              deterministic state within the protocol contract). If one escrow
-              is compromised:
-            </p>
-            <ul>
-              <li>Only that escrow's funds are at risk</li>
-              <li>
-                Other escrows continue operating normally (no shared state)
-              </li>
-              <li>
-                The issue does not propagate to resolvers, modules, or other
-                participants
-              </li>
-            </ul>
-          </div>
-          <div className="concept-subsection">
-            <h4>No pooled liabilities</h4>
-            <p>
-              Unlike custody pools or shared collateral systems, Sew does not
-              combine funds or risks across escrows.
-            </p>
-            <ul>
-              <li>
-                Each escrow defines its own release rules at creation time
-              </li>
-              <li>Resolution outcomes for one escrow cannot affect others</li>
-              <li>
-                Disputes are settled independently, without shared exposure
-              </li>
-            </ul>
-          </div>
-          <div className="concept-subsection">
-            <h4>Module modularity</h4>
-            <p>
-              Release strategies, resolution modules, and yield strategies are
-              isolated components. A bug in one module does not break others.
-            </p>
-            <ul>
-              <li>
-                Modular architecture allows upgrading or replacing components
-              </li>
-              <li>Failures are scoped to the affected module only</li>
-              <li>
-                Users can choose modules independently, without cascading risk
-              </li>
-            </ul>
+            <div className="cta-btns">
+              <Link href="/architecture" className="cta-btn primary">
+                Architecture
+              </Link>
+              <Link href="/developer" className="cta-btn">
+                Developer Guide
+              </Link>
+            </div>
           </div>
         </section>
 
         <section className="page-meta">
           <p>Last updated: February 2026</p>
           <p>
-            <Link href="/docs/security">View full documentation →</Link>
+            <Link href="/docs/security">
+              View full security documentation →
+            </Link>
           </p>
         </section>
       </div>
 
       <style jsx>{`
-        h1 {
-          margin-bottom: 0.5rem;
-        }
         .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
           color: var(--accents-3);
-          margin-bottom: 2rem;
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
         }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
+        .content-section {
+          margin: 0 auto;
           max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .header-section {
-          margin-bottom: 4rem;
-          text-align: center;
-        }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
+          padding: 4rem 2rem;
         }
         .property-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 2rem;
+          gap: 1.5rem;
           margin-top: 2rem;
+        }
+        .property {
+          padding: 1.5rem;
         }
         .property h4 {
           margin-bottom: 0.5rem;
-        }
-        @media (max-width: 600px) {
-          .property-grid {
-            grid-template-columns: 1fr;
-          }
-          .content-block {
-            padding: 0 1rem;
-          }
+          font-size: 1rem;
         }
         .page-meta {
           text-align: center;
@@ -498,23 +359,10 @@ export default function Security() {
           margin: 0.5rem 0;
         }
         .page-meta a {
-          color: #7adddc;
-        }
-        .disclaimer-block {
-          background: rgba(245, 158, 11, 0.08);
-          border: 1px solid rgba(245, 158, 11, 0.4);
-          border-radius: 8px;
-          padding: 1rem 1.5rem;
-          margin: 0 auto 3rem;
-          max-width: 800px;
-          font-size: 0.9rem;
-        }
-        .disclaimer-block p {
-          margin: 0;
-          color: #ffd166;
+          color: var(--primary);
         }
 
-        /* ── In-page nav ────────────────────────────────────────────────────── */
+        /* ── In-page nav ── */
         .page-nav {
           max-width: 800px;
           margin: 0 auto 1rem;
@@ -523,7 +371,7 @@ export default function Security() {
           align-items: center;
           flex-wrap: wrap;
           gap: 0.5rem;
-          border-bottom: 1px solid #2a3a3e;
+          border-bottom: 1px solid rgba(122, 221, 220, 0.1);
           font-size: 0.82rem;
         }
         .page-nav-label {
@@ -541,25 +389,19 @@ export default function Security() {
           transition: color 0.15s;
         }
         .page-nav a:hover {
-          color: #7adddc;
+          color: var(--primary);
         }
         .page-nav-sep {
           color: var(--accents-2);
           opacity: 0.4;
         }
 
-        /* ── Threat model cards ─────────────────────────────────────────────── */
+        /* ── Threat model cards ── */
         .threat-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 1.25rem;
           margin-top: 1.75rem;
-        }
-        .threat-card {
-          padding: 1.25rem;
-          border: 1px solid #2a3a3e;
-          border-radius: var(--radius);
-          background: var(--bg);
         }
         .threat-header {
           display: flex;
@@ -571,11 +413,10 @@ export default function Security() {
           font-size: 0.65rem;
           font-weight: 800;
           font-family: var(--font-mono);
-          background: #1b2a2e;
-          color: var(--accents-3);
+          background: rgba(122, 221, 220, 0.1);
+          color: var(--primary);
           padding: 0.15rem 0.45rem;
           border-radius: 3px;
-          letter-spacing: 0.04em;
         }
         .threat-header h4 {
           margin: 0;
@@ -588,8 +429,8 @@ export default function Security() {
           margin: 0 0 0.75rem;
         }
         .threat-mitigation {
-          background: rgba(122, 221, 220, 0.08);
-          border-left: 2.5px solid #7adddc;
+          background: rgba(122, 221, 220, 0.05);
+          border-left: 2.5px solid var(--primary);
           padding: 0.6rem 0.85rem;
           border-radius: 0 4px 4px 0;
         }
@@ -599,29 +440,81 @@ export default function Security() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.08em;
-          color: #7adddc;
+          color: var(--primary);
           margin-bottom: 0.3rem;
         }
         .threat-mitigation p {
           margin: 0;
           font-size: 0.82rem;
-          color: var(--accents-2);
           line-height: 1.55;
         }
-        .threat-mitigation code {
-          font-size: 0.75rem;
-          background: rgba(122, 221, 220, 0.08);
-          padding: 0.1rem 0.3rem;
-          border-radius: 3px;
-          font-family: var(--font-mono);
-          color: #7adddc;
+
+        /* ── Shared Grids ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
+        }
+        .guarantees-grid--wide {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1.5rem;
+        }
+        .cta-inner {
+          text-align: center;
+        }
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
+        }
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 900px) {
+          .guarantees-grid--wide {
+            grid-template-columns: 1fr 1fr;
+          }
         }
         @media (max-width: 700px) {
-          .threat-grid {
+          .guarantees-grid,
+          .guarantees-grid--wide,
+          .property-grid,
+          .threat-grid,
+          .principles-grid {
             grid-template-columns: 1fr;
           }
-          .page-nav {
-            padding: 0.75rem 1rem;
+          .cta-inner h3 {
+            font-size: 1.65rem;
           }
         }
       `}</style>

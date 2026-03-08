@@ -6,477 +6,226 @@ export default function Architecture() {
   return (
     <>
       <Header titlePre="Architecture" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        {/* ── Header ───────────────────────────────────────────────────────── */}
-        <section className="header-section">
-          <h1>Architecture</h1>
-          <h2 className="tagline">System design and structural invariants</h2>
-          <p className="intro">
-            A protected transfer is an ERC-20 transfer routed through a
-            deterministic escrow with predefined release and dispute resolution
-            paths. This page describes how the system is structured and why.
-          </p>
-        </section>
-
-        {/* ── Reviewer callout ─────────────────────────────────────────────── */}
-        <div className="reviewer-callout">
-          <p>
-            <strong>For auditors and security reviewers:</strong> This page
-            covers system structure. For threat analysis and economic security,
-            see the <Link href="/security">Security Model</Link>. For dispute
-            mechanics, see{' '}
-            <Link href="/dispute-resolution">Dispute Architecture</Link> and{' '}
-            <Link href="/security#dispute-economics">Dispute Economics</Link>.
-          </p>
-        </div>
-
-        {/* ── System flow ──────────────────────────────────────────────────── */}
-        <section className="content-block">
-          <h3>System flow</h3>
-          <p>
-            A transfer moves through well-defined states. Once a terminal state
-            is reached it is irreversible. No role can bypass the state machine.
-          </p>
-
-          <div className="flow-diagram">
-            <div className="flow-top-row">
-              <div className="flow-node sender">
-                <span className="node-label">Sender</span>
-              </div>
-              <div className="flow-arrow">→</div>
-              <div className="flow-node escrow active-node">
-                <span className="node-label">Escrow</span>
-                <code className="node-state">PENDING</code>
-              </div>
-              <div className="flow-arrow">→</div>
-              <div className="flow-node terminal">
-                <span className="node-label">Recipient</span>
-                <code className="node-state">RELEASED</code>
-              </div>
-            </div>
-            <div className="flow-mid-row">
-              <div className="flow-spacer-wide" />
-              <div className="flow-down-arrow">↓ dispute raised</div>
-              <div className="flow-spacer-wide" />
-            </div>
-            <div className="flow-bottom-row">
-              <div className="flow-node escrow">
-                <span className="node-label">Escrow</span>
-                <code className="node-state">DISPUTED</code>
-              </div>
-              <div className="flow-arrow">→</div>
-              <div className="flow-node">
-                <span className="node-label">Resolver</span>
-              </div>
-              <div className="flow-arrow">→</div>
-              <div className="flow-node terminal outcome-node">
-                <span className="node-label">Outcome</span>
-                <code className="node-state">RESOLVED</code>
-              </div>
-            </div>
-            <div className="flow-outcome-row">
-              <code className="outcome-label">Release · Refund</code>
-            </div>
-            <div className="flow-refund-row">
-              <div className="flow-spacer-wide" />
-              <div className="refund-branch">
-                <span className="refund-label">or: cancel → </span>
-                <div className="flow-node terminal small-node">
-                  <code className="node-state">REFUNDED</code>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="state-table">
-            <div className="state-row state-header">
-              <span>State</span>
-              <span>Meaning</span>
-              <span>Terminal</span>
-            </div>
-            <div className="state-row">
-              <code>NONE</code>
-              <span>Uninitialized</span>
-              <span className="badge no">—</span>
-            </div>
-            <div className="state-row">
-              <code>PENDING</code>
-              <span>Created and funded, awaiting action</span>
-              <span className="badge no">No</span>
-            </div>
-            <div className="state-row">
-              <code>RELEASED</code>
-              <span>Funds sent to recipient</span>
-              <span className="badge yes">Yes</span>
-            </div>
-            <div className="state-row">
-              <code>REFUNDED</code>
-              <span>Funds returned to sender</span>
-              <span className="badge yes">Yes</span>
-            </div>
-            <div className="state-row">
-              <code>DISPUTED</code>
-              <span>Dispute raised, awaiting resolver</span>
-              <span className="badge no">No</span>
-            </div>
-            <div className="state-row">
-              <code>RESOLVED</code>
-              <span>Resolver outcome enforced onchain</span>
-              <span className="badge yes">Yes</span>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/stitch-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 40%',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">System Design</span>
+              <h1>Architecture</h1>
+              <h2 className="tagline">
+                System structure and structural invariants
+              </h2>
+              <p className="description">
+                A protected transfer is an ERC-20 transfer routed through a
+                deterministic escrow with predefined release and dispute
+                resolution paths.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ── Core components ──────────────────────────────────────────────── */}
-        <section className="content-block">
+        {/* ── 2. REVIEWER CALLOUT ─────────────────────────────────────────── */}
+        <section className="content-section">
+          <div className="reviewer-callout">
+            <p>
+              <strong>For auditors and security reviewers:</strong> This page
+              covers system structure. For threat analysis, see the{' '}
+              <Link href="/security">Security Model</Link>.
+            </p>
+          </div>
+        </section>
+
+        {/* ── 3. SYSTEM FLOW ──────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>System flow</h3>
+            <p>
+              A transfer moves through well-defined states. Terminal states are
+              irreversible.
+            </p>
+
+            <div className="state-table stitched">
+              <div className="state-row state-header">
+                <span>State</span>
+                <span>Meaning</span>
+                <span>Terminal</span>
+              </div>
+              <div className="state-row">
+                <code>PENDING</code>
+                <span>Created and funded, awaiting action</span>
+                <span className="badge no">No</span>
+              </div>
+              <div className="state-row">
+                <code>DISPUTED</code>
+                <span>Dispute raised, awaiting resolver</span>
+                <span className="badge no">No</span>
+              </div>
+              <div className="state-row">
+                <code>RELEASED</code>
+                <span>Funds sent to recipient</span>
+                <span className="badge yes">Yes</span>
+              </div>
+              <div className="state-row">
+                <code>REFUNDED</code>
+                <span>Funds returned to sender</span>
+                <span className="badge yes">Yes</span>
+              </div>
+              <div className="state-row">
+                <code>RESOLVED</code>
+                <span>Resolver outcome enforced onchain</span>
+                <span className="badge yes">Yes</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 4. COMPONENTS ───────────────────────────────────────────────── */}
+        <section className="content-section">
           <h3>Core components</h3>
-
-          <div className="component">
-            <div className="component-header">
-              <span className="component-tag">Core</span>
+          <div className="guarantees-grid">
+            <div className="guarantee-card fabric-panel">
               <h4>Escrow layer</h4>
+              <p>
+                Core vault holding funds under rule-bound conditions. Enforces
+                all state transitions deterministically.
+              </p>
             </div>
-            <p>
-              Holds funds under rule-bound conditions. Tracks state. Enforces
-              transitions. Self-contained per agreement — no shared state
-              between escrows.
-            </p>
-            <ul>
-              <li>Accepts ERC-20 tokens into escrow on creation</li>
-              <li>Enforces all state transitions deterministically</li>
-              <li>
-                Delegates release authorization to the selected release strategy
-              </li>
-              <li>
-                Delegates dispute resolution to the selected resolution module
-              </li>
-              <li>
-                Captures module configuration at creation — locked for that
-                escrow's lifetime
-              </li>
-            </ul>
-          </div>
-
-          <div className="component">
-            <div className="component-header">
-              <span className="component-tag">Module</span>
+            <div className="guarantee-card fabric-panel">
               <h4>Release strategies</h4>
+              <p>
+                Pluggable modules determining when funds leave escrow (Sender,
+                Time-based, or Conditional).
+              </p>
             </div>
-            <p>
-              Pluggable modules that determine how and when funds can be
-              released. Selected at escrow creation and fixed for that escrow.
-            </p>
-            <ul>
-              <li>
-                <strong>Default:</strong> Sender-initiated release at any time
-              </li>
-              <li>
-                <strong>Timed auto-release:</strong> Funds release automatically
-                after a unix timestamp
-              </li>
-              <li>
-                <strong>Timed auto-cancel:</strong> Escrow cancels and refunds
-                sender after a unix timestamp
-              </li>
-              <li>
-                <strong>Custom:</strong> Arbitrary release logic via
-                IReleaseStrategy interface
-              </li>
-            </ul>
-            <p>
-              Release logic is separated from escrow storage to allow evolution
-              without rewriting core contracts.
-            </p>
-          </div>
-
-          <div className="component">
-            <div className="component-header">
-              <span className="component-tag">Module</span>
+            <div className="guarantee-card fabric-panel">
               <h4>Resolution modules</h4>
+              <p>
+                Handle disagreements. Resolvers cannot touch funds—they only
+                determine binary distribution outcomes.
+              </p>
             </div>
-            <p>
-              Handle disagreements between parties. Define who can resolve, how
-              decisions escalate, and how outcomes are enforced onchain.
-              Resolvers cannot touch funds — they only determine outcomes.
-            </p>
-            <ul>
-              <li>
-                <strong>v1 — DefaultResolutionModule:</strong> Single trusted
-                resolver, governance-appointed. No bonds required.
-              </li>
-              <li>
-                <strong>v2 — DecentralizedResolutionModule:</strong> Multi-level
-                escalation (Standard → Senior → External). Appeal bonds.
-              </li>
-              <li>
-                <strong>Custom:</strong> Per-escrow resolver address override
-                via <code>customResolver</code> field
-              </li>
-            </ul>
-            <p>
-              Outcome set is fixed: <code>{'Release | Refund'}</code>. No other
-              actions are available to any resolver.
-            </p>
-          </div>
-
-          <div className="component">
-            <div className="component-header">
-              <span className="component-tag">Module · Optional</span>
+            <div className="guarantee-card fabric-panel">
               <h4>Yield modules</h4>
-            </div>
-            <p>
-              Generate yield on escrowed funds while locked. Opt-in at creation.
-              Principal remains governed by escrow logic — yield modules control
-              only yield routing, not release.
-            </p>
-            <ul>
-              <li>
-                <strong>AaveYieldModule:</strong> Deposits idle funds into Aave
-                lending pool
-              </li>
-              <li>Yield routed to sender, recipient, or protocol per preset</li>
-              <li>
-                External protocol risk is scoped to participating escrows only
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* ── Architectural invariants ─────────────────────────────────────── */}
-        <section className="content-block">
-          <h3>Architectural invariants</h3>
-          <p>
-            These properties hold for every escrow, regardless of token,
-            configuration, module selection, or governance state.
-          </p>
-          <div className="invariant-list">
-            <div className="invariant">
-              <div className="invariant-title">Non-custodial</div>
-              <div className="invariant-desc">
-                Funds are held by the contract. No operator, resolver, or module
-                can redirect assets outside predefined state transitions.
-              </div>
-              <code className="invariant-notation">
-                {'Custody ∉ {operator, resolver, module}'}
-              </code>
-            </div>
-            <div className="invariant">
-              <div className="invariant-title">Configuration-locked</div>
-              <div className="invariant-desc">
-                Release strategy, resolution module, and yield module are
-                captured at escrow creation and cannot change for that escrow.
-              </div>
-              <code className="invariant-notation">
-                {'escrow.config fixed at creation, ∀ t > created'}
-              </code>
-            </div>
-            <div className="invariant">
-              <div className="invariant-title">Per-escrow isolation</div>
-              <div className="invariant-desc">
-                Each escrow is independent. A failure, exploit, or dispute in
-                one escrow cannot propagate to another. No pooled funds or
-                shared risk across agreements.
-              </div>
-              <code className="invariant-notation">
-                {'failure(escrow_n) ⊄ escrow_m  ∀ m ≠ n'}
-              </code>
-            </div>
-            <div className="invariant">
-              <div className="invariant-title">Forward-only upgrades</div>
-              <div className="invariant-desc">
-                Governance and module changes apply only to newly created
-                escrows. Active agreements remain bound to their original
-                configuration permanently.
-              </div>
-              <code className="invariant-notation">
-                {'upgrade(t) → escrow.created < t only'}
-              </code>
-            </div>
-            <div className="invariant">
-              <div className="invariant-title">Bounded resolver outcomes</div>
-              <div className="invariant-desc">
-                A resolver has exactly one power: choosing among a fixed set of
-                outcomes. No role can instruct the contract to take any other
-                action.
-              </div>
-              <code className="invariant-notation">
-                {'Outcome ∈ {RELEASE, REFUND}'}
-              </code>
-            </div>
-            <div className="invariant">
-              <div className="invariant-title">Bounded emergency controls</div>
-              <div className="invariant-desc">
-                The guardian role can pause high-risk operations for a maximum
-                of 7 days per cycle, up to 3 cycles total. Pause auto-expires
-                and cannot be extended indefinitely.
-              </div>
-              <code className="invariant-notation">
-                {'pause_max = 7d, cycles_max = 3'}
-              </code>
+              <p>
+                Optional integration for generating yield on locked principal
+                (e.g. Aave V3). Opt-in at creation.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ── Isolation principle ──────────────────────────────────────────── */}
-        <section className="content-block">
+        {/* ── 5. INVARIANTS ───────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Architectural invariants</h3>
+            <div className="principles-grid">
+              <div className="principle seam-accent">
+                <h4>Non-custodial</h4>
+                <p>
+                  Funds held by contract. No operator or module can redirect
+                  assets outside defined transitions.
+                </p>
+                <code className="invariant-notation">
+                  Custody ∉ {'{operator, resolver, module}'}
+                </code>
+              </div>
+              <div className="principle seam-accent">
+                <h4>Isolated</h4>
+                <p>
+                  Each escrow is independent. Failure in one cannot propagate to
+                  another. No shared risk.
+                </p>
+                <code className="invariant-notation">
+                  failure(escrow_n) ⊄ escrow_m ∀ m ≠ n
+                </code>
+              </div>
+              <div className="principle seam-accent">
+                <h4>Forward-only</h4>
+                <p>
+                  Upgrades apply only to new escrows. Active agreements remain
+                  bound to original rules.
+                </p>
+                <code className="invariant-notation">
+                  upgrade(t) → escrow.created &lt; t only
+                </code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 6. ISOLATION ────────────────────────────────────────────────── */}
+        <section className="content-section">
           <h3>Isolation as a first principle</h3>
-          <p>
-            Sew is designed to minimize blast radius. Isolation is enforced at
-            multiple levels simultaneously:
-          </p>
           <div className="isolation-levels">
-            <div className="isolation-level">
+            <div className="isolation-level fabric-panel">
               <div className="level-marker">01</div>
               <div className="level-content">
                 <strong>Between escrows</strong>
                 <p>
-                  Each agreement is an independent, self-contained unit. Funds
-                  in escrow A are never at risk from activity in escrow B. There
-                  is no shared collateral, shared yield pool, or shared dispute
-                  state.
+                  Self-contained units. No shared collateral, shared yield pool,
+                  or shared dispute state.
                 </p>
               </div>
             </div>
-            <div className="isolation-level">
+            <div className="isolation-level fabric-panel">
               <div className="level-marker">02</div>
               <div className="level-content">
                 <strong>Between modules</strong>
                 <p>
-                  Release logic, resolution logic, and yield generation are
-                  separated into distinct modules. A bug in a yield module
-                  cannot affect dispute resolution. A bug in a release strategy
-                  cannot affect core escrow state.
+                  Separated logic components. A bug in yield cannot affect
+                  dispute resolution or core state.
                 </p>
               </div>
             </div>
-            <div className="isolation-level">
+            <div className="isolation-level fabric-panel">
               <div className="level-marker">03</div>
               <div className="level-content">
                 <strong>Between governance and settlement</strong>
                 <p>
-                  Governance can approve new modules for future escrows, but
-                  cannot modify, cancel, or redirect active escrows. Settlement
-                  logic for any active escrow is immutable once created.
-                </p>
-              </div>
-            </div>
-            <div className="isolation-level">
-              <div className="level-marker">04</div>
-              <div className="level-content">
-                <strong>Between protocol versions</strong>
-                <p>
-                  Multiple generations of modules can coexist. v1 escrows and v2
-                  escrows operate under their own original rules. There is no
-                  migration, no forced upgrade, no shared execution path.
+                  Governance cannot modify active escrows. Settlement logic is
+                  immutable once created.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── Module registry ──────────────────────────────────────────────── */}
-        <section className="content-block">
-          <h3>Module registry and defaults</h3>
-          <p>
-            The module registry maintains governance-approved defaults. When an
-            escrow is created without specifying a module, it uses the current
-            default — which is captured and frozen at creation time.
-          </p>
-          <div className="registry-table">
-            <div className="registry-row registry-header">
-              <span>Module type</span>
-              <span>Interface</span>
-              <span>Scope</span>
-            </div>
-            <div className="registry-row">
-              <strong>Release Strategy</strong>
-              <code>IReleaseStrategy</code>
-              <span>Controls release authorization</span>
-            </div>
-            <div className="registry-row">
-              <strong>Resolution Module</strong>
-              <code>IResolutionModule</code>
-              <span>Handles disputes and outcomes</span>
-            </div>
-            <div className="registry-row">
-              <strong>Yield Module</strong>
-              <code>IYieldModule</code>
-              <span>Generates yield on idle funds</span>
+        {/* ── 7. FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/ancient-sewing-machine.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Start building today.</h3>
+            <p>
+              Explore the contract interfaces, state machines, and integration
+              patterns.
+            </p>
+            <div className="cta-btns">
+              <Link href="/developer" className="cta-btn primary">
+                Developer Guide
+              </Link>
+              <Link href="/contracts" className="cta-btn">
+                Contracts
+              </Link>
             </div>
           </div>
-          <p>
-            Governance can add or replace defaults via the registry. This
-            affects only escrows created after the change. Existing escrows
-            continue to use their original module snapshot.
-          </p>
         </section>
 
-        {/* ── Governance surface ───────────────────────────────────────────── */}
-        <section className="content-block">
-          <h3>Governance surface</h3>
-          <p>
-            Governance power is explicitly scoped. Understanding what governance
-            can and cannot do is central to assessing the trust model.
-          </p>
-          <div className="gov-cols">
-            <div className="gov-col can">
-              <h4>Governance can</h4>
-              <ul>
-                <li>Approve new modules for the registry</li>
-                <li>Update default module selections for new escrows</li>
-                <li>Adjust global protocol parameters (fees, limits)</li>
-                <li>Appoint or replace the guardian role</li>
-                <li>Appoint resolvers for the default resolution module</li>
-                <li>
-                  Queue and execute changes subject to timelock delay (48h
-                  fast-lane, 7-day slow-lane)
-                </li>
-              </ul>
-            </div>
-            <div className="gov-col cannot">
-              <h4>Governance cannot</h4>
-              <ul>
-                <li>Modify, cancel, or redirect any active escrow</li>
-                <li>Change the module configuration of an existing escrow</li>
-                <li>Override a resolver's outcome</li>
-                <li>Pause the system indefinitely</li>
-                <li>Move funds outside predefined release paths</li>
-                <li>Retroactively change fee rates on existing escrows</li>
-              </ul>
-            </div>
-          </div>
-          <p>
-            See <Link href="/protocol-limits">Protocol Limits</Link> for the
-            full constraint specification, and{' '}
-            <Link href="/emergency">Emergency Recovery</Link> for the guardian
-            pause procedure.
-          </p>
-        </section>
-
-        {/* ── Bottom navigation ────────────────────────────────────────────── */}
-        <section className="nav-section">
-          <div className="nav-links">
-            <div className="nav-link-group">
-              <span className="nav-group-label">Security</span>
-              <Link href="/security">Security Model</Link>
-              <Link href="/security#threat-model">Threat Model</Link>
-              <Link href="/security#dispute-economics">Dispute Economics</Link>
-              <Link href="/emergency">Emergency Recovery</Link>
-            </div>
-            <div className="nav-link-group">
-              <span className="nav-group-label">Technical</span>
-              <Link href="/modules">Modules</Link>
-              <Link href="/dispute-resolution">Dispute Architecture</Link>
-              <Link href="/protocol-limits">Protocol Limits</Link>
-              <Link href="/contracts">Contracts</Link>
-            </div>
-            <div className="nav-link-group">
-              <span className="nav-group-label">Context</span>
-              <Link href="/how-it-works">How It Works</Link>
-              <Link href="/developer">Build on Sew</Link>
-              <Link href="/release-plan">Release Plan</Link>
-            </div>
-          </div>
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
         </section>
       </div>
 
@@ -769,18 +518,6 @@ export default function Architecture() {
           color: var(--accents-2);
           line-height: 1.55;
           margin-bottom: 0.75rem;
-        }
-        .invariant-notation {
-          display: block;
-          font-family: var(--font-mono);
-          font-size: 0.68rem;
-          color: var(--accents-3);
-          background: #1b2a2e;
-          padding: 0.25rem 0.5rem;
-          border-radius: 3px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
 
         /* ── Isolation levels ───────────────────────────────────────────────── */

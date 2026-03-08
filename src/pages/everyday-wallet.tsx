@@ -1,263 +1,268 @@
-import Header from '../components/header'
-import sharedStyles from '../styles/shared.module.css'
-
 export default function EverydayWallet() {
   return (
     <>
       <Header titlePre="Everyday Wallet" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
-        <section className="header-section">
-          <h1>Everyday Wallet</h1>
-          <h2 className="tagline">Safe transfers for real-world exchanges</h2>
-          <p className="intro">
-            Everyday Wallet is a simple way to send protected transers on
-            Ethereum. Instead of sending money directly and hoping for the best,
-            you can hold funds safely until both sides are satisfied.
-          </p>
+      <div className={sharedStyles.layout}>
+        {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
+        <section
+          className="hero"
+          style={{
+            backgroundImage: "url('/images/needle-threads.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 35%',
+          }}
+        >
+          <div className="hero-inner">
+            <div className="hero-text">
+              <span className="hero-eyebrow">User Interface</span>
+              <h1>Everyday Wallet</h1>
+              <h2 className="tagline">
+                Safe transfers for real-world exchanges
+              </h2>
+              <p className="description">
+                A simple interface for sending protected transfers on Ethereum.
+                Hold funds safely until both sides are satisfied, without
+                introducing intermediaries.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>What it is</h3>
-          <p>Everyday Wallet is an interface to Sew Protocol.</p>
-          <p>It allows you to:</p>
-          <ul>
-            <li>Send transactions that are held in escrow</li>
-            <li>Release funds when a deal is complete</li>
-            <li>Resolve disagreements if something goes wrong</li>
-            <li>Use ETH and ERC20 tokens</li>
-          </ul>
-          <p>Protection is built into the transfer itself.</p>
+        {/* ── 2. WHAT IT IS ────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>The interface layer</h3>
+            <p>
+              Everyday Wallet is an interface built on Sew Protocol. It turns
+              standard transfers into protected ones:
+            </p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card fabric-panel">
+                <h4>Protected by Escrow</h4>
+                <p>
+                  Funds are held by smart contracts, not sent directly to
+                  recipients.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Locked Terms</h4>
+                <p>
+                  Release conditions and resolution paths are fixed at the
+                  moment of send.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
+        {/* ── 3. WHY IT EXISTS ─────────────────────────────────────────────── */}
+        <section className="content-section">
           <h3>Why it exists</h3>
-          <p>Most crypto transfers are instant and irreversible.</p>
           <p>
-            This works well when trust already exists. It creates risk when it
-            doesn't.
+            Most crypto transfers are instant and irreversible. This works when
+            trust exists, but creates risk for buying from strangers or paying
+            for services.
           </p>
-          <p>Everyday Wallet is designed for situations like:</p>
-          <ul>
-            <li>Buying something from a stranger</li>
-            <li>Paying for a service</li>
-            <li>Splitting transactions for real-world items</li>
-            <li>Sending money before delivery</li>
-          </ul>
-          <p>It adds a coordination phase before settlement.</p>
+          <div className="principles-grid">
+            <div className="principle seam-accent">
+              <h4>P2P Commerce</h4>
+              <p>Buy second-hand items with delivery assurance.</p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Service Payments</h4>
+              <p>Pay for freelance work with milestone-based release.</p>
+            </div>
+            <div className="principle seam-accent">
+              <h4>Remote Deals</h4>
+              <p>Coordinate exchanges when parties are not in person.</p>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>How it works</h3>
-          <p>When you send a protected transfer:</p>
-          <ol>
-            <li>
-              <strong>Funds are locked in escrow</strong> — neither party can
-              access them unilaterally
-            </li>
-            <li>
-              <strong>The other person delivers</strong> — the item or service
-              is provided
-            </li>
-            <li>
-              <strong>You release the transfer</strong> — when satisfied with
-              the outcome
-            </li>
-          </ol>
-          <p>If there is a disagreement:</p>
-          <ul>
-            <li>A dispute can be opened</li>
-            <li>A resolution process can determine the outcome</li>
-          </ul>
-          <p>
-            The wallet does not hold custody. The escrow contract enforces the
-            rules.
-          </p>
+        {/* ── 4. SAFER BY DEFAULT ─────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Safer by default</h3>
+            <div className="comparison-grid">
+              <div className="comparison-item fabric-panel seam-accent">
+                <h4>Traditional Send</h4>
+                <ul className="cons">
+                  <li>✗ Irreversible error risk</li>
+                  <li>✗ Zero delivery protection</li>
+                  <li>✗ Instant finality</li>
+                </ul>
+              </div>
+              <div className="comparison-item fabric-panel highlight stitched">
+                <h4>Everyday Wallet</h4>
+                <ul className="pros">
+                  <li>✓ Funds held until released</li>
+                  <li>✓ Built-in dispute handling</li>
+                  <li>✓ Non-custodial safety</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <section className="content-block">
-          <h3>Built for everyday exchanges</h3>
-          <p>
-            Everyday Wallet focuses on real situations where protection matters.
-          </p>
-          <p>Common use cases:</p>
-          <ul>
-            <li>Second-hand goods</li>
-            <li>Event tickets</li>
-            <li>Electronics and collectibles</li>
-            <li>Freelance work</li>
-            <li>Local marketplace transactions</li>
-          </ul>
-          <p>Anywhere transfer and delivery happen at different times.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Safer by default</h3>
-          <p>
-            <strong>Traditional crypto transfers:</strong>
-          </p>
-          <ul>
-            <li>Immediate</li>
-            <li>Final</li>
-            <li>No recovery if something goes wrong</li>
-          </ul>
-          <p>
-            <strong>Protected transfers:</strong>
-          </p>
-          <ul>
-            <li>Held until released</li>
-            <li>Structured release options</li>
-            <li>Support for dispute resolution</li>
-          </ul>
-          <p>This reduces the risk of scams and irreversible mistakes.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Flexible release options</h3>
-          <p>Different situations require different settlement paths.</p>
-          <p>Depending on the transfer, releases can be:</p>
-          <ul>
-            <li>
-              <strong>Manual</strong> — the sender confirms delivery
-            </li>
-            <li>
-              <strong>Automatic</strong> — funds release after a set time
-            </li>
-            <li>
-              <strong>Conditional</strong> — based on predefined rules
-            </li>
-          </ul>
-          <p>These options are defined when the transfer is created.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Optional yield</h3>
-          <p>
-            In some cases, escrowed funds can generate yield while waiting for
-            settlement.
-          </p>
-          <p>This is:</p>
-          <ul>
-            <li>Optional</li>
-            <li>Transparent</li>
-            <li>Linked to the escrow</li>
-          </ul>
-          <p>Funds remain controlled by the escrow contract at all times.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Designed for clarity</h3>
-          <p>The wallet is built around clear, simple flows:</p>
-          <ul>
-            <li>Who you're paying</li>
-            <li>How much is locked</li>
-            <li>When it can be released</li>
-            <li>What happens if there's a dispute</li>
-          </ul>
-          <p>
-            The goal is to make protected transfers feel natural and
-            understandable.
-          </p>
-        </section>
-
-        <section className="content-block">
-          <h3>Non-custodial by design</h3>
-          <p>Everyday Wallet does not hold your money.</p>
-          <p>Funds are:</p>
-          <ul>
-            <li>Sent directly to escrow contracts</li>
-            <li>Controlled by predefined rules</li>
-            <li>Released only through settlement paths</li>
-          </ul>
-          <p>This preserves the self-custody model of Ethereum.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Powered by Sew Protocol</h3>
-          <p>Everyday Wallet is one interface built on Sew.</p>
-          <p>The protocol provides:</p>
-          <ul>
-            <li>Escrow enforcement</li>
-            <li>Settlement logic</li>
-            <li>Dispute pathways</li>
-            <li>Optional integrations</li>
-          </ul>
-          <p>Other wallets and applications can build on the same system.</p>
-        </section>
-
-        <section className="content-block">
-          <h3>Who it's for</h3>
-          <p>
-            Everyday Wallet is designed for people who want safer transfers when
-            trust is limited.
-          </p>
-          <p>It's especially useful when:</p>
-          <ul>
-            <li>You don't know the other party</li>
-            <li>transfer happens before delivery</li>
-            <li>You want a clear, structured agreement</li>
-          </ul>
-          <p>It adds protection without adding intermediaries.</p>
-        </section>
-
-        <section className="content-block">
+        {/* ── 5. VISION ───────────────────────────────────────────────────── */}
+        <section className="content-section">
           <h3>Vision</h3>
           <p>
-            Sending money on Ethereum is powerful, but risky in real-world
-            transactions.
-          </p>
-          <p>Everyday Wallet explores a simple idea:</p>
-          <p>
+            Sending money on Ethereum is powerful, but risky. Everyday Wallet
+            explores a simple idea:{' '}
             <strong>
               Safer transfers should be available where protection is needed.
             </strong>
           </p>
           <p>
-            By making protection part of the send flow, the wallet aims to
-            support safer everyday exchanges between people.
+            By making protection part of the send flow, we support safer
+            everyday exchanges between people.
           </p>
         </section>
 
-        <section className="content-block">
-          <h3>Summary</h3>
-          <p>
-            Everyday Wallet turns a simple transfer into a protected transfer.
-          </p>
-          <ul>
-            <li>Funds are held</li>
-            <li>Both sides coordinate</li>
-            <li>Settlement happens when conditions are met</li>
-          </ul>
-          <p>It's a practical way to bring escrow into everyday use.</p>
+        {/* ── 6. FINAL CTA ────────────────────────────────────────────────── */}
+        <section
+          className="section-breakout cta-breakout"
+          style={{
+            backgroundImage: "url('/images/stitch-texture.jpeg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 40%',
+          }}
+        >
+          <div className="breakout-inner cta-inner">
+            <h3>Experience protected transfers.</h3>
+            <p>
+              Explore how Sew Protocol provides the foundation for Everyday
+              Wallet and other coordination tools.
+            </p>
+            <div className="cta-btns">
+              <Link href="/how-it-works" className="cta-btn primary">
+                How It Works
+              </Link>
+              <Link href="/use-cases" className="cta-btn">
+                Use Cases
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="page-meta">
+          <p>Last updated: February 2026</p>
         </section>
       </div>
 
       <style jsx>{`
-        h1 {
+        .tagline {
+          font-size: 1.15rem;
+          font-weight: 400;
+          color: var(--accents-2);
+          margin: 0 0 1.25rem;
+          line-height: 1.5;
+        }
+        .description {
+          font-size: 0.92rem;
+          color: var(--accents-3);
+          margin: 0 0 1.5rem;
+          line-height: 1.75;
+          max-width: 480px;
+        }
+        .content-section {
+          margin: 0 auto;
+          max-width: 800px;
+          padding: 4rem 2rem;
+        }
+        .page-meta {
+          text-align: center;
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
+        }
+
+        /* ── Shared Grids ── */
+        .guarantees-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 1.75rem;
+        }
+        .guarantee-card {
+          padding: 1.25rem 1.5rem;
+        }
+        .guarantee-card h4 {
+          margin: 0 0 0.4rem 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+        .guarantee-card p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+        }
+        .principles-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+        .principle {
+          padding: 1rem;
+        }
+        .comparison-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 2rem;
+        }
+        .comparison-item {
+          padding: 1.5rem;
+        }
+        .comparison-item ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          font-size: 0.9rem;
+        }
+        .comparison-item li {
           margin-bottom: 0.5rem;
         }
-        .tagline {
-          color: var(--accents-3);
-          margin-bottom: 2rem;
+        .pros {
+          color: #6ce5b1;
         }
-        .intro {
-          font-size: 1.2rem;
-          line-height: 1.6;
-          max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
+        .cons {
+          color: #ff6f61;
         }
-        .header-section {
-          margin-bottom: 4rem;
+        .comparison-item.highlight {
+          border: 4px solid var(--primary);
+          background: rgba(122, 221, 220, 0.05);
+        }
+
+        .cta-inner {
           text-align: center;
         }
-        .content-block {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
+        .cta-inner h3 {
+          font-size: 2.2rem;
+          font-weight: 900;
+          margin: 0 0 0.75rem 0;
+          letter-spacing: -0.04em;
+          color: #fff;
         }
-        @media (max-width: 600px) {
-          .content-block {
-            padding: 0 1rem;
+        .cta-inner p {
+          font-size: 1rem;
+          color: var(--accents-2);
+          max-width: 500px;
+          margin: 0 auto 2.5rem;
+          line-height: 1.65;
+        }
+
+        @media (max-width: 700px) {
+          .guarantees-grid,
+          .principles-grid,
+          .comparison-grid {
+            grid-template-columns: 1fr;
+          }
+          .cta-inner h3 {
+            font-size: 1.65rem;
           }
         }
       `}</style>
