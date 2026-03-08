@@ -143,14 +143,21 @@ export default function Security() {
                   <h4>👤 User error</h4>
                 </div>
                 <p className="threat-desc">
-                  Sending to the wrong address, premature release, or
-                  misunderstanding escrow state.
+                  <strong>Risk:</strong> Sender enters incorrect recipient or
+                  misunderstands the active release conditions.
                 </p>
                 <div className="threat-mitigation">
                   <span className="mitigation-label">📍 Mitigation</span>
                   <p>
-                    Sender can cancel while PENDING. Dispute pathway available
-                    if uncooperative.
+                    Escrow terms are visible before confirmation; pending
+                    escrows can follow predefined cancellation or dispute paths.
+                  </p>
+                </div>
+                <div className="threat-boundary">
+                  <span className="boundary-label">🚫 Boundary</span>
+                  <p>
+                    The protocol cannot recover funds sent via ordinary direct
+                    transfers outside the Sew ecosystem.
                   </p>
                 </div>
               </div>
@@ -160,13 +167,21 @@ export default function Security() {
                   <h4>🎭 Counterparty risk</h4>
                 </div>
                 <p className="threat-desc">
-                  Fraudulent participants or failure to deliver goods/services.
+                  <strong>Risk:</strong> Recipient fails to deliver goods or
+                  services after escrow is funded.
                 </p>
                 <div className="threat-mitigation">
                   <span className="mitigation-label">📍 Mitigation</span>
                   <p>
-                    Funds held in escrow until conditions are met. Neutral
-                    resolver decides outcome.
+                    Funds remain in escrow until conditions are met. Either
+                    party can initiate a dispute to trigger a resolver review.
+                  </p>
+                </div>
+                <div className="threat-boundary">
+                  <span className="boundary-label">🚫 Boundary</span>
+                  <p>
+                    The protocol is an enforcement layer, not a fact-finding
+                    oracle. Final decisions rely on the assigned resolver.
                   </p>
                 </div>
               </div>
@@ -176,14 +191,21 @@ export default function Security() {
                   <h4>🐛 Smart contract risk</h4>
                 </div>
                 <p className="threat-desc">
-                  Bugs in integration modules, yield strategies, or third-party
-                  contracts.
+                  <strong>Risk:</strong> A bug in a specific yield module or
+                  integration leads to loss of principal.
                 </p>
                 <div className="threat-mitigation">
                   <span className="mitigation-label">📍 Mitigation</span>
                   <p>
-                    Per-escrow isolation limits blast radius. Module boundaries
-                    prevent propagation.
+                    Per-escrow isolation and strictly namespaced module state
+                    limit the blast radius. Snapshots prevent retroactive bugs.
+                  </p>
+                </div>
+                <div className="threat-boundary">
+                  <span className="boundary-label">🚫 Boundary</span>
+                  <p>
+                    The protocol cannot reverse losses originating in external
+                    integration platforms (e.g. Aave V3).
                   </p>
                 </div>
               </div>
@@ -193,13 +215,21 @@ export default function Security() {
                   <h4>🏛️ Governance capture</h4>
                 </div>
                 <p className="threat-desc">
-                  Malicious proposals or compromised admin keys.
+                  <strong>Risk:</strong> Malicious governance proposal attempts
+                  to alter agreement outcomes or seize funds.
                 </p>
                 <div className="threat-mitigation">
                   <span className="mitigation-label">📍 Mitigation</span>
                   <p>
-                    Governance cannot touch active escrows. Changes are
-                    forward-only with timelocks.
+                    Upgrades are forward-only. Governance cannot touch active
+                    escrows or modify snapshotted module addresses.
+                  </p>
+                </div>
+                <div className="threat-boundary">
+                  <span className="boundary-label">🚫 Boundary</span>
+                  <p>
+                    Governance determines parameters for *new* agreements.
+                    Participants must review current settings before creation.
                   </p>
                 </div>
               </div>
@@ -263,19 +293,19 @@ export default function Security() {
         <section id="upgrade-semantics" className="content-section">
           <h3>Governance and upgrades</h3>
           <p>
-            Governance can approve new modules, but <strong>cannot</strong>{' '}
-            rewrite existing agreements. Each escrow is locked to its
-            configuration at creation.
+            Governance can approve new logic modules and adjust protocol-wide
+            caps, but <strong>cannot</strong> rewrite existing agreements or
+            redirect funds held in active escrows.
           </p>
           <div
             className="lifecycle-step fabric-panel stitched"
             style={{ marginTop: '2rem' }}
           >
-            <h4>Emergency response</h4>
+            <h4>Emergency containment</h4>
             <p>
-              A guardian role can pause high-risk operations (dispute
-              initiation) for up to 7 days. Settlement operations remain
-              available. Pause automatically expires.
+              A Guardian role can pause high-risk operations (such as dispute
+              initiation) for up to 7 days during an active exploit. Normal
+              settlement operations remain available to users.
             </p>
           </div>
         </section>
@@ -447,6 +477,28 @@ export default function Security() {
           margin: 0;
           font-size: 0.82rem;
           line-height: 1.55;
+        }
+        .threat-boundary {
+          margin-top: 0.75rem;
+          background: rgba(245, 158, 11, 0.03);
+          border-left: 2.5px solid #f59e0b;
+          padding: 0.6rem 0.85rem;
+          border-radius: 0 4px 4px 0;
+        }
+        .boundary-label {
+          display: block;
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #f59e0b;
+          margin-bottom: 0.3rem;
+        }
+        .threat-boundary p {
+          margin: 0;
+          font-size: 0.82rem;
+          line-height: 1.55;
+          color: var(--accents-3);
         }
 
         /* ── Shared Grids ── */

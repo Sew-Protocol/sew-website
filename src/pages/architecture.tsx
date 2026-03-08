@@ -21,12 +21,11 @@ export default function Architecture() {
               <span className="hero-eyebrow">System Design</span>
               <h1>Architecture</h1>
               <h2 className="tagline">
-                System structure and structural invariants
+                System structure and formal security invariants
               </h2>
               <p className="description">
-                A protected transfer is an ERC-20 transfer routed through a
-                deterministic escrow with predefined release and dispute
-                resolution paths.
+                The Sew Protocol architecture is centered on a non-custodial
+                Vault and a registry of swappable, immutable logic modules.
               </p>
             </div>
           </div>
@@ -36,54 +35,24 @@ export default function Architecture() {
         <section className="content-section">
           <div className="reviewer-callout">
             <p>
-              <strong>For auditors and security reviewers:</strong> This page
-              covers system structure. For threat analysis, see the{' '}
-              <Link href="/security">Security Model</Link>.
+              <strong>Technical focus:</strong> This page covers components and
+              invariants. For the transactional lifecycle, see{' '}
+              <Link href="/how-it-works">How It Works</Link>.
             </p>
           </div>
         </section>
 
-        {/* ── 3. SYSTEM FLOW ──────────────────────────────────────────────── */}
+        {/* ── 3. CORE PRINCIPLES ────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>System flow</h3>
+            <h3>Architectural Job</h3>
             <p>
-              A transfer moves through well-defined states. Terminal states are
-              irreversible.
+              The primary role of the Sew architecture is{' '}
+              <strong>containment</strong>. By strictly isolating agreement
+              state and snapshotted logic, the protocol ensures that failures
+              remain localized and governance cannot retroactively alter
+              finalized terms.
             </p>
-
-            <div className="state-table stitched">
-              <div className="state-row state-header">
-                <span>State</span>
-                <span>Meaning</span>
-                <span>Terminal</span>
-              </div>
-              <div className="state-row">
-                <code>PENDING</code>
-                <span>Created and funded, awaiting action</span>
-                <span className="badge no">No</span>
-              </div>
-              <div className="state-row">
-                <code>DISPUTED</code>
-                <span>Dispute raised, awaiting resolver</span>
-                <span className="badge no">No</span>
-              </div>
-              <div className="state-row">
-                <code>RELEASED</code>
-                <span>Funds sent to recipient</span>
-                <span className="badge yes">Yes</span>
-              </div>
-              <div className="state-row">
-                <code>REFUNDED</code>
-                <span>Funds returned to sender</span>
-                <span className="badge yes">Yes</span>
-              </div>
-              <div className="state-row">
-                <code>RESOLVED</code>
-                <span>Resolver outcome enforced onchain</span>
-                <span className="badge yes">Yes</span>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -91,146 +60,84 @@ export default function Architecture() {
         <section id="the-module-system" className="content-section">
           <h3>The module system</h3>
           <p>
-            Sew Protocol uses pluggable, immutable modules to define escrow
-            behavior. The protocol <strong>snapshots</strong> active module
-            addresses at creation, ensuring that historical agreements are never
+            The protocol <strong>snapshots</strong> active module addresses at
+            creation, ensuring that historical agreements are never
             retroactively affected by governance updates.
           </p>
           <div className="guarantees-grid guarantees-grid--wide">
             <div className="guarantee-card fabric-panel">
-              <h4>Release Strategy</h4>
+              <h4>Core Vault</h4>
               <p>
-                Controls authorization and timing for settlement (Immediate,
-                Time-based, or Conditional).
+                Holds funds and manages the global state machine. Enforces
+                transitions between Pending, Disputed, and Settled.
               </p>
             </div>
             <div className="guarantee-card fabric-panel">
-              <h4>Resolution Module</h4>
+              <h4>Module Registry</h4>
               <p>
-                Manages per-dispute state, resolver registries, and binary
-                outcome enforcement.
+                The canonical set of approved logic implementations. Swappable
+                by governance, but snapshotted by escrows.
               </p>
             </div>
             <div className="guarantee-card fabric-panel">
-              <h4>Yield Module</h4>
+              <h4>Pluggable Logic</h4>
               <p>
-                Tracks per-escrow positions and principal across external
-                protocols (Aave V3).
-              </p>
-            </div>
-          </div>
-
-          <div className="property-grid" style={{ marginTop: '2rem' }}>
-            <div className="property fabric-panel seam-accent">
-              <h4>Snapshotted at Creation</h4>
-              <p>
-                Module addresses are permanently stored in the escrow state.
-                Governance changes only affect new escrows.
-              </p>
-            </div>
-            <div className="property fabric-panel seam-accent">
-              <h4>Isolated Namespacing</h4>
-              <p>
-                Module state is indexed by <code>(vault, workflowId)</code>. A
-                module failure in one escrow cannot affect another.
+                Namespaced implementations for Release, Resolution, and Yield.
+                Logic is immutable and isolated per escrow.
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── 5. SAFETY INVARIANTS ────────────────────────────────────────── */}
+        {/* ── 5. SECURITY INVARIANTS ────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Module safety invariants</h3>
+            <h3>Security invariants</h3>
+            <p>
+              Formal properties enforced at the contract layer to ensure
+              predictable coordination.
+            </p>
             <div className="principles-grid">
               <div className="principle seam-accent">
-                <h4>No Silent Loss</h4>
+                <h4>Non-custodial</h4>
                 <p>
-                  Modules must return <strong>all funds</strong> or revert.
-                  Partial returns are not allowed. Escrow proves balance changes
-                  via before/after snapshots.
+                  Funds held by contract. No operator or module can redirect
+                  assets outside defined transitions.
                 </p>
+                <code className="invariant-notation">
+                  Custody ∉ {'{operator, resolver, module}'}
+                </code>
               </div>
               <div className="principle seam-accent">
-                <h4>No Fund Redirect</h4>
+                <h4>Isolated</h4>
                 <p>
-                  Modules only send funds back to the specific calling escrow
-                  vault. No discretionary redirection.
+                  Each escrow is independent. State is namespaced by
+                  <code>(vault, workflowId)</code> to prevent failure
+                  propagation.
                 </p>
+                <code className="invariant-notation">
+                  failure(escrow_n) ⊄ escrow_m ∀ m ≠ n
+                </code>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 6. ARCHITECTURAL INVARIANTS ─────────────────────────────────── */}
-        <section className="content-section">
-          <h3>Architectural invariants</h3>
-          <div className="principles-grid">
-            <div className="principle seam-accent">
-              <h4>Non-custodial</h4>
-              <p>
-                Funds held by contract. No operator or module can redirect
-                assets outside defined transitions.
-              </p>
-              <code className="invariant-notation">
-                Custody ∉ {'{operator, resolver, module}'}
-              </code>
-            </div>
-            <div className="principle seam-accent">
-              <h4>Isolated</h4>
-              <p>
-                Each escrow is independent. Failure in one cannot propagate to
-                another. No shared risk.
-              </p>
-              <code className="invariant-notation">
-                failure(escrow_n) ⊄ escrow_m ∀ m ≠ n
-              </code>
-            </div>
-            <div className="principle seam-accent">
-              <h4>Forward-only</h4>
-              <p>
-                Upgrades apply only to new escrows. Active agreements remain
-                bound to original rules.
-              </p>
-              <code className="invariant-notation">
-                upgrade(t) → escrow.created &lt; t only
-              </code>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 6. ISOLATION ────────────────────────────────────────────────── */}
-        <section className="content-section">
-          <h3>Isolation as a first principle</h3>
-          <div className="isolation-levels">
-            <div className="isolation-level fabric-panel">
-              <div className="level-marker">01</div>
-              <div className="level-content">
-                <strong>Between escrows</strong>
+              <div className="principle seam-accent">
+                <h4>Forward-only</h4>
                 <p>
-                  Self-contained units. No shared collateral, shared yield pool,
-                  or shared dispute state.
+                  Upgrades apply only to new escrows. Active agreements remain
+                  locked to their snapshotted modules.
                 </p>
+                <code className="invariant-notation">
+                  upgrade(t) → escrow.created &lt; t only
+                </code>
               </div>
-            </div>
-            <div className="isolation-level fabric-panel">
-              <div className="level-marker">02</div>
-              <div className="level-content">
-                <strong>Between modules</strong>
+              <div className="principle seam-accent">
+                <h4>Balance Integrity</h4>
                 <p>
-                  Separated logic components. A bug in yield cannot affect
-                  dispute resolution or core state.
+                  Modules must return all funds or revert. Partial returns are
+                  forbidden to ensure correct accounting.
                 </p>
-              </div>
-            </div>
-            <div className="isolation-level fabric-panel">
-              <div className="level-marker">03</div>
-              <div className="level-content">
-                <strong>Between governance and settlement</strong>
-                <p>
-                  Governance cannot modify active escrows. Settlement logic is
-                  immutable once created.
-                </p>
+                <code className="invariant-notation">
+                  balance_after ≥ balance_before
+                </code>
               </div>
             </div>
           </div>
@@ -330,166 +237,6 @@ export default function Architecture() {
         .content-section > p:last-child a {
           color: #7adddc;
           text-decoration: underline;
-        }
-
-        /* ── System flow diagram ────────────────────────────────────────────── */
-        .flow-diagram {
-          margin: 2rem 0 1.5rem;
-          padding: 2rem 1.5rem;
-          border: 1.5px solid var(--accents-2);
-          border-radius: var(--radius);
-          background: #1b2a2e;
-          font-size: 0.85rem;
-        }
-        .flow-top-row,
-        .flow-bottom-row {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-        }
-        .flow-bottom-row {
-          margin-top: 0;
-        }
-        .flow-mid-row {
-          display: flex;
-          align-items: center;
-          padding: 0.35rem 0;
-          gap: 0.75rem;
-        }
-        .flow-node {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 0.6rem 1rem;
-          border: 1.5px solid var(--accents-2);
-          border-radius: var(--radius);
-          background: var(--bg);
-          min-width: 90px;
-          text-align: center;
-        }
-        .active-node {
-          border-color: #7adddc;
-        }
-        .terminal {
-          border-color: #059669;
-        }
-        .outcome-node {
-          border-color: #059669;
-        }
-        .small-node {
-          min-width: 70px;
-          padding: 0.4rem 0.6rem;
-        }
-        .node-label {
-          font-weight: 600;
-          font-size: 0.82rem;
-          color: var(--fg);
-        }
-        .node-state {
-          display: block;
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          color: var(--accents-3);
-          margin-top: 0.2rem;
-        }
-        .flow-arrow {
-          color: var(--accents-3);
-          font-size: 1.1rem;
-          flex-shrink: 0;
-        }
-        .flow-spacer-wide {
-          width: 90px;
-          flex-shrink: 0;
-        }
-        .flow-down-arrow {
-          font-size: 0.78rem;
-          color: var(--accents-3);
-          white-space: nowrap;
-          padding-left: 0.5rem;
-        }
-        .flow-outcome-row {
-          display: flex;
-          justify-content: flex-end;
-          margin-top: 0.5rem;
-          padding-right: 0;
-        }
-        .outcome-label {
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          color: #059669;
-          background: rgba(108, 229, 177, 0.08);
-          padding: 0.2rem 0.6rem;
-          border-radius: 4px;
-        }
-        .flow-refund-row {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          margin-top: 0.75rem;
-          padding-top: 0.75rem;
-          border-top: 1px dashed #2a3a3e;
-        }
-        .refund-branch {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.78rem;
-          color: var(--accents-3);
-        }
-        .refund-label {
-          white-space: nowrap;
-        }
-
-        /* ── State table ────────────────────────────────────────────────────── */
-        .state-table {
-          border: 1px solid #2a3a3e;
-          border-radius: var(--radius);
-          overflow: hidden;
-          margin-top: 1.5rem;
-          font-size: 0.875rem;
-        }
-        .state-row {
-          display: grid;
-          grid-template-columns: 140px 1fr 80px;
-          gap: 0;
-          padding: 0.7rem 1rem;
-          border-bottom: 1px solid #2a3a3e;
-          align-items: center;
-        }
-        .state-row:last-child {
-          border-bottom: none;
-        }
-        .state-header {
-          background: #1b2a2e;
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: var(--accents-3);
-        }
-        .state-row code {
-          font-family: var(--font-mono);
-          font-size: 0.78rem;
-          background: #1b2a2e;
-          padding: 0.15rem 0.4rem;
-          border-radius: 3px;
-          display: inline-block;
-        }
-        .badge {
-          font-size: 0.72rem;
-          font-weight: 700;
-          padding: 0.15rem 0.5rem;
-          border-radius: 4px;
-          display: inline-block;
-          text-align: center;
-        }
-        .badge.yes {
-          background: rgba(108, 229, 177, 0.08);
-          color: #059669;
-        }
-        .badge.no {
-          background: #1b2a2e;
-          color: var(--accents-3);
         }
 
         /* ── Property grid ──────────────────────────────────────────────────── */

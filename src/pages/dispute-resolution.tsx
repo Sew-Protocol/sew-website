@@ -22,9 +22,9 @@ export default function DisputeResolution() {
               <h1>Dispute Architecture</h1>
               <h2 className="tagline">How resolution works structurally</h2>
               <p className="description">
-                Sew Protocol provides structured dispute resolution pathways,
-                evolving from single trusted resolvers to fully decentralised
-                arbitration.
+                Sew Protocol provides structured resolution pathways, evolving
+                from a single trusted resolver at launch toward decentralized
+                arbitration networks.
               </p>
             </div>
           </div>
@@ -33,22 +33,26 @@ export default function DisputeResolution() {
         {/* ── 2. MODES ────────────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Resolution modes</h3>
+            <h3>Launch trust model</h3>
+            <p>
+              In the initial phase, resolution authority is bounded by the
+              protocol but execution is centralized for safety.
+            </p>
             <div className="guarantees-grid">
               <div className="guarantee-card fabric-panel">
                 <span className="mode-badge active">Active at Launch</span>
                 <h4>Single Trusted Resolver</h4>
                 <p>
-                  A designated resolver evaluates evidence and makes final
-                  decisions. Simple, fast, and governance-controlled.
+                  A designated entity evaluates evidence. Decisions are fast and
+                  bounded to protocol-defined outcomes.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
                 <span className="mode-badge planned">Planned</span>
-                <h4>Escalating Resolution</h4>
+                <h4>Decentralized Arbitration</h4>
                 <p>
-                  Multi-level resolution with appeal bonds and final arbitration
-                  through third-party networks like Kleros.
+                  Integration with external networks (e.g., Kleros) to provide
+                  permissionless fact-finding and finality.
                 </p>
               </div>
             </div>
@@ -122,33 +126,35 @@ export default function DisputeResolution() {
 
         {/* ── 5. PROPERTIES ───────────────────────────────────────────────── */}
         <section className="content-section">
-          <h3>Key properties</h3>
+          <h3>Structural guarantees</h3>
           <div className="property-grid">
             <div className="property fabric-panel seam-accent">
-              <h4>Deterministic</h4>
+              <h4>Bounded Outcomes</h4>
               <p>
-                Resolution follows predefined rules encoded at creation, not
-                human discretion.
+                Resolvers evaluate evidence and make decisions, but the protocol
+                restricts their output to a fixed set of outcomes (Release or
+                Refund).
               </p>
             </div>
             <div className="property fabric-panel seam-accent">
-              <h4>Isolated</h4>
+              <h4>Enforceable Path</h4>
               <p>
-                Impact is limited to that single dispute. Other escrows remain
-                unaffected.
+                The resolution sequence is fixed at creation. No party can
+                arbitrarily bypass the assigned resolver or escalation logic.
               </p>
             </div>
             <div className="property fabric-panel seam-accent">
-              <h4>Bounded</h4>
+              <h4>Time-Bounded</h4>
               <p>
                 Maximum dispute duration is strictly enforced (90 days maximum).
+                Disputes cannot hang in limbo indefinitely.
               </p>
             </div>
             <div className="property fabric-panel seam-accent">
-              <h4>Transparent</h4>
+              <h4>Transparent Evidence</h4>
               <p>
                 All evidence hashes and resolver decisions are recorded
-                permanently onchain.
+                permanently onchain for auditability.
               </p>
             </div>
           </div>

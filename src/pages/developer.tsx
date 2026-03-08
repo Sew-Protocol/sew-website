@@ -52,31 +52,6 @@ export default function Developer() {
           </div>
         </div>
 
-        {/* ── 2. CORE CONCEPTS ────────────────────────────────────────────── */}
-        <section className="abstract-band">
-          <div className="abstract-band-inner">
-            <h3>Core concepts</h3>
-            <p>
-              Sew provides a settlement pattern where tokens are held until
-              conditions are met.
-            </p>
-            <div className="guarantees-grid guarantees-grid--wide">
-              <div className="guarantee-card fabric-panel">
-                <h4>Deterministic</h4>
-                <p>Release flows follow predefined paths locked at creation.</p>
-              </div>
-              <div className="guarantee-card fabric-panel">
-                <h4>Composable</h4>
-                <p>Modular architecture for resolution, release, and yield.</p>
-              </div>
-              <div className="guarantee-card fabric-panel">
-                <h4>Immutable</h4>
-                <p>Governance cannot modify terms of active escrows.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── 3. CREATION ─────────────────────────────────────────────────── */}
         <section className="content-section">
           <h3>Escrow creation</h3>

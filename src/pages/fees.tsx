@@ -63,29 +63,43 @@ export default function Fees() {
               <thead>
                 <tr>
                   <th>Fee Type</th>
-                  <th>Default at Launch</th>
+                  <th>Default</th>
                   <th>Max Cap</th>
                   <th>Applied When</th>
+                  <th>Payer</th>
+                  <th>Destination</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Escrow creation</td>
-                  <td>1%</td>
-                  <td>2%</td>
-                  <td>At escrow creation</td>
+                  <td>
+                    <strong>Escrow creation</strong>
+                  </td>
+                  <td>1.0%</td>
+                  <td>2.0%</td>
+                  <td>At creation</td>
+                  <td>Sender</td>
+                  <td>Treasury</td>
                 </tr>
                 <tr>
-                  <td>Yield protocol share</td>
+                  <td>
+                    <strong>Yield share</strong>
+                  </td>
                   <td>30%</td>
                   <td>30%</td>
-                  <td>On generated yield</td>
+                  <td>On settlement</td>
+                  <td>Recipient</td>
+                  <td>Treasury</td>
                 </tr>
                 <tr>
-                  <td>Appeal bond</td>
-                  <td>0% (inactive)</td>
+                  <td>
+                    <strong>Appeal bond</strong>
+                  </td>
+                  <td>0%</td>
                   <td>30%</td>
-                  <td>On appeal bonds</td>
+                  <td>On appeal</td>
+                  <td>Appellee</td>
+                  <td>Treasury</td>
                 </tr>
               </tbody>
             </table>

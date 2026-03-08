@@ -18,15 +18,15 @@ export default function About() {
         >
           <div className="hero-inner">
             <div className="hero-text">
-              <span className="hero-eyebrow">The Fabric of the Protocol</span>
               <h1>About Sew Protocol</h1>
               <h2 className="tagline">
-                Infrastructure for protected transfers
+                Non-custodial infrastructure for protected transfers on
+                Ethereum.
               </h2>
               <p className="description">
-                Sew Protocol makes coordination possible on Ethereum without
-                requiring custody or centralized trust. We believe every
-                transfer should be optionally protected.
+                Sew Protocol makes it possible to route ERC-20 transfers through
+                escrow with predefined release and dispute resolution paths,
+                without requiring custody or centralized trust.
               </p>
             </div>
           </div>
@@ -35,87 +35,66 @@ export default function About() {
         {/* ── 2. MISSION ──────────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Mission</h3>
+            <h3>Mission & Approach</h3>
             <p>
-              We believe every transfer should be optionally protected. Buyers
-              and sellers should be able to transact with confidence.
-              Applications should reuse infrastructure rather than reinvent
-              escrow.
+              We believe protection should be available at the moment of
+              transfer, not added later through third-party custody or
+              platform-specific workarounds. Sew provides the neutral ground
+              needed for secure onchain coordination.
             </p>
             <div className="guarantees-grid">
               <div className="guarantee-card fabric-panel">
-                <h4>Confidence</h4>
+                <h4>Core Escrow</h4>
                 <p>
-                  Ensuring both parties fulfill obligations before finality.
+                  Non-custodial transfer protection with defined release and
+                  resolution rules enforced by code.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Modular Design</h4>
+                <p>
+                  Pluggable release strategies, dispute resolvers, and yield
+                  modules selected at creation.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
                 <h4>Neutrality</h4>
                 <p>
-                  Enforcing rules defined at creation, not by intermediaries.
+                  Sew does not take custody. No party can redirect funds outside
+                  predefined settlement paths.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Forward-Only</h4>
+                <p>
+                  Module snapshots ensure that upgrades never retroactively
+                  alter active agreements.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── 3. BUILDING ─────────────────────────────────────────────────── */}
-        <section className="content-section">
-          <h3>What we're building</h3>
-          <p>
-            Sew is composable infrastructure: a set of smart contracts and
-            modules that applications, wallets, and protocols can build on.
-          </p>
-          <div className="property-grid">
-            <div className="property fabric-panel seam-accent">
-              <h4>Core escrow</h4>
-              <p>
-                Non-custodial transfer protection with defined release and
-                resolution rules.
-              </p>
-            </div>
-            <div className="property fabric-panel seam-accent">
-              <h4>Modular architecture</h4>
-              <p>
-                Pluggable release strategies, dispute resolvers, and yield
-                generators.
-              </p>
-            </div>
-            <div className="property fabric-panel seam-accent">
-              <h4>Dispute resolution</h4>
-              <p>
-                Structured, incentivized mechanisms for fair conflict
-                resolution.
-              </p>
-            </div>
-            <div className="property fabric-panel seam-accent">
-              <h4>Governance</h4>
-              <p>Community-controlled evolution through the SEW token.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 4. ROADMAP ──────────────────────────────────────────────────── */}
+        {/* ── 3. ROADMAP ──────────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Roadmap</h3>
+            <h3>Evolution Roadmap</h3>
             <p>
-              Sew is under active development. Our path to decentralization:
+              Sew is designed for progressive decentralization. Our current
+              phases:
             </p>
             <div className="principles-grid">
               <div className="principle">
-                <h4>v1 (Launch)</h4>
-                <p>Core escrow with single-tier dispute resolution.</p>
+                <h4>Phase 1 (Launch)</h4>
+                <p>Core escrow with single-tier trusted resolution.</p>
               </div>
               <div className="principle">
-                <h4>v2 (Post-launch)</h4>
-                <p>
-                  Multi-tier escalating resolution with staking and appeals.
-                </p>
+                <h4>Phase 2 (Planned)</h4>
+                <p>Multi-tier resolution with staking and public appeals.</p>
               </div>
               <div className="principle">
-                <h4>v3 (Future)</h4>
-                <p>Fully decentralized resolver selection with delegation.</p>
+                <h4>Phase 3 (Vision)</h4>
+                <p>Fully decentralized resolver networks and delegation.</p>
               </div>
             </div>
           </div>
@@ -149,10 +128,10 @@ export default function About() {
               </p>
             </div>
             <div className="guarantee-card fabric-panel">
-              <h4>Investors</h4>
+              <h4>Ecosystem</h4>
               <p>
-                Learn about the token.{' '}
-                <Link href="/investor">Token Info →</Link>
+                Learn about the tokenomics and roadmap.{' '}
+                <Link href="/investor">Protocol Vision →</Link>
               </p>
             </div>
           </div>

@@ -21,12 +21,12 @@ export default function Investor() {
               <span className="hero-eyebrow">Strategic Vision</span>
               <h1>For Investors</h1>
               <h2 className="tagline">
-                The case for structured programmable settlement
+                The case for a standardized protected transfer primitive
               </h2>
               <p className="description">
-                Sew Protocol introduces protected transfers as a new primitive
-                on Ethereum. We are building the infrastructure for safe,
-                trust-minimized commerce.
+                Sew Protocol is building the infrastructure for a multi-chain
+                future where payment protection is a native, non-custodial
+                standard rather than a platform-specific feature.
               </p>
             </div>
           </div>
@@ -35,11 +35,11 @@ export default function Investor() {
         {/* ── 2. OPPORTUNITY ──────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>The opportunity</h3>
+            <h3>The Opportunity</h3>
             <p>
-              Ethereum enables global transfers, but most are immediate and
-              irreversible. This creates massive friction for peer-to-peer
-              commerce, services, and marketplaces.
+              As stablecoin volume continues to scale, the absence of a standard
+              settlement primitive becomes a systemic friction point. Sew
+              captures the value of secure onchain coordination.
             </p>
             <div className="guarantees-grid">
               <div className="guarantee-card fabric-panel">
@@ -50,10 +50,10 @@ export default function Investor() {
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>Market Ready</h4>
+                <h4>Market Standard</h4>
                 <p>
-                  Increasing stablecoin use and demand for non-custodial
-                  coordination tools.
+                  Demand is surging for non-custodial tools that provide the
+                  same safety guarantees as traditional commerce.
                 </p>
               </div>
             </div>
@@ -62,28 +62,31 @@ export default function Investor() {
 
         {/* ── 3. POSITIONING ──────────────────────────────────────────────── */}
         <section className="content-section">
-          <h3>Category positioning</h3>
-          <p>Sew is not an app; it is infrastructure that apps build on.</p>
+          <h3>Market Positioning</h3>
+          <p>
+            Sew is a neutral infrastructure layer designed to be integrated at
+            the transaction level by wallets and marketplaces.
+          </p>
           <div className="principles-grid">
             <div className="principle seam-accent">
-              <h4>Non-custodial</h4>
+              <h4>Regulatory Neutrality</h4>
               <p>
-                Protection without the regulatory and security burden of holding
-                user funds.
+                Protocol-level protection that avoids the legal and technical
+                burdens of traditional third-party custody.
               </p>
             </div>
             <div className="principle seam-accent">
-              <h4>Composable</h4>
+              <h4>Standardization</h4>
               <p>
-                A reusable settlement pattern that works across wallets and
-                marketplaces.
+                A reusable pattern that creates liquidity and trust efficiency
+                across fragmented application silos.
               </p>
             </div>
             <div className="principle seam-accent">
-              <h4>Deterministic</h4>
+              <h4>Phased Evolution</h4>
               <p>
-                Rules enforced by code, providing neutral ground for strangers
-                to transact.
+                A progressive trajectory from trusted resolution at launch to
+                fully permissionless arbitration networks.
               </p>
             </div>
           </div>

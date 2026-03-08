@@ -39,55 +39,86 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        {/* ── 2. WHAT IT IS NOT ───────────────────────────────────────────── */}
-        <section className="content-section">
-          <h3>What Sew Is Not</h3>
-          <p>Sew is not a marketplace, a wallet, or a court.</p>
-          <p>
-            Sew is a <strong>security layer for transfers</strong>. It provides
-            the infrastructure for protected transfers while leaving user
-            experience, dispute evaluation, and interface design to the
-            applications built on top.
-          </p>
-        </section>
-
-        {/* ── 3. CORE IDEA ────────────────────────────────────────────────── */}
+        {/* ── 2. ESCROW MECHANICS ─────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>The core idea</h3>
+            <h3>Protocol mechanics</h3>
             <p>
               A standard token transfer is immediate and final. A protected
-              transfer is different:
+              transfer introduces a deterministic delay and rule-bound
+              settlement conditions.
             </p>
             <div className="guarantees-grid guarantees-grid--wide">
               <div className="guarantee-card fabric-panel">
                 <h4>Held in escrow</h4>
                 <p>
-                  Funds are placed into a smart contract, not sent directly.
+                  Funds are held by the core Vault contract, not sent directly
+                  to the recipient.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
                 <h4>Rules upfront</h4>
                 <p>
-                  Release conditions are defined at creation and cannot change.
+                  Release conditions and resolution paths are defined at
+                  creation and cannot change.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>Deterministic</h4>
-                <p>Settlement happens when rules are met, enforced by code.</p>
+                <h4>Snapshot integrity</h4>
+                <p>
+                  Each agreement is permanently bound to the module
+                  implementations active at creation.
+                </p>
               </div>
             </div>
-            <p className="key-concept" style={{ marginTop: '2rem' }}>
-              Each escrow captures its configuration at creation and cannot be
-              changed. Governance changes only affect future escrows, never
-              existing ones.
-            </p>
+          </div>
+        </section>
+
+        {/* ── 3. STATE MACHINE ────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>The State Machine</h3>
+          <p>
+            Each protected transfer moves through a strictly defined lifecycle.
+            Terminal states are irreversible.
+          </p>
+
+          <div className="state-table stitched">
+            <div className="state-row state-header">
+              <span>State</span>
+              <span>Meaning</span>
+              <span>Terminal</span>
+            </div>
+            <div className="state-row">
+              <code>PENDING</code>
+              <span>Active agreement, awaiting action</span>
+              <span className="badge no">No</span>
+            </div>
+            <div className="state-row">
+              <code>DISPUTED</code>
+              <span>Dispute raised, awaiting resolution</span>
+              <span className="badge no">No</span>
+            </div>
+            <div className="state-row">
+              <code>RELEASED</code>
+              <span>Funds sent to recipient (Success)</span>
+              <span className="badge yes">Yes</span>
+            </div>
+            <div className="state-row">
+              <code>REFUNDED</code>
+              <span>Funds returned to sender (Reversion)</span>
+              <span className="badge yes">Yes</span>
+            </div>
+            <div className="state-row">
+              <code>RESOLVED</code>
+              <span>Outcome enforced via resolution module</span>
+              <span className="badge yes">Yes</span>
+            </div>
           </div>
         </section>
 
         {/* ── 4. LIFECYCLE ────────────────────────────────────────────────── */}
         <section className="content-section">
-          <h3>Lifecycle of a protected transfer</h3>
+          <h3>Lifecycle sequence</h3>
 
           <div className="sequence-diagram fabric-panel">
             <div className="sequence-step">
@@ -98,12 +129,12 @@ export default function HowItWorks() {
             <div className="sequence-step active">
               <div className="step-node vault highlight">Held in Escrow</div>
               <div className="step-label">
-                Conditions: Pending Release or Dispute
+                Locked: Waiting for Release or Dispute
               </div>
             </div>
             <div className="sequence-step">
               <div className="step-node vault">Sew Vault</div>
-              <div className="step-arrow">Settlement (Release or Resolve)</div>
+              <div className="step-arrow">Settlement (Finality)</div>
               <div className="step-node recipient">Recipient</div>
             </div>
           </div>
@@ -112,159 +143,69 @@ export default function HowItWorks() {
             <div className="lifecycle-step fabric-panel seam-accent">
               <h4>1) Creation</h4>
               <p>
-                A user initiates a transfer through an interface. Terms (token,
-                amount, sender, recipient, release strategy, resolution path)
-                are defined and locked.
+                A user initiates a transfer. Parameters (amount, recipient,
+                timeout, resolver) are snapshotted into the vault state.
               </p>
             </div>
 
             <div className="lifecycle-step fabric-panel seam-accent">
-              <h4>2) Active escrow state</h4>
+              <h4>2) Coordination</h4>
               <p>
-                Funds remain locked. Neither party can access them unilaterally.
-                This creates a neutral coordination phase.
+                Funds remain locked in the Vault. The agreement provides a
+                neutral phase for fulfillment of obligations.
               </p>
             </div>
 
             <div className="lifecycle-step fabric-panel seam-accent">
-              <h4>3) Release</h4>
+              <h4>3) Settlement</h4>
               <p>
-                Settlement occurs via release (sender confirms), time-based
-                trigger, or predefined conditions being met.
+                Settlement occurs via manual release, automated triggers, or a
+                bilateral cancellation.
               </p>
             </div>
 
             <div className="lifecycle-step fabric-panel seam-accent">
-              <h4>4) Dispute (if needed)</h4>
+              <h4>4) Recourse</h4>
               <p>
-                If parties disagree, either can open a dispute. A neutral
-                resolver decides: Release or Refund.
+                If parties disagree, a dispute triggers the resolution module to
+                determine the final outcome.
               </p>
             </div>
           </div>
-
-          <p
-            className="learn-more"
-            style={{ marginTop: '2rem', textAlign: 'center' }}
-          >
-            <Link href="/docs/lifecycle">See full lifecycle details →</Link>
-          </p>
         </section>
 
-        {/* ── 5. YIELD ────────────────────────────────────────────────────── */}
+        {/* ── 5. ROLES ────────────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Optional yield generation</h3>
-            <p>
-              If enabled at creation, funds may generate yield through external
-              protocols (e.g., Aave V3).
-            </p>
-            <ul>
-              <li>The yield module is locked for the escrow's lifetime.</li>
-              <li>Yield can go to sender or be disabled.</li>
-              <li>
-                Funds remain under escrow control; the module is just an
-                integration.
-              </li>
-            </ul>
-            <div className="disclaimer-block">
-              <p>
-                <strong>Yield disclaimer:</strong> External protocol risk
-                exists. Governance can set exposure caps, and escrow can unwind
-                positions back to custody in emergencies.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 6. DISAGREEMENT ─────────────────────────────────────────────── */}
-        <section className="content-section">
-          <h3 id="what-if-disagreement">Dispute Resolution</h3>
-          <p>
-            Ethereum transfers are final. Sew adds structured resolution without
-            custody: neutral outcomes enforced by smart contracts.
-          </p>
-
-          <div className="principles-grid">
-            <div className="principle seam-accent">
-              <h4>The neutral resolver</h4>
-              <p>
-                Assigned when a dispute is opened. Reviews evidence. Can only
-                decide: Release or Refund. No custody of funds.
-              </p>
-            </div>
-            <div className="principle seam-accent">
-              <h4>Isolation of risk</h4>
-              <p>
-                Impact is limited to that single dispute. Other escrows are
-                unaffected. No systemic resolver risk.
-              </p>
-            </div>
-          </div>
-
-          <div
-            className="lifecycle-step fabric-panel stitched"
-            style={{ marginTop: '2rem' }}
-          >
-            <h4>Resolution modes</h4>
-            <p>
-              <strong>v1 (Launch):</strong> Single trusted resolver. Fast,
-              simple. <br />
-              <strong>v2+:</strong> Multiple resolvers with staking, appeal
-              bonds, and decentralized arbitration.
-            </p>
-          </div>
-        </section>
-
-        {/* ── 7. MODULE ARCHITECTURE ──────────────────────────────────────── */}
-        <section className="abstract-band">
-          <div className="abstract-band-inner">
-            <h3>Module architecture</h3>
-            <p>
-              Sew uses pluggable modules selected at creation to define
-              behavior:
-            </p>
+            <h3>Roles & permissions</h3>
             <div className="guarantees-grid">
               <div className="guarantee-card fabric-panel">
-                <h4>Release Strategy</h4>
-                <p>Controls who can release and when.</p>
+                <h4>Sender</h4>
+                <p>
+                  Creates agreement and funds escrow. Can release or dispute.
+                </p>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>Resolution Module</h4>
-                <p>Handles disputes and outcomes.</p>
+                <h4>Recipient</h4>
+                <p>
+                  Provides goods/services. Can release (if configured) or
+                  dispute.
+                </p>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>Yield Module</h4>
-                <p>Manages optional yield generation.</p>
+                <h4>Resolver</h4>
+                <p>
+                  Fact-finding entity. Outcomes are bounded to Release or
+                  Refund.
+                </p>
               </div>
-            </div>
-            <p className="learn-more" style={{ marginTop: '2rem' }}>
-              <Link href="/architecture#the-module-system">
-                Learn more about modules →
-              </Link>
-            </p>
-          </div>
-        </section>
-
-        {/* ── 8. ROLES ────────────────────────────────────────────────────── */}
-        <section className="content-section">
-          <h3>Who can do what?</h3>
-          <div className="guarantees-grid">
-            <div className="guarantee-card fabric-panel">
-              <h4>Sender</h4>
-              <p>Creates and funds escrow. Can release anytime or dispute.</p>
-            </div>
-            <div className="guarantee-card fabric-panel">
-              <h4>Recipient</h4>
-              <p>Can release (if allowed) or dispute. Cannot cancel.</p>
-            </div>
-            <div className="guarantee-card fabric-panel">
-              <h4>Resolver</h4>
-              <p>Decides disputes. Outcomes are bounded. No custody.</p>
-            </div>
-            <div className="guarantee-card fabric-panel">
-              <h4>Guardian</h4>
-              <p>Can pause (7-day max) or disable risky modules.</p>
+              <div className="guarantee-card fabric-panel">
+                <h4>Guardian</h4>
+                <p>
+                  Safety role. Can pause operations during technical
+                  emergencies.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -385,6 +326,59 @@ export default function HowItWorks() {
           max-width: 800px;
           padding: 4rem 2rem;
         }
+
+        /* ── State table ────────────────────────────────────────────────────── */
+        .state-table {
+          border: 1px solid #2a3a3e;
+          border-radius: var(--radius);
+          overflow: hidden;
+          margin-top: 1.5rem;
+          font-size: 0.875rem;
+        }
+        .state-row {
+          display: grid;
+          grid-template-columns: 140px 1fr 80px;
+          gap: 0;
+          padding: 0.7rem 1rem;
+          border-bottom: 1px solid #2a3a3e;
+          align-items: center;
+        }
+        .state-row:last-child {
+          border-bottom: none;
+        }
+        .state-header {
+          background: #1b2a2e;
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--accents-3);
+        }
+        .state-row code {
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          background: #1b2a2e;
+          padding: 0.15rem 0.4rem;
+          border-radius: 3px;
+          display: inline-block;
+        }
+        .badge {
+          font-size: 0.72rem;
+          font-weight: 700;
+          padding: 0.15rem 0.5rem;
+          border-radius: 4px;
+          display: inline-block;
+          text-align: center;
+        }
+        .badge.yes {
+          background: rgba(108, 229, 177, 0.08);
+          color: #059669;
+        }
+        .badge.no {
+          background: #1b2a2e;
+          color: var(--accents-3);
+        }
+
         .key-concept {
           font-style: italic;
           color: var(--accents-2);

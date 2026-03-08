@@ -36,19 +36,18 @@ export default function StartHere() {
                 <circle cx="24" cy="24" r="3" fill="currentColor" />
               </svg>
             </div>
-            <h2>I&apos;m a User</h2>
+            <h2>Users</h2>
             <p className="pathway-desc">
-              I want to make protected transfers on Ethereum
+              Make protected transfers using simple interfaces.
             </p>
             <div className="pathway-actions">
               <Link href="/everyday-wallet">
-                <a className="pathway-link">Use Everyday Wallet</a>
+                <a className="pathway-link">Everyday Wallet</a>
               </Link>
             </div>
             <div className="pathway-tags">
-              <span>Simple checkout</span>
+              <span>Checkout safety</span>
               <span>Buyer protection</span>
-              <span>Works with any wallet</span>
             </div>
           </div>
 
@@ -84,19 +83,57 @@ export default function StartHere() {
                 />
               </svg>
             </div>
-            <h2>I&apos;m a Builder</h2>
+            <h2>Builders</h2>
             <p className="pathway-desc">
-              I want to integrate protected transfers into my app
+              Integrate protected transfers into your application.
             </p>
             <div className="pathway-actions">
               <Link href="/developer">
-                <a className="pathway-link">Developer Guide</a>
+                <a className="pathway-link">Developer Docs</a>
               </Link>
             </div>
             <div className="pathway-tags">
+              <span>SDK (v2)</span>
               <span>API reference</span>
-              <span>Integration guides</span>
-              <span>Code examples</span>
+            </div>
+          </div>
+
+          <div className="pathway-card fabric-panel">
+            <div className="pathway-icon">
+              <svg
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 8l12 4v8c0 8-6 16-12 18-6-2-12-10-12-18v-8l12-4z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <circle
+                  cx="24"
+                  cy="22"
+                  r="6"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+              </svg>
+            </div>
+            <h2>Researchers</h2>
+            <p className="pathway-desc">
+              Deep dive into security and protocol architecture.
+            </p>
+            <div className="pathway-actions">
+              <Link href="/security">
+                <a className="pathway-link">Security Model</a>
+              </Link>
+              <Link href="/architecture">
+                <a className="pathway-link secondary">Architecture</a>
+              </Link>
+            </div>
+            <div className="pathway-tags">
+              <span>Threat model</span>
+              <span>Invariants</span>
             </div>
           </div>
 
@@ -120,81 +157,23 @@ export default function StartHere() {
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
-                <path
-                  d="M18 24l4 4 8-8"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
               </svg>
             </div>
-            <h2>I&apos;m an Investor</h2>
+            <h2>Governance</h2>
             <p className="pathway-desc">
-              I want to understand the protocol&apos;s value and tokenomics
+              Understand roles, tokenomics, and the roadmap.
             </p>
             <div className="pathway-actions">
-              <Link href="/investor">
-                <a className="pathway-link">Investment Thesis</a>
+              <Link href="/governance">
+                <a className="pathway-link">Governance Model</a>
               </Link>
               <Link href="/token">
                 <a className="pathway-link secondary">SEW Token</a>
               </Link>
             </div>
             <div className="pathway-tags">
-              <span>Token utility</span>
-              <span>Risk factors</span>
               <span>Roadmap</span>
-            </div>
-            <p className="pathway-disclaimer">
-              Not financial advice. Do your own research.
-            </p>
-          </div>
-
-          <div className="pathway-card fabric-panel">
-            <div className="pathway-icon">
-              <svg
-                viewBox="0 0 48 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M24 8l12 4v8c0 8-6 16-12 18-6-2-12-10-12-18v-8l12-4z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M20 24l3 3 5-5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle
-                  cx="24"
-                  cy="22"
-                  r="6"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-              </svg>
-            </div>
-            <h2>I&apos;m an Auditor / Researcher</h2>
-            <p className="pathway-desc">
-              I need deep technical and security documentation
-            </p>
-            <div className="pathway-actions">
-              <Link href="/security">
-                <a className="pathway-link">Security Model</a>
-              </Link>
-              <Link href="/architecture">
-                <a className="pathway-link secondary">Architecture</a>
-              </Link>
-            </div>
-            <div className="pathway-tags">
-              <span>Trust model</span>
-              <span>Invariant guarantees</span>
-              <span>Audit reports</span>
+              <span>DAO</span>
             </div>
           </div>
         </section>

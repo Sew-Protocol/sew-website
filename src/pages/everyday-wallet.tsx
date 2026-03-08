@@ -30,76 +30,96 @@ export default function EverydayWallet() {
           </div>
         </section>
 
-        {/* ── 2. WHAT IT IS ────────────────────────────────────────────────── */}
+        {/* ── 2. THE PROBLEM ────────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>The interface layer</h3>
+            <h3>Safe transfers for the real world</h3>
             <p>
-              Everyday Wallet is an interface built on Sew Protocol. It turns
-              standard transfers into protected ones:
+              Most Ethereum transfers are irreversible. This works for trusted
+              counterparties, but creates significant risk when buying goods,
+              services, or digital assets from strangers.
             </p>
             <div className="guarantees-grid">
               <div className="guarantee-card fabric-panel">
-                <h4>Protected by Escrow</h4>
+                <h4>Consumer Safety</h4>
                 <p>
-                  Funds are held by smart contracts, not sent directly to
-                  recipients.
+                  Never send funds "into the void." Funds are locked until you
+                  confirm delivery or a resolver mediates.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>Locked Terms</h4>
+                <h4>Seller Assurance</h4>
                 <p>
-                  Release conditions and resolution paths are fixed at the
-                  moment of send.
+                  Sellers see the funds are committed and secured by code before
+                  they ship or perform work.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── 3. WHY IT EXISTS ─────────────────────────────────────────────── */}
+        {/* ── 3. USER EXPERIENCE ────────────────────────────────────────────── */}
         <section className="content-section">
-          <h3>Why it exists</h3>
-          <p>
-            Most crypto transfers are instant and irreversible. This works when
-            trust exists, but creates risk for buying from strangers or paying
-            for services.
-          </p>
+          <h3>The Experience</h3>
           <div className="principles-grid">
             <div className="principle seam-accent">
-              <h4>P2P Commerce</h4>
-              <p>Buy second-hand items with delivery assurance.</p>
+              <div className="step-marker">01</div>
+              <h4>Secure</h4>
+              <p>
+                You send funds to a protected escrow. The recipient can see the
+                funds are locked but cannot touch them yet.
+              </p>
             </div>
             <div className="principle seam-accent">
-              <h4>Service Payments</h4>
-              <p>Pay for freelance work with milestone-based release.</p>
+              <div className="step-marker">02</div>
+              <h4>Fulfill</h4>
+              <p>
+                The exchange happens—goods are shipped, code is pushed, or the
+                service is completed.
+              </p>
             </div>
             <div className="principle seam-accent">
-              <h4>Remote Deals</h4>
-              <p>Coordinate exchanges when parties are not in person.</p>
+              <div className="step-marker">03</div>
+              <h4>Settle</h4>
+              <p>
+                You release the funds. If something goes wrong, you open a
+                dispute to trigger a neutral review.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* ── 4. SAFER BY DEFAULT ─────────────────────────────────────────── */}
+        {/* ── 4. HONEST TRADE-OFFS ─────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Safer by default</h3>
+            <h3>Honest trade-offs</h3>
+            <p>
+              Protection is a choice. Everyday Wallet is designed for specific
+              scenarios where security is more important than speed.
+            </p>
             <div className="comparison-grid">
               <div className="comparison-item fabric-panel seam-accent">
-                <h4>Traditional Send</h4>
+                <h4>Direct Transfer</h4>
+                <p className="desc">Best for: Exchanges with high trust</p>
+                <ul className="pros">
+                  <li>✓ Instant finality</li>
+                  <li>✓ Lowest gas cost</li>
+                </ul>
                 <ul className="cons">
-                  <li>✗ Irreversible error risk</li>
-                  <li>✗ Zero delivery protection</li>
-                  <li>✗ Instant finality</li>
+                  <li>✗ Zero recourse for errors</li>
+                  <li>✗ No delivery protection</li>
                 </ul>
               </div>
               <div className="comparison-item fabric-panel highlight stitched">
                 <h4>Everyday Wallet</h4>
+                <p className="desc">Best for: Buying from strangers</p>
                 <ul className="pros">
-                  <li>✓ Funds held until released</li>
-                  <li>✓ Built-in dispute handling</li>
-                  <li>✓ Non-custodial safety</li>
+                  <li>✓ Funds held until delivery</li>
+                  <li>✓ Standardized dispute path</li>
+                </ul>
+                <ul className="cons">
+                  <li>✗ Slower than direct transfer</li>
+                  <li>✗ Higher gas (escrow creation)</li>
                 </ul>
               </div>
             </div>
