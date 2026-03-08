@@ -132,7 +132,7 @@ export default function Investor() {
           }}
         >
           <div className="breakout-inner cta-inner">
-            <h3>Coordinate the evolution.</h3>
+            <h3>Understand the investment thesis.</h3>
             <p>
               Explore our technical roadmap, token economics, and governance
               trajectory.

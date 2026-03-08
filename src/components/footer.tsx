@@ -30,7 +30,7 @@ export default function Footer() {
             <ExtLink href="https://github.com/sew-protocol/sew-protocol">
               GitHub Repository
             </ExtLink>
-            <ExtLink href="https://discord.gg/sew">Discord</ExtLink>
+            <ExtLink href="https://discord.gg/sewprotocol">Discord</ExtLink>
           </div>
         </div>
         <div className="footer-legal">

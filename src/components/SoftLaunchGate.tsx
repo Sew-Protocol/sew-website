@@ -54,48 +54,70 @@ export default function SoftLaunchGate({ children }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#fff',
+          background: '#0e1a1d',
         }}
       >
         <form
           onSubmit={handleSubmit}
           style={{
-            padding: '2rem',
-            border: '1px solid #ddd',
-            borderRadius: '8px',
+            padding: '2.5rem',
+            border: '1px solid #2a3a3e',
+            borderRadius: '12px',
             maxWidth: '400px',
             width: '100%',
+            background: '#1b2a2e',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
           }}
         >
-          <h2 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>
-            Soft Launch - Access Required
+          <div style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+            <span style={{ fontSize: '2rem' }}>🪡</span>
+          </div>
+          <h2
+            style={{
+              marginBottom: '0.5rem',
+              fontSize: '1.1rem',
+              fontWeight: 700,
+              color: '#ffffff',
+              textAlign: 'center',
+            }}
+          >
+            Sew Protocol
           </h2>
           <p
-            style={{ marginBottom: '1rem', color: '#666', fontSize: '0.9rem' }}
+            style={{
+              marginBottom: '1.5rem',
+              color: '#8aaeb5',
+              fontSize: '0.875rem',
+              textAlign: 'center',
+            }}
           >
-            This site is currently in private beta. Please enter the access
-            code.
+            Private beta — enter access code to continue
           </p>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter access code"
+            placeholder="Access code"
+            autoFocus
             style={{
               width: '100%',
-              padding: '0.75rem',
-              marginBottom: '1rem',
-              border: error ? '1px solid red' : '1px solid #ddd',
-              borderRadius: '4px',
+              padding: '0.75rem 1rem',
+              marginBottom: '0.75rem',
+              border: error ? '1px solid #ff6b6b' : '1px solid #2a3a3e',
+              borderRadius: '6px',
               fontSize: '1rem',
+              background: '#0e1a1d',
+              color: '#ffffff',
+              outline: 'none',
+              boxSizing: 'border-box',
             }}
           />
           {error && (
             <p
               style={{
-                color: 'red',
-                marginBottom: '1rem',
-                fontSize: '0.875rem',
+                color: '#ff6b6b',
+                marginBottom: '0.75rem',
+                fontSize: '0.85rem',
               }}
             >
               Incorrect access code
@@ -106,12 +128,14 @@ export default function SoftLaunchGate({ children }) {
             style={{
               width: '100%',
               padding: '0.75rem',
-              background: '#000',
-              color: '#fff',
+              background: '#7adddc',
+              color: '#0e1a1d',
               border: 'none',
-              borderRadius: '4px',
+              borderRadius: '6px',
               fontSize: '1rem',
+              fontWeight: 600,
               cursor: 'pointer',
+              transition: 'opacity 0.2s',
             }}
           >
             Enter

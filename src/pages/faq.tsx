@@ -57,53 +57,7 @@ export default function FAQ() {
     },
   ]
 
-  const reviewerFaqs = [
-    {
-      question: 'Has the protocol been audited?',
-      answer:
-        'Not yet. The protocol is currently deployed on Base Sepolia testnet. A third-party security audit by a Tier 1 auditor is planned as part of the current development phase. The Ethereum Foundation grant, if awarded, funds this audit along with formal invariant testing, adversarial simulation, and testnet validation. See the Release Plan for the full timeline.',
-      links: [
-        { label: 'Release Plan →', href: '/release-plan' },
-        { label: 'Contracts →', href: '/contracts' },
-      ],
-    },
-    {
-      question: 'What is the trust model at launch?',
-      answer:
-        'At v1 launch, the protocol uses a single trusted resolver model. The resolver is governance-appointed and cannot seize funds — they can only choose Release or Refund. Funds always remain under smart contract control. Decentralised resolution with multi-resolver escalation, appeal bonds, and staking is roadmapped for v2 (Q2–Q3 2026) and v3.',
-      links: [
-        { label: 'Dispute Architecture →', href: '/dispute-resolution' },
-        { label: 'Release Plan →', href: '/release-plan' },
-      ],
-    },
-    {
-      question: 'What happens if the resolver is compromised?',
-      answer:
-        "A resolver's power is strictly bounded by the protocol. They can only choose one of two outcomes: Release or Refund. They cannot seize funds, redirect transfers to arbitrary addresses, or take any action outside that set. A compromised resolver decision affects only the specific escrow under dispute — no other escrows are at risk. In v2+, decisions can be appealed and overturned.",
-      links: [
-        { label: 'Security Model →', href: '/security' },
-        { label: 'Dispute Economics →', href: '/security#dispute-economics' },
-      ],
-    },
-    {
-      question: 'Is there a formal threat model?',
-      answer:
-        "Yes. The Security page documents six threat categories: User Error, Counterparty Risk, Smart Contract Risk, Governance Capture, Resolver Misconduct, and Yield Integration Risk. Each entry includes the attack surface and the protocol's structural mitigation. The Architecture page documents six formal invariants with set-theoretic notation.",
-      links: [
-        { label: 'Threat Model →', href: '/security#threat-model' },
-        { label: 'Architecture →', href: '/architecture' },
-      ],
-    },
-    {
-      question: 'What does the Ethereum Foundation grant fund?',
-      answer:
-        'The grant funds the validation and audit phase of the protocol. Specifically: formal invariant testing across all state transitions, adversarial simulation of dispute escalation paths, bond sizing and slashing rate economic validation, a third-party security audit, testnet deployment and integration test suite, and threat model red-teaming and formal review.',
-      links: [
-        { label: 'Audit Readiness →', href: '/#readiness' },
-        { label: 'Release Plan →', href: '/release-plan' },
-      ],
-    },
-  ]
+  const reviewerFaqs = []
 
   return (
     <>
@@ -115,43 +69,20 @@ export default function FAQ() {
           <p className="intro">
             Answers to frequently asked questions. Can&apos;t find what
             you&apos;re looking for?{' '}
-            <a href="https://discord.gg/sew">Ask in Discord</a>.
+            <a href="https://discord.gg/sewprotocol">Ask in Discord</a>.
           </p>
         </section>
 
-        {/* ── For reviewers and auditors ────────────────────────────────────── */}
-        <section className="reviewer-section">
-          <div className="reviewer-header">
-            <span className="reviewer-tag">For reviewers &amp; auditors</span>
-            <h2 className="reviewer-heading">
-              Grant and security review questions
-            </h2>
-            <p className="reviewer-intro">
-              Questions specifically relevant to the Ethereum Foundation
-              security team and independent auditors evaluating the protocol.
-            </p>
-          </div>
-          <div className="reviewer-grid">
-            {reviewerFaqs.map((faq) => (
-              <div key={faq.question} className="reviewer-card">
-                <h3>{faq.question}</h3>
-                <p>{faq.answer}</p>
-                {faq.links && (
-                  <div className="reviewer-links">
-                    {faq.links.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="reviewer-link"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+        {/* ── Auditor callout ──────────────────────────────────────────────── */}
+        <section className="auditor-callout">
+          <span className="auditor-tag">Security reviewers &amp; auditors</span>
+          <p>
+            Looking for audit status, trust model, threat model, or grant
+            information?
+          </p>
+          <Link href="/researcher" className="auditor-link">
+            See the Researchers &amp; Auditors page →
+          </Link>
         </section>
 
         {/* ── General FAQ ──────────────────────────────────────────────────── */}
@@ -235,78 +166,46 @@ export default function FAQ() {
           color: var(--accents-2);
           margin: 0;
         }
-        /* ── Reviewer section ───────────────────────────────────────────────── */
-        .reviewer-section {
+        /* ── Auditor callout ────────────────────────────────────────────────── */
+        .auditor-callout {
           max-width: 800px;
-          margin: 0 auto 3rem;
-          padding: 0 2rem;
+          margin: 0 auto 2rem;
+          padding: 1.25rem 1.5rem;
+          border: 1px solid rgba(122, 221, 220, 0.25);
+          border-radius: var(--radius);
+          background: rgba(122, 221, 220, 0.04);
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
         }
-        .reviewer-header {
-          margin-bottom: 2rem;
+        .auditor-callout p {
+          margin: 0;
+          font-size: 0.875rem;
+          color: var(--accents-2);
+          flex: 1;
         }
-        .reviewer-tag {
+        .auditor-tag {
           display: inline-block;
-          font-size: 0.68rem;
+          font-size: 0.65rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: #7adddc;
-          background: rgba(122, 221, 220, 0.08);
-          padding: 0.25rem 0.65rem;
+          background: rgba(122, 221, 220, 0.1);
+          padding: 0.2rem 0.55rem;
           border-radius: 4px;
-          margin-bottom: 0.75rem;
+          white-space: nowrap;
         }
-        .reviewer-heading {
-          font-size: 1.35rem;
-          font-weight: 800;
-          margin: 0 0 0.5rem;
-          letter-spacing: -0.02em;
-        }
-        .reviewer-intro {
+        .auditor-link {
           font-size: 0.875rem;
-          color: var(--accents-3);
-          margin: 0;
-          line-height: 1.6;
-        }
-        .reviewer-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        .reviewer-card {
-          padding: 1.5rem;
-          border: 1.5px solid var(--accents-2);
-          border-radius: var(--radius);
-          background: var(--bg);
-        }
-        .reviewer-card h3 {
-          font-size: 1rem;
-          font-weight: 700;
-          margin: 0 0 0.65rem;
-        }
-        .reviewer-card > p {
-          font-size: 0.875rem;
-          color: var(--accents-2);
-          line-height: 1.7;
-          margin: 0 0 1rem;
-        }
-        .reviewer-links {
-          display: flex;
-          gap: 0.6rem;
-          flex-wrap: wrap;
-        }
-        .reviewer-link {
-          font-size: 0.8rem;
           font-weight: 600;
           color: #7adddc;
           text-decoration: none;
-          padding: 0.25rem 0.65rem;
-          background: rgba(122, 221, 220, 0.08);
-          border-radius: 4px;
-          transition: background 0.15s;
+          white-space: nowrap;
         }
-        .reviewer-link:hover {
-          background: #22343a;
+        .auditor-link:hover {
+          text-decoration: underline;
         }
         /* ── General heading ────────────────────────────────────────────────── */
         .general-heading-section {

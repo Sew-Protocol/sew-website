@@ -57,7 +57,7 @@ export default function Token() {
         {/* ── 3. RIGHTS ───────────────────────────────────────────────────── */}
         <section className="content-section">
           <h3>Governance rights</h3>
-          <p>SEW holders can participate in the decision machine for:</p>
+          <p>SEW holders can participate in the governance process for:</p>
           <div className="principles-grid">
             <div className="principle seam-accent">
               <h4>Module Registry</h4>
@@ -113,7 +113,7 @@ export default function Token() {
           }}
         >
           <div className="breakout-inner cta-inner">
-            <h3>Coordinate the evolution.</h3>
+            <h3>Shape the protocol's future.</h3>
             <p>
               Learn how SEW holders participate in the governance process and
               technical timelocks.

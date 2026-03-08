@@ -7,7 +7,7 @@ export default function Comparisons() {
     {
       title: 'Direct Transfer',
       icon: '→',
-      description: 'Standard ERC20 transfer from one address to another',
+      description: 'Standard ERC-20 transfer from one address to another',
       characteristics: [
         'Immediate and irreversible',
         'No protection against fraud or errors',

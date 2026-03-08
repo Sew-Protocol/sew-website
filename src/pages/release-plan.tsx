@@ -58,7 +58,7 @@ export default function ReleasePlan() {
                 </div>
                 <p className="phase-desc">
                   Multi-resolver escalation. Focus on decentralizing the
-                  decision machine.
+                  governance process.
                 </p>
                 <ul className="phase-list">
                   <li>Multiple resolver registry</li>

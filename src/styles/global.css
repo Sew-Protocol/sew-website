@@ -38,7 +38,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-size: 20px;
+  font-size: 16px;
   color-scheme: dark;
 }
 
@@ -460,6 +460,14 @@ footer span:nth-child(3) a {
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.fabric-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(122, 221, 220, 0.3);
 }
 
 .fabric-panel::before {

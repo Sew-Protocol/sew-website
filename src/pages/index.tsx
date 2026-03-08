@@ -18,16 +18,16 @@ export default function Index() {
                 Protected transfers. Dispute resolution built in.
               </p>
               <p className="description">
-                An ERC-20 transfer routed through escrow, with predefined
-                release and dispute resolution paths — enforced by smart
-                contracts, not intermediaries.
+                Any ERC-20 transfer can be routed through a smart contract
+                escrow with structured release and dispute resolution — giving
+                both parties programmable protection without a custodian.
               </p>
               <div className="btns">
-                <Link href="/security" className="button primary">
-                  Read Security Model
+                <Link href="/how-it-works" className="button primary">
+                  See How It Works
                 </Link>
-                <Link href="/architecture" className="button secondary">
-                  View Architecture
+                <Link href="/security" className="button secondary">
+                  Read Security Model
                 </Link>
               </div>
               <div className="proof-chips">
@@ -47,9 +47,9 @@ export default function Index() {
             Ethereum.
           </p>
           <p>
-            A <strong>protected transfer</strong> is an ERC-20 transfer routed
-            through escrow, with predefined release and dispute resolution
-            paths.
+            A <strong>protected transfer</strong> is an ERC-20 transfer held in
+            escrow until defined conditions are met — release, refund, or a
+            resolver decision.
           </p>
           <p>
             Instead of sending tokens directly from one address to another, a
@@ -180,7 +180,7 @@ export default function Index() {
             <div className="comparison-grid">
               <div className="comparison-item fabric-panel seam-accent">
                 <h4>Direct Transfer</h4>
-                <p className="desc">Standard ERC20 transfer</p>
+                <p className="desc">Standard ERC-20 transfer</p>
                 <ul className="pros">
                   <li>✓ Instant</li>
                   <li>✓ Simple</li>
@@ -228,7 +228,7 @@ export default function Index() {
         <section id="how-it-helps" className="content-section">
           <h3>How it helps</h3>
           <p>
-            Sew allows an erc20 transfer to be structured as an escrowed
+            Sew allows any ERC-20 transfer to be structured as an escrowed
             transfer with clear release and dispute resolution paths. This
             enables:
           </p>
@@ -367,8 +367,8 @@ export default function Index() {
           <div className="breakout-inner cta-inner">
             <h3>Review the security model.</h3>
             <p>
-              Threat model, invariants, dispute economics, and upgrade semantics
-              — all in one place.
+              Threat model, invariants, dispute economics, and upgrade
+              semantics.
             </p>
             <div className="cta-btns">
               <Link href="/security" className="cta-btn primary">
