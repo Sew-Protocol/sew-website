@@ -93,7 +93,7 @@ export default function StartHere() {
               </Link>
             </div>
             <div className="pathway-tags">
-              <span>SDK (v2)</span>
+              <span>SDK (Planned)</span>
               <span>API reference</span>
             </div>
           </div>

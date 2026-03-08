@@ -62,88 +62,45 @@ export default function Comparisons() {
     {
       dimension: 'Who holds funds',
       patterns: [
-        {
-          name: 'Direct Transfer',
-          value: 'Recipient (Immediate)',
-          status: 'neutral',
-        },
-        {
-          name: 'Custodial Escrow',
-          value: 'Third-party (Platform)',
-          status: 'warning',
-        },
-        { name: 'App Escrow', value: 'App Operator', status: 'warning' },
+        { name: 'Direct Transfer', value: 'Recipient', status: 'neutral' },
+        { name: 'Custodial Escrow', value: 'Platform', status: 'warning' },
+        { name: 'App Escrow', value: 'App Contract', status: 'warning' },
         { name: 'Sew Protocol', value: 'Smart Contract', status: 'positive' },
       ],
     },
     {
-      dimension: 'Can terms change mid-flow?',
+      dimension: 'Dispute Resolution',
       patterns: [
-        { name: 'Direct Transfer', value: 'N/A', status: 'neutral' },
+        { name: 'Direct Transfer', value: 'None', status: 'warning' },
         {
           name: 'Custodial Escrow',
-          value: 'Yes (Platform policy)',
+          value: 'Platform operator',
           status: 'warning',
         },
-        { name: 'App Escrow', value: 'Yes (Code upgrade)', status: 'warning' },
-        { name: 'Sew Protocol', value: 'No (Snapshotted)', status: 'positive' },
+        { name: 'App Escrow', value: 'App logic', status: 'neutral' },
+        { name: 'Sew Protocol', value: 'Resolver pathway', status: 'positive' },
       ],
     },
     {
-      dimension: 'Built-in dispute path?',
+      dimension: 'Risk Model',
       patterns: [
-        { name: 'Direct Transfer', value: 'No', status: 'warning' },
         {
-          name: 'Custodial Escrow',
-          value: 'Yes (Internal)',
+          name: 'Direct Transfer',
+          value: 'Final immediately',
           status: 'neutral',
         },
-        { name: 'App Escrow', value: 'Yes (Custom)', status: 'neutral' },
-        { name: 'Sew Protocol', value: 'Yes (Modular)', status: 'positive' },
+        { name: 'Custodial Escrow', value: 'Custody risk', status: 'warning' },
+        { name: 'App Escrow', value: 'App-level trust', status: 'warning' },
+        { name: 'Sew Protocol', value: 'Non-custodial', status: 'positive' },
       ],
     },
     {
-      dimension: 'Shared counterparty risk?',
+      dimension: 'Reusable Across Apps',
       patterns: [
-        { name: 'Direct Transfer', value: 'No', status: 'positive' },
-        {
-          name: 'Custodial Escrow',
-          value: 'Yes (Platform-wide)',
-          status: 'warning',
-        },
-        { name: 'App Escrow', value: 'Yes (App-wide)', status: 'warning' },
-        { name: 'Sew Protocol', value: 'No (Isolated)', status: 'positive' },
-      ],
-    },
-    {
-      dimension: 'Reusable across apps?',
-      patterns: [
-        { name: 'Direct Transfer', value: 'Yes (Native)', status: 'positive' },
-        { name: 'Custodial Escrow', value: 'No (Siloed)', status: 'warning' },
-        { name: 'App Escrow', value: 'No (Custom)', status: 'warning' },
-        { name: 'Sew Protocol', value: 'Yes (Standard)', status: 'positive' },
-      ],
-    },
-    {
-      dimension: 'Onchain enforcement?',
-      patterns: [
-        { name: 'Direct Transfer', value: 'N/A', status: 'neutral' },
-        { name: 'Custodial Escrow', value: 'No (Offchain)', status: 'warning' },
-        { name: 'App Escrow', value: 'Partial', status: 'neutral' },
-        { name: 'Sew Protocol', value: 'Full', status: 'positive' },
-      ],
-    },
-    {
-      dimension: 'Custody burden?',
-      patterns: [
-        { name: 'Direct Transfer', value: 'None', status: 'positive' },
-        {
-          name: 'Custodial Escrow',
-          value: 'High (Legal/Reg)',
-          status: 'warning',
-        },
-        { name: 'App Escrow', value: 'High (Security)', status: 'warning' },
-        { name: 'Sew Protocol', value: 'None', status: 'positive' },
+        { name: 'Direct Transfer', value: 'Yes', status: 'positive' },
+        { name: 'Custodial Escrow', value: 'No', status: 'warning' },
+        { name: 'App Escrow', value: 'Limited', status: 'neutral' },
+        { name: 'Sew Protocol', value: 'Yes', status: 'positive' },
       ],
     },
   ]

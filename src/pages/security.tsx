@@ -65,8 +65,9 @@ export default function Security() {
               <div className="guarantee-card fabric-panel">
                 <h4>Determinism</h4>
                 <p>
-                  Funds move according to predefined rules, not discretionary
-                  human judgment.
+                  Settlement outcomes follow predefined rules encoded in the
+                  protocol. Resolvers evaluate evidence, but their decisions are
+                  restricted to a bounded set of outcomes.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">

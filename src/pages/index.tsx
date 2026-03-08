@@ -39,6 +39,38 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        {/* ── 1.5 FLOW VISUAL ─────────────────────────────────────────────── */}
+        <section className="abstract-band" style={{ padding: '2rem 0' }}>
+          <div className="abstract-band-inner" style={{ padding: '1rem 2rem' }}>
+            <div className="simple-flow">
+              <div className="flow-step">
+                <span className="step-num">1</span>
+                <strong>Create</strong>
+                <p>Sender funds escrow</p>
+              </div>
+              <div className="flow-connector">→</div>
+              <div className="flow-step">
+                <span className="step-num">2</span>
+                <strong>Fulfill</strong>
+                <p>Agreement obligations met</p>
+              </div>
+              <div className="flow-connector">→</div>
+              <div className="flow-step">
+                <span className="step-num">3</span>
+                <strong>Settle</strong>
+                <p>Funds released to recipient</p>
+              </div>
+              <div className="flow-connector">OR</div>
+              <div className="flow-step">
+                <span className="step-num">⚖️</span>
+                <strong>Resolve</strong>
+                <p>Dispute resolution path</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── 2. THE PROBLEM (WHY IT EXISTS) ────────────────────────────────── */}
         <section id="why-exists" className="abstract-band">
           <div className="abstract-band-inner">
@@ -460,6 +492,46 @@ export default function Index() {
           border-radius: 100px;
           font-size: 0.8rem;
           font-weight: 600;
+        }
+
+        /* ── Simple flow ──────────────────────────────────────────────────── */
+        .simple-flow {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          text-align: center;
+        }
+        .flow-step {
+          flex: 1;
+        }
+        .flow-step strong {
+          display: block;
+          font-size: 0.9rem;
+          color: var(--primary);
+          margin-bottom: 0.25rem;
+        }
+        .flow-step p {
+          margin: 0;
+          font-size: 0.75rem;
+          color: var(--accents-3);
+        }
+        .step-num {
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          line-height: 22px;
+          border: 1px solid var(--primary);
+          border-radius: 50%;
+          font-size: 0.7rem;
+          color: var(--primary);
+          margin-bottom: 0.5rem;
+          font-weight: 800;
+        }
+        .flow-connector {
+          color: var(--accents-5);
+          font-weight: 800;
+          font-size: 0.8rem;
         }
 
         .comparison-grid {

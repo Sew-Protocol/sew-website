@@ -188,15 +188,15 @@ export default function HowItWorks() {
               <div className="guarantee-card fabric-panel">
                 <h4>Recipient</h4>
                 <p>
-                  Provides goods/services. Can release (if configured) or
-                  dispute.
+                  Receives funds upon settlement. May trigger dispute if terms
+                  are unmet.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
                 <h4>Resolver</h4>
                 <p>
-                  Fact-finding entity. Outcomes are bounded to Release or
-                  Refund.
+                  Reviews disputes and selects Release or Refund. Bounded by
+                  code.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">

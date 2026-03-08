@@ -17,8 +17,8 @@ export default function UseCases() {
       title: 'Event Tickets',
       icon: '🎫',
       description: 'Reselling tickets for concerts, sports, flights',
-      whyProtected: 'Prevents fraud; ensures ticket transfer upon transfer',
-      pattern: 'transfer escrow → Ticket transfer → Confirmation → Release',
+      whyProtected: 'Prevents fraud; ensures ticket transfer upon settlement',
+      pattern: 'Escrow funded → Ticket transfer → Confirmation → Release',
     },
     {
       title: 'Freelance Services',
@@ -62,8 +62,7 @@ export default function UseCases() {
       description: 'Streaming or milestone-based contractor transfers',
       whyProtected:
         'Funds held until work verified; prevents front-running or default',
-      pattern:
-        'transfer streaming escrow → Milestone completion → Progressive release',
+      pattern: 'Streaming escrow → Milestone completion → Progressive release',
     },
     {
       title: 'Cross-Chain Settlement',

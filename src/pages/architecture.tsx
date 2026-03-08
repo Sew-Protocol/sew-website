@@ -24,9 +24,10 @@ export default function Architecture() {
                 System structure and formal security invariants
               </h2>
               <p className="description">
-                The Sew Protocol architecture is centered on a non-custodial
-                Vault and a registry of swappable, immutable logic modules.
-              </p>
+                The Sew architecture centers on a non-custodial Vault contract
+                and a registry of immutable logic modules used to define escrow
+                behavior.
+              </p>{' '}
             </div>
           </div>
         </section>
