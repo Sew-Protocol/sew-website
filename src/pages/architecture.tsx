@@ -25,8 +25,9 @@ export default function Architecture() {
               </h2>
               <p className="description">
                 The Sew architecture centers on a non-custodial Vault contract
-                and a registry of immutable logic modules used to define escrow
-                behavior.
+                and a registry of immutable logic modules. While modules are
+                swappable for future agreements, the Vault remains the
+                non-upgradeable core of the protocol.
               </p>{' '}
             </div>
           </div>

@@ -202,7 +202,7 @@ function createEscrow(
         {/* ── 7. CONTRACTS ────────────────────────────────────────────────── */}
         <section id="contracts" className="content-section">
           <h3>Contract addresses</h3>
-          <p>Base Mainnet (Production):</p>
+          <p>Base Sepolia (Testnet):</p>
           <table className="settings-table">
             <thead>
               <tr>

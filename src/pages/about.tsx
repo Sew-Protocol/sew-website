@@ -147,7 +147,7 @@ export default function About() {
           }}
         >
           <div className="breakout-inner cta-inner">
-            <h3>Ready to secure the fabric of Ethereum?</h3>
+            <h3>Ready to provide the security layer for Ethereum transfers?</h3>
             <p>
               Explore our documentation or reach out to the team to get started.
             </p>

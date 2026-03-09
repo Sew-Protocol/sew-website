@@ -15,26 +15,26 @@ export default function Index() {
               <span className="hero-eyebrow">🪡 Ethereum Infrastructure</span>
               <h1>Sew Protocol</h1>
               <p className="tagline">
-                Non-custodial infrastructure for protected transfers.
+                Non-custodial infrastructure for protected transfers on Ethereum
               </p>
               <p className="description">
-                A <strong>protected transfer</strong> is an ERC-20 transfer
-                routed through escrow with predefined release and dispute
-                resolution paths—enabling coordination without custody.
+                Route ERC-20 transfers through escrow with predefined release
+                and dispute resolution paths, without requiring custody or
+                centralized trust.
               </p>
               <div className="btns">
                 <Link href="/how-it-works" className="button primary">
                   See How It Works
                 </Link>
                 <Link href="/security" className="button secondary">
-                  Read Security Model
+                  Security Model
                 </Link>
               </div>
               <div className="pill-grid">
                 <span className="pill">Non-custodial</span>
+                <span className="pill">Forward-only</span>
                 <span className="pill">Isolated</span>
                 <span className="pill">Composable</span>
-                <span className="pill">Interface-agnostic</span>
               </div>
             </div>
           </div>
@@ -53,19 +53,19 @@ export default function Index() {
               <div className="flow-step">
                 <span className="step-num">2</span>
                 <strong>Fulfill</strong>
-                <p>Agreement obligations met</p>
+                <p>Obligations met</p>
               </div>
               <div className="flow-connector">→</div>
               <div className="flow-step">
                 <span className="step-num">3</span>
                 <strong>Settle</strong>
-                <p>Funds released to recipient</p>
+                <p>Released to recipient</p>
               </div>
               <div className="flow-connector">OR</div>
               <div className="flow-step">
                 <span className="step-num">⚖️</span>
                 <strong>Resolve</strong>
-                <p>Dispute resolution path</p>
+                <p>Dispute resolution</p>
               </div>
             </div>
           </div>
@@ -76,9 +76,10 @@ export default function Index() {
           <div className="abstract-band-inner">
             <h3>Why direct transfers are insufficient</h3>
             <p>
-              Ethereum transactions are irreversible by design. This is
-              excellent for settlement finality, but creates persistent delivery
-              and fraud risks for commerce and high-value coordination.
+              Ethereum transactions are irreversible by design. That is a
+              strength for settlement finality, but it creates persistent risk
+              when value must move before goods, services, or offchain
+              obligations are fully delivered.
             </p>
 
             <div className="comparison-grid">
@@ -121,24 +122,45 @@ export default function Index() {
             </div>
 
             <p style={{ marginTop: '2rem' }}>
-              By moving protection to the <strong>transaction layer</strong>,
-              Sew provides a neutral ground for coordination where outcomes are
-              enforced by code, not intermediaries. Any wallet, marketplace, or
-              coordination tool can build on it.
+              Sew introduces a reusable alternative: a protected transfer
+              primitive that adds structure before finality, without introducing
+              custody.
             </p>
           </div>
         </section>
 
-        {/* ── 3. CORE GUARANTEES (SECURITY BREAKOUT) ───────────────────────── */}
+        {/* ── 3. MECHANICS (WHAT SEW DOES) ─────────────────────────────────── */}
+        <section id="what-is-it" className="content-section">
+          <h3>What Sew does</h3>
+          <p>
+            Instead of sending funds directly to a recipient, Sew routes the
+            transfer through escrow. The agreement is defined at creation:
+          </p>
+          <ul className="check-list" style={{ marginBottom: '2rem' }}>
+            <li>Defined release and dispute authorization</li>
+            <li>Yield presets and timeout parameters</li>
+            <li>Snapshot of module addresses</li>
+          </ul>
+          <p>
+            Once created, those terms are fixed. Settlement then follows a
+            bounded path: Release, Refund, or Resolve. No party can redirect
+            funds outside those predefined outcomes.
+          </p>
+          <div className="section-link">
+            <Link href="/how-it-works">See technical mechanics →</Link>
+          </div>
+        </section>
+
+        {/* ── 4. CORE GUARANTEES (SECURITY BREAKOUT) ───────────────────────── */}
         <section
           id="guarantees"
           className="section-breakout guarantees-breakout"
         >
           <div className="breakout-inner">
-            <h3>Security invariants</h3>
+            <h3>Core security properties</h3>
             <p className="section-subtitle">
-              Formal properties the protocol enforces at the contract level for
-              every agreement.
+              Sew is designed as a containment layer. We focus on limiting
+              scope, bounding outcomes, and preserving per-agreement integrity.
             </p>
             <div className="guarantees-grid guarantees-grid--wide">
               <div className="guarantee-card fabric-panel">
@@ -152,33 +174,23 @@ export default function Index() {
                 </code>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>⚖️ Outcome-bounded</h4>
+                <h4>⚖️ Bounded outcomes</h4>
                 <p>
-                  A resolver can only choose from a fixed set of outcomes. No
-                  discretion beyond that.
+                  Resolvers evaluate evidence, but can only select from
+                  protocol-defined outcomes.
                 </p>
                 <code className="property-notation">
                   {'Outcome ∈ {RELEASE, REFUND}'}
                 </code>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>📦 Per-escrow isolation</h4>
+                <h4>📦 Per-escrow immutability</h4>
                 <p>
-                  A failure in one escrow cannot affect any other. No shared
-                  state between transfers.
+                  Agreements remain locked to the rules and module addresses
+                  captured at creation.
                 </p>
                 <code className="property-notation">
                   {'failure(escrow_n) ⊄ escrow_m'}
-                </code>
-              </div>
-              <div className="guarantee-card fabric-panel">
-                <h4>⚙️ Deterministic</h4>
-                <p>
-                  Settlement follows predefined transitions only. Path is locked
-                  at escrow creation.
-                </p>
-                <code className="property-notation">
-                  {'state ∈ {PENDING → RELEASED | REFUNDED | RESOLVED}'}
                 </code>
               </div>
               <div className="guarantee-card fabric-panel">
@@ -192,10 +204,18 @@ export default function Index() {
                 </code>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>🛑 Bounded emergency</h4>
+                <h4>🛡️ Failure isolation</h4>
                 <p>
-                  Emergency pause is time-limited and auto-expires. Cannot be
-                  used indefinitely.
+                  A failure in one escrow or module path should not affect
+                  unrelated escrows.
+                </p>
+                <code className="property-notation">{'state_n ⟂ state_m'}</code>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>🛑 Time-bounded powers</h4>
+                <p>
+                  Guardian actions are constrained, temporary, and cannot seize
+                  or redirect user funds.
                 </p>
                 <code className="property-notation">
                   {'pause_max = 7d × 3 cycles'}
@@ -203,54 +223,77 @@ export default function Index() {
               </div>
             </div>
             <p className="section-link">
-              <Link href="/security">Full security model →</Link>
+              <Link href="/security">Read Security Model →</Link>
             </p>
           </div>
         </section>
 
-        {/* ── 5. HOW IT HELPS ─────────────────────────────────────────────── */}
-        <section id="how-it-helps" className="content-section">
-          <h3>Impact</h3>
-          <p>
-            Sew transforms final-by-default transfers into rule-bound
-            agreements. This enables safer coordination across the ecosystem:
-          </p>
+        {/* ── 5. ROADMAP ──────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Launch state and roadmap</h3>
+            <p>
+              Sew is being rolled out in phases. The protocol is designed so
+              that governance can evolve future behavior without retroactively
+              changing active agreements.
+            </p>
+            <div className="readiness-grid">
+              <div className="readiness-col">
+                <h4>Current phase</h4>
+                <ul className="check-list">
+                  <li>Core escrow architecture</li>
+                  <li>Single trusted resolver</li>
+                  <li>Base Sepolia deployment</li>
+                </ul>
+              </div>
+              <div className="readiness-col">
+                <h4>Next phases</h4>
+                <ul className="check-list">
+                  <li>Multi-tier resolution</li>
+                  <li>Staking-based accountability</li>
+                  <li>Decentralized arbitration</li>
+                </ul>
+              </div>
+            </div>
+            <div className="section-link">
+              <Link href="/release-plan">View full roadmap →</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 6. AUDIENCE ──────────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>Who Sew is for</h3>
           <div className="guarantees-grid">
-            <div className="guarantee-card fabric-panel">
-              <h4>⏳ Trustless Settlement</h4>
+            <div className="guarantee-card fabric-panel seam-accent">
+              <h4>Builders</h4>
               <p>
-                Ensures both parties fulfill their obligations before
-                transaction finality.
+                Add protected transfers to wallets, marketplaces, and
+                coordination tools.
               </p>
             </div>
-            <div className="guarantee-card fabric-panel">
-              <h4>✅ Programmable Release</h4>
+            <div className="guarantee-card fabric-panel seam-accent">
+              <h4>Researchers</h4>
               <p>
-                Gives buyers and applications precise control over when and how
-                funds are distributed.
+                Review the architecture, invariants, threat model, and upgrade
+                boundaries.
               </p>
             </div>
-            <div className="guarantee-card fabric-panel">
-              <h4>⏰ Automated Finality</h4>
+            <div className="guarantee-card fabric-panel seam-accent">
+              <h4>Operators</h4>
               <p>
-                Settlement can be triggered by time-based constraints, reducing
-                manual intervention.
-              </p>
-            </div>
-            <div className="guarantee-card fabric-panel">
-              <h4>⚖️ Built-in Recourse</h4>
-              <p>
-                Provides a standard pathway for resolving disagreements without
-                introducing custody risk.
+                Track the phased path toward broader dispute resolution
+                decentralization.
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── 6. WHAT IT IS NOT ───────────────────────────────────────────── */}
+        {/* ── 7. PROTOCOL BOUNDARIES ───────────────────────────────────────── */}
         <section id="what-it-is-not" className="content-section">
           <div className="thread-divider" />
           <h3>Protocol boundaries</h3>
+          <p>Sew is infrastructure, not an application layer destination.</p>
           <ul className="not-list">
             <li>
               <strong>Not a wallet</strong> — Sew is infrastructure; interfaces
@@ -271,20 +314,23 @@ export default function Index() {
           </ul>
         </section>
 
-        {/* ── 7. FINAL CTA ─────────────────────────────────────────── */}
+        {/* ── 8. FINAL CTA ─────────────────────────────────────────── */}
         <section className="section-breakout cta-breakout">
           <div className="breakout-inner cta-inner">
-            <h3>Review the security model.</h3>
+            <h3>Protected transfers, without custody</h3>
             <p>
-              Threat model, invariants, dispute economics, and upgrade
-              semantics.
+              Explore the protocol mechanics, security model, and integration
+              surface.
             </p>
             <div className="cta-btns">
-              <Link href="/security" className="cta-btn primary">
+              <Link href="/developer" className="cta-btn primary">
+                Developer Docs
+              </Link>
+              <Link href="/security" className="cta-btn">
                 Security Model
               </Link>
-              <Link href="/developer" className="cta-btn">
-                Developer Docs
+              <Link href="/contracts" className="cta-btn">
+                Contracts
               </Link>
             </div>
           </div>

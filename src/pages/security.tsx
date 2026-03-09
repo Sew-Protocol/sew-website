@@ -66,8 +66,8 @@ export default function Security() {
                 <h4>Determinism</h4>
                 <p>
                   Settlement outcomes follow predefined rules encoded in the
-                  protocol. Resolvers evaluate evidence, but their decisions are
-                  restricted to a bounded set of outcomes.
+                  protocol. Resolvers may evaluate evidence, but their decisions
+                  are restricted to a bounded set of enforceable outcomes.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
