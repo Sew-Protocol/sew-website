@@ -39,9 +39,9 @@ export default function Security() {
           <span className="page-nav-sep">·</span>
           <a href="#dispute-economics">Dispute Economics</a>
           <span className="page-nav-sep">·</span>
-          <a href="#upgrade-semantics">Upgrade Semantics</a>
-          <span className="page-nav-sep">·</span>
           <a href="#emergency-recovery">Emergency Recovery</a>
+          <span className="page-nav-sep">·</span>
+          <a href="#protocol-limits">Protocol Limits</a>
           <span className="page-nav-sep">·</span>
           <a href="#isolation">Isolation Model</a>
         </nav>
@@ -311,7 +311,98 @@ export default function Security() {
           </div>
         </section>
 
-        {/* ── 8. FINAL CTA ────────────────────────────────────────────────── */}
+        {/* ── 8. EMERGENCY RECOVERY ────────────────────────────────────────── */}
+        <section id="emergency-recovery" className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Emergency Recovery</h3>
+            <p>
+              Sew Protocol is designed with a containment-first approach to
+              emergencies. Guardian powers are strictly bounded to prevent
+              abuse.
+            </p>
+            <div className="principles-grid">
+              <div className="principle seam-accent">
+                <h4>Guardian Pause</h4>
+                <p>
+                  A circuit-breaker to prevent mass exploitation while fixes are
+                  prepared. Affects new escrow creation and dispute escalation.
+                </p>
+              </div>
+              <div className="principle seam-accent">
+                <h4>Module Disabling</h4>
+                <p>
+                  Disable specific modules (e.g. yield or resolution) without
+                  pausing the entire protocol.
+                </p>
+              </div>
+              <div className="principle seam-accent">
+                <h4>Position Unwinding</h4>
+                <p>
+                  Supports unwinding positions back to escrow custody if an
+                  integration fails, preserving underlying funds.
+                </p>
+              </div>
+            </div>
+            {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' && (
+              <div className="section-link">
+                <Link href="/docs/emergency" style={{ fontWeight: 600 }}>
+                  Emergency Response Timeline & Procedures →
+                </Link>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ── 9. PROTOCOL LIMITS ──────────────────────────────────────────── */}
+        <section id="protocol-limits" className="content-section">
+          <h3>Protocol Limits</h3>
+          <p>Hard bounds enforced by contract, not policy.</p>
+          <div className="stitched" style={{ marginTop: '2rem' }}>
+            <table className="limits-table">
+              <thead>
+                <tr>
+                  <th>Constraint</th>
+                  <th>Maximum / Value</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Guardian pause duration</td>
+                  <td>7 days</td>
+                  <td>Prevent indefinite pauses</td>
+                </tr>
+                <tr>
+                  <td>Pause cycles (90-day window)</td>
+                  <td>3 pauses</td>
+                  <td>Limit frequency of emergency actions</td>
+                </tr>
+                <tr>
+                  <td>Dispute duration</td>
+                  <td>90 days</td>
+                  <td>Ensure resolution within bounded time</td>
+                </tr>
+                <tr>
+                  <td>Escrow creation fee</td>
+                  <td>2%</td>
+                  <td>Prevent excessive transaction fees</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p
+            style={{
+              marginTop: '1.5rem',
+              fontSize: '0.85rem',
+              color: 'var(--accents-3)',
+            }}
+          >
+            Guardian cannot extract funds, modify existing escrows, or override
+            settlement outcomes. After 7 days, pauses automatically expire.
+          </p>
+        </section>
+
+        {/* ── 10. FINAL CTA ───────────────────────────────────────────────── */}
         <section
           className="section-breakout cta-breakout"
           style={{
@@ -339,11 +430,13 @@ export default function Security() {
 
         <section className="page-meta">
           <p>Last updated: February 2026</p>
-          <p>
-            <Link href="/docs/security">
-              View full security documentation →
-            </Link>
-          </p>
+          {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' && (
+            <p>
+              <Link href="/docs/security">
+                View full security documentation →
+              </Link>
+            </p>
+          )}
         </section>
       </div>
 
@@ -379,6 +472,24 @@ export default function Security() {
         .property h4 {
           margin-bottom: 0.5rem;
           font-size: 1rem;
+        }
+        .limits-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 1.5rem;
+        }
+        .limits-table th,
+        .limits-table td {
+          text-align: left;
+          padding: 1rem;
+          border-bottom: 1px solid rgba(122, 221, 220, 0.1);
+        }
+        .limits-table th {
+          font-weight: 600;
+          color: var(--accents-3);
+          text-transform: uppercase;
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
         }
         .page-meta {
           text-align: center;

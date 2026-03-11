@@ -107,9 +107,11 @@ function createEscrow(
             </tbody>
           </table>
 
-          <p className="learn-more">
-            <Link href="/docs/quickstart">See full quickstart guide →</Link>
-          </p>
+          {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' && (
+            <p className="learn-more">
+              <Link href="/docs/quickstart">See full quickstart guide →</Link>
+            </p>
+          )}
         </section>
 
         {/* ── 4. STATES ───────────────────────────────────────────────────── */}
@@ -230,7 +232,53 @@ function createEscrow(
           </p>
         </section>
 
-        {/* ── 8. FINAL CTA ────────────────────────────────────────────────── */}
+        {/* ── 8. RESOURCES ────────────────────────────────────────────────── */}
+        <section id="resources" className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Reference materials</h3>
+            <div className="principles-grid">
+              {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' && (
+                <div className="principle">
+                  <h4>Technical Docs</h4>
+                  <p>
+                    Detailed smart contract reference and implementation guides.
+                  </p>
+                  <Link
+                    href="/docs/reference"
+                    style={{ fontSize: '0.85rem', color: 'var(--primary)' }}
+                  >
+                    Technical Reference →
+                  </Link>
+                </div>
+              )}
+              <div className="principle">
+                <h4>Security Model</h4>
+                <p>
+                  Deep dive into invariants, threat model, and isolation
+                  properties.
+                </p>
+                <Link
+                  href="/security"
+                  style={{ fontSize: '0.85rem', color: 'var(--primary)' }}
+                >
+                  Security Model →
+                </Link>
+              </div>
+              <div className="principle">
+                <h4>GitHub</h4>
+                <p>Source code, audit reports, and implementation examples.</p>
+                <Link
+                  href="https://github.com/sew-protocol"
+                  style={{ fontSize: '0.85rem', color: 'var(--primary)' }}
+                >
+                  Sew GitHub →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 9. FINAL CTA ────────────────────────────────────────────────── */}
         <section
           className="section-breakout cta-breakout"
           style={{

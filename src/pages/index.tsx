@@ -82,43 +82,46 @@ export default function Index() {
               obligations are fully delivered.
             </p>
 
-            <div className="comparison-grid">
-              <div className="comparison-item fabric-panel seam-accent">
-                <h4>Direct Transfer</h4>
-                <p className="desc">Standard ERC-20 transfer</p>
-                <ul className="pros">
-                  <li>✓ Instant</li>
-                  <li>✓ Simple</li>
-                </ul>
-                <ul className="cons">
-                  <li>✗ No protection</li>
-                  <li>✗ No recourse</li>
-                </ul>
-              </div>
-
-              <div className="comparison-item fabric-panel seam-accent">
-                <h4>Custodial Escrow</h4>
-                <p className="desc">Marketplace, processor</p>
-                <ul className="pros">
-                  <li>✓ Protection</li>
-                  <li>✓ Dispute handling</li>
-                </ul>
-                <ul className="cons">
-                  <li>✗ Custody required</li>
-                  <li>✗ Platform trust</li>
-                </ul>
-              </div>
-
-              <div className="comparison-item fabric-panel highlight stitched">
-                <h4>Sew Protocol</h4>
-                <p className="desc">Protected escrow layer</p>
-                <ul className="pros">
-                  <li>✓ Non-custodial</li>
-                  <li>✓ Rules upfront</li>
-                  <li>✓ Built-in recourse</li>
-                  <li>✓ Composable</li>
-                </ul>
-              </div>
+            <div
+              className="comparison-table-wrapper"
+              style={{ marginTop: '2rem' }}
+            >
+              <table className="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Dimension</th>
+                    <th>Direct Transfer</th>
+                    <th>Custodial Escrow</th>
+                    <th>Sew Protocol</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="dimension-label">Who holds funds</td>
+                    <td className="status-neutral">Recipient</td>
+                    <td className="status-warning">Platform</td>
+                    <td className="status-positive">Smart Contract</td>
+                  </tr>
+                  <tr>
+                    <td className="dimension-label">Dispute Resolution</td>
+                    <td className="status-warning">None</td>
+                    <td className="status-warning">Platform operator</td>
+                    <td className="status-positive">Resolver pathway</td>
+                  </tr>
+                  <tr>
+                    <td className="dimension-label">Risk Model</td>
+                    <td className="status-neutral">Final immediately</td>
+                    <td className="status-warning">Custody risk</td>
+                    <td className="status-positive">Non-custodial</td>
+                  </tr>
+                  <tr>
+                    <td className="dimension-label">Reusable Across Apps</td>
+                    <td className="status-positive">Yes</td>
+                    <td className="status-warning">No</td>
+                    <td className="status-positive">Yes</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
             <p style={{ marginTop: '2rem' }}>
@@ -147,7 +150,11 @@ export default function Index() {
             funds outside those predefined outcomes.
           </p>
           <div className="section-link">
-            <Link href="/how-it-works">See technical mechanics →</Link>
+            {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' ? (
+              <Link href="/docs/quickstart">See technical mechanics →</Link>
+            ) : (
+              <Link href="/how-it-works">See technical mechanics →</Link>
+            )}
           </div>
         </section>
 
@@ -261,35 +268,94 @@ export default function Index() {
           </div>
         </section>
 
-        {/* ── 6. AUDIENCE ──────────────────────────────────────────────────── */}
+        {/* ── 6. MISSION & APPROACH ────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Mission & Approach</h3>
+            <p>
+              We believe protection should be available at the moment of
+              transfer, not added later through third-party custody or
+              platform-specific workarounds. Sew provides the neutral ground
+              needed for secure onchain coordination.
+            </p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card fabric-panel">
+                <h4>Core Escrow</h4>
+                <p>
+                  Non-custodial transfer protection with defined release and
+                  resolution rules enforced by code.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Modular Design</h4>
+                <p>
+                  Pluggable release strategies, dispute resolvers, and yield
+                  modules selected at creation.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Neutrality</h4>
+                <p>
+                  Sew does not take custody. No party can redirect funds outside
+                  predefined settlement paths.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Forward-Only</h4>
+                <p>
+                  Module snapshots ensure that upgrades never retroactively
+                  alter active agreements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 7. PATHWAYS ─────────────────────────────────────────────────── */}
         <section className="content-section">
-          <h3>Who Sew is for</h3>
+          <h3>Find your path through Sew Protocol</h3>
           <div className="guarantees-grid">
-            <div className="guarantee-card fabric-panel seam-accent">
+            <div className="guarantee-card fabric-panel">
               <h4>Builders</h4>
               <p>
-                Add protected transfers to wallets, marketplaces, and
-                coordination tools.
+                Integrate protected transfers into your application.{' '}
+                <Link href="/developer" style={{ fontWeight: 600 }}>
+                  Developer Docs →
+                </Link>
               </p>
             </div>
-            <div className="guarantee-card fabric-panel seam-accent">
+            <div className="guarantee-card fabric-panel">
               <h4>Researchers</h4>
               <p>
-                Review the architecture, invariants, threat model, and upgrade
-                boundaries.
+                Deep dive into security and protocol architecture.{' '}
+                <Link href="/security" style={{ fontWeight: 600 }}>
+                  Security Model →
+                </Link>
               </p>
             </div>
-            <div className="guarantee-card fabric-panel seam-accent">
-              <h4>Operators</h4>
+            <div className="guarantee-card fabric-panel">
+              <h4>Governance</h4>
               <p>
-                Track the phased path toward broader dispute resolution
-                decentralization.
+                Understand roles, tokenomics, and the roadmap.{' '}
+                <Link href="/governance" style={{ fontWeight: 600 }}>
+                  Governance →
+                </Link>
+              </p>
+            </div>
+            <div className="guarantee-card fabric-panel">
+              <h4>Ecosystem</h4>
+              <p>
+                Explore verified contracts and integrations.{' '}
+                <Link href="/contracts" style={{ fontWeight: 600 }}>
+                  Deployment →
+                </Link>
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── 7. PROTOCOL BOUNDARIES ───────────────────────────────────────── */}
+        {/* ── 8. PROTOCOL BOUNDARIES ───────────────────────────────────────── */}
+
         <section id="what-it-is-not" className="content-section">
           <div className="thread-divider" />
           <h3>Protocol boundaries</h3>
@@ -578,6 +644,41 @@ export default function Index() {
           color: var(--accents-5);
           font-weight: 800;
           font-size: 0.8rem;
+        }
+
+        .comparison-table-wrapper {
+          overflow-x: auto;
+        }
+        .comparison-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.85rem;
+        }
+        .comparison-table th,
+        .comparison-table td {
+          padding: 0.75rem;
+          text-align: center;
+          border-bottom: 1px solid var(--accents-6);
+        }
+        .comparison-table th {
+          background: var(--accents-6);
+          font-weight: 600;
+        }
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+          text-align: left;
+        }
+        .dimension-label {
+          font-weight: 500;
+        }
+        .status-positive {
+          color: #059669;
+        }
+        .status-neutral {
+          color: var(--accents-3);
+        }
+        .status-warning {
+          color: #dc2626;
         }
 
         .comparison-grid {

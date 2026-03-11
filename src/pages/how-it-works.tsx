@@ -3,6 +3,37 @@ import sharedStyles from '../styles/shared.module.css'
 import Link from 'next/link'
 
 export default function HowItWorks() {
+  const useCases = [
+    {
+      title: 'Peer-to-Peer Goods',
+      icon: '📦',
+      description: 'Buying or selling physical items directly',
+      pattern:
+        'Buyer creates escrow → Seller ships → Buyer confirms → Auto/timed release',
+    },
+    {
+      title: 'Freelance Services',
+      icon: '💼',
+      description: 'Contracting developers, designers, writers',
+      pattern:
+        'Milestone escrow created → Work submitted → Review → Release or dispute',
+    },
+    {
+      title: 'Rental Deposits',
+      icon: '🏠',
+      description: 'Security deposits for rentals, equipment',
+      pattern:
+        'Deposit escrow → Rental period → Inspection → Release to host or tenant',
+    },
+    {
+      title: 'Marketplace Escrow',
+      icon: '🛒',
+      description: 'Multi-vendor marketplaces with buyer protection',
+      pattern:
+        'Buyer pays escrow → Vendor fulfills → Buyer approves → Release to vendor',
+    },
+  ]
+
   return (
     <>
       <Header titlePre="How It Works" />
@@ -21,133 +52,32 @@ export default function HowItWorks() {
               <span className="hero-eyebrow">Protocol Mechanics</span>
               <h1>How It Works</h1>
               <h2 className="tagline">
-                Escrow lifecycle, state transitions, and dispute mechanics
+                Escrow lifecycle, architecture, and resolution
               </h2>
               <p className="description">
-                Sew Protocol is a security layer for transfers on Base (Ethereum
-                L2). Instead of transferring funds directly, transfers can be
-                held in escrow until conditions are met.
-              </p>
-              <p className="glossary-note">
-                <small>
-                  <strong>Glossary:</strong> A protected transfer is an ERC-20
-                  transfer routed through escrow. "Transfer" refers to the
-                  onchain token movement; "payment" refers to the user intent.
-                </small>
+                Sew Protocol is a security layer for transfers. Instead of
+                transferring funds directly, transfers are routed through a
+                non-custodial Vault governed by immutable logic modules.
               </p>
             </div>
           </div>
         </section>
 
-        {/* ── 2. ESCROW MECHANICS ─────────────────────────────────────────── */}
-        <section className="abstract-band">
-          <div className="abstract-band-inner">
-            <h3>Protocol mechanics</h3>
-            <p>
-              A standard token transfer is immediate and final. A protected
-              transfer introduces a deterministic delay and rule-bound
-              settlement conditions.
-            </p>
-            <div className="guarantees-grid guarantees-grid--wide">
-              <div className="guarantee-card fabric-panel">
-                <h4>Held in escrow</h4>
-                <p>
-                  Funds are held by the core Vault contract, not sent directly
-                  to the recipient.
-                </p>
-              </div>
-              <div className="guarantee-card fabric-panel">
-                <h4>Rules upfront</h4>
-                <p>
-                  Release conditions and resolution paths are defined at
-                  creation and cannot change.
-                </p>
-              </div>
-              <div className="guarantee-card fabric-panel">
-                <h4>Snapshot integrity</h4>
-                <p>
-                  Each agreement is permanently bound to the module
-                  implementations active at creation.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 3. STATE MACHINE ────────────────────────────────────────────── */}
+        {/* ── 2. LIFECYCLE ────────────────────────────────────────────────── */}
         <section className="content-section">
-          <h3>The State Machine</h3>
+          <h3>The Escrow Lifecycle</h3>
           <p>
             Each protected transfer moves through a strictly defined lifecycle.
-            Terminal states are irreversible.
+            Rules are locked at creation and enforced by the core Vault.
           </p>
-
-          <div className="state-table stitched">
-            <div className="state-row state-header">
-              <span>State</span>
-              <span>Meaning</span>
-              <span>Terminal</span>
-            </div>
-            <div className="state-row">
-              <code>PENDING</code>
-              <span>Active agreement, awaiting action</span>
-              <span className="badge no">No</span>
-            </div>
-            <div className="state-row">
-              <code>DISPUTED</code>
-              <span>Dispute raised, awaiting resolution</span>
-              <span className="badge no">No</span>
-            </div>
-            <div className="state-row">
-              <code>RELEASED</code>
-              <span>Funds sent to recipient (Success)</span>
-              <span className="badge yes">Yes</span>
-            </div>
-            <div className="state-row">
-              <code>REFUNDED</code>
-              <span>Funds returned to sender (Reversion)</span>
-              <span className="badge yes">Yes</span>
-            </div>
-            <div className="state-row">
-              <code>RESOLVED</code>
-              <span>Outcome enforced via resolution module</span>
-              <span className="badge yes">Yes</span>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 4. LIFECYCLE ────────────────────────────────────────────────── */}
-        <section className="content-section">
-          <h3>Lifecycle sequence</h3>
-
-          <div className="sequence-diagram fabric-panel">
-            <div className="sequence-step">
-              <div className="step-node sender">Sender</div>
-              <div className="step-arrow">Create Escrow (Token + Amount)</div>
-              <div className="step-node vault">Sew Vault</div>
-            </div>
-            <div className="sequence-step active">
-              <div className="step-node vault highlight">Held in Escrow</div>
-              <div className="step-label">
-                Locked: Waiting for Release or Dispute
-              </div>
-            </div>
-            <div className="sequence-step">
-              <div className="step-node vault">Sew Vault</div>
-              <div className="step-arrow">Settlement (Finality)</div>
-              <div className="step-node recipient">Recipient</div>
-            </div>
-          </div>
-
           <div className="lifecycle-grid">
             <div className="lifecycle-step fabric-panel seam-accent">
               <h4>1) Creation</h4>
               <p>
-                A user initiates a transfer. Parameters (amount, recipient,
+                Sender initiates transfer. Parameters (amount, recipient,
                 timeout, resolver) are snapshotted into the vault state.
               </p>
             </div>
-
             <div className="lifecycle-step fabric-panel seam-accent">
               <h4>2) Coordination</h4>
               <p>
@@ -155,7 +85,6 @@ export default function HowItWorks() {
                 neutral phase for fulfillment of obligations.
               </p>
             </div>
-
             <div className="lifecycle-step fabric-panel seam-accent">
               <h4>3) Settlement</h4>
               <p>
@@ -163,7 +92,6 @@ export default function HowItWorks() {
                 bilateral cancellation.
               </p>
             </div>
-
             <div className="lifecycle-step fabric-panel seam-accent">
               <h4>4) Recourse</h4>
               <p>
@@ -174,64 +102,91 @@ export default function HowItWorks() {
           </div>
         </section>
 
-        {/* ── 5. ROLES ────────────────────────────────────────────────────── */}
+        {/* ── 3. ARCHITECTURE ─────────────────────────────────────────────── */}
         <section className="abstract-band">
           <div className="abstract-band-inner">
-            <h3>Roles & permissions</h3>
-            <div className="guarantees-grid">
+            <h3>System Architecture</h3>
+            <p>
+              The Sew architecture centers on a non-custodial Vault and a
+              registry of immutable logic modules.
+            </p>
+            <div className="guarantees-grid guarantees-grid--wide">
               <div className="guarantee-card fabric-panel">
-                <h4>Sender</h4>
+                <h4>Core Vault</h4>
                 <p>
-                  Creates agreement and funds escrow. Can release or dispute.
+                  Holds funds and manages the global state machine. Enforces
+                  transitions between Pending, Disputed, and Settled.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>Recipient</h4>
+                <h4>Module Registry</h4>
                 <p>
-                  Receives funds upon settlement. May trigger dispute if terms
-                  are unmet.
+                  The canonical set of approved logic implementations. Swappable
+                  by governance, but snapshotted by escrows.
                 </p>
               </div>
               <div className="guarantee-card fabric-panel">
-                <h4>Resolver</h4>
+                <h4>Pluggable Logic</h4>
                 <p>
-                  Reviews disputes and selects Release or Refund. Bounded by
-                  code.
-                </p>
-              </div>
-              <div className="guarantee-card fabric-panel">
-                <h4>Guardian</h4>
-                <p>
-                  Safety role. Can pause operations during technical
-                  emergencies.
+                  Namespaced implementations for Release, Resolution, and Yield.
+                  Logic is isolated per escrow.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ── 9. FINAL CTA breakout ───────────────────────────────────────── */}
-        <section
-          className="section-breakout cta-breakout"
-          style={{
-            backgroundImage: "url('/images/needle-closeup.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          <div className="breakout-inner cta-inner">
-            <h3>Understand the security model.</h3>
-            <p>
-              Explore the invariants, threat model, and recovery procedures that
-              protect Sew Protocol.
-            </p>
-            <div className="cta-btns">
-              <Link href="/security" className="cta-btn primary">
-                Security Model
-              </Link>
-              <Link href="/use-cases" className="cta-btn">
-                Use Cases
-              </Link>
+        {/* ── 4. DISPUTE RESOLUTION ───────────────────────────────────────── */}
+        <section className="content-section">
+          <h3>Dispute Architecture</h3>
+          <p>
+            Sew provides structured resolution pathways, evolving from a single
+            trusted resolver toward decentralized arbitration networks.
+          </p>
+          <div
+            className="escalation-path fabric-panel stitched"
+            style={{ marginTop: '2rem' }}
+          >
+            <div className="path-step">
+              <strong>Level 1: Standard Resolver</strong>
+              <p>
+                Initial review of evidence and circumstances by assigned
+                resolver.
+              </p>
+            </div>
+            <div className="path-step">
+              <strong>Level 2: Senior Resolver</strong>
+              <p>
+                Escalation path for disputed decisions with senior reviewer
+                review.
+              </p>
+            </div>
+            <div className="path-step">
+              <strong>Level 3: External Arbitration</strong>
+              <p>
+                Final arbitration through third-party protocols (e.g. Kleros).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 5. USE CASES ────────────────────────────────────────────────── */}
+        <section className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>Common Use Cases</h3>
+            <div className="use-cases-grid">
+              {useCases.map((uc) => (
+                <div key={uc.title} className="use-case-card fabric-panel">
+                  <div className="uc-header">
+                    <span>{uc.icon}</span>
+                    <h4>{uc.title}</h4>
+                  </div>
+                  <p>{uc.description}</p>
+                  <code style={{ fontSize: '0.75rem', opacity: 0.8 }}>
+                    {uc.pattern}
+                  </code>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -256,133 +211,10 @@ export default function HowItWorks() {
           line-height: 1.75;
           max-width: 480px;
         }
-        .glossary-note {
-          color: var(--accents-3);
-          font-size: 0.8rem;
-          line-height: 1.6;
-          max-width: 480px;
-        }
-        .sequence-diagram {
-          margin: 2rem 0 4rem;
-          padding: 2.5rem;
-          background: rgba(122, 221, 220, 0.02);
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-        .sequence-step {
-          display: grid;
-          grid-template-columns: 100px 1fr 100px;
-          align-items: center;
-          gap: 1rem;
-        }
-        .step-node {
-          padding: 0.5rem;
-          border-radius: 4px;
-          border: 1px solid var(--accents-2);
-          text-align: center;
-          font-size: 0.8rem;
-          font-weight: 600;
-        }
-        .step-node.vault {
-          border-color: var(--primary);
-          color: var(--primary);
-        }
-        .step-node.highlight {
-          background: var(--primary);
-          color: #000;
-        }
-        .step-arrow {
-          height: 2px;
-          background: var(--accents-2);
-          position: relative;
-          font-size: 0.75rem;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-          padding-bottom: 0.25rem;
-          color: var(--accents-3);
-        }
-        .step-arrow::after {
-          content: '→';
-          position: absolute;
-          right: -5px;
-          top: -9px;
-          font-size: 1.2rem;
-          color: var(--accents-2);
-        }
-        .sequence-step.active {
-          grid-template-columns: 1fr;
-          justify-items: center;
-          gap: 0.5rem;
-        }
-        .step-label {
-          font-size: 0.75rem;
-          color: var(--accents-3);
-          font-style: italic;
-        }
         .content-section {
           margin: 0 auto;
           max-width: 800px;
           padding: 4rem 2rem;
-        }
-
-        /* ── State table ────────────────────────────────────────────────────── */
-        .state-table {
-          border: 1px solid #2a3a3e;
-          border-radius: var(--radius);
-          overflow: hidden;
-          margin-top: 1.5rem;
-          font-size: 0.875rem;
-        }
-        .state-row {
-          display: grid;
-          grid-template-columns: 140px 1fr 80px;
-          gap: 0;
-          padding: 0.7rem 1rem;
-          border-bottom: 1px solid #2a3a3e;
-          align-items: center;
-        }
-        .state-row:last-child {
-          border-bottom: none;
-        }
-        .state-header {
-          background: #1b2a2e;
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          color: var(--accents-3);
-        }
-        .state-row code {
-          font-family: var(--font-mono);
-          font-size: 0.78rem;
-          background: #1b2a2e;
-          padding: 0.15rem 0.4rem;
-          border-radius: 3px;
-          display: inline-block;
-        }
-        .badge {
-          font-size: 0.72rem;
-          font-weight: 700;
-          padding: 0.15rem 0.5rem;
-          border-radius: 4px;
-          display: inline-block;
-          text-align: center;
-        }
-        .badge.yes {
-          background: rgba(108, 229, 177, 0.08);
-          color: #059669;
-        }
-        .badge.no {
-          background: #1b2a2e;
-          color: var(--accents-3);
-        }
-
-        .key-concept {
-          font-style: italic;
-          color: var(--accents-2);
-          font-size: 0.9rem;
         }
         .lifecycle-grid {
           display: grid;
@@ -394,36 +226,48 @@ export default function HowItWorks() {
           padding: 1.5rem;
         }
         .lifecycle-step h4 {
-          margin-top: 0;
-          margin-bottom: 0.5rem;
+          margin: 0 0 0.5rem 0;
           color: var(--primary);
         }
-        .learn-more a {
+        .escalation-path {
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+        .path-step strong {
+          display: block;
           color: var(--primary);
-          font-weight: 500;
+          margin-bottom: 0.25rem;
         }
-        .disclaimer-block {
-          background: rgba(245, 158, 11, 0.08);
-          border: 1px solid rgba(245, 158, 11, 0.4);
-          border-radius: 8px;
-          padding: 1rem 1.5rem;
-          margin: 1.5rem 0;
-          font-size: 0.85rem;
-        }
-        .disclaimer-block p {
+        .path-step p {
           margin: 0;
-          color: #ffd166;
-        }
-        .page-meta {
-          margin: 4rem auto;
-          max-width: 800px;
-          padding: 0 2rem;
-          font-size: 0.85rem;
+          font-size: 0.875rem;
           color: var(--accents-3);
-          text-align: center;
         }
-
-        /* ── Grids from Index ── */
+        .use-cases-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          margin-top: 2rem;
+        }
+        .use-case-card {
+          padding: 1.25rem;
+        }
+        .uc-header {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .uc-header h4 {
+          margin: 0;
+        }
+        .use-case-card p {
+          font-size: 0.875rem;
+          color: var(--accents-3);
+          margin-bottom: 0.75rem;
+        }
         .guarantees-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -447,49 +291,17 @@ export default function HowItWorks() {
           color: var(--accents-3);
           line-height: 1.5;
         }
-        .principles-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem;
-          margin-top: 2rem;
-        }
-        .principle {
-          padding: 1.5rem;
-        }
-
-        /* ── Breakout CTA Specifics ── */
-        .cta-inner {
+        .page-meta {
           text-align: center;
-        }
-        .cta-inner h3 {
-          font-size: 2.2rem;
-          font-weight: 900;
-          margin: 0 0 0.75rem 0;
-          letter-spacing: -0.04em;
-          color: #fff;
-        }
-        .cta-inner p {
-          font-size: 1rem;
-          color: var(--accents-2);
-          max-width: 500px;
-          margin: 0 auto 2.5rem;
-          line-height: 1.65;
-        }
-
-        @media (max-width: 900px) {
-          .guarantees-grid--wide {
-            grid-template-columns: 1fr 1fr;
-          }
+          padding: 3rem 2rem;
+          color: var(--accents-3);
+          font-size: 0.85rem;
         }
         @media (max-width: 700px) {
-          .guarantees-grid,
-          .guarantees-grid--wide,
           .lifecycle-grid,
-          .principles-grid {
+          .use-cases-grid,
+          .guarantees-grid--wide {
             grid-template-columns: 1fr;
-          }
-          .cta-inner h3 {
-            font-size: 1.65rem;
           }
         }
       `}</style>

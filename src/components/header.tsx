@@ -13,64 +13,12 @@ const protocolNavItems: {
 }[] = [
   { label: 'Home', page: '/' },
   { label: 'How It Works', page: '/how-it-works' },
-  {
-    label: 'Developers',
-    page: '/developer',
-    submenu: [
-      { label: 'Overview', page: '/developer' },
-      { label: 'Concepts', page: '/architecture' },
-      { label: 'Guides', page: '/docs/guides' },
-      { label: 'API Reference', page: '/docs/reference' },
-      { label: 'Contracts', page: '/contracts' },
-      { label: 'Protocol Limits', page: '/protocol-limits' },
-      { label: 'Fees', page: '/fees' },
-      { label: 'Release Plan', page: '/release-plan' },
-      {
-        label: 'GitHub ↗',
-        link: 'https://github.com/sew-protocol/sew-protocol',
-      },
-    ],
-  },
-  {
-    label: 'Build',
-    page: '/use-cases',
-    submenu: [
-      { label: 'Use Cases', page: '/use-cases' },
-      { label: 'Everyday Wallet', page: '/everyday-wallet' },
-      { label: 'Integrations', page: '/integrations' },
-    ],
-  },
-  {
-    label: 'Security',
-    page: '/security',
-    submenu: [
-      { label: 'Security Model', page: '/security' },
-      { label: 'Dispute Architecture', page: '/dispute-resolution' },
-      { label: 'Emergency Recovery', page: '/emergency' },
-      { label: 'For Researchers', page: '/researcher' },
-    ],
-  },
-  {
-    label: 'About',
-    page: '/about',
-    submenu: [
-      { label: 'Governance', page: '/governance' },
-      { label: 'SEW Token', page: '/token' },
-      { label: 'Investors', page: '/investor' },
-      { label: 'Contact', page: '/contact' },
-    ],
-  },
-  {
-    label: 'Reference',
-    page: '/start-here',
-    submenu: [
-      { label: 'Start Here', page: '/start-here' },
-      { label: 'FAQ', page: '/faq' },
-      { label: 'Glossary', page: '/glossary' },
-      { label: 'Comparisons', page: '/comparisons' },
-      { label: 'Resources', page: '/resources' },
-    ],
-  },
+  { label: 'Deployment', page: '/contracts' },
+  { label: 'Security', page: '/security' },
+  { label: 'Governance', page: '/governance' },
+  { label: 'Developer', page: '/developer' },
+  { label: 'FAQ', page: '/faq' },
+  { label: 'Contact', page: '/contact' },
 ]
 
 const ogImageUrl = 'https://sewprotocol.io/og-image.png'
@@ -229,14 +177,16 @@ const Header = ({ titlePre = '' }) => {
           })}
         </ul>
         <ul className={styles.secondaryNav}>
-          <li>
-            <Link
-              href="/docs"
-              className={pathname.startsWith('/docs') ? 'active' : undefined}
-            >
-              Documentation
-            </Link>
-          </li>
+          {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' && (
+            <li>
+              <Link
+                href="/docs"
+                className={pathname.startsWith('/docs') ? 'active' : undefined}
+              >
+                Documentation
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

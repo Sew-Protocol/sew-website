@@ -6,7 +6,7 @@ export default function Governance() {
   return (
     <>
       <Header titlePre="Governance" />
-      <div className={sharedStyles.layout}>
+      <div className={sharedStyles['hero-texture']}>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
@@ -137,7 +137,134 @@ export default function Governance() {
           </div>
         </section>
 
-        {/* ── FINAL CTA ────────────────────────────────────────────────── */}
+        {/* ── 5. ECONOMICS ────────────────────────────────────────────────── */}
+        <section id="fees" className="content-section">
+          <h3>Protocol Economics</h3>
+          <p>Bounded, transparent fees locked at escrow creation.</p>
+          <div className="stitched" style={{ marginTop: '2rem' }}>
+            <table className="lanes-table">
+              <thead>
+                <tr>
+                  <th>Fee Type</th>
+                  <th>Launch</th>
+                  <th>Maximum</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Escrow Creation</strong>
+                  </td>
+                  <td>1%</td>
+                  <td>2%</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Yield Protocol Share</strong>
+                  </td>
+                  <td>30%</td>
+                  <td>30%</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Appeal Bond Fee</strong>
+                  </td>
+                  <td>0%</td>
+                  <td>30%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p
+            style={{
+              marginTop: '1.5rem',
+              fontSize: '0.85rem',
+              color: 'var(--accents-3)',
+            }}
+          >
+            All fees are Disclosure upfront and deducted during predefined
+            transitions. governance cannot retroactively change fees for active
+            escrows.
+          </p>
+        </section>
+
+        {/* ── 6. SEW TOKEN ─────────────────────────────────────────────────── */}
+        <section id="token" className="abstract-band">
+          <div className="abstract-band-inner">
+            <h3>SEW Token</h3>
+            <p>
+              SEW is the utility and governance token for Sew Protocol. It
+              enables the community to coordinate protocol evolution and secure
+              the dispute resolution system.
+            </p>
+            <div className="guarantees-grid">
+              <div className="guarantee-card fabric-panel">
+                <h4>Governance</h4>
+                <p>
+                  Vote on upgrades, parameter changes, fee adjustments, and
+                  module activations.
+                </p>
+              </div>
+              <div className="guarantee-card fabric-panel">
+                <h4>Staking (future)</h4>
+                <p>
+                  Participate in the decentralized dispute resolution system via
+                  mixed-bond staking.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 7. RELEASE PLAN ─────────────────────────────────────────────── */}
+        <section id="release-plan" className="content-section">
+          <h3>Release Plan</h3>
+          <p>Phased rollout toward full decentralization.</p>
+          <div className="timeline-grid" style={{ marginTop: '2rem' }}>
+            <div className="timeline-phase active fabric-panel">
+              <div className="phase-header">
+                <span className="phase-status active">Active</span>
+                <h4>Phase 1: IEO</h4>
+              </div>
+              <p className="phase-desc">
+                Initial Escrow Offering. Core immutable escrow with single
+                trusted resolver.
+              </p>
+            </div>
+            <div className="timeline-phase fabric-panel">
+              <div className="phase-header">
+                <span className="phase-status upcoming">Q2-Q3 2026</span>
+                <h4>Phase 2: Decisions</h4>
+              </div>
+              <p className="phase-desc">
+                Multi-resolver escalation. Focus on decentralizing the
+                governance process.
+              </p>
+            </div>
+            <div className="timeline-phase fabric-panel">
+              <div className="phase-header">
+                <span className="phase-status upcoming">Q3-Q4 2026</span>
+                <h4>Phase 3: Incentives</h4>
+              </div>
+              <p className="phase-desc">
+                Decentralize incentives via appeal bonds. Economic gating for
+                escalation.
+              </p>
+            </div>
+            <div className="timeline-phase fabric-panel">
+              <div className="phase-header">
+                <span className="phase-status upcoming">2027+</span>
+                <h4>Phase 4: Capital</h4>
+              </div>
+              <p className="phase-desc">
+                Decentralize capital through resolver staking and slashing for
+                misconduct.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 8. FINAL CTA ────────────────────────────────────────────────── */}
         <section
           className="section-breakout cta-breakout"
           style={{
@@ -187,6 +314,49 @@ export default function Governance() {
           margin: 0 auto;
           max-width: 800px;
           padding: 4rem 2rem;
+        }
+        .timeline-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-top: 2rem;
+        }
+        .timeline-phase {
+          padding: 1.5rem;
+        }
+        .timeline-phase.active {
+          border-color: #059669;
+          box-shadow: 0 0 0 1px #059669;
+        }
+        .phase-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 0.75rem;
+        }
+        .phase-header h4 {
+          margin: 0;
+          font-size: 1.1rem;
+        }
+        .phase-status {
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+        }
+        .phase-status.active {
+          background: rgba(5, 150, 105, 0.1);
+          color: #059669;
+        }
+        .phase-status.upcoming {
+          background: rgba(122, 221, 220, 0.1);
+          color: var(--accents-3);
+        }
+        .phase-desc {
+          font-size: 0.88rem;
+          color: var(--accents-2);
+          line-height: 1.5;
         }
         .lanes-table {
           width: 100%;

@@ -1,7 +1,6 @@
 import Header from '../components/header'
 import sharedStyles from '../styles/shared.module.css'
 import Link from 'next/link'
-import ExtLink from '../components/ext-link'
 
 export default function FAQ() {
   const faqs = [
@@ -33,89 +32,118 @@ export default function FAQ() {
     {
       question: 'Is Sew a wallet or marketplace?',
       answer:
-        'No. Sew is infrastructure—a security layer for transfers. Wallets, marketplaces, and applications build on top of Sew to provide protected transfers. Everyday Wallet is one example interface built on the protocol.',
+        'No. Sew is infrastructure—a security layer for transfers. Wallets, marketplaces, and applications build on top of Sew to provide protected transfers.',
     },
     {
       question: 'Are my funds at risk if an integration (like Aave) fails?',
       answer:
-        'Yield generation is optional and protected by exposure caps. If an external protocol fails, exposure is limited to the capped amount. Core escrow funds remain separate and can be settled regardless of yield module status.',
+        'Yield generation is optional and protected by exposure caps. If an external protocol fails, exposure is limited to the capped amount. Core escrow funds remain separate.',
     },
     {
       question: 'Can escrow rules be changed after creation?',
       answer:
-        'No. Each escrow captures its complete configuration at creation—release strategy, resolution module, yield settings, and timeouts. These are snapshotted and cannot be changed by anyone, including governance.',
-    },
-    {
-      question: 'What fees does Sew charge?',
-      answer:
-        'Escrow creation: 1% at launch (2% max). Yield protocol fee: 30% of generated yield. Appeal bond fee: 0% at launch (30% max, governance-activated later). See the Fees page for details.',
-    },
-    {
-      question: 'How long does dispute resolution take?',
-      answer:
-        'Dispute duration is configurable per escrow with a maximum of 90 days. Simple disputes under single-resolver mode may resolve in hours. Complex disputes using escalating resolution may take longer depending on the escalation path.',
+        'No. Each escrow captures its complete configuration at creation—release strategy, resolution module, yield settings, and timeouts. These are snapshotted and cannot be changed.',
     },
   ]
 
-  const reviewerFaqs = []
+  const glossaryTerms = [
+    {
+      term: 'Appeal Bond',
+      definition:
+        'A deposit required to escalate or appeal a dispute outcome. May be forfeited if the appeal fails.',
+    },
+    {
+      term: 'Deterministic',
+      definition:
+        'Outcomes are determined strictly by predefined rules in smart contracts, not by discretionary decisions.',
+    },
+    {
+      term: 'Escrow',
+      definition:
+        'A smart contract that holds tokens under predefined conditions until release, refund, or resolution.',
+    },
+    {
+      term: 'Forward-Only',
+      definition:
+        'A design principle where upgrades affect only new escrows. Existing agreements remain bound to their snapshotted modules.',
+    },
+    {
+      term: 'Guardian',
+      definition:
+        'A limited emergency role that can pause high-risk operations temporarily.',
+    },
+    {
+      term: 'Invariant',
+      definition:
+        'A formal property enforced at the contract level that holds true for every escrow (e.g., non-custodial).',
+    },
+    {
+      term: 'Module',
+      definition:
+        'A pluggable, immutable smart contract that defines a specific logic behavior (Release, Resolution, or Yield).',
+    },
+    {
+      term: 'Non-Custodial',
+      definition:
+        'A model where funds are held by smart contracts rather than intermediaries.',
+    },
+    {
+      term: 'Protected Transfer',
+      definition:
+        'An ERC-20 transfer routed through a deterministic escrow with predefined release and dispute paths.',
+    },
+    {
+      term: 'Resolver',
+      definition:
+        'An entity that determines the outcome of a dispute, bounded to protocol-defined outcomes.',
+    },
+  ]
 
   return (
     <>
-      <Header titlePre="FAQ" />
-      <div className={`${sharedStyles.layout} hero-texture`}>
+      <Header titlePre="FAQ & Glossary" />
+      <div className={sharedStyles['hero-texture']}>
         <section className="header-section">
-          <h1>FAQ</h1>
-          <h2 className="tagline">Common questions about Sew Protocol</h2>
+          <h1>FAQ & Glossary</h1>
           <p className="intro">
-            Answers to frequently asked questions. Can&apos;t find what
-            you&apos;re looking for?{' '}
-            <a href="https://discord.gg/sewprotocol">Ask in Discord</a>.
+            Common questions and key terms used throughout the Sew Protocol
+            ecosystem.
           </p>
         </section>
 
-        {/* ── Auditor callout ──────────────────────────────────────────────── */}
-        <section className="auditor-callout">
-          <span className="auditor-tag">Security reviewers &amp; auditors</span>
-          <p>
-            Looking for audit status, trust model, threat model, or grant
-            information?
-          </p>
-          <Link href="/researcher" className="auditor-link">
-            See the Researchers &amp; Auditors page →
-          </Link>
+        {/* ── FAQ ─────────────────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h2 className="section-heading">Frequently Asked Questions</h2>
+          <div className="faq-grid">
+            {faqs.map((faq) => (
+              <div key={faq.question} className="faq-card fabric-panel">
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
-        {/* ── General FAQ ──────────────────────────────────────────────────── */}
-        <section className="general-heading-section">
-          <h2 className="general-heading">General questions</h2>
-        </section>
-
-        <section className="faq-grid">
-          {faqs.map((faq) => (
-            <div key={faq.question} className="faq-card fabric-panel">
-              <h3>{faq.question}</h3>
-              <p>{faq.answer}</p>
-            </div>
-          ))}
-        </section>
-
-        <section className="related-section fabric-texture fabric-texture-light">
-          <h3>Learn more</h3>
-          <div className="related-links">
-            <Link href="/how-it-works">How It Works</Link>
-            <Link href="/security">Security Model</Link>
-            <Link href="/security#threat-model">Threat Model</Link>
-            <Link href="/architecture">Architecture</Link>
-            <Link href="/governance">Governance</Link>
-            <Link href="/fees">Fees</Link>
+        {/* ── Glossary ───────────────────────────────────────────────────── */}
+        <section className="content-section">
+          <h2 className="section-heading">Key Terms</h2>
+          <div className="glossary-grid">
+            {glossaryTerms.map((item) => (
+              <div key={item.term} className="glossary-card fabric-panel">
+                <h4>{item.term}</h4>
+                <p>{item.definition}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         <section className="page-meta">
           <p>Last updated: February 2026</p>
-          <p>
-            <Link href="/docs">View full documentation →</Link>
-          </p>
+          {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' && (
+            <p>
+              <Link href="/docs">View full documentation →</Link>
+            </p>
+          )}
         </section>
       </div>
 
@@ -130,26 +158,26 @@ export default function FAQ() {
           font-size: 2.5rem;
           margin-bottom: 0.5rem;
         }
-        .tagline {
-          color: var(--accents-3);
-          font-size: 1.2rem;
-          margin-bottom: 1rem;
-        }
         .intro {
-          font-size: 1rem;
-          color: var(--accents-2);
+          font-size: 1.1rem;
+          color: var(--accents-3);
         }
-        .intro a {
-          color: var(--fg);
-          text-decoration: underline;
+        .content-section {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 2rem;
+        }
+        .section-heading {
+          font-size: 1.5rem;
+          margin-bottom: 2rem;
+          text-align: center;
+          color: var(--accents-2);
         }
         .faq-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
           gap: 1.5rem;
-          padding: 2rem;
-          max-width: 1200px;
-          margin: 0 auto;
+          margin-bottom: 4rem;
         }
         .faq-card {
           padding: 1.5rem;
@@ -157,121 +185,43 @@ export default function FAQ() {
         .faq-card h3 {
           font-size: 1rem;
           margin-bottom: 0.75rem;
-          padding-bottom: 0.75rem;
-          border-bottom: 1px solid #2a3a3e;
+          color: var(--primary);
         }
         .faq-card p {
           font-size: 0.9rem;
           line-height: 1.6;
-          color: var(--accents-2);
-          margin: 0;
-        }
-        /* ── Auditor callout ────────────────────────────────────────────────── */
-        .auditor-callout {
-          max-width: 800px;
-          margin: 0 auto 2rem;
-          padding: 1.25rem 1.5rem;
-          border: 1px solid rgba(122, 221, 220, 0.25);
-          border-radius: var(--radius);
-          background: rgba(122, 221, 220, 0.04);
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-        .auditor-callout p {
-          margin: 0;
-          font-size: 0.875rem;
-          color: var(--accents-2);
-          flex: 1;
-        }
-        .auditor-tag {
-          display: inline-block;
-          font-size: 0.65rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: #7adddc;
-          background: rgba(122, 221, 220, 0.1);
-          padding: 0.2rem 0.55rem;
-          border-radius: 4px;
-          white-space: nowrap;
-        }
-        .auditor-link {
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: #7adddc;
-          text-decoration: none;
-          white-space: nowrap;
-        }
-        .auditor-link:hover {
-          text-decoration: underline;
-        }
-        /* ── General heading ────────────────────────────────────────────────── */
-        .general-heading-section {
-          max-width: 800px;
-          margin: 0 auto 0.5rem;
-          padding: 0 2rem;
-        }
-        .general-heading {
-          font-size: 1.1rem;
-          font-weight: 700;
           color: var(--accents-3);
           margin: 0;
-          padding-bottom: 0.75rem;
-          border-bottom: 1px solid #2a3a3e;
         }
-        /* ── Related section ────────────────────────────────────────────────── */
-        .related-section {
-          max-width: 700px;
-          margin: 4rem auto;
-          padding: 3rem 2rem;
-          text-align: center;
-          border-radius: 12px;
+        .glossary-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1.25rem;
         }
-        .related-section h3 {
-          margin-bottom: 1.5rem;
+        .glossary-card {
+          padding: 1.25rem;
         }
-        .related-links {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          justify-content: center;
+        .glossary-card h4 {
+          margin: 0 0 0.5rem 0;
+          font-size: 0.95rem;
+          color: var(--accents-2);
         }
-        .related-links a {
-          padding: 0.5rem 1rem;
-          background: var(--bg);
-          border: 1px solid var(--accents-2);
-          border-radius: 6px;
-          color: var(--fg);
-          text-decoration: none;
-          font-size: 0.9rem;
-          transition: all 0.2s;
-        }
-        .related-links a:hover {
-          background: var(--accents-6);
+        .glossary-card p {
+          font-size: 0.85rem;
+          color: var(--accents-3);
+          line-height: 1.5;
+          margin: 0;
         }
         .page-meta {
           text-align: center;
-          padding: 3rem 2rem;
+          padding: 4rem 2rem;
           color: var(--accents-3);
           font-size: 0.85rem;
         }
-        .page-meta p {
-          margin: 0.5rem 0;
-        }
-        .page-meta a {
-          color: #7adddc;
-        }
-        @media (max-width: 600px) {
-          .faq-grid {
-            padding: 1rem;
-          }
-          .related-links {
-            flex-direction: column;
-          }
-          .related-links a {
-            display: block;
+        @media (max-width: 700px) {
+          .faq-grid,
+          .glossary-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

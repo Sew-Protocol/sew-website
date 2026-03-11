@@ -32,7 +32,7 @@ export default function Contact() {
   return (
     <>
       <Header titlePre="Contact" />
-      <div className={sharedStyles.layout}>
+      <div className={sharedStyles['hero-texture']}>
         {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
         <section
           className="hero"
@@ -83,13 +83,15 @@ export default function Contact() {
               documentation:
             </p>
             <div className="principles-grid">
-              <div className="principle seam-accent">
-                <h4>Documentation</h4>
-                <p>
-                  Full technical reference and integration guides.{' '}
-                  <Link href="/docs">View Docs →</Link>
-                </p>
-              </div>
+              {process.env.NEXT_PUBLIC_SHOW_DOCUMENTATION === 'true' && (
+                <div className="principle seam-accent">
+                  <h4>Documentation</h4>
+                  <p>
+                    Full technical reference and integration guides.{' '}
+                    <Link href="/docs">View Docs →</Link>
+                  </p>
+                </div>
+              )}
               <div className="principle seam-accent">
                 <h4>FAQ</h4>
                 <p>
